@@ -45,7 +45,7 @@ import UseEffect from "../views/ExampleView/UseEffect";
           element: <Navigate to="/dashboard" replace />
         },
         {
-          path: '*',
+          path: '/*',
           element: <> Not Found</>
         },  
         // {
