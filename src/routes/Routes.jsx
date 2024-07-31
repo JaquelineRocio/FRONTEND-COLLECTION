@@ -26,24 +26,36 @@ import ExampleUseRedux from "../views/ExampleView/ExampleUseRedux";
 import ProtectedRoute from "../views/Auth/ProtectedRoute";
 import HookForm from "../views/ExampleView/HookForm";
 import ReactTable from "../views/ExampleView/ReactTable";
+import ReactExcel from "../views/ExampleView/ReactExcel";
+import SelectComponent from "../views/ExampleView/SelectComponent";
+import SelectsAninados from "../views/ExampleView/SelectsAninados";
+import UseEffect from "../views/ExampleView/UseEffect";
 // import FlexTailwind from "../views/ExampleView/GridTailwind";
 // import SidebarAccessManagementView from "../views/Admin/Pages/SidebarAccessManagement/SidebarAccessManagementView";
 
 
   const Route = () => {
     const router = createBrowserRouter([
+        // {
+        //   path: '/',
+        //   element: <Navigate to="/login" replace />
+        // },
         {
           path: '/',
-          element: <Navigate to="/login" replace />
+          element: <Navigate to="/dashboard" replace />
         },
         {
           path: '*',
           element: <> Not Found</>
         },  
+        // {
+        //     path: '/login',
+        //     element: <Login/>
+        // },
         {
-            path: '/login',
-            element: <Login/>
-        },
+          path: '/login',
+          element: <Login/>
+      },
         {
             path: '/dashboard',
             // element: <MainLayout/>,
@@ -115,6 +127,22 @@ import ReactTable from "../views/ExampleView/ReactTable";
               {
                 path:"reacttable",
                 element: <ReactTable/>
+              },
+              {
+                path:"reactexcel",
+                element: <ReactExcel/>
+              },
+              {
+                path:"selectcomponent",
+                element: <SelectComponent/>
+              },
+              {
+                path:"selectaninados",
+                element: <SelectsAninados/>
+              },
+              {
+                path:"useefect",
+                element: <UseEffect/>
               }
 
             ]  

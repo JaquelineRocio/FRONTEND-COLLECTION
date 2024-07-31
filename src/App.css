@@ -1,42 +1,26 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* Aumentar el tamaño de fuente para los meses y años */
+.react-datepicker__month-year-dropdown-container,
+.react-datepicker__month-year,
+.react-datepicker__month {
+    font-size: 1.5em; /* Ajusta este valor según sea necesario */
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.react-datepicker__header {
+    font-size: 1.5em; /* Ajusta este valor según sea necesario */
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Estilos adicionales para personalizar el input y el calendario */
+.custom-input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.react-datepicker__current-month {
+    font-size: 1.5em; /* Ajusta este valor según sea necesario */
 }
 
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+.react-datepicker__month-text {
+    font-size: 1.2em; /* Ajusta este valor según sea necesario */
 }

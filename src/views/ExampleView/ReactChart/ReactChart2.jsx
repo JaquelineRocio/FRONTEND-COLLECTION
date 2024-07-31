@@ -33,6 +33,7 @@ const ReactChart2 = () => {
     };
 
     const options = {
+        maintainAspectRatio: false,
         responsive: true,
         plugins: {
             legend: {

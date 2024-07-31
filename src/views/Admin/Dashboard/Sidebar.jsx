@@ -66,6 +66,10 @@ function Sidebar(){
             <ItemList name="Ejemplo uso de redux" to="exampleredux" icon={FaUnlockKeyhole} />
             <ItemList name="Hook form" to="hookform" icon={FaUnlockKeyhole} />
             <ItemList name="Elemento tabla" to="reacttable" icon={FaUnlockKeyhole} />
+            <ItemList name="exportar datos para excel" to="reactexcel" icon={FaUnlockKeyhole} />
+            <ItemList name="Select component" to="selectcomponent" icon={FaUnlockKeyhole} />
+            <ItemList name="Selects aninados" to="selectaninados" icon={FaUnlockKeyhole} />
+            <ItemList name="Use Efect" to="useefect" icon={FaUnlockKeyhole} />
             </ul>
             
         </div>

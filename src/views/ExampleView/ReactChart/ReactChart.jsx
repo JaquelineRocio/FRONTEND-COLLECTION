@@ -34,8 +34,14 @@ const ReactChart = () => {
         ],
     };
 
+    // let misoptions = {
+    //     maintainAspectRatio: false,
+    //     responsive: true,
+    //   }
+
     const options = {
         responsive: true,
+        maintainAspectRatio: true,
         plugins: {
             legend: {
                 position: 'top',

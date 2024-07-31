@@ -27,7 +27,7 @@ const Body = () => {
 
     {/* PARTE DOS */}
 
-    <main className={`${isOpen ? 'md:ml-64 md:w-[calc(100%-256px)] ' : 'md:ml-0 md:w-full'} w-full  bg-gray-200 min-h-screen transition-all main `}>
+    <main className={`${isOpen ? 'md:ml-64 md:w-[calc(100%-256px)] ' : 'md:ml-0 md:w-full'} w-full  bg-white min-h-screen transition-all main `}>
             {/* navbar */}
             <div className="py-2 px-6 bg-[#F9FAFB] flex items-center shadow-md shadow-black/5 sticky top-0 left-0 z-30">
                 {/* Amburguesa (init) */}

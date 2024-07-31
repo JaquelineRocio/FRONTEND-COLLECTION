@@ -30,3 +30,13 @@ export const store = configureStore({
 });
 
 export const persistor  = persistStore(store);
+
+// 
+export const AppDispatch = store.dispatch;
+
+import { useDispatch } from "react-redux";
+export const useAppDispatch = () => useDispatch;
+// import { AppDispatch } from './store';
+// export const useAppDispatch = () => useDispatch<AppDispatch>();
+
+// export type AppThunkDispatch = ThunkDispatch;

@@ -2,11 +2,9 @@
 
 
 // const apiUrlEntrada = "http://127.0.0.1:3000";
-// const apiUrlEntrada = "https://poetic-tube-428221-a5.rj.r.appspot.com";
 const apiUrlEntrada = "https://poetic-tube-428221-a5.rj.r.appspot.com";
-// const apiUrlEntrada = "https://bce8-190-232-46-111.ngrok-free.app";
 
-
+// const apiUrlEntrada = "https://cf0f-201-240-244-251.ngrok-free.app";
 
 export function getToken (){
     const persistRoot = localStorage.getItem('persist:root');
@@ -17,7 +15,7 @@ export function getToken (){
         const auth = JSON.parse(parsedPersistRoot.auth);
         token = auth.token;
         // console.log("Token:", token);
-        console.log("verificando token",token );
+        // console.log("verificando token",token );
         return token;
 
     } else {
@@ -32,9 +30,8 @@ export class Api {
 
     static get(url, apiUrl = apiUrlEntrada) {
 
-        console.log("Token, method Get: ",getToken());
-        // const {token} = useSelector((argumento)=>argumento.auth);
-        console.log("URL, method Get: ", `${apiUrl}${url}`);
+        console.log("Token, method GET: ",getToken());
+        console.log("Url, method Get: ", `${apiUrl}${url}`);
 
         return fetch(`${apiUrl}${url}`, {
             method: 'GET',
@@ -42,10 +39,9 @@ export class Api {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${getToken()}`
             },
-            // body: JSON.stringify(data),
         })
         .then((response) => {
-            console.log("1° then, get:", response.body);
+          console.log("Respuesta de estatus get",response)
           if (!response.ok) {
                 if (response.status === 403) { // Si el estado es 401 (Unauthorized)
                     throw new Error('Token expired');
@@ -56,21 +52,20 @@ export class Api {
           return response.json();
         })
         .then((data) => {
-            console.log("2° then, get:", data);
-            // console.log('Success:', data);
             return data; // Devuelve los datos para que puedan ser usados
         })
         .catch((error) => {
-            console.log("3° then, get:", error);
-            
+            console.log("mensaje obtenido 'get' ", error);
             // console.error('Error:', error);
             throw error; // Vuelve a lanzar el error para que pueda ser capturado por el llamador
         });
     }
 
     static post(data, url, apiUrl = apiUrlEntrada) {
+
         console.log("Token, method Post: ",getToken());
         console.log(`Url, method Post: ${apiUrl}${url}`);
+
         return fetch(`${apiUrl}${url}`, {    
             method: 'POST',
             headers: {
@@ -80,8 +75,7 @@ export class Api {
             body: JSON.stringify(data),
         })
         .then((response) => {
-        
-            console.log("1° then, post:", response);
+            console.log("Respuesta de estatus post",response)
             if (!response.ok) {
                 if (response.status === 403) { // Si el estado es 401 (Unauthorized)
                     throw new Error('Token expired');
@@ -92,14 +86,10 @@ export class Api {
           return response.json();
         })
         .then((data) => {
-            console.log("2° then, post:", data);
-            // console.log('Success:', data);
             return data; // Devuelve los datos para que puedan ser usados
         })
         .catch((error) => {
-            console.log("3° then, post:", error);
-
-            // console.error('Error:', error);
+            console.log("mensaje obtenido 'get' ", error);
             throw error; // Vuelve a lanzar el error para que pueda ser capturado por el llamador
         });
     }
