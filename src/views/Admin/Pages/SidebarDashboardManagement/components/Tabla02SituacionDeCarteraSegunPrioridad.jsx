@@ -389,6 +389,8 @@ const customStyles = {
 			color: '#FFFFFF',
 			textAlign: 'center', // Centrar el texto
 			justifyContent: 'center', // Asegura que el contenido esté centrado			
+			// whiteSpace: 'nowrap', // Evita el ajuste de línea
+			textOverflow: 'ellipsis',
 		},
 	},
 	cells: {
@@ -397,6 +399,7 @@ const customStyles = {
 			// paddingRight: '0px',
 			textAlign: 'center', // Centrar el texto en las celdas de datos
 			justifyContent: 'center', // Asegura que el contenido esté centrado
+			whiteSpace: 'nowrap',
 		},
 	},
 };
