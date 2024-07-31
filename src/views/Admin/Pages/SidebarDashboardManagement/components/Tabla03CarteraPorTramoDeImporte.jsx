@@ -210,7 +210,7 @@ const columns = [
 	{
 		name: <div># PAGOS</div>,
 		selector: row => row.numPagos,
-		cell: row => <CustomRowPagosSecondVersion row={row} />,
+		// cell: row => <CustomRowPagosSecondVersion row={row} />,
 	},
 	{
 		name: <div>S/. PAGOS</div>,

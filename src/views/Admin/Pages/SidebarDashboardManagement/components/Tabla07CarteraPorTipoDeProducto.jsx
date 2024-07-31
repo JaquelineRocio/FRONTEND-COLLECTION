@@ -65,22 +65,12 @@ const columns = [
 	{
 		name: <div>CLIENTES</div>,	
 		selector: row => row.clientes,
-		// sortable: true,
-		cell: row => (
-			<div title={row.clientes}>
-				{row.clientes}
-			</div>
-		),
+		cell: row => <AdicionaComas value={row.clientes} />,
 	},
 	{
 		name: <div>CUENTAS</div>, 
 		selector: row => row.cuentas,
-		// sortable: true,
-		cell: row => (
-			<div title={row.cuentas}>
-				{row.cuentas}
-			</div>
-		),
+		cell: row => <AdicionaComas value={row.cuentas} />,
 	},
 	{
 		name: <div>%CUENTAS</div>,
@@ -91,7 +81,6 @@ const columns = [
 	{
 		name: <div>CAPITAL</div>,
 		selector: row => row.capitalMN,
-		// sortable: true,
 		cell: row => <AdicionaComas value={row.capitalMN} />,
 	},
 	{
@@ -117,22 +106,12 @@ const columns = [
 	{
 		name: <div># CTC</div>,	
 		selector: row => row.numCtc,
-		// sortable: true,
-		cell: row => (
-			<div title={row.numCtc}>
-				{row.numCtc}
-			</div>
-		),
+		cell: row => <AdicionaComas value={row.numCtc} />,
 	},
 	{
 		name: <div># CD</div>,	
 		selector: row => row.numCd,
-		// sortable: true,
-		cell: row => (
-			<div title={row.numCd}>
-				{row.numCd}
-			</div>
-		),
+		cell: row => <AdicionaComas value={row.numCd} />,
 	},
 
 	{
@@ -153,74 +132,42 @@ const columns = [
 	{
 		name: '# PDP',
 		selector: row => row.numPDP,
-		// sortable: true,
-		cell: row => (
-			<div title={row.numPDP}>
-				{row.numPDP}
-			</div>
-		),
+		cell: row => <AdicionaComas value={row.numPDP} />,
 	},
 	{
 		name: 'MONTO PDP',
 		selector: row => row.montoPDP,
-		// sortable: true,
-		cell: row => (
-			<div title={row.montoPDP}>
-				{row.montoPDP}
-			</div>
-		),
+		cell: row => <AdicionaComas value={row.montoPDP} />,
 	},
 	{
 		name: <div>INT TOTAL</div>, // hecho
 		selector: row => row.intTotal,
-		cell: row => (
-			<div title={row.intTotal}>
-				{row.intTotal}
-			</div>
-		),
+		cell: row => <AdicionaComas value={row.intTotal} />,
 	},
 	{
 		name: 'INT AGENTE',
 		selector: row => row.intAgente,
-		cell: row => (
-			<div title={row.intAgente}>
-				{row.intAgente}
-			</div>
-		),
+		cell: row => <AdicionaComas value={row.intAgente} />,
 	},
 	{
 		name: <div>INT CTC</div>,
 		selector: row => row.intCTC,
-		// sortable: true,
-		cell: row => (
-			<div title={row.intCTC}>
-				{row.intCTC}
-			</div>
-		),
+		cell: row => <AdicionaComas value={row.intCTC} />,
 	},
 	{
 		name: <div>INT CD</div>,
 		selector: row => row.intCD,
-		// sortable: true,
-		cell: row => (
-			<div title={row.intCD}>
-				{row.intCD}
-			</div>
-		),
+		cell: row => <AdicionaComas value={row.intCD} />,
 	},
 	{
 		name: <div># PAGOS</div>,
 		selector: row => row.numPagos,
-		cell: row => <CustomRowPagosSecondVersion row={row} />,
+		cell: row => <AdicionaComas value={row.numPagos} />,
 	},
 	{
 		name: <div>S/. PAGOS</div>,
-		// sortable: true,
-		cell: row => (
-			<div title={row.solesPagos}>
-				{row.solesPagos}
-			</div>
-		),
+		selector: row => row.solesPagos,
+		cell: row => <AdicionaComas value={row.solesPagos} />,
 	},
 	{
 		name: <div>%EFICIENCIA</div>,
@@ -231,16 +178,12 @@ const columns = [
 	{
 		name: <div>TICKET D. CAPITAL</div>,
 		selector: row => row.ticketCapital,
-		// sortable: true,
-		cell: row => (
-			<div title={row.ticketCapital}>
-				{row.ticketCapital}
-			</div>
-		),
+		cell: row => <AdicionaComas value={row.ticketCapital} />,
 	},
 	{
 		name: <div>TICKET PAGO</div>,
 		selector: row => row.ticketPago,
+		cell: row => <AdicionaComas value={row.ticketPago} />,
 		// sortable: true,
 	},
 	{
@@ -254,7 +197,6 @@ const columns = [
 		// sortable: true,
 	},
 ];
-
 
 const CustomRowPagos = ({row}) => (
 
