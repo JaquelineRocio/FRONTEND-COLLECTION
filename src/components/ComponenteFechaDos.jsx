@@ -25,7 +25,7 @@ export default function ComponenteFechaDos({valor, setValor}) {
       // value={selectedDate}
       value={valor}
       onChange={handleDateChange}
-      minDate={dayjs('2023-01-01')}
+      minDate={dayjs('2022-01-01')}
       maxDate={dayjs('2024-12-31')}
       renderInput={(params) => (
         <TextField 
