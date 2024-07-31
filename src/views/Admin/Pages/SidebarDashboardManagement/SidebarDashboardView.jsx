@@ -300,9 +300,7 @@ const SidebarDashboardView = () => {
                 </div>
             </div>
 
-            <button onClick={mostrarValorDeFecha}>
-                Presiona para mostrar fecha
-            </button>
+
 
             <div className="bg-white border border-gray-100 shadow-md rounded-md  shadow-black/5 m-6">
                 <div className="pt-2 rounded border-b-0 mb-4 mt-4 text-gray-900 text-md flex justify-center font-bold">
