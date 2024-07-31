@@ -68,6 +68,7 @@ const SidebarDashboardView = () => {
     const [selectEntidad, setSelectEntidad] = useState(null);
     const [selectCartera, setSelectCartera] = useState(null);
     const [selectMes, setSelectMes] = useState(null);
+    const [selectFecha, setSelectFecha] = useState(null);
 
     const [selectPrioridad, setSelectPrioridad] = useState(null);
     const [selectMoneda, setSelectMoneda] = useState(null);
@@ -82,11 +83,17 @@ const SidebarDashboardView = () => {
         setOpen(open==true?false:true);
     }
 
+    function mostrarValorDeFecha(){
+        console.log("Esta es la fecha:", selectFecha?.format('MM-YYYY')); // Ajusta el formato según lo que necesites
+        
+        // setSelectFecha(null);
+    }
+
     async function handleGroupTables(){
         console.log(selectPrioridad);
         setSpinnerShowGroupTables(true);
         setLoadingAllTable(true);
-        if(!selectEntidad || !selectCartera || selectCartera.length === 0 || !selectMes){
+        if(!selectEntidad || !selectCartera || selectCartera.length === 0 || !selectFecha){
             console.log("hay parametros vacios");
                 // alert("Tu sesión ha iniciado correctamente");
                 Swal.fire({
@@ -120,16 +127,10 @@ const SidebarDashboardView = () => {
                 "rangoEdad":null
               }
 
+            // const response =  await Api.post(data,`/admin/tablon/dashboards?entidad=${selectEntidad}&mes=${selectMes}&carteras=${codCarteras}`)
+            // selectFecha?.format('MM-YYYY'))
+            const response =  await Api.post(data,`/admin/tablon/dashboards?entidad=${selectEntidad}&mes=${selectFecha?.format('MM-YYYY')}&carteras=${codCarteras}`)
 
-
-
-            // const registroPrimeraTabla = await Api.get(`/admin/tablon/dashboard?carteras=${codCarteras}&entidad=${selectEntidad}&mes=${selectMes}`)
-            // const registroSegundaTabla = await Api.get(`/admin/tablon/dashboard-especifico?tipo=CodPrioridad&valoresTipo=${codPrioridad}&carteras=${codCarteras}&entidad=${selectEntidad}&mes=${selectMes}`)
-            // setRegistroPrimeraTabla(registroPrimeraTabla);
-            // setRegistroSegundaTabla(registroSegundaTabla);
-
-            // const response =  await Api.get(`/admin/tablon/dashboards?entidad=1&mes=11&carteras=1,2 &prioridad=null&moneda=null&producto=null`)
-            const response =  await Api.post(data,`/admin/tablon/dashboards?entidad=${selectEntidad}&mes=${selectMes}&carteras=${codCarteras}`)
             console.log("valores de data",data);
             console.log('Respuesta tablas', response);
             // registroPrimeraTabla
@@ -276,15 +277,18 @@ const SidebarDashboardView = () => {
         setSelectMoneda(null);
         setSelectProducto(null);
         setLimpiarSegundoSelect(limpiarSegundoSelect? false: true);
+        setSelectFecha(null);
         
     }
     
 
     return(
         <>
-            <code>
-                {urlSecondTable}
-            </code>
+            {/* <code>
+                {selectFecha}
+            </code> */}
+
+            {/* <h3>{selectFecha}</h3> */}
             <div className="m-6 flex">
                 <div className="text-blue-600 p-2 mr-2 font-bold place-content-center transition-colors hover:text-blue-900 hover:bg-blue-100/50 rounded">
                     {/* <a href="#">Volver</a> */}
@@ -295,6 +299,10 @@ const SidebarDashboardView = () => {
                     <p className="text-gray-500">Revisemos cómo ha ido la Gestión...</p>
                 </div>
             </div>
+
+            <button onClick={mostrarValorDeFecha}>
+                Presiona para mostrar fecha
+            </button>
 
             <div className="bg-white border border-gray-100 shadow-md rounded-md  shadow-black/5 m-6">
                 <div className="pt-2 rounded border-b-0 mb-4 mt-4 text-gray-900 text-md flex justify-center font-bold">
@@ -309,18 +317,11 @@ const SidebarDashboardView = () => {
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2   mb-4 text-base font-normal text-gray-700">                   
-                        {/* <div className="bg-red-400 h-10"> */}
-
-                        <ComponenteFechaDos/>
-                        {/* </div> */}
-                        
+                        <ComponenteFechaDos valor={selectFecha} setValor={setSelectFecha}/>                        
                         {/* <ComponenteFecha/> */}
-                        <SelectTailwind label="Seleccione un mes *"      llave="3" options={optionsMes}       valor={selectMes}  setValor={setSelectMes} />
+                        {/* <SelectTailwind label="Seleccione un mes *"      llave="3" options={optionsMes}       valor={selectMes}  setValor={setSelectMes} /> */}
                         <SelectTailwind label="Seleccione Una entidad *" llave="1" options={optionsEntidad}   valor={selectEntidad} setValor={setSelectEntidad}/>
                         <SelectElementSecondVersion realizarPeticion={selectEntidad? true : false} url={`https://poetic-tube-428221-a5.rj.r.appspot.com/cartera/entidad/${selectEntidad}`} label="Seleccione una Cartera *" tipoDato="cartera" valor={selectCartera} setValor={setSelectCartera}/>
-                        {/* <SelectElementSecondVersion url={`https://cf0f-201-240-244-251.ngrok-free.app/cartera/entidad/${selectEntidad}`} label="Seleccione una Cartera *" tipoDato="cartera" valor={selectCartera} setValor={setSelectCartera}/> */}
-                        {/* <SelectTailwind label="Seleccione una Cartera" llave="2" options={optionsCartera}   valor={selectCartera} setValor={setSelectCartera}/> */}
-                        {/* <SelectElement  label="Seleccione una Cartera" llave="2" options={optionsCartera}   valor={selectCartera} setValor={setSelectCartera}/> */}
                     </div>
 
                     <div className={` border-b-0 mb-4 mt-4 transition-colors text-indigo-900 hover:text-blue-700 text-md font-bold flex `} onClick={handleOpen}>
@@ -333,12 +334,7 @@ const SidebarDashboardView = () => {
                         <SelectElementSecondVersion limpiar={limpiarSegundoSelect} url={`https://poetic-tube-428221-a5.rj.r.appspot.com/prioridad`} tipoDato="prioridad" label="Seleccione prioridad"  valor={selectPrioridad} setValor={setSelectPrioridad}/>
                         <SelectTailwind label="Seleccione Moneda"   llave="5" options={optionsMoneda}    valor={selectMoneda}  setValor={setSelectMoneda} />
                         <SelectTailwind label="Seleccione Producto" llave="6" options={optionsProducto}  valor={selectProducto}  setValor={setSelectProducto} />
-                        {/* <SelectTailwind label="Seleccione Una entidad"/>
-                        <SelectTailwind label="Seleccione una Cartera"/>
-                        <SelectTailwind label="Seleccione un mes"/>
-                        <SelectTailwind label="Seleccione una Cartera"/>
-                        <SelectTailwind label="Seleccione una Cartera"/>
-                        <SelectTailwind label="Seleccione una Cartera"/> */}
+
                     </div>
 
 
@@ -538,6 +534,8 @@ const SidebarDashboardView = () => {
                 </div>
 
             </div>
+
+            
 
         </>
     )
