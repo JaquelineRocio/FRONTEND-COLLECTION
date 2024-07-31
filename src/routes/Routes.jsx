@@ -41,11 +41,11 @@ import UseEffect from "../views/ExampleView/UseEffect";
         //   element: <Navigate to="/login" replace />
         // },
         {
-          path: '/FRONTEND-COLLECTION/',
+          path: '/',
           element: <Navigate to="/dashboard" replace />
         },
         {
-          path: '/FRONTEND-COLLECTION/*',
+          path: '/*',
           element: <> Not Found</>
         },  
         // {
@@ -53,11 +53,11 @@ import UseEffect from "../views/ExampleView/UseEffect";
         //     element: <Login/>
         // },
         {
-          path: '/FRONTEND-COLLECTION/login',
+          path: '/login',
           element: <Login/>
       },
         {
-            path: '/FRONTEND-COLLECTION/dashboard',
+            path: '/dashboard',
             // element: <MainLayout/>,
             element: <ProtectedRoute element={<MainLayout />} />,
             // isProtected: true,
