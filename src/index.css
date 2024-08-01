@@ -1,7 +1,27 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-/* @import "@material-tailwind/react/tailwind.css"; */
-/* @tailwind base;
-@tailwind components;
-@tailwind utilities; */
+
+@font-face{
+    font-family: "Bold";
+    src: local("Ubuntu-Regular"),
+    url('./assets/fonts/raleway/Raleway-Bold.ttf') format("truetype");
+}
+
+@font-face{
+    font-family: "Medium";
+    src: local("Ubuntu-Regular"),
+    url('./assets/fonts/raleway/Raleway-Medium.ttf') format("truetype");
+}
+
+@font-face{
+    font-family: "Regular";
+    src: local("Ubuntu-Regular"),
+    url('./assets/fonts/raleway/Raleway-Regular.ttf') format("truetype");
+}
+
+@font-face{
+    font-family: "SemiBold";
+    src: local("Ubuntu-Regular"),
+    url('./assets/fonts/raleway/Raleway-SemiBold.ttf') format("truetype");
+}

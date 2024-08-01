@@ -38,6 +38,7 @@ export default function SelectTailwind({label = "ingrese etiqeuta", className = 
             label={label}
             value={valor}
             onChange={(val) => setValor(val)}
+            className="w-full" 
         >
             {
                 options.map((x)=>(<Option key={x.value} value={x.value} > {x.label || "Default Label"} </Option>))

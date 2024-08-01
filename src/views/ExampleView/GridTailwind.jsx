@@ -15,6 +15,7 @@ export default function GridTailwind() {
     };
 
   return (
+    <>
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DatePicker 
       views={['year', 'month']}
@@ -24,5 +25,25 @@ export default function GridTailwind() {
       maxDate={dayjs('2024-12-31')}
       />
     </LocalizationProvider>
+
+    <div className='bg-tonosOscuros-4 font-raleway-'>
+      hola
+    </div>
+
+    <div className="font-raleway font-bold">
+      Este texto está en Raleway Bold.
+      ESTE ES EL TEXTO
+    </div>
+
+    <div className="font-pruebaFuente">
+      Este texto está en Raleway Bold.
+      ESTE ES EL TEXTO
+    </div>
+
+    <div className="font-ralewayBold">
+      Este texto está en Raleway Bold.
+      ESTE ES EL TEXTO
+    </div>
+    </>
   );
 }

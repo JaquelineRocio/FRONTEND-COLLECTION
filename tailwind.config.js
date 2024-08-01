@@ -47,6 +47,12 @@ module.exports = withMT({
   ],
   theme: {
     extend: {
+      fontFamily:{
+        ralewayRegular: ['Regular'],
+        ralewayMedium: ['Medium'],
+        ralewayBold: ['Bold'],
+        ralewaySemibold: ['Semibold'],
+      },
       colors: {
         sky: {
           50: "#f0f9ff",
@@ -60,6 +66,20 @@ module.exports = withMT({
           800: "#075985",
           900: "#0c4a6e",
         },
+        tonosOscuros:{
+          0: "#072d44",
+          1: "#064469",
+          2: "#5790ab",
+          3: "#9ccddb",
+          4: "#d0d7e1",
+        },
+        tonosClaros:{
+          0: "#7296a4",
+          1: "#9ebecb",
+          2: "#cddee5",
+          3: "#e6f0f2",
+          4: "#efefef",
+        }
       },
     },
   },

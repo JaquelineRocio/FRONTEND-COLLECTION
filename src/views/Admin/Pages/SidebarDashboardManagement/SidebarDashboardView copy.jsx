@@ -1,4 +1,3 @@
-import { IoChevronBackCircle } from "react-icons/io5";
 import SelectTailwind from "../../../ExampleView/SelectTailwind";
 import { IoAddCircle } from "react-icons/io5";
 import { IoMdRemoveCircle } from "react-icons/io";
@@ -31,8 +30,6 @@ import GridLoader from "react-spinners/GridLoader";
 import filtro from '../../../../../public/filtro.svg';
 import ComponenteFecha from "../../../../components/ComponenteFecha";
 import ComponenteFechaDos from "../../../../components/ComponenteFechaDos";
-import BotonOscuro from "../../../../components/BotonOscuro";
-import BotonClaro from "../../../../components/BotonClaro";
 
 
 
@@ -287,70 +284,91 @@ const SidebarDashboardView = () => {
 
     return(
         <>
-            <div className="p-5">
+            {/* <code>
+                {selectFecha}
+            </code> */}
 
-                <div className="flex mb-5">
-                    <Link to="/" className="pr-5 flex items-center"> <IoChevronBackCircle  className={`text-5xl`}/> </Link>
-                    <div>
-                        <h1 className="font-ralewaySemibold text-2xl">Dashboard de Gestión</h1>
-                        <h1 className="font-ralewayMedium text-base">Revisemos cómo ha ido la Gestión...</h1>
-                    </div>
+            {/* <h3>{selectFecha}</h3> */}
+            <div className="m-6 flex">
+                <div className="text-blue-600 p-2 mr-2 font-bold place-content-center transition-colors hover:text-blue-900 hover:bg-blue-100/50 rounded">
+                    {/* <a href="#">Volver</a> */}
+                    <Link to="/">Volver</Link>
+                </div>
+                <div>
+                    <h1 className="text-2xl font-bold">Dashboard de Gestión</h1>
+                    <p className="text-gray-500">Revisemos cómo ha ido la Gestión...</p>
+                </div>
+            </div>
+
+
+
+            <div className="bg-white border border-gray-100 shadow-md rounded-md  shadow-black/5 m-6">
+                <div className="pt-2 rounded border-b-0 mb-4 mt-4 text-gray-900 text-md flex justify-center font-bold">
+                    Filtros
                 </div>
 
-                <div className="">
-                    <div className=" bg-tonosClaros-2 text-tonosOscuros-1 pl-5 flex items-center font-ralewayBold text-base h-16">
-                        FILTROS
+
+                <div className="mb-2  px-4">
+
+                    <div className={`border-b-0 mb-4 mt-4 transition-colors text-indigo-900 hover:text-blue-700 text-md font-bold`}>
+                    Filtros generales
                     </div>
 
-                    <div className="bg-white p-5">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2   mb-4 text-base font-normal text-gray-700">                   
+                        <ComponenteFechaDos valor={selectFecha} setValor={setSelectFecha}/>                        
+                        {/* <ComponenteFecha/> */}
+                        {/* <SelectTailwind label="Seleccione un mes *"      llave="3" options={optionsMes}       valor={selectMes}  setValor={setSelectMes} /> */}
+                        <SelectTailwind label="Seleccione Una entidad *" llave="1" options={optionsEntidad}   valor={selectEntidad} setValor={setSelectEntidad}/>
+                        <SelectElementSecondVersion realizarPeticion={selectEntidad? true : false} url={`https://poetic-tube-428221-a5.rj.r.appspot.com/cartera/entidad/${selectEntidad}`} label="Seleccione una Cartera *" tipoDato="cartera" valor={selectCartera} setValor={setSelectCartera}/>
+                    </div>
 
-                        <h3 className="font-ralewaySemibold text-base text-tonosOscuros-2 mb-5">FILTROS GENERALES</h3>
-                        {/* Poner un grid */}
+                    <div className={` border-b-0 mb-4 mt-4 transition-colors text-indigo-900 hover:text-blue-700 text-md font-bold flex `} onClick={handleOpen}>
+                        Filtros Específicos
+                        <IoMdRemoveCircle className={`mt-0.5 ml-2 text-xl ${open==true?'hidden':''}`}/>
+                        <IoAddCircle className={`mt-0.5 ml-2 text-xl  ${open==true?'':'hidden'}`}/>
+                    </div>
 
-                        {/* <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5"> */}
-                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-5">
-                            <div className="col-span-2 grid grid-cols-subgrid grid-cols-1 md:grid-cols-3 gap-5">
-
-                                <ComponenteFechaDos valor={selectFecha} setValor={setSelectFecha}/>
-                                <SelectTailwind label="Seleccione una entidad *" llave="1" options={optionsEntidad}   valor={selectEntidad} setValor={setSelectEntidad} />
-                                <SelectElementSecondVersion realizarPeticion={selectEntidad? true : false} url={`https://poetic-tube-428221-a5.rj.r.appspot.com/cartera/entidad/${selectEntidad}`} label="Seleccione una cartera *" tipoDato="cartera" valor={selectCartera} setValor={setSelectCartera}/>
-                                
-                            </div>
-                            <div className="grid grid-cols-subgrid lg:grid-cols-3 gap-5">
-                                <BotonClaro  className="col-start-2" layout="LIMPIAR BÚSQUEDA" onClick={cleanSearch}/>
-                                <BotonOscuro className="col-start-3" layout="BUSCAR" onClick={handleGroupTables}/>
-                            </div>
-
-                        </div>
-                        <div className={`transition-colors text-tonosOscuros-2 font-ralewaySemibold mb-5 flex `} onClick={handleOpen}>
-                            FILTROS ESPECÍFICOS
-                            <IoMdRemoveCircle className={`mt-0.5 ml-2 text-xl ${open==true?'hidden':''}`}/>
-                            <IoAddCircle className={`mt-0.5 ml-2 text-xl  ${open==true?'':'hidden'}`}/>
-                        </div>
-
-                        <div className={`grid grid-cols-1 lg:grid-cols-3 gap-5 ${open==true?'hidden':''}`}>
-                        <div className="col-span-2 grid grid-cols-subgrid grid-cols-1 md:grid-cols-3 gap-5">
+                    <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2   mb-4 text-base font-normal text-gray-700 ${open==true?'hidden':''}`}>
                         <SelectElementSecondVersion limpiar={limpiarSegundoSelect} url={`https://poetic-tube-428221-a5.rj.r.appspot.com/prioridad`} tipoDato="prioridad" label="Seleccione prioridad"  valor={selectPrioridad} setValor={setSelectPrioridad}/>
                         <SelectTailwind label="Seleccione Moneda"   llave="5" options={optionsMoneda}    valor={selectMoneda}  setValor={setSelectMoneda} />
                         <SelectTailwind label="Seleccione Producto" llave="6" options={optionsProducto}  valor={selectProducto}  setValor={setSelectProducto} />
-                        </div>
-                        </div>
-
 
                     </div>
+
+
+                    <div className="mt-8  mb-4 text-gray-700 gap-2 text-right">
+                        <button
+                            // className="mr-2 border-1 border-gray-500 shadow-md shadow-black/30 align-middle select-none font-sans font-bold text-center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-sm py-3 px-6 rounded-lg bg-gray-[#f1f5f9] text-gray shadow-md shadow-gray-[#f1f5f9]/10 hover:shadow-lg hover:shadow-[#f1f5f9]-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none "
+                            className="mr-2 border-solid border-2 border-indigo-900 py-3 px-6 rounded font-sans text-center text-sm text-indigo-900"
+                            type="button"
+                            onClick={cleanSearch}
+                        >
+                            Limpiar búsqueda
+                        </button>
+                       
+                        <button
+                            className="align-middle border-solid border-2 border-indigo-900 select-none font-sans font-bold text-center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-sm py-3 px-6 rounded bg-indigo-900 text-white shadow-md shadow-blue-900/10 hover:shadow-lg hover:shadow-blue-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
+                            type="button"
+                            onClick={handleGroupTables}
+                        >
+                            Buscar
+                        </button>
+                    </div>
+                    
                 </div>
+
             </div>
                         
-            <div className={`p-5 ${groupOfTables==false?'hidden':''}`}>
+            <div className={`bg-white border border-gray-100 shadow-md rounded-md  shadow-black/5 m-6 ${groupOfTables==false?'hidden':''}`}>
                 {/* 1: Dashboard de Estado General de Cartera */}
-                <Accordion open={firstTableOpen} className="">
+                <Accordion open={firstTableOpen} className="mb-2 px-4">
                     <AccordionHeader
                     onClick={handleFirstTable}
-                    className={`border-b-0  transition-colors font-ralewaySemibold text-base text-tonosOscuros-1 ${
-                        secondTableOpen? "hover:!text-blue-700 " : ""
+                    className={`border-b-0 transition-colors text-3xl font-bold   ${
+                        secondTableOpen? "hover:!text-blue-700 text-3xl " : ""
                     }`}
                     >
-                    ESTADO GENERAL DE CARTERA DEL MES X
+                    Estado General de Cartera del mes X
                     </AccordionHeader>
 
                     <AccordionBody className="pt-0 text-base font-normal">
@@ -362,14 +380,14 @@ const SidebarDashboardView = () => {
                 </Accordion>
 
                 {/* 2: Dashboard de situación de Cartera según prioridad */}
-                <Accordion open={secondTableOpen} className="">
+                <Accordion open={secondTableOpen} className="mb-2 px-4">
                     <AccordionHeader
                     onClick={handleSecondTable}
-                    className={`border-b-0  transition-colors font-ralewaySemibold text-base text-tonosOscuros-1  ${
-                        secondTableOpen? "hover:!text-blue-700" : ""
+                    className={`border-b-0 transition-colors text-3xl font-bold   ${
+                        secondTableOpen? "hover:!text-blue-700 text-3xl " : ""
                     }`}
                     >
-                    SITUACIÓN DE CARTERA SEGÚN PRIORIDAD
+                    Situación de Cartera según prioridad
                     </AccordionHeader>
 
                     <AccordionBody className="pt-0 text-base font-normal">
@@ -401,15 +419,14 @@ const SidebarDashboardView = () => {
                 </Accordion> */}
 
                 {/* 4: Dashboard de cartera por rango de maduración*/}
-                <Accordion open={fourthTableOpen} className="">
+                <Accordion open={fourthTableOpen} className="mb-2 px-4">
                     <AccordionHeader
                     onClick={handleFourthTable}
-                    className={`border-b-0 transition-colors font-ralewaySemibold text-base text-tonosOscuros-1  ${
-                        secondTableOpen? "hover:!text-blue-700" : ""
+                    className={`border-b-0 transition-colors text-3xl font-bold   ${
+                        secondTableOpen? "hover:!text-blue-700 text-3xl " : ""
                     }`}
                     >
-
-                    CARTERA POR RANGO DE MADURACIÓN
+                    Cartera por rango de maduración
                     </AccordionHeader>
 
                     <AccordionBody className="pt-0 text-base font-normal">
@@ -421,14 +438,14 @@ const SidebarDashboardView = () => {
                 </Accordion>
 
                 {/* 5: Dashboard de cartera por año - mes de castigo*/}
-                <Accordion open={fifthTableOpen} className="">
+                <Accordion open={fifthTableOpen} className="mb-2 px-4">
                     <AccordionHeader
                     onClick={handleFifthTable}
-                    className={`border-b-0 transition-colors font-ralewaySemibold text-base text-tonosOscuros-1   ${
-                        secondTableOpen? "hover:!text-blue-700 " : ""
+                    className={`border-b-0 transition-colors text-3xl font-bold   ${
+                        secondTableOpen? "hover:!text-blue-700 text-3xl " : ""
                     }`}
                     >
-                    CARTERA POR AÑO - MES DE CASTIGO
+                    Cartera por año - mes de castigo
                     </AccordionHeader>
 
                     <AccordionBody className="pt-0 text-base font-normal">
@@ -440,14 +457,14 @@ const SidebarDashboardView = () => {
                 </Accordion>
 
                 {/* 6: Dashboard por rango de campaña*/}
-                <Accordion open={sixthTableOpen} className="">
+                <Accordion open={sixthTableOpen} className="mb-2 px-4">
                     <AccordionHeader
                     onClick={handleSixthTable}
-                    className={`border-b-0 transition-colors font-ralewaySemibold text-base text-tonosOscuros-1  ${
-                        secondTableOpen? "hover:!text-blue-700" : ""
+                    className={`border-b-0 transition-colors text-3xl font-bold   ${
+                        secondTableOpen? "hover:!text-blue-700 text-3xl " : ""
                     }`}
                     >
-                    DASHBOARD POR RANGO DE CAMPAÑA
+                    Dashboard por rango de campaña
                     </AccordionHeader>
 
                     <AccordionBody className="pt-0 text-base font-normal">
@@ -459,14 +476,14 @@ const SidebarDashboardView = () => {
                 </Accordion>
 
                 {/* 7: Dashboard de cartera por tipo de producto*/}
-                <Accordion open={seventhTableOpen} className="">
+                <Accordion open={seventhTableOpen} className="mb-2 px-4">
                     <AccordionHeader
                     onClick={handleSeventhTable}
-                    className={`border-b-0 transition-colors font-ralewaySemibold text-base text-tonosOscuros-1  ${
-                        secondTableOpen? "hover:!text-blue-700" : ""
+                    className={`border-b-0 transition-colors text-3xl font-bold   ${
+                        secondTableOpen? "hover:!text-blue-700 text-3xl " : ""
                     }`}
                     >
-                    CARTERA POR TIPO DE PRODUCTO
+                    Cartera por tipo de producto
                     </AccordionHeader>
 
                     <AccordionBody className="pt-0 text-base font-normal">
@@ -478,14 +495,14 @@ const SidebarDashboardView = () => {
                 </Accordion>
 
                 {/* 8: Dashboard de cartera por zona*/}
-                <Accordion open={octaveTableOpen} className="">
+                <Accordion open={octaveTableOpen} className="mb-2 px-4">
                     <AccordionHeader
                     onClick={handleoctaveTable}
-                    className={`border-b-0 transition-colors font-ralewaySemibold text-base text-tonosOscuros-1  ${
-                        secondTableOpen? "hover:!text-blue-700" : ""
+                    className={`border-b-0 transition-colors text-3xl font-bold   ${
+                        secondTableOpen? "hover:!text-blue-700 text-3xl " : ""
                     }`}
                     >
-                    CARTERA POR ZONA
+                    Cartera por zona
                     </AccordionHeader>
 
                     <AccordionBody className="pt-0 text-base font-normal">
@@ -497,15 +514,24 @@ const SidebarDashboardView = () => {
                 </Accordion>
             </div>
 
-            {/* <div className={`bg-white border border-gray-100 shadow-md rounded-md  shadow-black/5 m-6 ${groupOfTables==true?'hidden':''}`}>
+            <div className={`bg-white border border-gray-100 shadow-md rounded-md  shadow-black/5 m-6 ${groupOfTables==true?'hidden':''}`}>
+
+                {/* <div style={{ padding: '50px', textAlign: 'center' }}> */}
+                    {/* <GridLoader color="#0076B1" size={20} loading={true}/> */}
+                {/* </div> */}
+                {/* <div style={{ padding: '50px', textAlign: 'center' }}> */}
                 <div className="text-center">
                     <div className={`py-8 ${spinnerShowGroupTables?'hidden':''}`}>                
+                    
                         <img src={filtro} alt="Portada" className="max-w-60 mx-auto "/>
                         <h3 className="pt-4"> Filtra para iniciar búsqueda</h3>
+
                     </div>
+
                     <GridLoader color="#1A237E" size={20} loading={spinnerShowGroupTables}/>
                 </div>
-            </div> */}
+
+            </div>
 
             
 

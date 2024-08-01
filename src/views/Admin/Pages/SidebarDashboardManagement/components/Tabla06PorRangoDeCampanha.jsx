@@ -370,6 +370,7 @@ const AdicionaComas = ({ value }) => {
     return numero.toLocaleString('en-US');
 };
 
+
 const customStyles = {
 	// rows: {
 	// 	style: {
@@ -380,11 +381,13 @@ const customStyles = {
 		style: {
 			paddingLeft: '8px', // override the cell padding for head cells
 			paddingRight: '8px',
-			backgroundColor: '#699AD0', // Usar el tono 500 del color rojo
+			backgroundColor: '#064469', // Usar el tono 500 del color rojo
 			fontSize: '14px',
 			color: '#FFFFFF',
 			textAlign: 'center', // Centrar el texto
 			justifyContent: 'center', // Asegura que el contenido esté centrado			
+			// whiteSpace: 'nowrap', // Evita el ajuste de línea
+			textOverflow: 'ellipsis',
 		},
 	},
 	cells: {
@@ -402,7 +405,7 @@ const conditionalRowStyles = [
 	{
 		when: row => row.tipo == "suma",
 		style: {
-			backgroundColor: 'rgba(0, 170, 255, 0.2)',
+			backgroundColor: '#E6F0F2',
 			color: 'black',
 			fontWeight: 'bold',
 			// '&:hover': {
@@ -413,10 +416,10 @@ const conditionalRowStyles = [
 	{
 		when: row => row.tipo == "total",
 		style: {
-			backgroundColor: '#AAD6EE',
+			backgroundColor: '#9CCDDB',
 			color: 'black',
 			fontWeight: 'bold',
-			border: '1px solid #1A237E',
+			// border: '1px solid #1A237E',
 			// '&:hover': {
 			// 	cursor: 'pointer',
 			// },
