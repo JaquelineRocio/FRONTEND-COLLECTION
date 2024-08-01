@@ -57,7 +57,7 @@ const columns = [
 		selector: row => row.codTipo,
 		// sortable: true,
 		cell: row => (
-			<div title={row.codTipo}>
+			<div title={row.codTipo} className='pl-4'>
 				{row.codTipo}
 			</div>
 		),

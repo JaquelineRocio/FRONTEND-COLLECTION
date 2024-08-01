@@ -346,7 +346,7 @@ const SidebarDashboardView = () => {
                 <Accordion open={firstTableOpen} className="">
                     <AccordionHeader
                     onClick={handleFirstTable}
-                    className={`border-b-0  transition-colors font-ralewaySemibold text-base text-tonosOscuros-1 ${
+                    className={`border-b-0  transition-colors font-ralewayBold text-base text-tonosOscuros-1 ${
                         secondTableOpen? "hover:!text-blue-700 " : ""
                     }`}
                     >
@@ -365,7 +365,7 @@ const SidebarDashboardView = () => {
                 <Accordion open={secondTableOpen} className="">
                     <AccordionHeader
                     onClick={handleSecondTable}
-                    className={`border-b-0  transition-colors font-ralewaySemibold text-base text-tonosOscuros-1  ${
+                    className={`border-b-0  transition-colors font-ralewayBold text-base text-tonosOscuros-1  ${
                         secondTableOpen? "hover:!text-blue-700" : ""
                     }`}
                     >
@@ -404,7 +404,7 @@ const SidebarDashboardView = () => {
                 <Accordion open={fourthTableOpen} className="">
                     <AccordionHeader
                     onClick={handleFourthTable}
-                    className={`border-b-0 transition-colors font-ralewaySemibold text-base text-tonosOscuros-1  ${
+                    className={`border-b-0 transition-colors font-ralewayBold text-base text-tonosOscuros-1  ${
                         secondTableOpen? "hover:!text-blue-700" : ""
                     }`}
                     >
@@ -424,7 +424,7 @@ const SidebarDashboardView = () => {
                 <Accordion open={fifthTableOpen} className="">
                     <AccordionHeader
                     onClick={handleFifthTable}
-                    className={`border-b-0 transition-colors font-ralewaySemibold text-base text-tonosOscuros-1   ${
+                    className={`border-b-0 transition-colors font-ralewayBold text-base text-tonosOscuros-1   ${
                         secondTableOpen? "hover:!text-blue-700 " : ""
                     }`}
                     >
@@ -443,7 +443,7 @@ const SidebarDashboardView = () => {
                 <Accordion open={sixthTableOpen} className="">
                     <AccordionHeader
                     onClick={handleSixthTable}
-                    className={`border-b-0 transition-colors font-ralewaySemibold text-base text-tonosOscuros-1  ${
+                    className={`border-b-0 transition-colors font-ralewayBold text-base text-tonosOscuros-1  ${
                         secondTableOpen? "hover:!text-blue-700" : ""
                     }`}
                     >
@@ -462,7 +462,7 @@ const SidebarDashboardView = () => {
                 <Accordion open={seventhTableOpen} className="">
                     <AccordionHeader
                     onClick={handleSeventhTable}
-                    className={`border-b-0 transition-colors font-ralewaySemibold text-base text-tonosOscuros-1  ${
+                    className={`border-b-0 transition-colors font-ralewayBold text-base text-tonosOscuros-1  ${
                         secondTableOpen? "hover:!text-blue-700" : ""
                     }`}
                     >
@@ -481,7 +481,7 @@ const SidebarDashboardView = () => {
                 <Accordion open={octaveTableOpen} className="">
                     <AccordionHeader
                     onClick={handleoctaveTable}
-                    className={`border-b-0 transition-colors font-ralewaySemibold text-base text-tonosOscuros-1  ${
+                    className={`border-b-0 transition-colors font-ralewayBold text-base text-tonosOscuros-1  ${
                         secondTableOpen? "hover:!text-blue-700" : ""
                     }`}
                     >
@@ -497,7 +497,7 @@ const SidebarDashboardView = () => {
                 </Accordion>
             </div>
 
-            {/* <div className={`bg-white border border-gray-100 shadow-md rounded-md  shadow-black/5 m-6 ${groupOfTables==true?'hidden':''}`}>
+            <div className={`bg-white border border-gray-100 shadow-md rounded-md  shadow-black/5 m-6 ${groupOfTables==true?'hidden':''}`}>
                 <div className="text-center">
                     <div className={`py-8 ${spinnerShowGroupTables?'hidden':''}`}>                
                         <img src={filtro} alt="Portada" className="max-w-60 mx-auto "/>
@@ -505,7 +505,7 @@ const SidebarDashboardView = () => {
                     </div>
                     <GridLoader color="#1A237E" size={20} loading={spinnerShowGroupTables}/>
                 </div>
-            </div> */}
+            </div>
 
             
 

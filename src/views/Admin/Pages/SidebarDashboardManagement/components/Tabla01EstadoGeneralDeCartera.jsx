@@ -48,7 +48,7 @@ const columns = [
 		selector: row => row.desCartera,
 		// sortable: true,
 		cell: row => (
-			<div title={row.desCartera}>
+			<div title={row.desCartera} className='pl-4'>
 				{row.desCartera}
 			</div>
 		),
@@ -371,13 +371,14 @@ const customStyles = {
 	// },
 	headCells: {
 		style: {
-			paddingLeft: '8px', // override the cell padding for head cells
-			paddingRight: '8px',
+			// paddingLeft: '8px', // override the cell padding for head cells
+			// paddingRight: '8px',
 			backgroundColor: '#064469', // Usar el tono 500 del color rojo -------
 			fontSize: '14px',
 			color: '#FFFFFF',
 			textAlign: 'center', // Centrar el texto
-			justifyContent: 'center', // Asegura que el contenido esté centrado			
+			justifyContent: 'center', // Asegura que el contenido esté centrado	
+			whiteSpace: 'nowrap',		
 		},
 	},
 	cells: {
@@ -386,7 +387,7 @@ const customStyles = {
 			// paddingRight: '0px',
 			textAlign: 'center', // Centrar el texto en las celdas de datos
 			justifyContent: 'center', // Asegura que el contenido esté centrado
-			whiteSpace: 'nowrap',
+			
 		},
 	},
 };

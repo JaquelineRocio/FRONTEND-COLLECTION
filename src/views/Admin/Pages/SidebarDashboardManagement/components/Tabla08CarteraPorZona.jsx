@@ -57,7 +57,7 @@ const columns = [
 		selector: row => row.codTipo,
 		// sortable: true,
 		cell: row => (
-			<div title={row.codTipo}>
+			<div title={row.codTipo} className='pl-4'>
 				{row.codTipo}
 			</div>
 		),
@@ -386,7 +386,7 @@ const customStyles = {
 			color: '#FFFFFF',
 			textAlign: 'center', // Centrar el texto
 			justifyContent: 'center', // Asegura que el contenido esté centrado			
-			// whiteSpace: 'nowrap', // Evita el ajuste de línea
+			whiteSpace: 'nowrap', // Evita el ajuste de línea
 			textOverflow: 'ellipsis',
 		},
 	},
