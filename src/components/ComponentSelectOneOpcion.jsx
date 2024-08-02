@@ -1,35 +1,21 @@
 import Select from 'react-select'
-// import makeAnimated from 'react-select/animated'
-import { useRef, useEffect, useMemo } from 'react';
-import { useFetch } from '../../../../../hooks/useFetch';
+import { useRef, useEffect} from 'react';
 
+export default function ComponentSelectOneOpcion({
 
-
-// const animatedComponents = makeAnimated()
-
-export default function SelectElementSecondVersion({
-        url,
-        limpiar, 
-        realizarPeticion = true,
+        options,
         label='escoja una opcion', 
-        tipoDato, 
+        // url,
+        limpiar, 
+        // realizarPeticion = true,
+        // tipoDato, 
         setValor, 
-        valor, 
-        isMulti=true, 
-        closeMenuOnSelect=false
+        valor=null,
+        loading=false, 
+        // isMulti=true, 
+        // closeMenuOnSelect=false
 
 }){
-
-    let urlFetch = null;
-    if(realizarPeticion){
-        urlFetch = url;
-    }
-
-    const {data, error, loading} = useFetch(urlFetch);
-
-
-    // Memoiza las opciones para evitar recalculaciones innecesarias
-    const options = useMemo(() => transformData(data, tipoDato), [data, tipoDato]);
 
     const selectRef = useRef(null);
 
@@ -37,7 +23,7 @@ export default function SelectElementSecondVersion({
         if (selectRef.current) {
             selectRef.current.clearValue();
         }
-    }, [data, limpiar]);
+    }, [limpiar]);
 
     return (
         <>
@@ -47,12 +33,12 @@ export default function SelectElementSecondVersion({
                 ref={selectRef}
                 placeholder={label}
                 options={options}
-                closeMenuOnSelect={closeMenuOnSelect}           // Evita que se cierre el modal hasta que el usuario termine de seleccionar opciones
+                // closeMenuOnSelect={closeMenuOnSelect}           // Evita que se cierre el modal hasta que el usuario termine de seleccionar opciones
                 // defaultValue={options[0]}                     // Esta es una opcion seleccionada por defecto
                 // defaultValue={[options[0],options[1]]}       // Esta es varias opciones seleccionadas por defecto
                 // components={animatedComponents}
-                isMulti={isMulti}
-                onChange={(val) => {setValor(val)}}
+                // isMulti={isMulti}
+                onChange={(val) => {setValor(val?.value)}}
                 styles={customStyles}
             />
         </>
@@ -77,6 +63,7 @@ const customStyles = {
         whiteSpace: 'nowrap',       // Evita que el texto se envuelva a la siguiente línea
         overflow: 'hidden',         // Oculta el desbordamiento del texto
         textOverflow: 'ellipsis',   // Añade puntos suspensivos (...) al final del texto que se desborda
+
     }),
     placeholder: (provided) => ({
         ...provided,
@@ -87,7 +74,6 @@ const customStyles = {
         ...provided,
         fontSize: '12px',           // Ajusta el tamaño de letra del valor seleccionado
     }),
-    
     option: (provided) => ({
         ...provided,
         fontSize: '12px',           // Ajusta el tamaño de letra de las opciones
@@ -99,20 +85,3 @@ const customStyles = {
     }),
 };
 
-// Función para transformar los datos basados en el tipo
-const transformData = (data, tipoDato) => {
-    switch (tipoDato) {
-        case 'cartera':
-            return data?.map(option => ({
-                value: option.codCartera.toString(),
-                label: option.desCartera
-            })) || [];
-        case 'prioridad':
-            return data?.map(option => ({
-                value: option.codPrioridad.toString(),
-                label: option.desPrioridad
-            })) || [];
-        default:
-            return [];
-    }
-}

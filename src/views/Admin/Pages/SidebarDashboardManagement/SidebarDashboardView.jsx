@@ -33,6 +33,7 @@ import ComponenteFecha from "../../../../components/ComponenteFecha";
 import ComponenteFechaDos from "../../../../components/ComponenteFechaDos";
 import BotonOscuro from "../../../../components/BotonOscuro";
 import BotonClaro from "../../../../components/BotonClaro";
+import ComponentSelectOneOpcion from "../../../../components/ComponentSelectOneOpcion";
 
 
 
@@ -68,6 +69,8 @@ const SidebarDashboardView = () => {
     const [optionsMoneda, setOptionsMoneda] = useState([]);
     const [optionsProducto, setOptionsProducto] = useState([]);
 
+
+
     const [selectEntidad, setSelectEntidad] = useState(null);
     const [selectCartera, setSelectCartera] = useState(null);
     const [selectMes, setSelectMes] = useState(null);
@@ -76,19 +79,25 @@ const SidebarDashboardView = () => {
     const [selectPrioridad, setSelectPrioridad] = useState(null);
     const [selectMoneda, setSelectMoneda] = useState(null);
     const [selectProducto, setSelectProducto] = useState(null);
+
+
+
     const dispatch = useDispatch();
     const [limpiarSegundoSelect, setLimpiarSegundoSelect] = useState(false);
     const [urlSecondTable, setUrlSecondTable] = useState(false);
-    const [loadingAllTable, setLoadingAllTable] = useState(false);
 
+    const [limpiarComponentSelectOneOpcion, setLimpiarComponentSelectOneOpcion] = useState(false);
+    const [loadingAllTable, setLoadingAllTable] = useState(false);
+    const [loadingAllSelects, setLoadingAllSelects] = useState(false);
 
     function handleOpen(){
         setOpen(open==true?false:true);
+
     }
 
     function mostrarValorDeFecha(){
         console.log("Esta es la fecha:", selectFecha?.format('MM-YYYY')); // Ajusta el formato según lo que necesites
-        
+
         // setSelectFecha(null);
     }
 
@@ -119,11 +128,11 @@ const SidebarDashboardView = () => {
 
 
             const data = {
-                "producto": null,
+                "producto": selectProducto,
                 "campaña": null,
                 "macroRegiones": null,
                 "añoCastigo": null,
-                "moneda": null,
+                "moneda": selectMoneda,
                 "estadoCuenta": null,
                 "mesCastigo": null,
                 "prioridad":codPrioridad,
@@ -201,6 +210,7 @@ const SidebarDashboardView = () => {
 
 
     async function loadSelects() {
+        setLoadingAllSelects(true);
         try {
           const [entidadResponse, prioridadResponse, productoResponse, monedaResponse] = await Promise.all([
             Api.get('/entidad'),
@@ -250,7 +260,7 @@ const SidebarDashboardView = () => {
             { value: '12', label: 'Diciembre' },
 
           ]);
-
+          setLoadingAllSelects(false);
         } catch (error) {
             if (error.message === 'Token expired') {
                 swal({
@@ -262,6 +272,7 @@ const SidebarDashboardView = () => {
                     dispatch(unauthenticatedUser());
                 });
             }
+        setLoadingAllSelects(false);
         }
     }
 
@@ -279,8 +290,9 @@ const SidebarDashboardView = () => {
         setSelectPrioridad(null);
         setSelectMoneda(null);
         setSelectProducto(null);
-        setLimpiarSegundoSelect(limpiarSegundoSelect? false: true);
         setSelectFecha(null);
+        setLimpiarSegundoSelect(limpiarSegundoSelect?false: true);
+        setLimpiarComponentSelectOneOpcion(limpiarComponentSelectOneOpcion?false:true);
         
     }
     
@@ -312,7 +324,9 @@ const SidebarDashboardView = () => {
                             <div className="col-span-2 grid grid-cols-subgrid grid-cols-1 md:grid-cols-3 gap-5">
 
                                 <ComponenteFechaDos valor={selectFecha} setValor={setSelectFecha}/>
-                                <SelectTailwind label="Seleccione una entidad *" llave="1" options={optionsEntidad}   valor={selectEntidad} setValor={setSelectEntidad} />
+                                {/* <SelectTailwind label="Seleccione una entidad *" llave="1" options={optionsEntidad}   valor={selectEntidad} setValor={setSelectEntidad} /> */}
+                                <ComponentSelectOneOpcion loading={loadingAllSelects} label="Seleccione una entidad *" limpiar={limpiarComponentSelectOneOpcion}  options={optionsEntidad}   valor={selectEntidad} setValor={setSelectEntidad}/>
+                                {/* <SelectTailwind label="Seleccione una entidad *" limpiar={limpiarSelectEntidad}  options={optionsEntidad}   valor={selectEntidad} setValor={setSelectEntidad} /> */}
                                 <SelectElementSecondVersion realizarPeticion={selectEntidad? true : false} url={`https://poetic-tube-428221-a5.rj.r.appspot.com/cartera/entidad/${selectEntidad}`} label="Seleccione una cartera *" tipoDato="cartera" valor={selectCartera} setValor={setSelectCartera}/>
                                 
                             </div>
@@ -331,184 +345,206 @@ const SidebarDashboardView = () => {
                         <div className={`grid grid-cols-1 lg:grid-cols-3 gap-5 ${open==true?'hidden':''}`}>
                         <div className="col-span-2 grid grid-cols-subgrid grid-cols-1 md:grid-cols-3 gap-5">
                         <SelectElementSecondVersion limpiar={limpiarSegundoSelect} url={`https://poetic-tube-428221-a5.rj.r.appspot.com/prioridad`} tipoDato="prioridad" label="Seleccione prioridad"  valor={selectPrioridad} setValor={setSelectPrioridad}/>
+                        
+                        <ComponentSelectOneOpcion loading={loadingAllSelects} label="Seleccione Moneda" limpiar={limpiarComponentSelectOneOpcion}  options={optionsMoneda}   valor={selectMoneda} setValor={setSelectMoneda}/>                       
+                        <ComponentSelectOneOpcion loading={loadingAllSelects} label="Seleccione Producto" limpiar={limpiarComponentSelectOneOpcion}  options={optionsProducto}   valor={selectProducto} setValor={setSelectProducto}/>                       
+                        
+                        {/* producto ---
+                        campaña
+                        macroRegiones
+                        añoCastigo
+                        moneda ---
+                        estadoCuenta
+                        mesCastigo
+                        prioridad ---
+                        rangoEdad */}
+
+                        {/* <ComponentSelectOneOpcion label="Seleccione Producto" limpiar={limpiarSelectEntidad}  options={optionsProducto}   valor={selectProducto} setValor={setSelectProducto}/>     
+                        <ComponentSelectOneOpcion label="Seleccione Producto" limpiar={limpiarSelectEntidad}  options={optionsProducto}   valor={selectProducto} setValor={setSelectProducto}/>     
+                        <ComponentSelectOneOpcion label="Seleccione Producto" limpiar={limpiarSelectEntidad}  options={optionsProducto}   valor={selectProducto} setValor={setSelectProducto}/>     
+                        <ComponentSelectOneOpcion label="Seleccione Producto" limpiar={limpiarSelectEntidad}  options={optionsProducto}   valor={selectProducto} setValor={setSelectProducto}/>     
+                        <ComponentSelectOneOpcion label="Seleccione Producto" limpiar={limpiarSelectEntidad}  options={optionsProducto}   valor={selectProducto} setValor={setSelectProducto}/>     
+                        <ComponentSelectOneOpcion label="Seleccione Producto" limpiar={limpiarSelectEntidad}  options={optionsProducto}   valor={selectProducto} setValor={setSelectProducto}/>      */}
+
+
+                        {/*                         
                         <SelectTailwind label="Seleccione Moneda"   llave="5" options={optionsMoneda}    valor={selectMoneda}  setValor={setSelectMoneda} />
-                        <SelectTailwind label="Seleccione Producto" llave="6" options={optionsProducto}  valor={selectProducto}  setValor={setSelectProducto} />
+                        <SelectTailwind label="Seleccione Producto" llave="6" options={optionsProducto}  valor={selectProducto}  setValor={setSelectProducto} /> */}
                         </div>
                         </div>
 
 
                     </div>
                 </div>
-            </div>
+
                         
-            <div className={`p-5 ${groupOfTables==false?'hidden':''}`}>
-                {/* 1: Dashboard de Estado General de Cartera */}
-                <Accordion open={firstTableOpen} className="">
-                    <AccordionHeader
-                    onClick={handleFirstTable}
-                    className={`border-b-0  transition-colors font-ralewayBold text-base text-tonosOscuros-1 ${
-                        secondTableOpen? "hover:!text-blue-700 " : ""
-                    }`}
-                    >
-                    ESTADO GENERAL DE CARTERA DEL MES X
-                    </AccordionHeader>
+                <div className={` ${groupOfTables==false?'hidden':''}`}>
+                    {/* 1: Dashboard de Estado General de Cartera */}
+                    <Accordion open={firstTableOpen} className="">
+                        <AccordionHeader
+                        onClick={handleFirstTable}
+                        className={`border-b-0  transition-colors font-ralewayBold text-base text-tonosOscuros-1 ${
+                            secondTableOpen? "hover:!text-blue-700 " : ""
+                        }`}
+                        >
+                        ESTADO GENERAL DE CARTERA DEL MES X
+                        </AccordionHeader>
 
-                    <AccordionBody className="pt-0 text-base font-normal">
-                        <Tabla01EstadoGeneralDeCartera
-                            tableRows={registroPrimeraTabla}
-                            loading={loadingAllTable}
-                        />
-                    </AccordionBody>
-                </Accordion>
+                        <AccordionBody className="pt-0 text-base font-normal">
+                            <Tabla01EstadoGeneralDeCartera
+                                tableRows={registroPrimeraTabla}
+                                loading={loadingAllTable}
+                            />
+                        </AccordionBody>
+                    </Accordion>
 
-                {/* 2: Dashboard de situación de Cartera según prioridad */}
-                <Accordion open={secondTableOpen} className="">
-                    <AccordionHeader
-                    onClick={handleSecondTable}
-                    className={`border-b-0  transition-colors font-ralewayBold text-base text-tonosOscuros-1  ${
-                        secondTableOpen? "hover:!text-blue-700" : ""
-                    }`}
-                    >
-                    SITUACIÓN DE CARTERA SEGÚN PRIORIDAD
-                    </AccordionHeader>
+                    {/* 2: Dashboard de situación de Cartera según prioridad */}
+                    <Accordion open={secondTableOpen} className="">
+                        <AccordionHeader
+                        onClick={handleSecondTable}
+                        className={`border-b-0  transition-colors font-ralewayBold text-base text-tonosOscuros-1  ${
+                            secondTableOpen? "hover:!text-blue-700" : ""
+                        }`}
+                        >
+                        SITUACIÓN DE CARTERA SEGÚN PRIORIDAD
+                        </AccordionHeader>
 
-                    <AccordionBody className="pt-0 text-base font-normal">
-                        <Tabla02SituacionDeCarteraSegunPrioridad
-                            tableRows={registroSegundaTabla}
-                            loading={loadingAllTable}
-                        />
-                    </AccordionBody>
-                </Accordion>
+                        <AccordionBody className="pt-0 text-base font-normal">
+                            <Tabla02SituacionDeCarteraSegunPrioridad
+                                tableRows={registroSegundaTabla}
+                                loading={loadingAllTable}
+                            />
+                        </AccordionBody>
+                    </Accordion>
 
-                {/* 3: Dashboard de cartera por tramo de importe*/}
-                {/* <Accordion open={thirdTableOpen} className="mb-2 px-4">
-                    <AccordionHeader
-                    onClick={handleThirdTable}
-                    className={`border-b-0 transition-colors text-3xl font-bold   ${
-                        secondTableOpen? "hover:!text-blue-700 text-3xl " : ""
-                    }`}
-                    >
-                    Cartera por tramo de importe
-                    </AccordionHeader>
+                    {/* 3: Dashboard de cartera por tramo de importe*/}
+                    {/* <Accordion open={thirdTableOpen} className="mb-2 px-4">
+                        <AccordionHeader
+                        onClick={handleThirdTable}
+                        className={`border-b-0 transition-colors text-3xl font-bold   ${
+                            secondTableOpen? "hover:!text-blue-700 text-3xl " : ""
+                        }`}
+                        >
+                        Cartera por tramo de importe
+                        </AccordionHeader>
 
-                    <AccordionBody className="pt-0 text-base font-normal">
-                        <TablaCarteraPorTramoDeImporte
-                            tableRows={registroTerceraTabla}
-                            loading={loadingAllTable}
-                        />
-                        
-                    </AccordionBody>
-                </Accordion> */}
+                        <AccordionBody className="pt-0 text-base font-normal">
+                            <TablaCarteraPorTramoDeImporte
+                                tableRows={registroTerceraTabla}
+                                loading={loadingAllTable}
+                            />
+                            
+                        </AccordionBody>
+                    </Accordion> */}
 
-                {/* 4: Dashboard de cartera por rango de maduración*/}
-                <Accordion open={fourthTableOpen} className="">
-                    <AccordionHeader
-                    onClick={handleFourthTable}
-                    className={`border-b-0 transition-colors font-ralewayBold text-base text-tonosOscuros-1  ${
-                        secondTableOpen? "hover:!text-blue-700" : ""
-                    }`}
-                    >
+                    {/* 4: Dashboard de cartera por rango de maduración*/}
+                    <Accordion open={fourthTableOpen} className="">
+                        <AccordionHeader
+                        onClick={handleFourthTable}
+                        className={`border-b-0 transition-colors font-ralewayBold text-base text-tonosOscuros-1  ${
+                            secondTableOpen? "hover:!text-blue-700" : ""
+                        }`}
+                        >
 
-                    CARTERA POR RANGO DE MADURACIÓN
-                    </AccordionHeader>
+                        CARTERA POR RANGO DE MADURACIÓN
+                        </AccordionHeader>
 
-                    <AccordionBody className="pt-0 text-base font-normal">
-                        <Tabla04CarteraPorRangoDeMaduracion
-                            tableRows={registroCuartaTabla}
-                            loading={loadingAllTable}
-                        />
-                    </AccordionBody>
-                </Accordion>
+                        <AccordionBody className="pt-0 text-base font-normal">
+                            <Tabla04CarteraPorRangoDeMaduracion
+                                tableRows={registroCuartaTabla}
+                                loading={loadingAllTable}
+                            />
+                        </AccordionBody>
+                    </Accordion>
 
-                {/* 5: Dashboard de cartera por año - mes de castigo*/}
-                <Accordion open={fifthTableOpen} className="">
-                    <AccordionHeader
-                    onClick={handleFifthTable}
-                    className={`border-b-0 transition-colors font-ralewayBold text-base text-tonosOscuros-1   ${
-                        secondTableOpen? "hover:!text-blue-700 " : ""
-                    }`}
-                    >
-                    CARTERA POR AÑO - MES DE CASTIGO
-                    </AccordionHeader>
+                    {/* 5: Dashboard de cartera por año - mes de castigo*/}
+                    <Accordion open={fifthTableOpen} className="">
+                        <AccordionHeader
+                        onClick={handleFifthTable}
+                        className={`border-b-0 transition-colors font-ralewayBold text-base text-tonosOscuros-1   ${
+                            secondTableOpen? "hover:!text-blue-700 " : ""
+                        }`}
+                        >
+                        CARTERA POR AÑO - MES DE CASTIGO
+                        </AccordionHeader>
 
-                    <AccordionBody className="pt-0 text-base font-normal">
-                        <Tabla05CarteraPorAnioMesDeCastigo
-                            tableRows={registroQuintaTabla}
-                            loading={loadingAllTable}
-                        />
-                    </AccordionBody>
-                </Accordion>
+                        <AccordionBody className="pt-0 text-base font-normal">
+                            <Tabla05CarteraPorAnioMesDeCastigo
+                                tableRows={registroQuintaTabla}
+                                loading={loadingAllTable}
+                            />
+                        </AccordionBody>
+                    </Accordion>
 
-                {/* 6: Dashboard por rango de campaña*/}
-                <Accordion open={sixthTableOpen} className="">
-                    <AccordionHeader
-                    onClick={handleSixthTable}
-                    className={`border-b-0 transition-colors font-ralewayBold text-base text-tonosOscuros-1  ${
-                        secondTableOpen? "hover:!text-blue-700" : ""
-                    }`}
-                    >
-                    DASHBOARD POR RANGO DE CAMPAÑA
-                    </AccordionHeader>
+                    {/* 6: Dashboard por rango de campaña*/}
+                    <Accordion open={sixthTableOpen} className="">
+                        <AccordionHeader
+                        onClick={handleSixthTable}
+                        className={`border-b-0 transition-colors font-ralewayBold text-base text-tonosOscuros-1  ${
+                            secondTableOpen? "hover:!text-blue-700" : ""
+                        }`}
+                        >
+                        DASHBOARD POR RANGO DE CAMPAÑA
+                        </AccordionHeader>
 
-                    <AccordionBody className="pt-0 text-base font-normal">
-                        <Tabla06PorRangoDeCampanha
-                            tableRows={registroSextaTabla}
-                            loading={loadingAllTable}
-                        />
-                    </AccordionBody>
-                </Accordion>
+                        <AccordionBody className="pt-0 text-base font-normal">
+                            <Tabla06PorRangoDeCampanha
+                                tableRows={registroSextaTabla}
+                                loading={loadingAllTable}
+                            />
+                        </AccordionBody>
+                    </Accordion>
 
-                {/* 7: Dashboard de cartera por tipo de producto*/}
-                <Accordion open={seventhTableOpen} className="">
-                    <AccordionHeader
-                    onClick={handleSeventhTable}
-                    className={`border-b-0 transition-colors font-ralewayBold text-base text-tonosOscuros-1  ${
-                        secondTableOpen? "hover:!text-blue-700" : ""
-                    }`}
-                    >
-                    CARTERA POR TIPO DE PRODUCTO
-                    </AccordionHeader>
+                    {/* 7: Dashboard de cartera por tipo de producto*/}
+                    <Accordion open={seventhTableOpen} className="">
+                        <AccordionHeader
+                        onClick={handleSeventhTable}
+                        className={`border-b-0 transition-colors font-ralewayBold text-base text-tonosOscuros-1  ${
+                            secondTableOpen? "hover:!text-blue-700" : ""
+                        }`}
+                        >
+                        CARTERA POR TIPO DE PRODUCTO
+                        </AccordionHeader>
 
-                    <AccordionBody className="pt-0 text-base font-normal">
-                        <Tabla07CarteraPorTipoDeProducto
-                            tableRows={registroSextaTabla}
-                            loading={loadingAllTable}
-                        />
-                    </AccordionBody>
-                </Accordion>
+                        <AccordionBody className="pt-0 text-base font-normal">
+                            <Tabla07CarteraPorTipoDeProducto
+                                tableRows={registroSextaTabla}
+                                loading={loadingAllTable}
+                            />
+                        </AccordionBody>
+                    </Accordion>
 
-                {/* 8: Dashboard de cartera por zona*/}
-                <Accordion open={octaveTableOpen} className="">
-                    <AccordionHeader
-                    onClick={handleoctaveTable}
-                    className={`border-b-0 transition-colors font-ralewayBold text-base text-tonosOscuros-1  ${
-                        secondTableOpen? "hover:!text-blue-700" : ""
-                    }`}
-                    >
-                    CARTERA POR ZONA
-                    </AccordionHeader>
+                    {/* 8: Dashboard de cartera por zona*/}
+                    <Accordion open={octaveTableOpen} className="">
+                        <AccordionHeader
+                        onClick={handleoctaveTable}
+                        className={`border-b-0 transition-colors font-ralewayBold text-base text-tonosOscuros-1  ${
+                            secondTableOpen? "hover:!text-blue-700" : ""
+                        }`}
+                        >
+                        CARTERA POR ZONA
+                        </AccordionHeader>
 
-                    <AccordionBody className="pt-0 text-base font-normal">
-                        <Tabla08CarteraPorZona
-                            tableRows={registroOctavaTabla}
-                            loading={loadingAllTable}
-                        />
-                    </AccordionBody>
-                </Accordion>
-            </div>
-
-            <div className={`bg-white border border-gray-100 shadow-md rounded-md  shadow-black/5 m-6 ${groupOfTables==true?'hidden':''}`}>
-                <div className="text-center">
-                    <div className={`py-8 ${spinnerShowGroupTables?'hidden':''}`}>                
-                        <img src={filtro} alt="Portada" className="max-w-60 mx-auto "/>
-                        <h3 className="pt-4"> Filtra para iniciar búsqueda</h3>
-                    </div>
-                    <GridLoader color="#1A237E" size={20} loading={spinnerShowGroupTables}/>
+                        <AccordionBody className="pt-0 text-base font-normal">
+                            <Tabla08CarteraPorZona
+                                tableRows={registroOctavaTabla}
+                                loading={loadingAllTable}
+                            />
+                        </AccordionBody>
+                    </Accordion>
                 </div>
+
+                <div className={` text-center ${groupOfTables==true?'hidden':''}`}>
+                    <div className="text-cente h-all">
+                        <div className={`py-8 ${spinnerShowGroupTables?'hidden':''}`}>                
+                            <img src={filtro} alt="Portada" className="max-w-60 mx-auto "/>
+                            <h3 className="font-ralewayBold text-base text-tonosOscuros-2 "> FILTRA PARA INICIAR BÚSQUEDA</h3>
+                        </div>
+                        <GridLoader color="#1A237E" size={20} loading={spinnerShowGroupTables}/>
+                    </div>
+                </div>
+
             </div>
-
-            
-
         </>
     )
 }

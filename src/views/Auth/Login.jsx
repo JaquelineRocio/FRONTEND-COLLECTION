@@ -1,5 +1,5 @@
 // import React from 'react';
-import globalCorebankia from '../../../public/globalCorebankia.svg'
+import globalCorebankia from '/globalCorebankia.svg'
 import logoContactoEficaz from '../../../public/contactoEficaz.png'
 // import { Input } from "@material-tailwind/react";
 import { useEffect, useState } from 'react';
