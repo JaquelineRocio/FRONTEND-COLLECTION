@@ -104,8 +104,8 @@ const UserProfile = ({ name, role }) => {
                     
                 >
                     <div className="p-2 md:block text-left">
-                        <h2 className="text-sm font-semibold text-gray-800">{name}</h2>
-                        <p className="text-xs text-gray-500">{role}</p>
+                        <h2 className="text-xl font-ralewayBold text-tonosOscuros-0 ">{name}</h2>
+                        <p className="text-sm font-ralewayBold text-tonosClaros-0">{role}</p>
                     </div>
                     <div className="flex-shrink-0 w-10 h-10 relative">
                         <div className="p-1 bg-white rounded-full focus:outline-none focus:ring">

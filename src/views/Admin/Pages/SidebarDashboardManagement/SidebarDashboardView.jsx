@@ -174,7 +174,16 @@ const SidebarDashboardView = () => {
                 }).then(() => {
                     dispatch(unauthenticatedUser());
                 });
+            }else{
+                swal({
+                    title: "Error de consulta",
+                    text: "Hubo un error al obtener los datos, por favor vuelva a realizar su consulta.",
+                    icon: "warning",
+                    button: "OK"
+                })
             }
+
+
         }
 
         setGroupOfTables(true);
@@ -263,6 +272,7 @@ const SidebarDashboardView = () => {
           setLoadingAllSelects(false);
         } catch (error) {
             if (error.message === 'Token expired') {
+                
                 swal({
                     title: "Sesión Expirada",
                     text: "Su sesión ha expirado. Por favor, inicie sesión nuevamente para continuar.",
@@ -271,7 +281,18 @@ const SidebarDashboardView = () => {
                 }).then(() => {
                     dispatch(unauthenticatedUser());
                 });
+
+
+            }else{
+                swal({
+                    title: "Error de consulta",
+                    text: "Hubo un error al obtener los datos, por favor vuelva a realizar su consulta.",
+                    icon: "warning",
+                    button: "OK"
+                })
             }
+
+
         setLoadingAllSelects(false);
         }
     }
@@ -310,7 +331,7 @@ const SidebarDashboardView = () => {
                 </div>
 
                 <div className="">
-                    <div className=" bg-tonosClaros-2 text-tonosOscuros-1 pl-5 flex items-center font-ralewayBold text-base h-16">
+                    <div className=" bg-tonosClaros-2 text-tonosOscuros-1 pl-5 flex items-center font-ralewayBold text-base h-12">
                         FILTROS
                     </div>
 
@@ -387,7 +408,13 @@ const SidebarDashboardView = () => {
                             secondTableOpen? "hover:!text-blue-700 " : ""
                         }`}
                         >
-                        ESTADO GENERAL DE CARTERA DEL MES X
+                        {
+                            selectFecha==null? ('ESTADO GENERAL DE CARTERA DEL MES'):(
+                                `ESTADO GENERAL DE CARTERA DEL MES ${selectFecha?.format('MM')} Y AÑO ${selectFecha?.format('YYYY')}`
+                            )
+                        }
+
+                        
                         </AccordionHeader>
 
                         <AccordionBody className="pt-0 text-base font-normal">

@@ -21,17 +21,29 @@ import { CiGrid42 } from "react-icons/ci";
 import { RiGitPullRequestFill } from "react-icons/ri";
 import { TbLayoutDashboardFilled } from "react-icons/tb";
 import logoContactoEficaz from '../../../../public/contactoEficaz.png'
+import { useLocation } from "react-router-dom";
 
 
 
 
 
 function Sidebar(){
+    const location = useLocation();
+    let secondSegment = null;
+
+    const handleClick = () => {
+        const segments = location.pathname.split('/').filter(Boolean); // Filtra segmentos vacíos
+        secondSegment = segments[1] || null; // Obtiene el segundo segmento o un mensaje si no existe
+
+        console.log("ruta actual", location.pathname);
+        console.log("Segundo segmento:", secondSegment);
+    };
+    
     return(
         <>
-        
-      <div className="fixed left-0 top-0 rounded w-64 p-4 h-full bg-[#F9FAFB]  z-50 sidebar-menu transition-transform overflow-y-auto">
-        {/* <div className="fixed left-0 top-0 w-64 h-full bg-[#f9fafb] p-4 z-50 sidebar-menu transition-transform"> */}
+
+      {/* <div className="fixed left-0 top-0 rounded w-[300px] bg-white p-2 h-full  z-50 sidebar-menu transition-transform overflow-y-auto" style={{scrollbarWidth: 'thin', scrollbarColor: '#888 #f1f1f1'}} > */}
+      <div className="fixed left-0 top-0 rounded w-[300px] p-2 h-full  z-50 sidebar-menu transition-transform overflow-y-auto" style={{scrollbarWidth: 'thin', scrollbarColor: '#888 #f1f1f1'}} >
         
             {/* <a href="#" className="flex items-center pb-4 border-b border-b-gray-800"> */}
                 {/* <h2 className="font-bold text-2xl">CONTACTO EFICAZ <span className="bg-[#f84525] text-white px-2 rounded-md">IPSUM</span></h2> */}
@@ -40,8 +52,15 @@ function Sidebar(){
 
             <ul className="grap-2">
             
+            <div className="mt-2 mb-2 flex pl-9">
+            <img src={logoContactoEficaz} alt="Login Image" className="w-100  p-4 h-16 text-sm text-center" />
+            </div>
 
-            <img src={logoContactoEficaz} alt="Login Image" className="w-100  p-4 object-cover" />
+
+            {/* <div className="bg-red-600 text-center flex justify-center items-center">
+                <img src={logoContactoEficaz} alt="Login Image" className="w-100 p-4 h-16 text-sm align-bottom bg-blue-700" />
+            </div> */}
+
 
             {/* 
             <img
@@ -50,8 +69,10 @@ function Sidebar(){
             src={logoContactoEficaz}
             alt="nature image"
             /> */}
+            
+            
 
-            <ItemList name="Home" to="" icon={FaHome} />
+            <ItemList name="Home" to="/" icon={FaHome} />
             <ItemList name="Dashboard de gestión" to="gestiondashboard" icon={TbLayoutDashboardFilled} />
             <ItemList name="Gestión de cliente" to="gestiondecliente" icon={FaPeopleGroup} />
             <ItemList name="Gestión de información" to="gridtailwind" icon={RiCustomerService2Line} />
@@ -59,7 +80,7 @@ function Sidebar(){
             <ItemList name="Gestión de entidades" to="accordiontailwind" icon={MdManageAccounts} />
             <ItemList name="Gestión de accesos" to="selecttailwind" icon={FaUnlockKeyhole} />
             <ItemList name="Ejemplo Componente" to="accordiontailwindsecondversion" icon={BiSolidHomeCircle} />
-            <ItemList name="Ejemplo graficos react chart" to="graficos" icon={SiGraphite} />
+            {/* <ItemList name="Ejemplo graficos react chart" to="graficos" icon={SiGraphite} />
             <ItemList name="Ejemplo grid" to="gridtailwind" icon={CiGrid42} />
             <ItemList name="Peticion de ejemplo" to="peticionapi" icon={RiGitPullRequestFill} />
             <ItemList name="Componente Select" to="selecttailwindtow" icon={FaUnlockKeyhole} />
@@ -69,14 +90,19 @@ function Sidebar(){
             <ItemList name="exportar datos para excel" to="reactexcel" icon={FaUnlockKeyhole} />
             <ItemList name="Select component" to="selectcomponent" icon={FaUnlockKeyhole} />
             <ItemList name="Selects aninados" to="selectaninados" icon={FaUnlockKeyhole} />
-            <ItemList name="Use Efect" to="useefect" icon={FaUnlockKeyhole} />
+            <ItemList name="Use Efect" to="useefect" icon={FaUnlockKeyhole} /> */}
             </ul>
-            
+
         </div>
         </>
     )
 }
 export default Sidebar;
+
+
+const styleScrollbar = {
+    
+}
 
 
 {/* <div className="fixed left-0 top-0 w-64 h-full bg-[#f8f4f3] p-4 z-50 sidebar-menu transition-transform overflow-y-auto">

@@ -43,7 +43,7 @@ export class Api {
         .then((response) => {
           console.log("Respuesta de estatus get",response)
           if (!response.ok) {
-                if (response.status === 403) { // Si el estado es 401 (Unauthorized)
+                if (response.status === 401) { // Si el estado es 401 (Unauthorized)
                     throw new Error('Token expired');
                 } else {
                     throw new Error('Error in get type network response');
@@ -77,7 +77,7 @@ export class Api {
         .then((response) => {
             console.log("Respuesta de estatus post",response)
             if (!response.ok) {
-                if (response.status === 403) { // Si el estado es 401 (Unauthorized)
+                if (response.status === 401) { // Si el estado es 401 (Unauthorized)
                     throw new Error('Token expired');
                 } else {
                     throw new Error('Error in get type network response');

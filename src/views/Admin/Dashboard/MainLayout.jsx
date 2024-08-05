@@ -10,13 +10,12 @@ const Body = () => {
 
     const handleOpen = function(){
         setIsOpen(!isOpen);
-        console.log('boton presionado');
     }
 
     return(
     <>
     {/* sidenav */}
-    <div className={`fixed left-0 top-0 w-64 h-full bg-[#f8f4f3]  p-4 z-50 sidebar-menu transition-transform ${isOpen ? '' : '-translate-x-full'} transition-all duration-300`}>
+    <div className={`fixed bg-white left-0 top-0 w-[300px] h-full  p-4 z-50 sidebar-menu transition-transform ${isOpen ? '' : '-translate-x-full'} transition-all duration-300`}>
         <Sidebar/>
     </div>
 
@@ -27,13 +26,13 @@ const Body = () => {
 
     {/* PARTE DOS */}
 
-    <main className={`${isOpen ? 'md:ml-64 md:w-[calc(100%-256px)] ' : 'md:ml-0 md:w-full'} w-full  bg-tonosClaros-4 min-h-screen transition-all main `}>
+    <main className={`${isOpen ? 'md:ml-[300px] md:w-[calc(100%-300px)] ' : 'md:ml-0 md:w-full'} w-full  bg-tonosClaros-4 min-h-screen transition-all main `}>
             {/* navbar */}
-            <div className="py-2 px-6 bg-[#F9FAFB] flex items-center shadow-md shadow-black/5 sticky top-0 left-0 z-30">
+            <div className="py-2 px-6 bg-white flex items-center shadow-md shadow-black/5 sticky top-0 left-0 z-30">
                 {/* Amburguesa (init) */}
-                <button type="button" className="text-lg text-gray-900 font-semibold sidebar-toggle" onClick={handleOpen}>
+                <button type="button" onClick={handleOpen}>
                     {/* <i className="ri-menu-line"></i> */}
-                    <HiOutlineMenuAlt1 />
+                    <HiOutlineMenuAlt1 className="text-2xl" />
                 </button>
                 {/* Amburguesa (end) */}
 

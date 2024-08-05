@@ -37,6 +37,7 @@ export class LoginApi {
         })
         .then((response) => {
           if (!response.ok) {
+            
             throw new Error('error in post type network response');
           }
           return response.json();

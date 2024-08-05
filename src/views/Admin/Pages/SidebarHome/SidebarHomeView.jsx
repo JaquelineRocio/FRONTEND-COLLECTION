@@ -8,6 +8,7 @@ import { HomeViewCard } from "./Components/HomeViewCard";
 const SidebarHomeView = () => {
     return(
         <>
+        <div className="p-5">
             {/* <div className="grid grid-cols-4 gap-4 p-6">
                 <div className="bg-red-500 text-purple-50 p-5 border-2 col-span-4"><HomeViewCard/></div>
                 <div className="bg-red-500 text-purple-50 p-5 w-96 "> <ButtonWithImage/> </div>
@@ -20,17 +21,31 @@ const SidebarHomeView = () => {
                 <div className="bg-black text-purple-50 p-5 ">9</div>
 
             </div> */}
-            <div className="m-6 flex">
+            {/* <div className="m-6 flex">
 
                 <div>
                     <h1 className="text-2xl font-bold">Hola, Supervisor</h1>
                     <p className="text-gray-500">¿Cómo está su gestión el día de hoy?</p>
                 </div>
-            </div>
+            </div> */}
 
-            <div className="m-6">
+            
+            <div className="flex mb-5">
+                    <div>
+                        <h1 className="font-ralewaySemibold text-2xl">¿Hola, supervisor?</h1>
+                        <h1 className="font-ralewayMedium text-base text-gray-500">¿Cómo está su gestión el día de hoy?</h1>
+                    </div>
+                </div>
+
+            <div className="mb-6">
                 <HomeViewCard/>
-                <div className="flex gap-6 mt-6 flex-wrap">
+                {/* <div className="flex gap-6 mt-6 flex-wrap">
+                    <div className="w-90 grow shrik-0"><ButtonWithImage/></div>
+                    <div className="w-90 grow shrik-0"><ButtonWithImage/></div>
+                    <div className="w-90 grow shrik-0"><ButtonWithImage/></div>
+                </div> */}
+
+                <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-5">
                     <div className="w-90 grow shrik-0"><ButtonWithImage/></div>
                     <div className="w-90 grow shrik-0"><ButtonWithImage/></div>
                     <div className="w-90 grow shrik-0"><ButtonWithImage/></div>
@@ -42,11 +57,14 @@ const SidebarHomeView = () => {
                     <div className="w-90 grow shrik-0"><ButtonWithImage/></div>*/}
                     <div className="w-90 shrik-0"><ButtonWithImage/></div> 
                 </div>
+
+
             </div>
             {/* <div className="w-full max-w-md mx-auto mb-12 flex items-center justify-center text-right">
             <img src={logoContactoEficaz} alt="Login Image" className="w-100 object-cover" />
             </div> */}
             {/* <ButtonWithImage/> */}
+        </div>
         </>
     );
 }
