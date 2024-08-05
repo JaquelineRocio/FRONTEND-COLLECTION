@@ -7,7 +7,7 @@ import TextField from '@mui/material/TextField';
 // import { makeStyles } from '@mui/styles';
 import { styled } from '@mui/material/styles';
 // import { blue } from '@mui/material/colors';
-
+import './ComponenteFecha.css';
 export default function ComponenteFechaDos({valor, setValor}) {
 
 

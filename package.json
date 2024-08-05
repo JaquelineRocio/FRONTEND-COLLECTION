@@ -42,6 +42,7 @@
     "react-table": "^7.8.0",
     "redux-persist": "^6.0.0",
     "scheduler": "^0.23.2",
+    "sistemasdecobranzajavasccript": "file:",
     "styled-components": "^6.1.11",
     "sweetalert": "^2.1.2",
     "sweetalert2": "^11.12.2",
