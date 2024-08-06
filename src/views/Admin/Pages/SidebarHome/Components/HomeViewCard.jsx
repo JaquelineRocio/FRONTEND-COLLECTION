@@ -23,7 +23,7 @@ import {
           // className="absolute inset-0 m-0 h-full w-full rounded-none bg-[url('https://images.unsplash.com/photo-1552960562-daf630e9278b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80')] bg-cover bg-center"
           // className={`absolute inset-0 m-0 h-full w-full rounded-none bg-[src('${logoContactoEficaz}.svg')] bg-cover bg-center`}
           // className={`absolute inset-0 m-0 h-full w-full rounded-none bg-cover bg-center bg-[url('${logoContactoEficaz}.svg')]`}
-          className={`absolute inset-0 m-0 h-full w-full bg-cover bg-center bg-yellow-800 rounded-md`}
+          className={`absolute inset-0 m-0 h-full w-full bg-cover bg-center rounded-md`}
           style={{ backgroundImage: `url(${logoContactoEficaz})` }}
           // className={`absolute inset-0 m-0 h-full w-full rounded-none src={logoContactoEficaz2}  src('${logoContactoEficaz2}')] bg-cover bg-center`}
         >

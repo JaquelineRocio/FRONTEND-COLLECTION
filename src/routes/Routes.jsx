@@ -30,6 +30,7 @@ import ReactExcel from "../views/ExampleView/ReactExcel";
 import SelectComponent from "../views/ExampleView/SelectComponent";
 import SelectsAninados from "../views/ExampleView/SelectsAninados";
 import UseEffect from "../views/ExampleView/UseEffect";
+import EnConstruccion from "../views/ExampleView/EnConstruccion";
 // import FlexTailwind from "../views/ExampleView/GridTailwind";
 // import SidebarAccessManagementView from "../views/Admin/Pages/SidebarAccessManagement/SidebarAccessManagementView";
 
@@ -72,32 +73,33 @@ import UseEffect from "../views/ExampleView/UseEffect";
               },
               {
                 path: "gestiondecliente",
-                element: <SidebarClientManagerView/>
+                // element: <SidebarClientManagerView/>
+                element: <EnConstruccion/>
               },
               {
                 path: "gridtailwind",
-                element: <GridTailwind/>
+                element: <EnConstruccion/>
               },
               {
                 path: "flextailwind",
-                element: <FlexTailwind/>
+                element: <EnConstruccion/>
               }
               ,
               {
                 path: "accordiontailwind",
-                element: <AccordionTailwind/>
+                element: <EnConstruccion/>
               },
               {
                 path: "selecttailwind",
-                element: <SelectTailwind/>
+                element: <EnConstruccion/>
               },
               {
                 path: "accordiontailwindsecondversion",
-                element: <AccordionTailwindSecond/>
+                element: <EnConstruccion/>
               },
               {
                 path: "tabletailwind",
-                element: <TableTailwind/>
+                element: <EnConstruccion/>
               },
               {
                 path: "drawertailwind",

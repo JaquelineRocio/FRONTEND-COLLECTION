@@ -79,7 +79,7 @@ function Sidebar(){
             <ItemList name="Gestión de comunicaciones" to="flextailwind" icon={BsFillPhoneVibrateFill} />
             <ItemList name="Gestión de entidades" to="accordiontailwind" icon={MdManageAccounts} />
             <ItemList name="Gestión de accesos" to="selecttailwind" icon={FaUnlockKeyhole} />
-            <ItemList name="Ejemplo Componente" to="accordiontailwindsecondversion" icon={BiSolidHomeCircle} />
+            {/* <ItemList name="Ejemplo Componente" to="accordiontailwindsecondversion" icon={BiSolidHomeCircle} /> */}
             {/* <ItemList name="Ejemplo graficos react chart" to="graficos" icon={SiGraphite} />
             <ItemList name="Ejemplo grid" to="gridtailwind" icon={CiGrid42} />
             <ItemList name="Peticion de ejemplo" to="peticionapi" icon={RiGitPullRequestFill} />
