@@ -124,13 +124,13 @@ export default authSlice.reducer;
 /**
  * extraReducers solo funciona con createAsyncThunk, informacion que solo se puede obtener de manera 
  * asincrona.
- * Por otro lado "createAsyncThunk" toma dos argumentos. la primera es una ulr y la segunda es una funcion anónima asincrna
+ * Por otro lado "createAsyncThunk" toma dos argumentos. la primera es una ulr y la segunda es una funcion anónima asíncrona
  */
 import { LoginApi } from "../services/LoginApi";
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async (data, thunkAPI) => {
-    console.log("datos ingresados", data);
+    // console.log("datos ingresados", data);
     try{
       const response = await LoginApi.post(data, '/auth/login');
       return response;

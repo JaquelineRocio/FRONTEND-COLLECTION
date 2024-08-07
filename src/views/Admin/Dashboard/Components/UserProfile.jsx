@@ -53,12 +53,15 @@ import { Input } from '@material-tailwind/react';
 const UserProfile = ({ name, role }) => {
     const [isOpen, setIsOpen] = useState(false);
     const dispach = useDispatch();
+    
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
     };
+
     const handleMouseLeave = () => {
-        setIsOpen(false);
-      };
+        setTimeout(()=>{setIsOpen(!isOpen);}, 200)
+        
+    };
 
     return (
         <>
@@ -101,6 +104,7 @@ const UserProfile = ({ name, role }) => {
                     type="button"
                     className="dropdown-toggle flex items-center"
                     onClick={toggleDropdown}
+                    onBlur={handleMouseLeave}
                     
                 >
                     <div className="p-2 md:block text-left">
@@ -113,7 +117,7 @@ const UserProfile = ({ name, role }) => {
                                 className="w-8 h-8 rounded-full"
                                 // src="https://laravelui.spruko.com/tailwind/ynex/build/assets/images/faces/9.jpg"
                                 src={emptyAvatar}
-                                alt=""
+                                alt="avatar"
                             />
                           
                             {/* <div className="top-0 left-7 absolute w-3 h-3 bg-lime-400 border-2 border-white rounded-full animate-ping"></div> */}
@@ -123,20 +127,20 @@ const UserProfile = ({ name, role }) => {
 
                 </button>
                 <ul
-                onMouseLeave={handleMouseLeave}
+                
                     className={`dropdown-menu shadow-md shadow-black/5 z-30 py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px] absolute ${isOpen ? 'block' : 'hidden'}`}
                 >
                     <li>
-                        <a href="#" className="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-[#f84525] hover:bg-gray-50">Profile</a>
+                        <a href="#" className="flex items-center font-ralewayMedium text-sm py-1.5 px-4 text-gray-600 hover:text-[#f84525] hover:bg-gray-50">Profile</a>
                     </li>
                     <li>
-                        <a href="#" className="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-[#f84525] hover:bg-gray-50">Settings</a>
+                        <a href="#" className="flex items-center font-ralewayMedium text-sm py-1.5 px-4 text-gray-600 hover:text-[#f84525] hover:bg-gray-50">Settings</a>
                     </li>
                     <li>
                         <form method="POST" action="">
                             <a
                                 role="menuitem"
-                                className="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-[#f84525] hover:bg-gray-50 cursor-pointer"
+                                className="flex items-center font-ralewayMedium text-sm py-1.5 px-4 text-gray-600 hover:text-[#f84525] hover:bg-gray-50 cursor-pointer"
                                 onClick={(e) => {
                                     e.preventDefault();
                                     // Aquí puedes añadir la lógica para cerrar sesión

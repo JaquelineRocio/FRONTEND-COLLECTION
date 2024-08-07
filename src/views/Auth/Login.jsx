@@ -41,8 +41,6 @@ const handlePasswordInputChange = (event) => {
   setInputPassword(event.target.value);
 }
 
-
-
 async function handleSubmit(){
   
   const data = {
@@ -52,7 +50,7 @@ async function handleSubmit(){
 
 
   dispatch(loginUser(data)).then((response)=>{
-    console.log("mi respuesta login",response);
+
     if(response.type=="auth/loginUser/fulfilled"){
 
       navigate("/dashboard");
