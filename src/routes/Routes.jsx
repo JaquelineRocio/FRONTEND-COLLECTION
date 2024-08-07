@@ -31,130 +31,144 @@ import SelectComponent from "../views/ExampleView/SelectComponent";
 import SelectsAninados from "../views/ExampleView/SelectsAninados";
 import UseEffect from "../views/ExampleView/UseEffect";
 import EnConstruccion from "../views/ExampleView/EnConstruccion";
+import { useDispatch } from "react-redux";
+import {unauthenticatedUser} from "../store/authSlice";
+import { useEffect } from "react";
 // import FlexTailwind from "../views/ExampleView/GridTailwind";
 // import SidebarAccessManagementView from "../views/Admin/Pages/SidebarAccessManagement/SidebarAccessManagementView";
 
 
-  const Route = () => {
-    const router = createBrowserRouter([
-        // {
-        //   path: '/',
-        //   element: <Navigate to="/login" replace />
-        // },
-        {
-          path: '/',
-          element: <Navigate to="/dashboard" replace />
-        },
-        {
-          path: '/*',
-          element: <> Not Found</>
-        },  
-        // {
-        //     path: '/login',
-        //     element: <Login/>
-        // },
-        {
-          path: '/login',
-          element: <Login/>
-      },
-        {
-            path: '/dashboard',
-            // element: <MainLayout/>,
-            element: <ProtectedRoute element={<MainLayout />} />,
-            // isProtected: true,
-            children: [
-              {
-                index: true,
-                element: <SidebarHomeView/>
-              },
-              {
-                path: "gestiondashboard",
-                element: <SidebarDashboardView/>
-              },
-              {
-                path: "gestiondecliente",
-                // element: <SidebarClientManagerView/>
-                element: <EnConstruccion/>
-              },
-              {
-                path: "gridtailwind",
-                element: <EnConstruccion/>
-              },
-              {
-                path: "flextailwind",
-                element: <EnConstruccion/>
-              }
-              ,
-              {
-                path: "accordiontailwind",
-                element: <EnConstruccion/>
-              },
-              {
-                path: "selecttailwind",
-                element: <EnConstruccion/>
-              },
-              {
-                path: "accordiontailwindsecondversion",
-                element: <EnConstruccion/>
-              },
-              {
-                path: "tabletailwind",
-                element: <EnConstruccion/>
-              },
-              {
-                path: "drawertailwind",
-                element: <DrawerTailwind/>
-              }
-              ,
-              {
-                path: "graficos",
-                element: <Graficos/>
-              },
-              {
-                path: "peticionapi",
-                element: <PeticionApi/>
-              },
-              {
-                path:"selecttailwindtow",
-                element: <SelectTailwindTwo/>
-              },
-              {
-                path:"exampleredux",
-                element: <ExampleUseRedux/>
-              },
-              {
-                path:"hookform",
-                element: <HookForm/>
-              },
-              {
-                path:"reacttable",
-                element: <ReactTable/>
-              },
-              {
-                path:"reactexcel",
-                element: <ReactExcel/>
-              },
-              {
-                path:"selectcomponent",
-                element: <SelectComponent/>
-              },
-              {
-                path:"selectaninados",
-                element: <SelectsAninados/>
-              },
-              {
-                path:"useefect",
-                element: <UseEffect/>
-              }
-
-            ]  
-        }    
-      ]);
-      
-      return <RouterProvider router={router} />;
-    };
+const DeleteSession = ({children}) => {
+  const dispatch = useDispatch();
+  useEffect(()=>{
+    dispatch(unauthenticatedUser());
+  },[dispatch]);
+  return children;
+}
     
-    export default Route;
+const Route = () => {
+
+  const router = createBrowserRouter([
+      // {
+      //   path: '/',
+      //   element: <Navigate to="/login" replace />
+      // },
+      {
+        path: '/',
+        element: <Navigate to="/dashboard" replace />
+      },
+      {
+        path: '/*',
+        element: <> Not Found</>
+      },  
+      // {
+      //     path: '/login',
+      //     element: <Login/>
+      // },
+      {
+        path: '/login',
+        // element: <Login/>
+        // element: 
+        element: <DeleteSession> <Login/> </DeleteSession>
+      },
+      {
+          path: '/dashboard',
+          // element: <MainLayout/>,
+          element: <ProtectedRoute element={<MainLayout />} />,
+          // isProtected: true,
+          children: [
+            {
+              index: true,
+              element: <SidebarHomeView/>
+            },
+            {
+              path: "gestiondashboard",
+              element: <SidebarDashboardView/>
+            },
+            {
+              path: "gestiondecliente",
+              // element: <SidebarClientManagerView/>
+              element: <EnConstruccion/>
+            },
+            {
+              path: "gridtailwind",
+              element: <EnConstruccion/>
+            },
+            {
+              path: "flextailwind",
+              element: <EnConstruccion/>
+            }
+            ,
+            {
+              path: "accordiontailwind",
+              element: <EnConstruccion/>
+            },
+            {
+              path: "selecttailwind",
+              element: <EnConstruccion/>
+            },
+            {
+              path: "accordiontailwindsecondversion",
+              element: <EnConstruccion/>
+            },
+            {
+              path: "tabletailwind",
+              element: <EnConstruccion/>
+            },
+            {
+              path: "drawertailwind",
+              element: <DrawerTailwind/>
+            }
+            ,
+            {
+              path: "graficos",
+              element: <Graficos/>
+            },
+            {
+              path: "peticionapi",
+              element: <PeticionApi/>
+            },
+            {
+              path:"selecttailwindtow",
+              element: <SelectTailwindTwo/>
+            },
+            {
+              path:"exampleredux",
+              element: <ExampleUseRedux/>
+            },
+            {
+              path:"hookform",
+              element: <HookForm/>
+            },
+            {
+              path:"reacttable",
+              element: <ReactTable/>
+            },
+            {
+              path:"reactexcel",
+              element: <ReactExcel/>
+            },
+            {
+              path:"selectcomponent",
+              element: <SelectComponent/>
+            },
+            {
+              path:"selectaninados",
+              element: <SelectsAninados/>
+            },
+            {
+              path:"useefect",
+              element: <UseEffect/>
+            }
+
+          ]  
+      }    
+  ]);
+  
+  return <RouterProvider router={router} />;
+};
+
+export default Route;
 
 
     

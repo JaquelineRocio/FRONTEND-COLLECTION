@@ -50,80 +50,18 @@ async function handleSubmit(){
     "password": inputPassword
   }
 
-  // try{
 
-  //   // Intenta realizar la solicitud de login
-  //   const response = await LoginApi.post(data, '/auth/login');
-  //   console.log("espuesta***", response);
-  //   // Si la respuesta no contiene un token válido, lanzamos un error
-  //   const token = response?.token;
-  //   if (!token) {
-  //     throw new Error('No se recibió un token válido');
-  //   }
-
-  //   // Crear el objeto de respuesta
-  //   const dataResponse = {
-  //     "token": token,
-  //     "user": {
-  //       "id": 1,
-  //       "name": "Juan",
-  //       "email": "juan@gmail.com"
-  //     },
-  //   };
-
-  //   // Despachar el usuario autenticado
-  //   dispatch(authenticatedUser(dataResponse));
-    
-  //   // Lógica para asegurar que el token está guardado en el localstorage
-  //   let newToken = getToken();
-  //   const maxAttempts = 10; // Número máximo de intentos
-  //   let attempts = 0;
-
-  //   while (token !== newToken && attempts < maxAttempts) {
-  //     newToken = getToken();
-  //     console.log("nuevo Token", getToken());
-  //     attempts++;
-  //     await new Promise(resolve => setTimeout(resolve, 1000)); // Espera 1 segundo antes de la siguiente verificación
-  //   }
-
-  //   // Si después de varios intentos el token no coincide, registramos un error y despachamos un usuario no autenticado
-  //   if (token !== newToken) {
-  //     console.error('No se pudo actualizar el token');
-  //     dispatch(unauthenticatedUser());
-  //   }
-
-  //   // Establece login a verdadero solo si el token es guardado correctamente en el local storage
-  //   if (token == newToken) {
-  //     console.log('Token guardado correctamente');
-  //     dispatch(setIsloginToTrue());
-  //   }
-
-
-
-
-  // }catch(error){
-  //     console.error('Error en la petición:', error);
-  // }
   dispatch(loginUser(data)).then((response)=>{
     console.log("mi respuesta login",response);
     if(response.type=="auth/loginUser/fulfilled"){
-      // alert("Tu sesión ha iniciado correctamente");
-      // Swal.fire({
-      //   position: "top-end",
-      //   icon: "success",
-      //   title: "Su sesión inició correctamente",
-      //   showConfirmButton: false,
-      //   timer: 1500
-      // });
+
       navigate("/dashboard");
     }else{
-      // alert("hubo un error en tu inicio de sesión");
+
       Swal.fire({
         // position: 'top-end',
         icon: "error",
         title: "Usuario o contraseña incorrectos",
-        // text: "¡Algo salió mal!",
-        // footer: '<a href="#">Why do I have this issue?</a>'
         showCancelButton: false,
         timer: 1500
       });
@@ -131,13 +69,6 @@ async function handleSubmit(){
   });
 }
 
-// useEffect(()=>{
-//   console.log("useEffect verificado");
-//   if(isLogin){
-//     navigate("/dashboard");
-//   }
-
-// },[isLogin]);
 
     return (
     <>
@@ -240,10 +171,6 @@ async function handleSubmit(){
         </div> 
 
       </div>
-
-
-
-
 
     </>
     )
