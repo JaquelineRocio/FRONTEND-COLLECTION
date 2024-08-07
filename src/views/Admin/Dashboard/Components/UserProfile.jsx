@@ -128,7 +128,7 @@ const UserProfile = ({ name, role }) => {
                 </button>
                 <ul
                 
-                    className={`dropdown-menu shadow-md shadow-black/5 z-30 py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px] absolute ${isOpen ? 'block' : 'hidden'}`}
+                    className={`dropdown-menu shadow-md shadow-black/5 z-30 rounded-sm bg-white border border-gray-100 w-full max-w-48 absolute ${isOpen ? 'block' : 'hidden'}`}
                 >
                     <li>
                         <a href="#" className="flex items-center font-ralewayMedium text-sm py-1.5 px-4 text-gray-600 hover:text-[#f84525] hover:bg-gray-50">Profile</a>
