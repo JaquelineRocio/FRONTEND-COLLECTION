@@ -2,6 +2,9 @@ import Select from 'react-select'
 // import makeAnimated from 'react-select/animated'
 import { useRef, useEffect, useMemo } from 'react';
 import { useFetch } from '../../../../../hooks/useFetch';
+import swal from "sweetalert";
+import { useDispatch } from "react-redux";
+import {unauthenticatedUser} from '../../../../../store/authSlice';
 
 
 
@@ -20,6 +23,7 @@ export default function SelectElementSecondVersion({
 
 }){
 
+    const dispatch = useDispatch();
     let urlFetch = null;
     if(realizarPeticion){
         urlFetch = url;
@@ -28,10 +32,25 @@ export default function SelectElementSecondVersion({
     const {data, error, loading} = useFetch(urlFetch);
 
 
+    
+
     // Memoiza las opciones para evitar recalculaciones innecesarias
     const options = useMemo(() => transformData(data, tipoDato), [data, tipoDato]);
 
     const selectRef = useRef(null);
+
+    useEffect(() => {
+        if(error?.status == 401){
+            swal({
+                title: "Sesión Expirada",
+                text: "Su sesión ha expirado. Por favor, inicie sesión nuevamente para continuar.",
+                icon: "warning",
+                button: "OK"
+            }).then(() => {
+                dispatch(unauthenticatedUser());
+            });
+        }
+    }, [error, dispatch]);
 
     useEffect(() => {
         if (selectRef.current) {

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import UserProfile from "../../Dashboard/Components/UserProfile";
 import ButtonWithImage from "./Components/ButtonWithImage";
 import { HomeViewCard } from "./Components/HomeViewCard";
+import SecondHomeViewCard from "./Components/SecondHomeViewCard";
 // import logoContactoEficaz from '../../../../../public/fondo.svg'
 
 
@@ -44,7 +45,7 @@ const SidebarHomeView = () => {
                     <div className="w-90 grow shrik-0"><ButtonWithImage/></div>
                     <div className="w-90 grow shrik-0"><ButtonWithImage/></div>
                 </div> */}
-
+                {/* <SecondHomeViewCard/> */}
                 <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-5">
                     <div className="w-90 grow shrik-0"><ButtonWithImage/></div>
                     <div className="w-90 grow shrik-0"><ButtonWithImage/></div>

@@ -1,20 +1,45 @@
-import { useEffect } from "react";
-const UseEffect = () => {
-const miValor = null;
+import React, { useState } from 'react';
 
-useEffect(()=>{
+export default function UseEffect({ initialCount = 0}) {
+    const [count, setCount] = useState(0);
 
-    if(false){
-        console.log("componente Montado")
-    }
-
-},[miValor]);
-    return(
-        <h3>
-            Estamo en analisis de funcionameitno de Useefect
-        </h3>
-    )
-
+    // Intento incorrecto de establecer el estado directamente en el cuerpo del componente
+    // if (count !== initialCount) {
+    //     setCount(initialCount); // Esto es incorrecto
+    // }
+    console.log("renderizados");
+    return (
+        <div>
+            <p>Contador: {count}</p>
+            <button onClick={() => setCount(count + 1)}>Incrementar</button>
+        </div>
+    );
 }
 
-export default UseEffect;
+
+
+
+
+// UseEffect
+
+// import React, { useState, useEffect } from 'react';
+
+// export default function UseEffect({ initialCount = 0}) {
+//     const [count, setCount] = useState(0);
+
+//     // Usar useEffect para manejar actualizaciones basadas en props
+//     useEffect(() => {
+//         if (count !== initialCount) {
+//             setCount(initialCount);
+//         }
+//     }, [initialCount]); // Dependencia en initialCount para ejecutar el efecto solo cuando cambie
+
+//     console.log("renderizados");
+
+//     return (
+//         <div>
+//             <p>Contador: {count}</p>
+//             <button onClick={() => setCount(count + 1)}>Incrementar</button>
+//         </div>
+//     );
+// }
