@@ -5,7 +5,6 @@ import PercentageBar from './PercentageBar';
 
 export default function Tabla02SituacionDeCarteraSegunPrioridad({tableRows, loading}) {
 
-    console.log("nuevos datos ingresados",tableRows );
 	
 	return (
 		<DataTable
@@ -47,7 +46,6 @@ const buildRows = (rowsInput) => {
 	// Arma la fila "total"
 	rowsOutput.push({...rowsInput.totalGeneral, tipo: "total", codTipo: "TOTAL GENERAL"});
 
-	console.log("Resultado final",rowsOutput );
 	return rowsOutput;
 }
 

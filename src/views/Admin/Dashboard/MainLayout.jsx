@@ -15,8 +15,12 @@ const Body = () => {
     return(
     <>
     {/* sidenav */}
-    <div className={`fixed bg-white left-0 top-0 w-[300px] h-full  p-4 z-50 sidebar-menu transition-transform ${isOpen ? '' : '-translate-x-full'} transition-all duration-300`}>
+    {/* <div className={`fixed bg-white left-0 top-0 w-[300px] h-full  p-4 z-50 sidebar-menu transition-transform ${isOpen ? '' : '-translate-x-full'} transition-all duration-300`}>
         <Sidebar/>
+    </div> */}
+
+    <div className={` fixed left-0 top-0 w-[300px] h-full  p-4 z-50 sidebar-menu transition-transform ${isOpen ? '' : '-translate-x-full md:-translate-x-[210px]'} transition-all `}>
+        <Sidebar openSidebar={isOpen}/>
     </div>
 
     {/* Oscurece la pantalla (init) */}
@@ -25,10 +29,10 @@ const Body = () => {
     {/* end sidenav */}
 
     {/* PARTE DOS */}
-
-    <main className={`${isOpen ? 'md:ml-[300px] md:w-[calc(100%-300px)] ' : 'md:ml-0 md:w-full'} w-full  bg-tonosClaros-4 min-h-screen transition-all main `}>
+    {/* <main className={`${isOpen ? 'md:ml-[300px] md:w-[calc(100%-300px)] ' : 'md:ml-[100px] md:w-full '} w-full  bg-tonosClaros-4 min-h-screen transition-all main `}> */}
+    <main className={`${isOpen ? 'md:ml-[300px] md:w-[calc(100%-300px)] ' : 'md:ml-[90px]  md:w-[calc(100%-90px)]'} w-full  bg-tonosClaros-4 min-h-screen transition-all main `}>
             {/* navbar */}
-            <div className="py-2 px-6 bg-white flex items-center shadow-md shadow-black/5 sticky top-0 left-0 z-30">
+            <div className="bg-white py-2 px-6  flex items-center shadow-md shadow-black/5 sticky top-0 left-0 z-30 ">
                 {/* Amburguesa (init) */}
                 <button type="button" onClick={handleOpen}>
                     {/* <i className="ri-menu-line"></i> */}

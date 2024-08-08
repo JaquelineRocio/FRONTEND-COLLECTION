@@ -5,8 +5,6 @@ import PercentageBar from './PercentageBar';
 
 export default function Tabla01EstadoGeneralDeCartera({tableRows, loading}) {
 
-    console.log("nuevos datos ingresados",tableRows );
-	
 	return (
 		<DataTable
 			// title="Dashboard de cartera por tramo de importe"
@@ -37,7 +35,6 @@ const buildRows = (rowsInput) => {
 	// Arma la fila "total"
 	rowsOutput.push({...rowsInput.totalGeneral, tipo: "total"});
 
-	console.log("Resultado final",rowsOutput );
 	return rowsOutput;
 }
 

@@ -323,7 +323,7 @@ const SidebarDashboardView = () => {
             <div className="p-5">
 
                 <div className="flex mb-5">
-                    <Link to="/" className="pr-5 flex items-center"> <IoChevronBackCircle  className={`text-5xl`}/> </Link>
+                    <Link to='/' className="pr-5 flex items-center"> <IoChevronBackCircle  className={`text-5xl`}/> </Link>
                     <div>
                         <h1 className="font-ralewaySemibold text-2xl">Dashboard de Gestión</h1>
                         <h1 className="font-ralewayMedium text-base">Revisemos cómo ha ido la Gestión...</h1>

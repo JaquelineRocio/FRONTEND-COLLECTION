@@ -1,6 +1,6 @@
 const SecondHomeViewCard = () => {
     return(
-        <div className="flex">
+        <div className="">
             <div className="bg-red-400 flex-none w-64 ...">
                 01 
             </div>

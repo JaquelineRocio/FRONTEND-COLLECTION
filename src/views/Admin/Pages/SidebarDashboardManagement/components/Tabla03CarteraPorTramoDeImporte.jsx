@@ -4,8 +4,6 @@ import RiseLoader from "react-spinners/RiseLoader";
 import PercentageBar from './PercentageBar';
 
 export default function Tabla03CarteraPorTramoDeImporte({tableRows, loading}) {
-
-    console.log("nuevos datos ingresados",tableRows );
 	
 	return (
 		<DataTable
@@ -47,7 +45,6 @@ const buildRows = (rowsInput) => {
 	// Arma la fila "total"
 	rowsOutput.push({...rowsInput.totalGeneral, tipo: "total", codTipo: "TOTAL GENERAL"});
 
-	console.log("Resultado final",rowsOutput );
 	return rowsOutput;
 }
 
