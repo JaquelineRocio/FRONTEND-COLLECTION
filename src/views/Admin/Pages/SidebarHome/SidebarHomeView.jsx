@@ -9,7 +9,7 @@ import SecondHomeViewCard from "./Components/SecondHomeViewCard";
 const SidebarHomeView = () => {
     return(
         <>
-        <div className="p-5">
+        <div className="py-5 px-7">
             {/* <div className="grid grid-cols-4 gap-4 p-6">
                 <div className="bg-red-500 text-purple-50 p-5 border-2 col-span-4"><HomeViewCard/></div>
                 <div className="bg-red-500 text-purple-50 p-5 w-96 "> <ButtonWithImage/> </div>
@@ -46,17 +46,12 @@ const SidebarHomeView = () => {
                     <div className="w-90 grow shrik-0"><ButtonWithImage/></div>
                 </div> */}
                 {/* <SecondHomeViewCard/> */}
-                <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-5">
+                <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5 gap-5">
                     <div className="w-90 grow shrik-0"><ButtonWithImage/></div>
-                    <div className="w-90 grow shrik-0"><ButtonWithImage/></div>
-                    <div className="w-90 grow shrik-0"><ButtonWithImage/></div>
-                    {/* <div className="w-90 grow shrik-0"><ButtonWithImage/></div> */}
                     {/* <div className="w-90 grow shrik-0"><ButtonWithImage/></div>
                     <div className="w-90 grow shrik-0"><ButtonWithImage/></div>
-                    <div className="w-90 grow shrik-0"><ButtonWithImage/></div>
-                    <div className="w-90 grow shrik-0"><ButtonWithImage/></div>
-                    <div className="w-90 grow shrik-0"><ButtonWithImage/></div>*/}
-                    <div className="w-90 shrik-0"><ButtonWithImage/></div> 
+
+                    <div className="w-90 shrik-0"><ButtonWithImage/></div>  */}
                 </div>
 
 

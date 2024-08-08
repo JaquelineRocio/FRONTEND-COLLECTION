@@ -6,10 +6,6 @@ const ListItem = ({src=null, open=true, name='Ingrese nombre de link', to=''}) =
     const segments = location.pathname.split('/').filter(Boolean); // Filtra segmentos vacíos
     secondSegment = segments[1] || ""; // Obtiene el segundo segmento o un mensaje si no existe
 
-    // if(to=="/" && secondSegment == null){
-    //     secondSegment = "";
-    // }
-    
     return(
         <>
             <Link to={to}>

@@ -11,7 +11,8 @@ export default function ComponentSelectOneOpcion({
         // tipoDato, 
         setValor, 
         valor=null,
-        loading=false, 
+        loading=false,
+        className="", 
         // isMulti=true, 
         // closeMenuOnSelect=false
 
@@ -27,21 +28,24 @@ export default function ComponentSelectOneOpcion({
 
     return (
         <>
-            <Select
-                // key={valor ? `selected${llave}` : `empty${llave}`}
-                isLoading={loading}  
-                ref={selectRef}
-                placeholder={label}
-                options={options}
-                // closeMenuOnSelect={closeMenuOnSelect}           // Evita que se cierre el modal hasta que el usuario termine de seleccionar opciones
-                // defaultValue={options[0]}                     // Esta es una opcion seleccionada por defecto
-                // defaultValue={[options[0],options[1]]}       // Esta es varias opciones seleccionadas por defecto
-                // components={animatedComponents}
-                // isMulti={isMulti}
-                onChange={(val) => {setValor(val?.value)}}
-                styles={customStyles}
-            />
+            <div className={className}>
+                <Select
+                    // key={valor ? `selected${llave}` : `empty${llave}`}
+                    isLoading={loading}  
+                    ref={selectRef}
+                    placeholder={label}
+                    options={options}
+                    // closeMenuOnSelect={closeMenuOnSelect}           // Evita que se cierre el modal hasta que el usuario termine de seleccionar opciones
+                    // defaultValue={options[0]}                     // Esta es una opcion seleccionada por defecto
+                    // defaultValue={[options[0],options[1]]}       // Esta es varias opciones seleccionadas por defecto
+                    // components={animatedComponents}
+                    // isMulti={isMulti}
+                    onChange={(val) => {setValor(val?.value)}}
+                    styles={customStyles}
+                />
+            </div>
         </>
+        
     )
 }
 

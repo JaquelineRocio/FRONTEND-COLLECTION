@@ -320,9 +320,9 @@ const SidebarDashboardView = () => {
 
     return(
         <>
-            <div className="p-5">
+            <div className="py-5 px-7 flex flex-col h-screen">
 
-                <div className="flex mb-5">
+                <div className=" flex mb-5">
                     <Link to='/' className="pr-5 flex items-center"> <IoChevronBackCircle  className={`text-5xl`}/> </Link>
                     <div>
                         <h1 className="font-ralewaySemibold text-2xl">Dashboard de Gestión</h1>
@@ -330,70 +330,31 @@ const SidebarDashboardView = () => {
                     </div>
                 </div>
 
-                <div className="">
-                    <div className=" bg-tonosClaros-2 text-tonosOscuros-1 pl-5 flex items-center font-ralewayBold text-base h-12">
+                <div className=" border-2 border-gray-200 rounded-lg">
+
+
+                    <div className=" bg-gray-200 text-blac pl-5 flex items-center font-ralewayBold text-base h-12">
                         FILTROS
                     </div>
 
                     <div className="bg-white p-5">
 
-                        <h3 className="font-ralewaySemibold text-base text-tonosOscuros-2 mb-5">FILTROS GENERALES</h3>
-                        {/* Poner un grid */}
+                        <div className="grid grid-cols-1 gap-5 md:grid-cols-6 ">
+                            <h3 className="md:col-span-6 font-ralewaySemibold text-base text-gray-900">FILTROS GENERALES</h3>
+                            <ComponenteFechaDos valor={selectFecha} setValor={setSelectFecha}/>
+                            <ComponentSelectOneOpcion loading={loadingAllSelects} label="Seleccione una entidad *" limpiar={limpiarComponentSelectOneOpcion}  options={optionsEntidad}   valor={selectEntidad} setValor={setSelectEntidad}/>
+                            <SelectElementSecondVersion realizarPeticion={selectEntidad? true : false} url={`https://poetic-tube-428221-a5.rj.r.appspot.com/cartera/entidad/${selectEntidad}`} label="Seleccione una cartera *" tipoDato="cartera" valor={selectCartera} setValor={setSelectCartera}/>
+                            <BotonClaro  className={`${open==true?'md:col-start-5 md:col-end-5':'hidden'} `} layout="LIMPIAR BÚSQUEDA" onClick={cleanSearch}/>
+                            <BotonOscuro className={`${open==true?'md:col-start-6 md:col-end-6':'hidden'} `} layout="BUSCAR" onClick={handleGroupTables}/>
+                            <div className={`md:col-span-6 transition-colors text-gray-900 font-ralewaySemibold flex`} onClick={handleOpen}>  FILTROS ESPECÍFICOS <IoMdRemoveCircle className={`mt-0.5 ml-2 text-xl ${open==true?'hidden':''}`}/> <IoAddCircle className={`mt-0.5 ml-2 text-xl  ${open==true?'':'hidden'}`}/> </div>
 
-                        {/* <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5"> */}
-                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-5">
-                            <div className="col-span-2 grid grid-cols-subgrid grid-cols-1 md:grid-cols-3 gap-5">
-
-                                <ComponenteFechaDos valor={selectFecha} setValor={setSelectFecha}/>
-                                {/* <SelectTailwind label="Seleccione una entidad *" llave="1" options={optionsEntidad}   valor={selectEntidad} setValor={setSelectEntidad} /> */}
-                                <ComponentSelectOneOpcion loading={loadingAllSelects} label="Seleccione una entidad *" limpiar={limpiarComponentSelectOneOpcion}  options={optionsEntidad}   valor={selectEntidad} setValor={setSelectEntidad}/>
-                                {/* <SelectTailwind label="Seleccione una entidad *" limpiar={limpiarSelectEntidad}  options={optionsEntidad}   valor={selectEntidad} setValor={setSelectEntidad} /> */}
-                                <SelectElementSecondVersion realizarPeticion={selectEntidad? true : false} url={`https://poetic-tube-428221-a5.rj.r.appspot.com/cartera/entidad/${selectEntidad}`} label="Seleccione una cartera *" tipoDato="cartera" valor={selectCartera} setValor={setSelectCartera}/>
-                                
-                            </div>
-                            <div className="grid grid-cols-subgrid lg:grid-cols-3 gap-5">
-                                <BotonClaro  className="col-start-2" layout="LIMPIAR BÚSQUEDA" onClick={cleanSearch}/>
-                                <BotonOscuro className="col-start-3" layout="BUSCAR" onClick={handleGroupTables}/>
-                            </div>
+                            <SelectElementSecondVersion className={` ${open==true?'hidden':''}`} limpiar={limpiarSegundoSelect} url={`https://poetic-tube-428221-a5.rj.r.appspot.com/prioridad`} tipoDato="prioridad" label="Seleccione prioridad"  valor={selectPrioridad} setValor={setSelectPrioridad}/>                               
+                            <ComponentSelectOneOpcion   className={` ${open==true?'hidden':''}`} loading={loadingAllSelects} label="Seleccione Moneda" limpiar={limpiarComponentSelectOneOpcion}  options={optionsMoneda}   valor={selectMoneda} setValor={setSelectMoneda}/>                       
+                            <ComponentSelectOneOpcion   className={` ${open==true?'hidden':''}`} loading={loadingAllSelects} label="Seleccione Producto" limpiar={limpiarComponentSelectOneOpcion}  options={optionsProducto}   valor={selectProducto} setValor={setSelectProducto}/>                       
+                            <BotonClaro  className={`${open==true?'hidden':'md:col-start-5 md:col-end-5'} `} layout="LIMPIAR BÚSQUEDA" onClick={cleanSearch}/>
+                            <BotonOscuro className={`${open==true?'hidden':'md:col-start-6 md:col-end-6'} `} layout="BUSCAR" onClick={handleGroupTables}/>
 
                         </div>
-                        <div className={`transition-colors text-tonosOscuros-2 font-ralewaySemibold mb-5 flex `} onClick={handleOpen}>
-                            FILTROS ESPECÍFICOS
-                            <IoMdRemoveCircle className={`mt-0.5 ml-2 text-xl ${open==true?'hidden':''}`}/>
-                            <IoAddCircle className={`mt-0.5 ml-2 text-xl  ${open==true?'':'hidden'}`}/>
-                        </div>
-
-                        <div className={`grid grid-cols-1 lg:grid-cols-3 gap-5 ${open==true?'hidden':''}`}>
-                        <div className="col-span-2 grid grid-cols-subgrid grid-cols-1 md:grid-cols-3 gap-5">
-                        <SelectElementSecondVersion limpiar={limpiarSegundoSelect} url={`https://poetic-tube-428221-a5.rj.r.appspot.com/prioridad`} tipoDato="prioridad" label="Seleccione prioridad"  valor={selectPrioridad} setValor={setSelectPrioridad}/>
-                        
-                        <ComponentSelectOneOpcion loading={loadingAllSelects} label="Seleccione Moneda" limpiar={limpiarComponentSelectOneOpcion}  options={optionsMoneda}   valor={selectMoneda} setValor={setSelectMoneda}/>                       
-                        <ComponentSelectOneOpcion loading={loadingAllSelects} label="Seleccione Producto" limpiar={limpiarComponentSelectOneOpcion}  options={optionsProducto}   valor={selectProducto} setValor={setSelectProducto}/>                       
-                        
-                        {/* producto ---
-                        campaña
-                        macroRegiones
-                        añoCastigo
-                        moneda ---
-                        estadoCuenta
-                        mesCastigo
-                        prioridad ---
-                        rangoEdad */}
-
-                        {/* <ComponentSelectOneOpcion label="Seleccione Producto" limpiar={limpiarSelectEntidad}  options={optionsProducto}   valor={selectProducto} setValor={setSelectProducto}/>     
-                        <ComponentSelectOneOpcion label="Seleccione Producto" limpiar={limpiarSelectEntidad}  options={optionsProducto}   valor={selectProducto} setValor={setSelectProducto}/>     
-                        <ComponentSelectOneOpcion label="Seleccione Producto" limpiar={limpiarSelectEntidad}  options={optionsProducto}   valor={selectProducto} setValor={setSelectProducto}/>     
-                        <ComponentSelectOneOpcion label="Seleccione Producto" limpiar={limpiarSelectEntidad}  options={optionsProducto}   valor={selectProducto} setValor={setSelectProducto}/>     
-                        <ComponentSelectOneOpcion label="Seleccione Producto" limpiar={limpiarSelectEntidad}  options={optionsProducto}   valor={selectProducto} setValor={setSelectProducto}/>     
-                        <ComponentSelectOneOpcion label="Seleccione Producto" limpiar={limpiarSelectEntidad}  options={optionsProducto}   valor={selectProducto} setValor={setSelectProducto}/>      */}
-
-
-                        {/*                         
-                        <SelectTailwind label="Seleccione Moneda"   llave="5" options={optionsMoneda}    valor={selectMoneda}  setValor={setSelectMoneda} />
-                        <SelectTailwind label="Seleccione Producto" llave="6" options={optionsProducto}  valor={selectProducto}  setValor={setSelectProducto} /> */}
-                        </div>
-                        </div>
-
 
                     </div>
                 </div>
@@ -561,11 +522,11 @@ const SidebarDashboardView = () => {
                     </Accordion>
                 </div>
 
-                <div className={` text-center ${groupOfTables==true?'hidden':''}`}>
-                    <div className="text-cente h-all">
+                <div className={`h-full  flex items-center justify-center ${groupOfTables==true?'hidden':''}`}>
+                    <div className="">
                         <div className={`py-8 ${spinnerShowGroupTables?'hidden':''}`}>                
                             <img src={filtro} alt="Portada" className="max-w-60 mx-auto "/>
-                            <h3 className="font-ralewayBold text-base text-tonosOscuros-2 "> FILTRA PARA INICIAR BÚSQUEDA</h3>
+                            <h3 className="font-ralewayBold text-base text-tonosOscuros-0 "> FILTRA PARA INICIAR BÚSQUEDA</h3>
                         </div>
                         <GridLoader color="#1A237E" size={20} loading={spinnerShowGroupTables}/>
                     </div>

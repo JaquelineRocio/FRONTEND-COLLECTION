@@ -35,6 +35,8 @@ export default function ComponenteFechaDos({valor, setValor}) {
 
 
       slotProps={{ textField: { size: 'small', } }}
+      sx={{ width: '100%' }}  // Cambia el valor de '250px' por el ancho deseado
+
       />
     </LocalizationProvider>
 

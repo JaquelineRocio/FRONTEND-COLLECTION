@@ -91,75 +91,22 @@ const Route = () => {
               element: <EnConstruccion/>
             },
             {
-              path: "gridtailwind",
+              path: "gestioninformacion",
               element: <EnConstruccion/>
             },
             {
-              path: "flextailwind",
+              path: "gestioncomunicacion",
+              element: <EnConstruccion/>
+            },
+            {
+              path: "gestionentidades",
+              element: <EnConstruccion/>
+            },
+            {
+              path: "gestionaccesos",
               element: <EnConstruccion/>
             }
-            ,
-            {
-              path: "accordiontailwind",
-              element: <EnConstruccion/>
-            },
-            {
-              path: "selecttailwind",
-              element: <EnConstruccion/>
-            },
-            {
-              path: "accordiontailwindsecondversion",
-              element: <EnConstruccion/>
-            },
-            {
-              path: "tabletailwind",
-              element: <EnConstruccion/>
-            },
-            {
-              path: "drawertailwind",
-              element: <DrawerTailwind/>
-            }
-            ,
-            {
-              path: "graficos",
-              element: <Graficos/>
-            },
-            {
-              path: "peticionapi",
-              element: <PeticionApi/>
-            },
-            {
-              path:"selecttailwindtow",
-              element: <SelectTailwindTwo/>
-            },
-            {
-              path:"exampleredux",
-              element: <ExampleUseRedux/>
-            },
-            {
-              path:"hookform",
-              element: <HookForm/>
-            },
-            {
-              path:"reacttable",
-              element: <ReactTable/>
-            },
-            {
-              path:"reactexcel",
-              element: <ReactExcel/>
-            },
-            {
-              path:"selectcomponent",
-              element: <SelectComponent/>
-            },
-            {
-              path:"selectaninados",
-              element: <SelectsAninados/>
-            },
-            {
-              path:"useefect",
-              element: <UseEffect/>
-            }
+
 
           ]  
       }    

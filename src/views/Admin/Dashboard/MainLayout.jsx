@@ -30,7 +30,7 @@ const Body = () => {
 
     {/* PARTE DOS */}
     {/* <main className={`${isOpen ? 'md:ml-[300px] md:w-[calc(100%-300px)] ' : 'md:ml-[100px] md:w-full '} w-full  bg-tonosClaros-4 min-h-screen transition-all main `}> */}
-    <main className={`${isOpen ? 'md:ml-[300px] md:w-[calc(100%-300px)] ' : 'md:ml-[90px]  md:w-[calc(100%-90px)]'} w-full  bg-tonosClaros-4 min-h-screen transition-all main `}>
+    <main className={`${isOpen ? 'md:ml-[300px] md:w-[calc(100%-300px)] ' : 'md:ml-[90px]  md:w-[calc(100%-90px)]'} w-full  bg-white min-h-screen transition-all main `}>
             {/* navbar */}
             <div className="bg-white py-2 px-6  flex items-center shadow-md shadow-black/5 sticky top-0 left-0 z-30 ">
                 {/* Amburguesa (init) */}

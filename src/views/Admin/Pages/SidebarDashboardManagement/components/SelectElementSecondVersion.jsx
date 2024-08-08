@@ -19,7 +19,8 @@ export default function SelectElementSecondVersion({
         setValor, 
         valor, 
         isMulti=true, 
-        closeMenuOnSelect=false
+        closeMenuOnSelect=false,
+        className="",
 
 }){
 
@@ -60,7 +61,8 @@ export default function SelectElementSecondVersion({
 
     return (
         <>
-            <Select
+        <div className={className}>
+        <Select
                 // key={valor ? `selected${llave}` : `empty${llave}`}
                 isLoading={loading}  
                 ref={selectRef}
@@ -74,6 +76,8 @@ export default function SelectElementSecondVersion({
                 onChange={(val) => {setValor(val)}}
                 styles={customStyles}
             />
+        </div>
+
         </>
     )
 }
