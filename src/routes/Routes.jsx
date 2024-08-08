@@ -34,6 +34,7 @@ import EnConstruccion from "../views/ExampleView/EnConstruccion";
 import { useDispatch } from "react-redux";
 import {unauthenticatedUser} from "../store/authSlice";
 import { useEffect } from "react";
+import UsoFormularioReactHookForm from "../views/ExampleView/UsoFormularioReactHookForm";
 // import FlexTailwind from "../views/ExampleView/GridTailwind";
 // import SidebarAccessManagementView from "../views/Admin/Pages/SidebarAccessManagement/SidebarAccessManagementView";
 
@@ -73,9 +74,7 @@ const Route = () => {
       },
       {
           path: '/dashboard',
-          // element: <MainLayout/>,
           element: <ProtectedRoute element={<MainLayout />} />,
-          // isProtected: true,
           children: [
             {
               index: true,
@@ -108,7 +107,12 @@ const Route = () => {
             }
 
 
-          ]  
+          ],
+
+      },
+      {
+        path: 'examples',
+        element: <UsoFormularioReactHookForm/>
       }    
   ]);
   
