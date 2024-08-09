@@ -2,8 +2,8 @@ const BotonClaro = ({layout = "INGRESE NOMBRE", className=null, onClick=null}) =
     return(
         <>
             <button className = {`   
-              border-tonosOscuros-1
-              text-tonosOscuros-1 h-10
+              border-buttonColor-0
+              text-buttonColor-0 h-10
 
                 px-2
                 font-ralewayBold

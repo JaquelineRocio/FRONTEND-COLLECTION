@@ -9,10 +9,13 @@ const ListItem = ({src=null, open=true, name='Ingrese nombre de link', to=''}) =
     return(
         <>
             <Link to={to}>
-                <li className={`h-12 hover:bg-sidebarColor-1 flex flex-row items-center ${open?'':'justify-center'} ${secondSegment == to?'bg-sidebarColor-1':''}`}>
-                    {/* <div className={`${secondSegment == to?'bg-orange-500 h-full min-w-1':''} ${open?'':''} `}></div> */}
-                    <img src={src} className={`text-white ${open?'ml-4':''}`}/>
-                    <h3 className={`ml-5 font-ralewayMedium text-white ${open?'':'hidden'}`}>
+                <li className={`h-12 hover:bg-sidebarColor-1 flex flex-row items-center ${open?'':'justify-between'} ${secondSegment == to?'bg-sidebarColor-1':''}`}>
+                {/* <div className=" shadow-[10px_0px_20px_0px_rgba(6,182,212,0.5)]">Subscribe</div> */}
+                    <div className={`${secondSegment == to?'bg-[#50B8E4] shadow-[10px_0px_20px_0px_rgba(6,182,212,0.5)] h-full min-w-1':''} ${open?'':''} `}></div>
+                    <img src={src} className={`text-white h-5 ${open?'ml-4 ':''} ${secondSegment == to?'h-6 ml-[8px] ':''}`}/>
+                    <div className={`${secondSegment == to?' h-full min-w-1':''} ${open?'hidden':''} `}></div>
+
+                    <h3 className={`ml-5 font-ralewayMedium  text-white ${open?'':'hidden'}  ${secondSegment == to?'text-base':'text-sm'}`}>
                         {name}
                     </h3>
                 </li>

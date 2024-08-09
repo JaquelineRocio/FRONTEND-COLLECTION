@@ -59,47 +59,48 @@ const Login = () => {
               {/* <!-- Right Pane --> */}
               <div className="w-full bg-white lg:w-1/2 flex items-center justify-center">
               <div className="max-w-md w-full p-6 " >
+
                 <div className="w-full max-w-md mx-auto mb-12 flex items-center justify-center text-right">
                   <img src={logoContactoEficaz} alt="Login Image" className="w-100 object-cover" />
                 </div>
-                  <h1 className="text-4xl font-semibold mb-3 text-black text-center font-ralewayBold">Bienvenido</h1>
-                  <h1 className="text-2xl mb-6 text-gray-700 text-center font-ralewayMedium">Sistema de cobranza </h1>
-                  <div className="space-y-4">
+
+                <h1 className="text-4xl font-semibold mb-3 text-black text-center font-ralewayBold">Bienvenido</h1>
+                <h1 className="text-2xl mb-6 text-gray-700 text-center font-ralewayMedium">Sistema de cobranza </h1>
+                  {/* <div className="space-y-4"> */}
                   
 
-            {/* ------------------ */}
-            <form className="" onSubmit={onSubmit}>
-                  <div>
-                    <label htmlFor="usuario" className="block text-sm font-medium text-gray-700 font-ralewayMedium">Usuario</label>
-                    {/* <input value={inputUser} onChange={handleUserInputChange} placeholder="Ingrese su nombre de usuario" type="text" id="username" name="username" className="font-ralewayMedium mt-1 p-3 w-full border border-gray-800/30 rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-blue-900 transition-colors duration-300"/> */}
-                    <input  placeholder="Ingrese su nombre de usuario" autoComplete="usuario"  type="text" name="usuario" className="font-ralewayMedium mt-1 p-3 w-full border border-gray-800/30 rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-blue-900 transition-colors duration-300"
-                    {...register("usuario", {...reglasUsuario})}
-                    />
-                      {errors.usuario && <span className="text-red-800 font-ralewayRegular text-xs ml-4">{errors.usuario.message}</span>}
-                  </div>
+                {/* ------------------ */}
+                <form className="" onSubmit={onSubmit}>
+                      <div className='mb-6'>
+                        <label htmlFor="usuario" className="block text-sm font-medium text-gray-700 font-ralewayMedium ">Usuario</label>
+                        {/* <input value={inputUser} onChange={handleUserInputChange} placeholder="Ingrese su nombre de usuario" type="text" id="username" name="username" className="font-ralewayMedium mt-1 p-3 w-full border border-gray-800/30 rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-blue-900 transition-colors duration-300"/> */}
+                        <input  placeholder="Ingrese su nombre de usuario" autoComplete="usuario"  type="text" name="usuario" className="font-ralewayMedium mt-1 p-3 w-full border border-gray-800/30 rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-blue-900 transition-colors duration-300"
+                        {...register("usuario", {...reglasUsuario})}
+                        />
+                          {errors.usuario && <span className="text-red-800 font-ralewayRegular text-xs">{errors.usuario.message}</span>}
+                      </div>
 
-                  <div>
-                    <label htmlFor="password" className="block text-sm font-medium text-gray-700 font-ralewayMedium">Contraseña</label>
-                    {/* <input value={inputPassword} onChange={handlePasswordInputChange} placeholder="Ingrese contraseña" type="password" id="password" name="password" className=" font-ralewayMedium mt-1 p-3 w-full border border-gray-800/30 rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-blue-900 transition-colors duration-300"/>                            */}
-                    <input placeholder="Ingrese contraseña" autoComplete="password"  type="password" name="password" className=" font-ralewayMedium mt-1 p-3 w-full border border-gray-800/30 rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-blue-900 transition-colors duration-300"
-                    {...register("password", {...reglasPassword})}
-                    />                           
-                      {errors.password && <span className="text-red-800 font-ralewayRegular text-xs ml-4">{errors.password.message}</span>}
-                  </div>
+                      <div>
+                        <label htmlFor="password" className="block text-sm font-medium text-gray-700 font-ralewayMedium">Contraseña</label>
+                        {/* <input value={inputPassword} onChange={handlePasswordInputChange} placeholder="Ingrese contraseña" type="password" id="password" name="password" className=" font-ralewayMedium mt-1 p-3 w-full border border-gray-800/30 rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-blue-900 transition-colors duration-300"/>                            */}
+                        <input placeholder="Ingrese contraseña" autoComplete="password"  type="password" name="password" className=" font-ralewayMedium mt-1 p-3 w-full border border-gray-800/30 rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-blue-900 transition-colors duration-300"
+                        {...register("password", {...reglasPassword})}
+                        />                           
+                          {errors.password && <span className="text-red-800 font-ralewayRegular text-xs">{errors.password.message}</span>}
+                      </div>
 
-                  <div className="mt-4 text-sm text-gray-600 text-right">
-                    <p><a href="#" className="text-black hover:underline font-ralewayMedium">¿Olvidaste tu usuario ó contraseña?</a></p>
-                  </div>
+                      <div className="mt-4 text-sm text-gray-600 text-right mb-9">
+                        <p><a href="#" className="text-black hover:underline font-ralewayMedium ">¿Olvidaste tu usuario ó contraseña?</a></p>
+                      </div>
 
-                  <div>
-                    {/* <button onClick={formHandleSubmit} type="button" className="font-ralewayMedium w-full bg-blue-900 text-white p-3 rounded-md hover:bg-blue-950 focus:outline-none focus:bg-blue-800 focus:outline-none focus:bg-blue-700  transition-colors duration-300">Ingresar</button> */}
-                    <button type="submit" className="font-ralewayMedium w-full bg-blue-900 text-white p-3 rounded-md hover:bg-blue-950 focus:outline-none focus:bg-blue-800 focus:outline-none focus:bg-blue-700  transition-colors duration-300">Ingresar</button>
+                      <div>
+                        <button type="submit" className="font-ralewayMedium w-full bg-[#0041BF] text-white p-3 rounded-md hover:bg-blue-950 focus:outline-none focus:bg-blue-800 focus:outline-none focus:bg-blue-700  transition-colors duration-300">Ingresar</button>
 
-                  </div>
-              </form>
-              {/* ------------------ */}
+                      </div>
+                </form>
+                {/* ------------------ */}
 
-                  </div>
+                  {/* </div> */}
                 <div className="w-full max-w-md mx-auto mt-12 flex items-center justify-center text-right">
                   <img src={globalCorebankia} alt="Login Image" className="w-100 object-cover" />
                 </div>
@@ -122,14 +123,14 @@ const Login = () => {
                 />
                 <div className="absolute inset-0 grid h-full w-full  bg-black/10">
                   <div className="text-center">
-                    <Typography
+                    {/* <Typography
                       // variant="h1"
                       variant="lead"
                       color="black"
                       className="mb-4 text-xl md:text-xl lg:text-3xl w-full pt-10 font-ralewayMedium"
                     >
                       {'"La perseverancia y la determinación son nuestras herramientas más poderosas."'}
-                    </Typography>
+                    </Typography> */}
                     {/* <Typography
                       variant="lead"
                       color="white"
@@ -152,7 +153,6 @@ const Login = () => {
                 </div>
               </div>
               </Carousel>     
-
             </div> 
 
           </div>

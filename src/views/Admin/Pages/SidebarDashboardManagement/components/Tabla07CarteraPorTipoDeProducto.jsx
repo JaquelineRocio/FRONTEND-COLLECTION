@@ -1,6 +1,6 @@
 import DataTable from 'react-data-table-component';
 import { Chip } from "@material-tailwind/react";
-import RiseLoader from "react-spinners/RiseLoader";
+import MoonLoader from "react-spinners/MoonLoader";
 import PercentageBar from './PercentageBar';
 
 export default function Tabla07CarteraPorTipoDeProducto({tableRows, loading}) {
@@ -425,8 +425,8 @@ const conditionalRowStyles = [
 ];
 
 const CustomLoader = () => (
-	<div style={{ padding: '50px', textAlign: 'center' }}>
-		<RiseLoader color="#1A237E" size={12} loading={true}/>
+	<div style={{ padding: '50px', textAlign: '' }}>
+		<MoonLoader color="#1A237E" size={40} loading={true}/>
 	</div>
 		// <div style={{ padding: '24px', textAlign: 'center' }}>
 		//   <img src="/loading.gif" alt="Cargando..." />  // Puedes usar una imagen de carga

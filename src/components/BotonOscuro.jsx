@@ -2,7 +2,7 @@ const BotonOscuro = ({layout = "INGRESE NOMBRE", className="null", onClick=null}
     return(
         <>
             <button className={`
-                bg-tonosOscuros-1 
+                bg-buttonColor-0
                 text-white h-10
                  
                 px-2

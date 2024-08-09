@@ -111,10 +111,10 @@ const UserProfile = ({ name, role }) => {
                         <h2 className="text-base font-ralewayBold text-tonosOscuros-0 ">{name}</h2>
                         <p className="text-base font-ralewayBold text-tonosClaros-0">{role}</p>
                     </div>
-                    <div className="flex-shrink-0 w-10 h-10 relative">
-                        <div className="p-1 bg-white rounded-full focus:outline-none focus:ring">
+                    <div className="flex-shrink-0 relative">
+                        <div className="rounded-full ">
                             <img
-                                className="w-8 h-8 rounded-full"
+                                className="w-10 h-10 rounded-full"
                                 // src="https://laravelui.spruko.com/tailwind/ynex/build/assets/images/faces/9.jpg"
                                 src={emptyAvatar}
                                 alt="avatar"

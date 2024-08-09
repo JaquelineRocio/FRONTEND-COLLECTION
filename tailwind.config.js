@@ -70,6 +70,9 @@ module.exports = withMT({
           0: "#1F263E",
           1: "#303750",
         },
+        buttonColor:{
+          0: "#0041BF"
+        },
         tonosOscuros:{
           0: "#072d44",
           1: "#064469",

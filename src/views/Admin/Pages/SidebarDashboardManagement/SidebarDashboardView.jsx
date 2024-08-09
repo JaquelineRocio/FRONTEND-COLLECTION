@@ -28,6 +28,7 @@ import Tabla08CarteraPorZona from "./components/Tabla08CarteraPorZona";
 
 import SelectElementSecondVersion from "./components/SelectElementSecondVersion";
 import GridLoader from "react-spinners/GridLoader";
+import MoonLoader from "react-spinners/MoonLoader";
 import filtro from '../../../../../public/filtro.svg';
 import ComponenteFecha from "../../../../components/ComponenteFecha";
 import ComponenteFechaDos from "../../../../components/ComponenteFechaDos";
@@ -109,10 +110,10 @@ const SidebarDashboardView = () => {
             console.log("hay parametros vacios");
                 // alert("Tu sesión ha iniciado correctamente");
                 Swal.fire({
-                  position: "top-end",
+                  position: "top-center",
                 //   icon: "success",
                   title: "Necesario",
-                  text: 'Debe seleccionar por lo menos un valor para "Entidad", "Cartera" y "Mes".',
+                  text: 'Debe seleccionar por lo menos un valor para "Entidad", "Cartera" y "Fecha".',
                   showConfirmButton: false,
                   timer: 3000
                 });
@@ -314,6 +315,7 @@ const SidebarDashboardView = () => {
         setSelectFecha(null);
         setLimpiarSegundoSelect(limpiarSegundoSelect?false: true);
         setLimpiarComponentSelectOneOpcion(limpiarComponentSelectOneOpcion?false:true);
+        setGroupOfTables(false);
         
     }
     
@@ -323,7 +325,7 @@ const SidebarDashboardView = () => {
             <div className="py-5 px-7 flex flex-col h-screen">
 
                 <div className=" flex mb-5">
-                    <Link to='/' className="pr-5 flex items-center"> <IoChevronBackCircle  className={`text-5xl`}/> </Link>
+                    <Link to="/dashboard" className="pr-5 flex items-center"> <IoChevronBackCircle  className={`text-5xl text-[#1F263E]`}/> </Link>
                     <div>
                         <h1 className="font-ralewaySemibold text-2xl">Dashboard de Gestión</h1>
                         <h1 className="font-ralewayMedium text-base">Revisemos cómo ha ido la Gestión...</h1>
@@ -339,20 +341,21 @@ const SidebarDashboardView = () => {
 
                     <div className="bg-white p-5">
 
-                        <div className="grid grid-cols-1 gap-5 md:grid-cols-6 ">
-                            <h3 className="md:col-span-6 font-ralewaySemibold text-base text-gray-900">FILTROS GENERALES</h3>
-                            <ComponenteFechaDos valor={selectFecha} setValor={setSelectFecha}/>
-                            <ComponentSelectOneOpcion loading={loadingAllSelects} label="Seleccione una entidad *" limpiar={limpiarComponentSelectOneOpcion}  options={optionsEntidad}   valor={selectEntidad} setValor={setSelectEntidad}/>
-                            <SelectElementSecondVersion realizarPeticion={selectEntidad? true : false} url={`https://poetic-tube-428221-a5.rj.r.appspot.com/cartera/entidad/${selectEntidad}`} label="Seleccione una cartera *" tipoDato="cartera" valor={selectCartera} setValor={setSelectCartera}/>
-                            <BotonClaro  className={`${open==true?'md:col-start-5 md:col-end-5':'hidden'} `} layout="LIMPIAR BÚSQUEDA" onClick={cleanSearch}/>
-                            <BotonOscuro className={`${open==true?'md:col-start-6 md:col-end-6':'hidden'} `} layout="BUSCAR" onClick={handleGroupTables}/>
-                            <div className={`md:col-span-6 transition-colors text-gray-900 font-ralewaySemibold flex`} onClick={handleOpen}>  FILTROS ESPECÍFICOS <IoMdRemoveCircle className={`mt-0.5 ml-2 text-xl ${open==true?'hidden':''}`}/> <IoAddCircle className={`mt-0.5 ml-2 text-xl  ${open==true?'':'hidden'}`}/> </div>
+                        <div className="grid grid-cols-1 gap-5 md:grid-cols-5 2xl:grid-cols-6 ">
+                            <h3 className="md:col-span-5 2xl:col-span-6 font-ralewaySemibold text-base text-gray-900">FILTROS GENERALES</h3>
+                            <div><label className="text-[11px] pl-1 text-gray-600">Fecha</label><ComponenteFechaDos valor={selectFecha} setValor={setSelectFecha}/></div>
+                            <div><label className="text-[11px] pl-1 text-gray-600">Entidad</label>  <ComponentSelectOneOpcion loading={loadingAllSelects} label="Seleccione una entidad *" limpiar={limpiarComponentSelectOneOpcion}  options={optionsEntidad}   valor={selectEntidad} setValor={setSelectEntidad}/></div>
+                            <div><label className="text-[11px] pl-1 text-gray-600">Cartera</label> <SelectElementSecondVersion realizarPeticion={selectEntidad? true : false} url={`https://poetic-tube-428221-a5.rj.r.appspot.com/cartera/entidad/${selectEntidad}`} label="Seleccione una cartera *" tipoDato="cartera" valor={selectCartera} setValor={setSelectCartera}/></div>
+                            <div className={`${open==true?'md:col-start-4 md:col-end-4 2xl:col-start-5 2xl:col-end-5':'hidden'} pt-[24px]`} ><BotonClaro  className={`${open==true?'md:col-start-4 md:col-end-4 2xl:col-start-5 2xl:col-end-5':'hidden'} `} layout="LIMPIAR BÚSQUEDA" onClick={cleanSearch}/></div>
+                            <div className={`${open==true?'md:col-start-5 md:col-end-5 2xl:col-start-6 2xl:col-end-6':'hidden'} pt-[24px]`}><BotonOscuro className={`${open==true?'md:col-start-5 md:col-end-5 2xl:col-start-6 2xl:col-end-6':'hidden'} `} layout="BUSCAR" onClick={handleGroupTables}/></div>
+                            
+                            <div className={`md:col-span-5 2xl:col-span-6 transition-colors text-gray-900 font-ralewaySemibold flex`} onClick={handleOpen}>  FILTROS ESPECÍFICOS <IoMdRemoveCircle className={`mt-0.5 ml-2 text-2 ${open==true?'hidden':''}`}/> <IoAddCircle className={`mt-0.5 ml-2 text-xl  ${open==true?'':'hidden'}`}/> </div>
 
-                            <SelectElementSecondVersion className={` ${open==true?'hidden':''}`} limpiar={limpiarSegundoSelect} url={`https://poetic-tube-428221-a5.rj.r.appspot.com/prioridad`} tipoDato="prioridad" label="Seleccione prioridad"  valor={selectPrioridad} setValor={setSelectPrioridad}/>                               
-                            <ComponentSelectOneOpcion   className={` ${open==true?'hidden':''}`} loading={loadingAllSelects} label="Seleccione Moneda" limpiar={limpiarComponentSelectOneOpcion}  options={optionsMoneda}   valor={selectMoneda} setValor={setSelectMoneda}/>                       
-                            <ComponentSelectOneOpcion   className={` ${open==true?'hidden':''}`} loading={loadingAllSelects} label="Seleccione Producto" limpiar={limpiarComponentSelectOneOpcion}  options={optionsProducto}   valor={selectProducto} setValor={setSelectProducto}/>                       
-                            <BotonClaro  className={`${open==true?'hidden':'md:col-start-5 md:col-end-5'} `} layout="LIMPIAR BÚSQUEDA" onClick={cleanSearch}/>
-                            <BotonOscuro className={`${open==true?'hidden':'md:col-start-6 md:col-end-6'} `} layout="BUSCAR" onClick={handleGroupTables}/>
+                            <div><label className={`text-[11px] pl-1 text-gray-600 ${open==true?'hidden':''}`}>Prioridad</label><SelectElementSecondVersion className={` ${open==true?'hidden':''}`} limpiar={limpiarSegundoSelect} url={`https://poetic-tube-428221-a5.rj.r.appspot.com/prioridad`} tipoDato="prioridad" label="Seleccione prioridad"  valor={selectPrioridad} setValor={setSelectPrioridad}/></div>                               
+                            <div><label className={`text-[11px] pl-1 text-gray-600 ${open==true?'hidden':''}`}>Moneda</label><ComponentSelectOneOpcion   className={` ${open==true?'hidden':''}`} loading={loadingAllSelects} label="Seleccione Moneda" limpiar={limpiarComponentSelectOneOpcion}  options={optionsMoneda}   valor={selectMoneda} setValor={setSelectMoneda}/></div>                       
+                            <div><label className={`text-[11px] pl-1 text-gray-600 ${open==true?'hidden':''}`}>Producto</label><ComponentSelectOneOpcion   className={` ${open==true?'hidden':''}`} loading={loadingAllSelects} label="Seleccione Producto" limpiar={limpiarComponentSelectOneOpcion}  options={optionsProducto}   valor={selectProducto} setValor={setSelectProducto}/></div>                       
+                            <div className={`pt-[24px] ${open==true?'hidden':'md:col-start-4 md:col-end-4 2xl:col-start-5 2xl:col-end-5'} `}><BotonClaro  layout="LIMPIAR BÚSQUEDA" onClick={cleanSearch}/></div>
+                            <div className={`pt-[24px] ${open==true?'hidden':'md:col-start-5 md:col-end-5 2xl:col-start-6 2xl:col-end-6'} `}><BotonOscuro  layout="BUSCAR" onClick={handleGroupTables}/></div>
 
                         </div>
 
@@ -523,12 +526,12 @@ const SidebarDashboardView = () => {
                 </div>
 
                 <div className={`h-full  flex items-center justify-center ${groupOfTables==true?'hidden':''}`}>
-                    <div className="">
+                    <div className="h-20">
                         <div className={`py-8 ${spinnerShowGroupTables?'hidden':''}`}>                
                             <img src={filtro} alt="Portada" className="max-w-60 mx-auto "/>
                             <h3 className="font-ralewayBold text-base text-tonosOscuros-0 "> FILTRA PARA INICIAR BÚSQUEDA</h3>
                         </div>
-                        <GridLoader color="#1A237E" size={20} loading={spinnerShowGroupTables}/>
+                        <MoonLoader color="#1A237E" size={40} loading={spinnerShowGroupTables}/>
                     </div>
                 </div>
 
