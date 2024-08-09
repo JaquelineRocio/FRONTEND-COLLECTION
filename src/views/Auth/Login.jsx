@@ -58,7 +58,6 @@ const Login = () => {
 
         return (
         <>
-          {loading ? <h3>Está cargando...</h3> : <h3>No está cargando</h3>}
           <div className="flex h-screen">
               {/* <!-- Right Pane --> */}
               <div className="w-full bg-white lg:w-1/2 flex items-center justify-center">
@@ -99,7 +98,7 @@ const Login = () => {
 
                       <div>
                         {/* <button  type="submit" className="font-ralewayMedium w-full bg-[#0041BF] text-white p-3 rounded-md hover:bg-blue-950 focus:outline-none focus:bg-blue-800 focus:outline-none focus:bg-blue-700  transition-colors duration-300">Ingresar</button> */}
-                        <button disabled={loading}  type="submit" className={`font-ralewayMedium w-full bg-[#0041BF] text-white p-3 rounded-md hover:bg-blue-950 focus:outline-none  transition-colors duration-300 flex flex-col justify-center items-center ${loading&&"bg-[#0041BF]/70"}`}>
+                        <button disabled={loading}  type="submit" className={`font-ralewayMedium w-full bg-[#0041BF] text-white p-3 rounded-md hover:bg-blue-950 focus:outline-none  transition-colors duration-300 flex flex-col justify-center items-center ${loading&&"bg-[#0041BF]/80"}`}>
                           { !loading && <>Ingresar</>}
                           <ClipLoader color="#ffffff" size={24} loading={loading}/>
                         </button>
