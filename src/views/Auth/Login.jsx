@@ -77,7 +77,7 @@ const Login = () => {
                       <div className='mb-6'>
                         <label htmlFor="usuario" className="block text-sm font-medium text-gray-700 font-ralewayMedium ">Usuario</label>
                         {/* <input value={inputUser} onChange={handleUserInputChange} placeholder="Ingrese su nombre de usuario" type="text" id="username" name="username" className="font-ralewayMedium mt-1 p-3 w-full border border-gray-800/30 rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-blue-900 transition-colors duration-300"/> */}
-                        <input  placeholder="Ingrese su nombre de usuario" autoComplete="usuario"  type="text" name="usuario" className="font-ralewayMedium mt-1 p-3 w-full border border-gray-800/30 rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-blue-900 transition-colors duration-300"
+                        <input  disabled={loading} placeholder="Ingrese su nombre de usuario" autoComplete="usuario"  type="text" name="usuario" className="font-ralewayMedium mt-1 p-3 w-full border border-gray-800/30 rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-blue-900 transition-colors duration-300"
                         {...register("usuario", {...reglasUsuario})}
                         />
                           {errors.usuario && <span className="text-red-800 font-ralewayRegular text-xs">{errors.usuario.message}</span>}
@@ -86,7 +86,7 @@ const Login = () => {
                       <div>
                         <label htmlFor="password" className="block text-sm font-medium text-gray-700 font-ralewayMedium">Contraseña</label>
                         {/* <input value={inputPassword} onChange={handlePasswordInputChange} placeholder="Ingrese contraseña" type="password" id="password" name="password" className=" font-ralewayMedium mt-1 p-3 w-full border border-gray-800/30 rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-blue-900 transition-colors duration-300"/>                            */}
-                        <input placeholder="Ingrese contraseña" autoComplete="password"  type="password" name="password" className=" font-ralewayMedium mt-1 p-3 w-full border border-gray-800/30 rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-blue-900 transition-colors duration-300"
+                        <input disabled={loading} placeholder="Ingrese contraseña" autoComplete="password"  type="password" name="password" className=" font-ralewayMedium mt-1 p-3 w-full border border-gray-800/30 rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-blue-900 transition-colors duration-300"
                         {...register("password", {...reglasPassword})}
                         />                           
                           {errors.password && <span className="text-red-800 font-ralewayRegular text-xs">{errors.password.message}</span>}
