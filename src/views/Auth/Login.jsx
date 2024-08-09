@@ -15,19 +15,23 @@ import fondo from '../../../public/fondologin.png';
 import Swal from 'sweetalert2';
 import { Carousel, Typography } from '@material-tailwind/react';
 import { useForm } from "react-hook-form";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const Login = () => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [loading, setLoading] = useState(false);
     
     const {register, handleSubmit, formState:{errors}} = useForm();
 
         const onSubmit = handleSubmit(data => {
+            setLoading(true);
             dispatch(loginUser(data)).then((response)=>{
               if(response.type=="auth/loginUser/fulfilled"){
                 navigate("/dashboard");
               }else{
+                setLoading(false);
                 Swal.fire({
                   // position: 'top-end',
                   icon: "error",
@@ -54,7 +58,7 @@ const Login = () => {
 
         return (
         <>
-
+          {loading ? <h3>Está cargando...</h3> : <h3>No está cargando</h3>}
           <div className="flex h-screen">
               {/* <!-- Right Pane --> */}
               <div className="w-full bg-white lg:w-1/2 flex items-center justify-center">
@@ -94,8 +98,11 @@ const Login = () => {
                       </div>
 
                       <div>
-                        <button type="submit" className="font-ralewayMedium w-full bg-[#0041BF] text-white p-3 rounded-md hover:bg-blue-950 focus:outline-none focus:bg-blue-800 focus:outline-none focus:bg-blue-700  transition-colors duration-300">Ingresar</button>
-
+                        {/* <button  type="submit" className="font-ralewayMedium w-full bg-[#0041BF] text-white p-3 rounded-md hover:bg-blue-950 focus:outline-none focus:bg-blue-800 focus:outline-none focus:bg-blue-700  transition-colors duration-300">Ingresar</button> */}
+                        <button disabled={loading}  type="submit" className={`font-ralewayMedium w-full bg-[#0041BF] text-white p-3 rounded-md hover:bg-blue-950 focus:outline-none  transition-colors duration-300 flex flex-col justify-center items-center ${loading&&"bg-[#0041BF]/70"}`}>
+                          { !loading && <>Ingresar</>}
+                          <ClipLoader color="#ffffff" size={24} loading={loading}/>
+                        </button>
                       </div>
                 </form>
                 {/* ------------------ */}
