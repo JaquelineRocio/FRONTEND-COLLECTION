@@ -35,11 +35,15 @@ import ComponenteFechaDos from "../../../../components/ComponenteFechaDos";
 import BotonOscuro from "../../../../components/BotonOscuro";
 import BotonClaro from "../../../../components/BotonClaro";
 import ComponentSelectOneOpcion from "../../../../components/ComponentSelectOneOpcion";
-
-
+import DatePickerCustomed from "../../../../components/DatePickerCustomed/DatePickerCustomed";
+import SelectCustomed from "../../../../components/SelectCustomed/SelectCustomed";
+import SelectMultipleCustomed from "../../../../components/SelectMultipleCustomed/SelectMultipleCustomed";
+// import {useFetch} from "./../../../../hooks/useFetch";
+import { testFetch } from "../../../../hooks/testFetch";
 
 
 const SidebarDashboardView = () => {
+
     const [open, setOpen] = useState(true);
     const [firstTableOpen, setFirstTableOpen] = useState(false);
     const [secondTableOpen, setSecondTableOpen] = useState(false);
@@ -72,14 +76,14 @@ const SidebarDashboardView = () => {
 
 
 
-    const [selectEntidad, setSelectEntidad] = useState(null);
-    const [selectCartera, setSelectCartera] = useState(null);
-    const [selectMes, setSelectMes] = useState(null);
+    const [selectEntidad, setSelectEntidad] = useState('');
+    const [selectCartera, setSelectCartera] = useState([]);
+    const [selectMes, setSelectMes] = useState('');
     const [selectFecha, setSelectFecha] = useState(null);
 
-    const [selectPrioridad, setSelectPrioridad] = useState(null);
-    const [selectMoneda, setSelectMoneda] = useState(null);
-    const [selectProducto, setSelectProducto] = useState(null);
+    const [selectPrioridad, setSelectPrioridad] = useState([]);
+    const [selectMoneda, setSelectMoneda] = useState('');
+    const [selectProducto, setSelectProducto] = useState('');
 
 
 
@@ -90,6 +94,8 @@ const SidebarDashboardView = () => {
     const [limpiarComponentSelectOneOpcion, setLimpiarComponentSelectOneOpcion] = useState(false);
     const [loadingAllTable, setLoadingAllTable] = useState(false);
     const [loadingAllSelects, setLoadingAllSelects] = useState(false);
+    const [loadingFiltroCartera,setLoadingFiltroCartera] = useState(false);
+    // const { data, error, loading, fetchData } = testFetchGet();
 
     function handleOpen(){
         setOpen(open==true?false:true);
@@ -110,7 +116,7 @@ const SidebarDashboardView = () => {
             console.log("hay parametros vacios");
                 // alert("Tu sesión ha iniciado correctamente");
                 Swal.fire({
-                  position: "top-center",
+                  position: "center",
                 //   icon: "success",
                   title: "Necesario",
                   text: 'Debe seleccionar por lo menos un valor para "Entidad", "Cartera" y "Fecha".',
@@ -124,24 +130,38 @@ const SidebarDashboardView = () => {
 
         try{
             
-            const codCarteras = selectCartera?.map(item => item.value).join(',') || null;
-            const codPrioridad = selectPrioridad?.map(item => item.value).join(',') || null;
+            // const codCarteras = selectCartera?.map(item => item.value).join(',') || null;
+            // const codPrioridad = selectPrioridad?.map(item => item.value).join(',') || null;
+            let codPrioridad = selectPrioridad.join(",");
+            codPrioridad = codPrioridad === "" ? null : codPrioridad
+
+            // let codMoneda = selectMoneda?.join(",");
+            let codMoneda = null;
+            console.log("MONEDA",selectMoneda);
+            codMoneda = selectMoneda == "" ? null : selectMoneda;
+
+            let codProducto = null;
+            codProducto = selectProducto == "" ? null : selectProducto
+            // let codProducto = selectProducto.join(",");
+            // codProducto = codProducto === "" ? null : codProducto
+
+            
 
 
             const data = {
-                "producto": selectProducto,
+                "producto": codProducto,
                 "campaña": null,
                 "macroRegiones": null,
                 "añoCastigo": null,
-                "moneda": selectMoneda,
+                "moneda": null,
                 "estadoCuenta": null,
                 "mesCastigo": null,
                 "prioridad":codPrioridad,
                 "rangoEdad":null
               }
 
-
-            const response =  await Api.post(data,`/admin/tablon/dashboards?entidad=${selectEntidad}&mes=${selectFecha?.format('MM-YYYY')}&carteras=${codCarteras}`)
+            
+            const response =  await Api.post(data,`/admin/tablon/dashboards?entidad=${selectEntidad}&mes=${selectFecha?.format('MM-YYYY')}&carteras=${selectCartera}`)
             // const response =  await Api.post(data,`/admin/tablon/dashboards?entidad=${selectEntidad}&mes=08&carteras=${codCarteras}`)
 
             console.log("valores de data",data);
@@ -304,24 +324,54 @@ const SidebarDashboardView = () => {
         loadSelects();
     }, []);
 
+    async function getOptionsToCartera() {
+        setLoadingFiltroCartera(true);
+        setSelectCartera([]);
+        const {data, error, loading} = await testFetch.get(`/cartera/entidad/${selectEntidad}`);        // const {data, error, loading} = useFetch(urlFetch);
+        if (data && Array.isArray(data)) {
+            const carteraOptions = data.map(option => ({
+                value: option.codCartera.toString(),
+                label: option.desCartera
+            }));
+            setOptionsCartera(carteraOptions);
+        }
+        setLoadingFiltroCartera(loading);
+         console.log("valores cartera obtenidos", data);
+         console.log("valores cartera obtenidos errores", error);
+         console.log("valores cartera obtenidos loading", loading);
+         console.log("estas son las opciones de cartera option", optionsCartera);
+    }
+
+    useEffect(() => {
+        if(selectEntidad){
+            getOptionsToCartera();
+        }
+    }, [selectEntidad]);
 
     function cleanSearch(){
-        setSelectEntidad(null); 
-        setSelectCartera(null); 
-        setSelectMes(null);     
-        setSelectPrioridad(null);
-        setSelectMoneda(null);
-        setSelectProducto(null);
+        setSelectEntidad(''); 
+        setSelectCartera([]); 
+        setSelectMes('');     
+        setSelectPrioridad([]);
+        setSelectMoneda('');
+        setSelectProducto('');
         setSelectFecha(null);
         setLimpiarSegundoSelect(limpiarSegundoSelect?false: true);
         setLimpiarComponentSelectOneOpcion(limpiarComponentSelectOneOpcion?false:true);
         setGroupOfTables(false);
         
     }
-    
+    // function mostrardatos(){
+
+
+    //     console.log("Estos son los datos obtenidos. fecha: ", selectFecha);
+    //     console.log("Estos son los datos obtenidos. Entidad: ", selectEntidad);
+    //     console.log("Estos son los datos obtenidos. Cartera: ", selectCartera);
+    // }
 
     return(
         <>
+            {/* <button className="bg-red-300" onClick={mostrardatos}>presiona para ver datos</button> */}
             <div className="py-5 px-7 flex flex-col h-screen">
 
                 <div className=" flex mb-5">
@@ -342,20 +392,23 @@ const SidebarDashboardView = () => {
                     <div className="bg-white p-5">
 
                         <div className="grid grid-cols-1 gap-5 md:grid-cols-5 2xl:grid-cols-6 ">
+                        
+                        {/* <SelectElementSecondVersion className={` ${open==true?'hidden':''}`}  url={`https://poetic-tube-428221-a5.rj.r.appspot.com/prioridad`}    /> */}
+                            
                             <h3 className="md:col-span-5 2xl:col-span-6 font-ralewaySemibold text-base text-gray-900">FILTROS GENERALES</h3>
-                            <div><label className="text-[11px] pl-1 text-gray-600">Fecha</label><ComponenteFechaDos valor={selectFecha} setValor={setSelectFecha}/></div>
-                            <div><label className="text-[11px] pl-1 text-gray-600">Entidad</label>  <ComponentSelectOneOpcion loading={loadingAllSelects} label="Seleccione una entidad *" limpiar={limpiarComponentSelectOneOpcion}  options={optionsEntidad}   valor={selectEntidad} setValor={setSelectEntidad}/></div>
-                            <div><label className="text-[11px] pl-1 text-gray-600">Cartera</label> <SelectElementSecondVersion realizarPeticion={selectEntidad? true : false} url={`https://poetic-tube-428221-a5.rj.r.appspot.com/cartera/entidad/${selectEntidad}`} label="Seleccione una cartera *" tipoDato="cartera" valor={selectCartera} setValor={setSelectCartera}/></div>
-                            <div className={`${open==true?'md:col-start-4 md:col-end-4 2xl:col-start-5 2xl:col-end-5':'hidden'} pt-[24px]`} ><BotonClaro  className={`${open==true?'md:col-start-4 md:col-end-4 2xl:col-start-5 2xl:col-end-5':'hidden'} `} layout="LIMPIAR BÚSQUEDA" onClick={cleanSearch}/></div>
-                            <div className={`${open==true?'md:col-start-5 md:col-end-5 2xl:col-start-6 2xl:col-end-6':'hidden'} pt-[24px]`}><BotonOscuro className={`${open==true?'md:col-start-5 md:col-end-5 2xl:col-start-6 2xl:col-end-6':'hidden'} `} layout="BUSCAR" onClick={handleGroupTables}/></div>
+                            <div><DatePickerCustomed valor={selectFecha} setValor={setSelectFecha} /></div>
+                            <div><SelectCustomed label="Entidad *"    valor={selectEntidad}   setValor={setSelectEntidad} options={optionsEntidad} loading={loadingAllSelects}    /></div>
+                            <div><SelectMultipleCustomed label="Cartera *" valor={selectCartera}  setValor={setSelectCartera} options={optionsCartera} loading={loadingFiltroCartera} /></div>
+                            <div className={`${open==true?'md:col-start-4 md:col-end-4 2xl:col-start-5 2xl:col-end-5':'hidden'}`} ><BotonClaro  className={`${open==true?'md:col-start-4 md:col-end-4 2xl:col-start-5 2xl:col-end-5':'hidden'} `} layout="LIMPIAR BÚSQUEDA" onClick={cleanSearch}/></div>
+                            <div className={`${open==true?'md:col-start-5 md:col-end-5 2xl:col-start-6 2xl:col-end-6':'hidden'}`}><BotonOscuro className={`${open==true?'md:col-start-5 md:col-end-5 2xl:col-start-6 2xl:col-end-6':'hidden'} `} layout="BUSCAR" onClick={handleGroupTables}/></div>
                             
                             <div className={`md:col-span-5 2xl:col-span-6 transition-colors text-gray-900 font-ralewaySemibold flex`} onClick={handleOpen}>  FILTROS ESPECÍFICOS <IoMdRemoveCircle className={`mt-0.5 ml-2 text-2 ${open==true?'hidden':''}`}/> <IoAddCircle className={`mt-0.5 ml-2 text-xl  ${open==true?'':'hidden'}`}/> </div>
 
-                            <div><label className={`text-[11px] pl-1 text-gray-600 ${open==true?'hidden':''}`}>Prioridad</label><SelectElementSecondVersion className={` ${open==true?'hidden':''}`} limpiar={limpiarSegundoSelect} url={`https://poetic-tube-428221-a5.rj.r.appspot.com/prioridad`} tipoDato="prioridad" label="Seleccione prioridad"  valor={selectPrioridad} setValor={setSelectPrioridad}/></div>                               
-                            <div><label className={`text-[11px] pl-1 text-gray-600 ${open==true?'hidden':''}`}>Moneda</label><ComponentSelectOneOpcion   className={` ${open==true?'hidden':''}`} loading={loadingAllSelects} label="Seleccione Moneda" limpiar={limpiarComponentSelectOneOpcion}  options={optionsMoneda}   valor={selectMoneda} setValor={setSelectMoneda}/></div>                       
-                            <div><label className={`text-[11px] pl-1 text-gray-600 ${open==true?'hidden':''}`}>Producto</label><ComponentSelectOneOpcion   className={` ${open==true?'hidden':''}`} loading={loadingAllSelects} label="Seleccione Producto" limpiar={limpiarComponentSelectOneOpcion}  options={optionsProducto}   valor={selectProducto} setValor={setSelectProducto}/></div>                       
-                            <div className={`pt-[24px] ${open==true?'hidden':'md:col-start-4 md:col-end-4 2xl:col-start-5 2xl:col-end-5'} `}><BotonClaro  layout="LIMPIAR BÚSQUEDA" onClick={cleanSearch}/></div>
-                            <div className={`pt-[24px] ${open==true?'hidden':'md:col-start-5 md:col-end-5 2xl:col-start-6 2xl:col-end-6'} `}><BotonOscuro  layout="BUSCAR" onClick={handleGroupTables}/></div>
+                            <div className={` ${open==true?'hidden':''}`}><SelectMultipleCustomed label="Prioridad" valor={selectPrioridad}  setValor={setSelectPrioridad} options={optionsPrioridad} loading={loadingAllSelects} /></div>                               
+                            <div className={` ${open==true?'hidden':''}`}><SelectCustomed  label="Moneda"    valor={selectMoneda}   setValor={setSelectMoneda} options={optionsMoneda} loading={loadingAllSelects}    /></div>                       
+                            <div className={` ${open==true?'hidden':''}`}><SelectCustomed   label="Producto"    valor={selectProducto}   setValor={setSelectProducto} options={optionsProducto} loading={loadingAllSelects}    /></div>                       
+                            <div className={` ${open==true?'hidden':'md:col-start-4 md:col-end-4 2xl:col-start-5 2xl:col-end-5'} `}><BotonClaro  layout="LIMPIAR BÚSQUEDA" onClick={cleanSearch}/></div>
+                            <div className={` ${open==true?'hidden':'md:col-start-5 md:col-end-5 2xl:col-start-6 2xl:col-end-6'} `}><BotonOscuro  layout="BUSCAR" onClick={handleGroupTables}/></div>
 
                         </div>
 

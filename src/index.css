@@ -3,25 +3,25 @@
 @import "tailwindcss/utilities";
 
 @font-face{
-    font-family: "Bold";
+    font-family: "Raleway-Bold";
     src: local("Ubuntu-Regular"),
     url('./assets/fonts/raleway/Raleway-Bold.ttf') format("truetype");
 }
 
 @font-face{
-    font-family: "Medium";
+    font-family: "Raleway-Medium";
     src: local("Ubuntu-Regular"),
     url('./assets/fonts/raleway/Raleway-Medium.ttf') format("truetype");
 }
 
 @font-face{
-    font-family: "Regular";
+    font-family: "Raleway-Regular";
     src: local("Ubuntu-Regular"),
     url('./assets/fonts/raleway/Raleway-Regular.ttf') format("truetype");
 }
 
 @font-face{
-    font-family: "SemiBold";
+    font-family: "Raleway-SemiBold";
     src: local("Ubuntu-Regular"),
     url('./assets/fonts/raleway/Raleway-SemiBold.ttf') format("truetype");
 }

@@ -48,10 +48,10 @@ module.exports = withMT({
   theme: {
     extend: {
       fontFamily:{
-        ralewayRegular: ['Regular'],
-        ralewayMedium: ['Medium'],
-        ralewayBold: ['Bold'],
-        ralewaySemibold: ['Semibold'],
+        ralewayRegular: ['Raleway-Regular'],
+        ralewayMedium: ['Raleway-Medium'],
+        ralewayBold: ['Raleway-Bold'],
+        ralewaySemibold: ['Raleway-SemiBold'],
       },
       colors: {
         sky: {

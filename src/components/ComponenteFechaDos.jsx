@@ -19,9 +19,6 @@ export default function ComponenteFechaDos({valor, setValor}) {
       setValor(newValue);
     };
 
-
-    // const classes = useStyles();
-
   return (
     <>
     <LocalizationProvider dateAdapter={AdapterDayjs}>

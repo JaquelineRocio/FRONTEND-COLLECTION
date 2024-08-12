@@ -96,23 +96,184 @@
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 
-const url = "https://static.vecteezy.com/system/resources/thumbnails/022/645/069/small/illustration-painting-of-love-riding-on-bicycle-generate-ai-photo.jpg";
-const UsoFormularioReactHookForm = () => {
+// const url = "https://static.vecteezy.com/system/resources/thumbnails/022/645/069/small/illustration-painting-of-love-riding-on-bicycle-generate-ai-photo.jpg";
+// const UsoFormularioReactHookForm = () => {
 
 
-    return (
-        <>
-            {/* <div style={{backgroundImage:url,}} className="w-96 h-96 bg-red-200"> */}
-            {/* <div style={`background-image: url(${url})`} className="w-96 h-96 bg-red-200"> */}
-            <div style={{
-                    backgroundImage: `url(${url})`
-                }} className="w-96 h-96 bg-cover bg-center">
-                este es undiv
-            </div>
-            <h3>-</h3>
-            <img src={url} className="w-96 h-96 object-cover"></img>
-        </>
-    )
+//     return (
+//         <>
+//             {/* <div style={{backgroundImage:url,}} className="w-96 h-96 bg-red-200"> */}
+//             {/* <div style={`background-image: url(${url})`} className="w-96 h-96 bg-red-200"> */}
+//             <div style={{
+//                     backgroundImage: `url(${url})`
+//                 }} className="w-96 h-96 bg-cover bg-center">
+//                 este es undiv
+//             </div>
+//             <h3>-</h3>
+//             <img src={url} className="w-96 h-96 object-cover"></img>
+//         </>
+//     )
+// }
+
+// export default UsoFormularioReactHookForm;
+
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// const url = "https://static.vecteezy.com/system/resources/thumbnails/022/645/069/small/illustration-painting-of-love-riding-on-bicycle-generate-ai-photo.jpg";
+// import { css } from '@emotion/react';
+// import styled from '@emotion/styled'
+// const UsoFormularioReactHookForm = () => {
+//     const color = 'white';
+
+//     const Button = styled.button`
+//     padding: 32px;
+//     background-color: hotpink;
+//     font-size: 24px;
+//     border-radius: 4px;
+//     color: black;
+//     font-weight: bold;
+//     &:hover {
+//       color: white;
+//     }
+//   `
+//     const Otro = styled.button`padding: 32px; background-color: hotpink; font-size: 12px; border-radius: 4px; color: black; font-weight: bold;  &:hover {   color: white; background-color: #234323;  } `
+
+//     const style = css`
+//     color: hotpink;
+//   `;
+
+
+//     return (<>
+//         <Button>This my button component.</Button>
+//         <Otro>ddddd</Otro>
+//         <div css={style}>Styled with Emotion</div>
+//         <div
+//           css={css`
+//             background-color: hotpink;
+//             &:hover {
+//               color: ${color};
+//             }
+//           `}
+//         >
+//           This has a hotpink background.
+//         </div>
+
+//         <div
+//           css={css`
+//             padding: 32px;
+//             background-color: hotpink;
+//             font-size: 24px;
+//             border-radius: 4px;
+//             &:hover {
+//               color: ${color};
+//             }
+//           `}
+//         >
+//         Hover to change color.
+//       </div>
+//             </>
+//     );
+// }
+
+// export default UsoFormularioReactHookForm;
+
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// const url = "https://static.vecteezy.com/system/resources/thumbnails/022/645/069/small/illustration-painting-of-love-riding-on-bicycle-generate-ai-photo.jpg";
+// import { css } from '@emotion/react';
+
+// const UsoFormularioReactHookForm = () => {
+
+//     const style = css`
+//     color: hotpink;
+//     `;
+
+
+//     return (<>
+//         <div css={style}>Styled with Emotion</div>
+//     </>
+//     );
+// }
+
+// export default UsoFormularioReactHookForm;
+//------------------------------------------------------------------------------------------------------------------------------------------------------
+import styled from '@emotion/styled';
+
+import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import EditCalendarRoundedIcon from '@mui/icons-material/EditCalendarRounded';
+import IconButton from '@mui/material/IconButton';
+
+const StyledDiv = styled.div`
+  color: hotpink;
+`;
+
+const StyledButton = styled(IconButton)(({ theme }) => ({
+  borderRadius: 4,
+}));
+
+const StyledDatePicker  = styled(DatePicker)`
+  & .MuiInputBase-root {
+    color: hotpink; // Cambia el color del texto en el input
+  }
+  & .MuiSvgIcon-root {
+    color: hotpink; // Cambia el color de los iconos, como el del calendario
+  }
+    & .MuiOutlinedInput-root {
+    height: 40px; // Esta regla asegura que el borde del input también tenga el alto deseado
+  }
+    & .css-1rtg91x-MuiDateCalendar-root {
+    //height: 100% !important;
+    height: 100%;
+  }
+`;
+
+function UsoFormularioReactHookForm() {
+  return (
+    <>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <DatePicker 
+        label="Styled picker"
+        views={['year', 'month']}
+        slots={{
+          openPickerIcon: EditCalendarRoundedIcon,
+
+        }}/>
+
+
+      <StyledDatePicker 
+        label="estilizado"
+        views={['year', 'month']}
+        slots={{
+          // openPickerIcon: EditCalendarRoundedIcon,
+          // openPickerButton: StyledButton,
+
+        }}
+        slotProps={{
+          // openPickerIcon: { fontSize: 'large' },
+          openPickerButton: { color: 'secondary' },
+          textField: {
+            // variant: 'filled',
+            // focused: true,
+            color: 'secondary',
+          },
+          actionBar: {
+            actions: ['today', 'clear','cancel'],
+          },
+        }}
+      />
+      </LocalizationProvider>
+
+
+      <StyledDiv
+      
+      >
+        Styled with Emotion
+      </StyledDiv>
+    </>
+  );
 }
 
 export default UsoFormularioReactHookForm;
