@@ -1,4 +1,4 @@
-import { CircularProgress, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { CircularProgress, FormControl, FormHelperText, InputLabel, MenuItem, Select } from "@mui/material";
 import { useEffect, useState } from "react";
 
 
@@ -8,7 +8,8 @@ const SelectCustomed = ({
     valor = '', 
     setValor= '',
     loading = false,
-    options = []
+    options = [],
+    requerido = false,
 }) =>{
 
     // const [value, setValue] = useState(valor);
@@ -85,6 +86,7 @@ const SelectCustomed = ({
                     <MenuItem value={20}>Twenty</MenuItem>
                     <MenuItem value={30}>Thirty</MenuItem> */}
             </Select>
+            <FormHelperText className={`${!requerido?"hidden": ''}`}>Requerido</FormHelperText>
         </FormControl>
     </>
     )

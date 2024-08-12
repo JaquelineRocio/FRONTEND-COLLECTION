@@ -6,6 +6,7 @@ import EditCalendarRoundedIcon from '@mui/icons-material/EditCalendarRounded';
 import IconButton from '@mui/material/IconButton';
 import './DatePickerCustomed.css';
 import dayjs from 'dayjs';
+import { FormControl, FormHelperText } from '@mui/material';
 
 
 // const StyledDatePicker  = styled(DatePicker)`
@@ -26,7 +27,8 @@ import dayjs from 'dayjs';
 
 function DatePickerCustomed({
   valor,
-  setValor
+  setValor,
+  requerido = false,
 }) {
 
   const handleDateChange = (newValue) => {
@@ -36,6 +38,7 @@ function DatePickerCustomed({
 
   return (
     <>
+    <FormControl  fullWidth>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DatePicker
         onChange={handleDateChange} 
@@ -80,8 +83,8 @@ function DatePickerCustomed({
         }}
       /> */}
       </LocalizationProvider>
-
-
+      <FormHelperText className={`${!requerido?"hidden": ''}`}>Requerido</FormHelperText>
+    </FormControl>
     </>
   );
 }
