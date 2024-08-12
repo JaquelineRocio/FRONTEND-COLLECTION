@@ -19,6 +19,9 @@ const SelectCustomed = ({
         setValor(date.target.value);
     }
 
+    const handleClear = () => {
+        setValor(''); // Establece el valor a vacío o null según lo que maneje mejor tu aplicación
+    };
 
     // useEffect(()=>{
     //     // if(selectLoading){
@@ -57,17 +60,24 @@ const SelectCustomed = ({
                     // size: 'small',
                     // borderRadius: '10px',
                     // fontSize: '0.875rem', // Tamaño de letra más pequeño
-                    fontFamily: ['Raleway-Bold'],  // Aplicando Raleway-Medium
+                    // fontFamily: ['Raleway-Bold'],  // Aplicando Raleway-Medium
                 }}
                 // slotProps={{ textField: { size: 'small', } }}
                 disabled={loading}
                 >
-                    
+                    <MenuItem value="" onClick={handleClear}>
+                        <em>Limpiar</em>
+                    </MenuItem>
+                    {/* <MenuItem key={0} value={"ninguno"}> ninguno </MenuItem> */}
                     {options.map((item) => (
                         <MenuItem key={item.value} value={item.value}>
                             {item.label}
                         </MenuItem>
                     ))}
+
+
+
+
                     {/* <MenuItem value="">
                         <em>None</em>
                     </MenuItem>

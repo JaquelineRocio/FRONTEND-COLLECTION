@@ -1,14 +1,15 @@
-import { CircularProgress, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { IconButton } from "@material-tailwind/react";
+import { CircularProgress, FormControl, FormHelperText, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select } from "@mui/material";
 import { useEffect, useState } from "react";
-
-
+import { IoMdCloseCircle } from "react-icons/io";
 
 const SelectMultipleCustomed = ({
     label = "Ingrese su texto aquí",
-    valor = '', 
+    valor = [], 
     setValor= '',
     loading = false,
-    options = []
+    options = [],
+    requerido = false,
 }) =>{
 
     // console.log("estamos en select multiple", options);
@@ -21,6 +22,9 @@ const SelectMultipleCustomed = ({
         setValor(date.target.value);
     }
 
+    const handleClear = () => {
+        setValor([]);
+    }
 
     // useEffect(()=>{
     //     // if(selectLoading){
@@ -32,7 +36,7 @@ const SelectMultipleCustomed = ({
     // },[loading])
     return(
     <>
-        <FormControl fullWidth>
+        <FormControl  fullWidth>
             <InputLabel id="demo-simple-select-label"
             
             sx={{
@@ -53,14 +57,46 @@ const SelectMultipleCustomed = ({
                 value={valor}
                 label={label}
                 onChange={handleChange}
-                 multiple
+                multiple
+                
+                // input={
+                //     <OutlinedInput
+                //         className=""
+                //         id="select-multiple-chip"
+                //         label={label}
+                //         endAdornment={
+                //             <InputAdornment position="end" className="" >
+                //                 {valor != ""? (
+                //                     <IoMdCloseCircle onClick={handleClear} className="hover:text-blue-gray-900 hover:cursor-pointer text-xl"  />
+                //                 ): ""}
+                                
+                //                 {/* <h3 onClick={handleClear} className="bg-red-300" >x</h3> */}
+                //                 {/* <IconButton
+                //                     aria-label="clear all"
+                //                     onClick={handleClear}
+                //                     edge="end"
+                //                     size={"9px"}
+                //                 >
+                //                     <h3 onClick={handleClear} >x</h3>
+                //                 </IconButton> */}
+                //             </InputAdornment>
+                            
+                //         }
+                //         style={{ paddingRight: '30px' }} // Ajusta esto para asegurar que el icono no cubra el texto
+                        
+                //         />
+                // }
+                
+            
+
+
                 sx={{ 
                     // border: '5px solid red',
                     height: '40px', 
                     // size: 'small',
                     // borderRadius: '10px',
                     // fontSize: '0.875rem', // Tamaño de letra más pequeño
-                    fontFamily: ['Raleway-Bold'],  // Aplicando Raleway-Medium
+                    // fontFamily: ['Raleway-Bold'],  // Aplicando Raleway-Medium
                 }}
                 // slotProps={{ textField: { size: 'small', } }}
                 disabled={loading}
@@ -78,7 +114,9 @@ const SelectMultipleCustomed = ({
                     <MenuItem value={20}>Twenty</MenuItem>
                     <MenuItem value={30}>Thirty</MenuItem> */}
             </Select>
+            <FormHelperText className={`${!requerido?"hidden": ''}`}>Requerido</FormHelperText>
         </FormControl>
+
     </>
     )
 }
