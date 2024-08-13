@@ -1,6 +1,8 @@
-const apiUrlEntrada = "https://poetic-tube-428221-a5.rj.r.appspot.com";
+// const apiUrlEntrada = "https://poetic-tube-428221-a5.rj.r.appspot.com";
+const apiUrlEntrada = "http://161.132.55.33:8090"
 export class testFetch {
     static async get(url, apiUrl = apiUrlEntrada) {
+        console.log("url de consulta testFecht",apiUrl);
         let loading = true;
         let error = null;
         let data = null;
@@ -20,7 +22,7 @@ export class testFetch {
                 if (response.status === 401) {
                     throw new Error('Token expired');
                 } else {
-                    throw new Error('Error in network response');
+                    throw new Error('Error in network response: ',response.json());
                 }
             }
 
@@ -39,6 +41,7 @@ export class testFetch {
         let responseData = null;
 
         try {
+
             const response = await fetch(`${apiUrl}${url}`, {
                 method: 'POST',
                 headers: {
@@ -47,7 +50,9 @@ export class testFetch {
                 },
                 body: JSON.stringify(data),
             });
-
+            console.log("Este es el interior de response: ",response);
+            // const aux = await response.json();
+            // console.log("Este es el interior de response 2: ",aux);
             loading = false;
 
             if (!response.ok) {

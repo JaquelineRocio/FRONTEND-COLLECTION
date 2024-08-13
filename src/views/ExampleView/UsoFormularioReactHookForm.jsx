@@ -199,79 +199,152 @@
 
 // export default UsoFormularioReactHookForm;
 //------------------------------------------------------------------------------------------------------------------------------------------------------
-import styled from '@emotion/styled';
+// import styled from '@emotion/styled';
 
-import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import EditCalendarRoundedIcon from '@mui/icons-material/EditCalendarRounded';
-import IconButton from '@mui/material/IconButton';
+// import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
+// import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+// import EditCalendarRoundedIcon from '@mui/icons-material/EditCalendarRounded';
+// import IconButton from '@mui/material/IconButton';
 
-const StyledDiv = styled.div`
-  color: hotpink;
-`;
+// const StyledDiv = styled.div`
+//   color: hotpink;
+// `;
 
-const StyledButton = styled(IconButton)(({ theme }) => ({
-  borderRadius: 4,
-}));
+// const StyledButton = styled(IconButton)(({ theme }) => ({
+//   borderRadius: 4,
+// }));
 
-const StyledDatePicker  = styled(DatePicker)`
-  & .MuiInputBase-root {
-    color: hotpink; // Cambia el color del texto en el input
-  }
-  & .MuiSvgIcon-root {
-    color: hotpink; // Cambia el color de los iconos, como el del calendario
-  }
-    & .MuiOutlinedInput-root {
-    height: 40px; // Esta regla asegura que el borde del input también tenga el alto deseado
-  }
-    & .css-1rtg91x-MuiDateCalendar-root {
-    //height: 100% !important;
-    height: 100%;
-  }
-`;
+// const StyledDatePicker  = styled(DatePicker)`
+//   & .MuiInputBase-root {
+//     color: hotpink; // Cambia el color del texto en el input
+//   }
+//   & .MuiSvgIcon-root {
+//     color: hotpink; // Cambia el color de los iconos, como el del calendario
+//   }
+//     & .MuiOutlinedInput-root {
+//     height: 40px; // Esta regla asegura que el borde del input también tenga el alto deseado
+//   }
+//     & .css-1rtg91x-MuiDateCalendar-root {
+//     //height: 100% !important;
+//     height: 100%;
+//   }
+// `;
+
+// function UsoFormularioReactHookForm() {
+//   return (
+//     <>
+//       <LocalizationProvider dateAdapter={AdapterDayjs}>
+//       <DatePicker 
+//         label="Styled picker"
+//         views={['year', 'month']}
+//         slots={{
+//           openPickerIcon: EditCalendarRoundedIcon,
+
+//         }}/>
+
+
+//       <StyledDatePicker 
+//         label="estilizado"
+//         views={['year', 'month']}
+//         slots={{
+//           // openPickerIcon: EditCalendarRoundedIcon,
+//           // openPickerButton: StyledButton,
+
+//         }}
+//         slotProps={{
+//           // openPickerIcon: { fontSize: 'large' },
+//           openPickerButton: { color: 'secondary' },
+//           textField: {
+//             // variant: 'filled',
+//             // focused: true,
+//             color: 'secondary',
+//           },
+//           actionBar: {
+//             actions: ['today', 'clear','cancel'],
+//           },
+//         }}
+//       />
+//       </LocalizationProvider>
+
+
+//       <StyledDiv
+      
+//       >
+//         Styled with Emotion
+//       </StyledDiv>
+//     </>
+//   );
+// }
+
+// export default UsoFormularioReactHookForm;
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------
+// import SimulatorApi from "../../services/resources/SimulatorApi";
+
+// function UsoFormularioReactHookForm() {
+
+//   function onClick(){
+//     console.log("este es un mensaje ejecuto al presionar sobre el texto");
+//   }
+
+//   function render(){
+//     return "hola este es un mensaje traido desde una funcion"
+//   }
+
+//   function complemento(){
+//     return "este es un mensaje complemento"
+//   }
+//   const miMensaje =  complemento();
+
+//   function SegundoComplemento(){
+//     return <h3> Este es el mensaje del segundo complemento</h3>
+//   }
+
+//   function ComplementoDos(){
+//     return "este es un mensaje complemento dos"
+//   }
+//   const miMensajeDos = <ComplementoDos/>
+//   return (
+//     <>
+//         *****UNO****
+//         <h3 onClick={onClick}>hola mundo</h3>
+//         *****DOS****
+//         <h3>{render()}</h3>
+//         *****TRES****
+//         <h3>{miMensaje}</h3>
+//         *****CUATRO****
+//         <SegundoComplemento/>
+//         *****CINCO****
+//         <h3>{miMensajeDos}</h3>
+//         *****SEIS****<br></br>
+//         <ComplementoDos/>
+//         *****SIETE**** <br></br>
+//         {ComplementoDos()}
+//         *****OCHO****<br></br>
+//         {SimulatorApi()}
+//     </>
+//   );
+// }
+
+// export default UsoFormularioReactHookForm;
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------
+import { useState } from "react";
+import SimulatorApi from "../../services/resources/SimulatorApi";
 
 function UsoFormularioReactHookForm() {
+
+  // const [valor, setValor] = useState({});
+
+  async function getData(){
+    const result = await SimulatorApi(200, false);
+    console.log(result);
+  }
+
+
   return (
     <>
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DatePicker 
-        label="Styled picker"
-        views={['year', 'month']}
-        slots={{
-          openPickerIcon: EditCalendarRoundedIcon,
-
-        }}/>
-
-
-      <StyledDatePicker 
-        label="estilizado"
-        views={['year', 'month']}
-        slots={{
-          // openPickerIcon: EditCalendarRoundedIcon,
-          // openPickerButton: StyledButton,
-
-        }}
-        slotProps={{
-          // openPickerIcon: { fontSize: 'large' },
-          openPickerButton: { color: 'secondary' },
-          textField: {
-            // variant: 'filled',
-            // focused: true,
-            color: 'secondary',
-          },
-          actionBar: {
-            actions: ['today', 'clear','cancel'],
-          },
-        }}
-      />
-      </LocalizationProvider>
-
-
-      <StyledDiv
-      
-      >
-        Styled with Emotion
-      </StyledDiv>
+        <button onClick={getData}>presiona para consumir api</button>
     </>
   );
 }

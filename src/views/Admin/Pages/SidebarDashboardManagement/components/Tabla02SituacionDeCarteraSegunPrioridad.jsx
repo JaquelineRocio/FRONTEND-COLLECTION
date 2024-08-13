@@ -4,7 +4,7 @@ import MoonLoader from "react-spinners/MoonLoader";
 import PercentageBar from './PercentageBar';
 
 export default function Tabla02SituacionDeCarteraSegunPrioridad({tableRows, loading}) {
-
+	console.log("entrada registros tabla dos: ", tableRows);
 	
 	return (
 		<DataTable
@@ -25,28 +25,32 @@ export default function Tabla02SituacionDeCarteraSegunPrioridad({tableRows, load
 }
 
 const buildRows = (rowsInput) => {
-	const rowsOutput = []
+	if (rowsInput && Object.keys(rowsInput).length > 0) {
+		console.log("entrada build tabla prioridad ",rowsInput);
+		const rowsOutput = []
+		// registros
+		rowsInput?.registros?.map((bloque)=>{
+	
+			// Arma la primera fila "suma"
+			const objetoTotal = bloque?.total || {}
+			rowsOutput.push({...objetoTotal, tipo: "suma", codTipo: objetoTotal.desCartera})
+	
+			// Arma las filas "fila"
+			bloque?.subRegistros?.map((row)=>{
+				row = {...row, tipo: "fila", porcentajeTotalPagos: bloque?.total["pagos"]}
+				rowsOutput.push(row)
+			}) || {}
+	
+			
+	
+		}) || []
+	
+		// totalGeneral
+		rowsOutput.push({...rowsInput.totalGeneral[0], tipo: "total", codTipo: "TOTAL GENERAL"});
+	
+		return rowsOutput;
+	}
 
-	rowsInput?.registrosAgrupados?.map((bloque)=>{
-
-		// Arma la primera fila "suma"
-		const objetoTotal = bloque?.total || {}
-		rowsOutput.push({...objetoTotal, tipo: "suma", codTipo: objetoTotal.desCartera})
-
-		// Arma las filas "fila"
-		bloque?.subRegistros?.map((row)=>{
-			row = {...row, tipo: "fila", porcentajeTotalPagos: bloque?.total["pagos"]}
-			rowsOutput.push(row)
-		}) || {}
-
-		
-
-	}) || []
-
-	// Arma la fila "total"
-	rowsOutput.push({...rowsInput.totalGeneral, tipo: "total", codTipo: "TOTAL GENERAL"});
-
-	return rowsOutput;
 }
 
 const columns = [

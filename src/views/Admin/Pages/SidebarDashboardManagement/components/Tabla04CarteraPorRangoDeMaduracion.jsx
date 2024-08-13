@@ -25,9 +25,11 @@ export default function Tabla04CarteraPorRangoDeMaduracion({tableRows, loading})
 }
 
 const buildRows = (rowsInput) => {
+	if (rowsInput && Object.keys(rowsInput).length > 0) {
+	console.log("entrada build: ",rowsInput);
 	const rowsOutput = []
-
-	rowsInput?.registrosAgrupados?.map((bloque)=>{
+	// registros
+	rowsInput?.registros?.map((bloque)=>{
 
 		// Arma la primera fila "suma"
 		const objetoTotal = bloque?.total || {}
@@ -43,10 +45,11 @@ const buildRows = (rowsInput) => {
 
 	}) || []
 
-	// Arma la fila "total"
-	rowsOutput.push({...rowsInput.totalGeneral, tipo: "total", codTipo: "TOTAL GENERAL"});
+	// totalGeneral
+	rowsOutput.push({...rowsInput.totalGeneral[0], tipo: "total", codTipo: "TOTAL GENERAL"});
 
 	return rowsOutput;
+}
 }
 
 const columns = [

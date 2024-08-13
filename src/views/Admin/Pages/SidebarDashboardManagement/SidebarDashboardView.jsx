@@ -40,7 +40,7 @@ import SelectCustomed from "../../../../components/SelectCustomed/SelectCustomed
 import SelectMultipleCustomed from "../../../../components/SelectMultipleCustomed/SelectMultipleCustomed";
 // import {useFetch} from "./../../../../hooks/useFetch";
 import { testFetch } from "../../../../hooks/testFetch";
-
+import SimulatorApi from "../../../../services/resources/SimulatorApi";
 
 const SidebarDashboardView = () => {
 
@@ -92,7 +92,17 @@ const SidebarDashboardView = () => {
     const [urlSecondTable, setUrlSecondTable] = useState(false);
 
     const [limpiarComponentSelectOneOpcion, setLimpiarComponentSelectOneOpcion] = useState(false);
-    const [loadingAllTable, setLoadingAllTable] = useState(false);
+    const [loadingAllTable, setLoadingAllTable] = useState(false);  
+
+    const [loadingFirstTable, setLoadingFirstTable] = useState(false);
+    const [loadingSecondTable, setLoadingSecondTable] = useState(false);
+    const [loadingThirdTable, setLoadingThirdTable] = useState(false);
+    const [loadingFourthTable, setLoadingFourthTable] = useState(false);
+    const [loadingFifthTable, setLoadingFifthTable] = useState(false);
+    const [loadingSixthTable, setLoadingSixthTable] = useState(false);
+    const [loadingSeventhTable, setLoadingSeventhTable] = useState(false);
+    const [loadingEighthTable, setLoadingEighthTable] = useState(false);
+
     const [loadingAllSelects, setLoadingAllSelects] = useState(false);
     const [loadingFiltroCartera,setLoadingFiltroCartera] = useState(false);
     // const { data, error, loading, fetchData } = testFetchGet();
@@ -102,18 +112,10 @@ const SidebarDashboardView = () => {
 
     }
 
-    function mostrarValorDeFecha(){
-        console.log("Esta es la fecha:", selectFecha?.format('MM-YYYY')); // Ajusta el formato según lo que necesites
-
-        // setSelectFecha(null);
-    }
-
     async function handleGroupTables(){
-        console.log(selectPrioridad);
         setSpinnerShowGroupTables(true);
         setLoadingAllTable(true);
         if(!selectEntidad || !selectCartera || selectCartera.length === 0 || !selectFecha){
-            console.log("hay parametros vacios");
                 // alert("Tu sesión ha iniciado correctamente");
                 Swal.fire({
                   position: "center",
@@ -137,7 +139,7 @@ const SidebarDashboardView = () => {
 
             // let codMoneda = selectMoneda?.join(",");
             let codMoneda = null;
-            console.log("MONEDA",selectMoneda);
+
             codMoneda = selectMoneda == "" ? null : selectMoneda;
 
             let codProducto = null;
@@ -150,22 +152,20 @@ const SidebarDashboardView = () => {
 
             const data = {
                 "producto": codProducto,
-                "campaña": null,
-                "macroRegiones": null,
-                "añoCastigo": null,
-                "moneda": null,
-                "estadoCuenta": null,
-                "mesCastigo": null,
+                "campaña": "",
+                "macroRegiones": "",
+                "añoCastigo": "",
+                "moneda": "",
+                "estadoCuenta": "",
+                "mesCastigo": "",
                 "prioridad":codPrioridad,
-                "rangoEdad":null
+                "rangoEdad":""
               }
 
             
             const response =  await Api.post(data,`/admin/tablon/dashboards?entidad=${selectEntidad}&mes=${selectFecha?.format('MM-YYYY')}&carteras=${selectCartera}`)
             // const response =  await Api.post(data,`/admin/tablon/dashboards?entidad=${selectEntidad}&mes=08&carteras=${codCarteras}`)
 
-            console.log("valores de data",data);
-            console.log('Respuesta tablas', response);
             // registroPrimeraTabla
             setRegistroPrimeraTabla(response.data.dashboardGeneral);
             // setRegistroPrimeraTabla([]);
@@ -185,7 +185,6 @@ const SidebarDashboardView = () => {
         }catch(error){
             setLoadingAllTable(false);
             setSpinnerShowGroupTables(false);
-            console.log(error);
             if (error.message === 'Token expired') {
                 swal({
                     title: "Sesión Expirada",
@@ -210,7 +209,170 @@ const SidebarDashboardView = () => {
         setGroupOfTables(true);
 
     }
+    function closeAll(){
+        setFirstTableOpen(false);
+        setSecondTableOpen(false);
+        setThirdTableOpen(false);
+        setFourthTableOpen(false);
+        setFifthTableOpen(false);
+        setSixthTableOpen(false);
+        setSeventhTableOpen(false);
+        setOctaveTableOpen(false);
+        setGroupOfTables(false);
+    }
+    async function getDataTables(tipoTabla){
 
+
+        if(!selectEntidad || !selectCartera || selectCartera.length === 0 || !selectFecha){
+            // alert("Tu sesión ha iniciado correctamente");
+            Swal.fire({
+              position: "center",
+            //   icon: "success",
+              title: "Necesario",
+              text: 'Debe seleccionar por lo menos un valor para "Entidad", "Cartera" y "Fecha".',
+              showConfirmButton: false,
+              timer: 3000
+            });
+            setSpinnerShowGroupTables(false);
+            setLoadingAllTable(false);
+        return true;
+    }
+
+        setSpinnerShowGroupTables(true);
+        console.log("Este es el tipo de tabla:", tipoTabla)
+        // setSpinnerShowGroupTables(true);
+        let codPrioridad = selectPrioridad.join(",");
+        codPrioridad = codPrioridad === "" ? null : codPrioridad
+
+
+        let codMoneda = null;
+        codMoneda = selectMoneda == "" ? null : selectMoneda;
+
+        let codProducto = null;
+        codProducto = selectProducto == "" ? null : selectProducto
+
+        const payload = {
+            "producto": codProducto,
+            "campaña": null,
+            "macroRegiones": null,
+            "añoCastigo": null,
+            "moneda": null,
+            "estadoCuenta": null,
+            "mesCastigo": null,
+            "prioridad":codPrioridad,
+            "rangoEdad":null,
+            "tipo": tipoTabla
+            }
+              
+
+        console.log("valores de data: ", payload);
+        // console.log("valores de error: ", error);
+        // console.log("valores de lading: ", loading);
+        
+        switch (tipoTabla) {
+        case "General":{
+            setLoadingFirstTable(true);
+            setRegistroPrimeraTabla({});
+            // setFirstTableOpen(true);
+            if(!firstTableOpen){
+                // setFirstTableOpen(true);
+                let {data, error, loading} = await testFetch.post(payload,`/admin/tablon/dashboards?entidad=${selectEntidad}&mes=${selectFecha?.format('MM-YYYY')}&carteras=${selectCartera}`); 
+                // let data = await SimulatorApi(500,false);
+                errorToken(error);
+                console.log("Integra datos para tabla 'General'. ");
+                setRegistroPrimeraTabla(data.data);
+                setGroupOfTables(true);
+                setFirstTableOpen(true); 
+            }
+            setLoadingFirstTable(false);
+            break;
+        }
+        case "Prioridad":{
+            setLoadingSecondTable(true);
+            setRegistroSegundaTabla({})
+            console.log("estamos case Prioridad");
+            if(!secondTableOpen){
+                console.log("Integra datos para tabla 'Prioridad'");
+                let {data, error, loading} = await testFetch.post(payload,`/admin/tablon/dashboards?entidad=${selectEntidad}&mes=${selectFecha?.format('MM-YYYY')}&carteras=${selectCartera}`); 
+                errorToken(error);
+                // let data = await SimulatorApi(500,false);
+                
+                setRegistroSegundaTabla(data.data);
+            }
+            setLoadingSecondTable(false);
+            break;
+        }
+        case "Maduracion":{
+            setLoadingFourthTable(true);
+            setRegistroCuartaTabla({});
+            if(!fourthTableOpen){
+            // let data = await SimulatorApi(500,false);
+            let {data, error, loading} = await testFetch.post(payload,`/admin/tablon/dashboards?entidad=${selectEntidad}&mes=${selectFecha?.format('MM-YYYY')}&carteras=${selectCartera}`); 
+            errorToken(error);
+            console.log("datos previos a tabla 3", data);
+            setRegistroCuartaTabla(data.data);
+            console.log("Integra datos para tabla 'Maduracion. ");
+            }
+            setLoadingFourthTable(false);
+            break;
+        }
+        case "AÑO_CASTIGO":{
+            setLoadingFifthTable(true);
+            setRegistroQuintaTabla({});
+            if(!fifthTableOpen){
+            // let data = await SimulatorApi(500,false);
+            let {data, error, loading} = await testFetch.post(payload,`/admin/tablon/dashboards?entidad=${selectEntidad}&mes=${selectFecha?.format('MM-YYYY')}&carteras=${selectCartera}`); 
+            errorToken(error);
+            setRegistroQuintaTabla(data.data);
+            console.log("Integra datos para tabla 'AÑO_CASTIGO'. ");
+            }
+            setLoadingFifthTable(false);
+            break;
+        }
+        case "RangoCampaña":{
+            setLoadingSixthTable(true);
+            setRegistroSextaTabla({});
+            if(!sixthTableOpen){
+                // let data = await SimulatorApi(500,false);
+                let {data, error, loading} = await testFetch.post(payload,`/admin/tablon/dashboards?entidad=${selectEntidad}&mes=${selectFecha?.format('MM-YYYY')}&carteras=${selectCartera}`); 
+                errorToken(error);
+                setRegistroSextaTabla(data.data);
+                console.log("Integra datos para tabla 'RangoCampaña'. ");
+            }
+            setLoadingSixthTable(false);
+            break;
+        }
+        case "CodProducto":{
+            setLoadingSeventhTable(true);
+            setRegistroSetimaTabla({});
+            if(!seventhTableOpen){
+                // let data = await SimulatorApi(500,false);
+                let {data, error, loading} = await testFetch.post(payload,`/admin/tablon/dashboards?entidad=${selectEntidad}&mes=${selectFecha?.format('MM-YYYY')}&carteras=${selectCartera}`); 
+                errorToken(error);
+                setRegistroSetimaTabla(data.data);
+                console.log("Integra datos para tabla 'CodProducto'. ");
+            }
+            setLoadingSeventhTable(false);
+            break;
+        }
+        case "MacroRegiones":{
+            setLoadingEighthTable(true);
+            setRegistroOctavaTabla({})
+            if(!octaveTableOpen){
+            // let data = await SimulatorApi(500,false);
+            let {data, error, loading} = await testFetch.post(payload,`/admin/tablon/dashboards?entidad=${selectEntidad}&mes=${selectFecha?.format('MM-YYYY')}&carteras=${selectCartera}`); 
+            errorToken(error);
+            setRegistroOctavaTabla(data.data);
+            console.log("Integra datos para tabla 'MacroRegiones'. ");
+            }
+            setLoadingEighthTable(false);
+            break;
+        }
+        default:
+            console.log("No hay consulta solicitada");
+        }
+        setSpinnerShowGroupTables(false);
+    }
 
     function handleFirstTable(){
         setFirstTableOpen(firstTableOpen==true?false:true);
@@ -318,7 +480,28 @@ const SidebarDashboardView = () => {
         }
     }
 
+    const errorToken = (error)=>{
+        if(error){
+            if(error =='Token expired' ){
+                swal({
+                    title: "Sesión Expirada",
+                    text: "Su sesión ha expirado. Por favor, inicie sesión nuevamente para continuar.",
+                    icon: "warning",
+                    button: "OK"
+                }).then(() => {
+                    dispatch(unauthenticatedUser());
+                });
+             }else{
+                swal({
+                    title: "Error de consulta",
+                    text: "Hubo un error al obtener los datos, por favor vuelva a realizar su consulta.",
+                    icon: "warning",
+                    button: "OK"
+                })
+             }
+        }
 
+    }
 
     useEffect(() => {
         loadSelects();
@@ -336,15 +519,30 @@ const SidebarDashboardView = () => {
             setOptionsCartera(carteraOptions);
         }
         setLoadingFiltroCartera(loading);
-         console.log("valores cartera obtenidos", data);
-         console.log("valores cartera obtenidos errores", error);
-         console.log("valores cartera obtenidos loading", loading);
-         console.log("estas son las opciones de cartera option", optionsCartera);
+        if(error){
+            if(error =='Token expired' ){
+                swal({
+                    title: "Sesión Expirada",
+                    text: "Su sesión ha expirado. Por favor, inicie sesión nuevamente para continuar.",
+                    icon: "warning",
+                    button: "OK"
+                }).then(() => {
+                    dispatch(unauthenticatedUser());
+                });
+             }else{
+                swal({
+                    title: "Error de consulta",
+                    text: "Hubo un error al obtener los datos, por favor vuelva a realizar su consulta.",
+                    icon: "warning",
+                    button: "OK"
+                })
+             }
+        }
+
     }
 
     useEffect(() => {
         if(selectEntidad){
-            console.log("se esta realizando la consulta", selectEntidad);
             getOptionsToCartera();
             
         }
@@ -361,19 +559,15 @@ const SidebarDashboardView = () => {
         setLimpiarSegundoSelect(limpiarSegundoSelect?false: true);
         setLimpiarComponentSelectOneOpcion(limpiarComponentSelectOneOpcion?false:true);
         setGroupOfTables(false);
+        closeAll();
         
     }
-    // function mostrardatos(){
 
-
-    //     console.log("Estos son los datos obtenidos. fecha: ", selectFecha);
-    //     console.log("Estos son los datos obtenidos. Entidad: ", selectEntidad);
-    //     console.log("Estos son los datos obtenidos. Cartera: ", selectCartera);
-    // }
 
     return(
         <>
             {/* <button className="bg-red-300" onClick={mostrardatos}>presiona para ver datos</button> */}
+            {firstTableOpen && <h3>esta abierto</h3>}
             <div className="py-5 px-7 flex flex-col h-screen">
 
                 <div className=" flex mb-5">
@@ -402,7 +596,7 @@ const SidebarDashboardView = () => {
                             <div><SelectCustomed label="Entidad *"    valor={selectEntidad}   setValor={setSelectEntidad} options={optionsEntidad} loading={loadingAllSelects}   requerido={true}/></div>
                             <div><SelectMultipleCustomed label="Cartera" valor={selectCartera}  setValor={setSelectCartera} options={optionsCartera} loading={loadingFiltroCartera}  requerido={true}/></div>
                             <div className={`${open==true?'md:col-start-4 md:col-end-4 2xl:col-start-5 2xl:col-end-5':'hidden'}`} ><BotonClaro  className={`${open==true?'md:col-start-4 md:col-end-4 2xl:col-start-5 2xl:col-end-5':'hidden'} `} layout="LIMPIAR BÚSQUEDA" onClick={cleanSearch}/></div>
-                            <div className={`${open==true?'md:col-start-5 md:col-end-5 2xl:col-start-6 2xl:col-end-6':'hidden'}`}><BotonOscuro className={`${open==true?'md:col-start-5 md:col-end-5 2xl:col-start-6 2xl:col-end-6':'hidden'} `} layout="BUSCAR" onClick={handleGroupTables}/></div>
+                            <div className={`${open==true?'md:col-start-5 md:col-end-5 2xl:col-start-6 2xl:col-end-6':'hidden'}`}><BotonOscuro className={`${open==true?'md:col-start-5 md:col-end-5 2xl:col-start-6 2xl:col-end-6':'hidden'} `} layout="BUSCAR" onClick={()=>{closeAll(); getDataTables("General"); }}/></div>
                             
                             <div className={`md:col-span-5 2xl:col-span-6 transition-colors text-gray-900 font-ralewaySemibold flex`} onClick={handleOpen}>  FILTROS ESPECÍFICOS <IoMdRemoveCircle className={`mt-0.5 ml-2 text-xl text-buttonColor-0  ${open==true?'hidden':''}`}/> <IoAddCircle className={`mt-0.5 ml-2 text-xl text-buttonColor-0  ${open==true?'':'hidden'}`}/> </div>
 
@@ -410,7 +604,7 @@ const SidebarDashboardView = () => {
                             <div className={` ${open==true?'hidden':''}`}><SelectCustomed  label="Moneda"    valor={selectMoneda}   setValor={setSelectMoneda} options={optionsMoneda} loading={loadingAllSelects}    /></div>                       
                             <div className={` ${open==true?'hidden':''}`}><SelectCustomed   label="Producto"    valor={selectProducto}   setValor={setSelectProducto} options={optionsProducto} loading={loadingAllSelects}    /></div>                       
                             <div className={` ${open==true?'hidden':'md:col-start-4 md:col-end-4 2xl:col-start-5 2xl:col-end-5'} `}><BotonClaro  layout="LIMPIAR BÚSQUEDA" onClick={cleanSearch}/></div>
-                            <div className={` ${open==true?'hidden':'md:col-start-5 md:col-end-5 2xl:col-start-6 2xl:col-end-6'} `}><BotonOscuro  layout="BUSCAR" onClick={handleGroupTables}/></div>
+                            <div className={` ${open==true?'hidden':'md:col-start-5 md:col-end-5 2xl:col-start-6 2xl:col-end-6'} `}><BotonOscuro  layout="BUSCAR" onClick={()=>{closeAll(); getDataTables("General");}}/></div>
 
                         </div>
 
@@ -420,10 +614,10 @@ const SidebarDashboardView = () => {
                         
                 <div className={` ${groupOfTables==false?'hidden':''}`}>
                     {/* 1: Dashboard de Estado General de Cartera */}
-                    <Accordion open={firstTableOpen} className="">
+                    <Accordion open={firstTableOpen} className=""  >
                         <AccordionHeader
-                        onClick={handleFirstTable}
-                        className={`border-b-0  transition-colors font-ralewayBold text-base text-tonosOscuros-1 ${
+                        onClick={()=>{handleFirstTable(); getDataTables("General")}}
+                        className={`hover:cursor-pointer border-b-0  transition-colors font-ralewayBold text-base text-tonosOscuros-1 ${
                             secondTableOpen? "hover:!text-blue-700 " : ""
                         }`}
                         >
@@ -439,16 +633,16 @@ const SidebarDashboardView = () => {
                         <AccordionBody className="pt-0 text-base font-normal">
                             <Tabla01EstadoGeneralDeCartera
                                 tableRows={registroPrimeraTabla}
-                                loading={loadingAllTable}
+                                loading={loadingFirstTable}
                             />
                         </AccordionBody>
                     </Accordion>
 
                     {/* 2: Dashboard de situación de Cartera según prioridad */}
-                    <Accordion open={secondTableOpen} className="">
+                    <Accordion open={secondTableOpen} >
                         <AccordionHeader
-                        onClick={handleSecondTable}
-                        className={`border-b-0  transition-colors font-ralewayBold text-base text-tonosOscuros-1  ${
+                         onClick={()=>{handleSecondTable();getDataTables("Prioridad");}}
+                        className={`hover:cursor-pointer border-b-0  transition-colors font-ralewayBold text-base text-tonosOscuros-1  ${
                             secondTableOpen? "hover:!text-blue-700" : ""
                         }`}
                         >
@@ -458,7 +652,7 @@ const SidebarDashboardView = () => {
                         <AccordionBody className="pt-0 text-base font-normal">
                             <Tabla02SituacionDeCarteraSegunPrioridad
                                 tableRows={registroSegundaTabla}
-                                loading={loadingAllTable}
+                                loading={loadingSecondTable}
                             />
                         </AccordionBody>
                     </Accordion>
@@ -484,10 +678,11 @@ const SidebarDashboardView = () => {
                     </Accordion> */}
 
                     {/* 4: Dashboard de cartera por rango de maduración*/}
-                    <Accordion open={fourthTableOpen} className="">
+                    <Accordion open={fourthTableOpen} className=""  >
                         <AccordionHeader
-                        onClick={handleFourthTable}
-                        className={`border-b-0 transition-colors font-ralewayBold text-base text-tonosOscuros-1  ${
+                        onClick={()=>{handleFourthTable();getDataTables("Maduracion");}}
+
+                        className={`hover:cursor-pointer border-b-0 transition-colors font-ralewayBold text-base text-tonosOscuros-1  ${
                             secondTableOpen? "hover:!text-blue-700" : ""
                         }`}
                         >
@@ -498,16 +693,16 @@ const SidebarDashboardView = () => {
                         <AccordionBody className="pt-0 text-base font-normal">
                             <Tabla04CarteraPorRangoDeMaduracion
                                 tableRows={registroCuartaTabla}
-                                loading={loadingAllTable}
+                                loading={loadingFourthTable}
                             />
                         </AccordionBody>
                     </Accordion>
 
                     {/* 5: Dashboard de cartera por año - mes de castigo*/}
-                    <Accordion open={fifthTableOpen} className="">
+                    <Accordion open={fifthTableOpen} className=""  >
                         <AccordionHeader
-                        onClick={handleFifthTable}
-                        className={`border-b-0 transition-colors font-ralewayBold text-base text-tonosOscuros-1   ${
+                        onClick={()=>{handleFifthTable(); getDataTables("AÑO_CASTIGO");}}
+                        className={`hover:cursor-pointer border-b-0 transition-colors font-ralewayBold text-base text-tonosOscuros-1   ${
                             secondTableOpen? "hover:!text-blue-700 " : ""
                         }`}
                         >
@@ -517,16 +712,16 @@ const SidebarDashboardView = () => {
                         <AccordionBody className="pt-0 text-base font-normal">
                             <Tabla05CarteraPorAnioMesDeCastigo
                                 tableRows={registroQuintaTabla}
-                                loading={loadingAllTable}
+                                loading={loadingFifthTable}
                             />
                         </AccordionBody>
                     </Accordion>
 
                     {/* 6: Dashboard por rango de campaña*/}
-                    <Accordion open={sixthTableOpen} className="">
+                    <Accordion open={sixthTableOpen} className="" >
                         <AccordionHeader
-                        onClick={handleSixthTable}
-                        className={`border-b-0 transition-colors font-ralewayBold text-base text-tonosOscuros-1  ${
+                        onClick={()=>{handleSixthTable(); getDataTables("RangoCampaña");}}
+                        className={`hover:cursor-pointer border-b-0 transition-colors font-ralewayBold text-base text-tonosOscuros-1  ${
                             secondTableOpen? "hover:!text-blue-700" : ""
                         }`}
                         >
@@ -536,16 +731,16 @@ const SidebarDashboardView = () => {
                         <AccordionBody className="pt-0 text-base font-normal">
                             <Tabla06PorRangoDeCampanha
                                 tableRows={registroSextaTabla}
-                                loading={loadingAllTable}
+                                loading={loadingSixthTable}
                             />
                         </AccordionBody>
                     </Accordion>
 
                     {/* 7: Dashboard de cartera por tipo de producto*/}
-                    <Accordion open={seventhTableOpen} className="">
+                    <Accordion open={seventhTableOpen} className="" >
                         <AccordionHeader
-                        onClick={handleSeventhTable}
-                        className={`border-b-0 transition-colors font-ralewayBold text-base text-tonosOscuros-1  ${
+                        onClick={()=>{handleSeventhTable(); getDataTables("CodProducto");}}
+                        className={`hover:cursor-pointer border-b-0 transition-colors font-ralewayBold text-base text-tonosOscuros-1  ${
                             secondTableOpen? "hover:!text-blue-700" : ""
                         }`}
                         >
@@ -554,17 +749,17 @@ const SidebarDashboardView = () => {
 
                         <AccordionBody className="pt-0 text-base font-normal">
                             <Tabla07CarteraPorTipoDeProducto
-                                tableRows={registroSextaTabla}
-                                loading={loadingAllTable}
+                                tableRows={registroSetimaTabla}
+                                loading={loadingSeventhTable}
                             />
                         </AccordionBody>
                     </Accordion>
 
                     {/* 8: Dashboard de cartera por zona*/}
-                    <Accordion open={octaveTableOpen} className="">
+                    <Accordion open={octaveTableOpen} className="" >
                         <AccordionHeader
-                        onClick={handleoctaveTable}
-                        className={`border-b-0 transition-colors font-ralewayBold text-base text-tonosOscuros-1  ${
+                        onClick={()=>{handleoctaveTable(); getDataTables("MacroRegiones");}}
+                        className={`hover:cursor-pointer border-b-0 transition-colors font-ralewayBold text-base text-tonosOscuros-1  ${
                             secondTableOpen? "hover:!text-blue-700" : ""
                         }`}
                         >
@@ -574,7 +769,7 @@ const SidebarDashboardView = () => {
                         <AccordionBody className="pt-0 text-base font-normal">
                             <Tabla08CarteraPorZona
                                 tableRows={registroOctavaTabla}
-                                loading={loadingAllTable}
+                                loading={loadingEighthTable}
                             />
                         </AccordionBody>
                     </Accordion>

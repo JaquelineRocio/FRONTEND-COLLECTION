@@ -4,7 +4,7 @@ import MoonLoader from "react-spinners/MoonLoader";
 import PercentageBar from './PercentageBar';
 
 export default function Tabla01EstadoGeneralDeCartera({tableRows, loading}) {
-
+console.log("mostrar filas de priemra tabla", tableRows);
 	return (
 		<DataTable
 			// title="Dashboard de cartera por tramo de importe"
@@ -24,6 +24,7 @@ export default function Tabla01EstadoGeneralDeCartera({tableRows, loading}) {
 }
 
 const buildRows = (rowsInput) => {
+	if (rowsInput && Object.keys(rowsInput).length > 0) {
 	const rowsOutput = []
 
 	rowsInput?.registros?.map((bloque)=>{
@@ -33,9 +34,10 @@ const buildRows = (rowsInput) => {
 	}) || []
 
 	// Arma la fila "total"
-	rowsOutput.push({...rowsInput.totalGeneral, tipo: "total"});
+	rowsOutput.push({...rowsInput.total[0], tipo: "total"});
 
 	return rowsOutput;
+}
 }
 
 const columns = [

@@ -4,7 +4,7 @@ import RiseLoader from "react-spinners/RiseLoader";
 import PercentageBar from './PercentageBar';
 
 export default function Tabla03CarteraPorTramoDeImporte({tableRows, loading}) {
-	
+console.log("datos detnro de tercera tabla",tableRows );
 	return (
 		<DataTable
 			// title="Dashboard de cartera por tramo de importe"
@@ -24,9 +24,10 @@ export default function Tabla03CarteraPorTramoDeImporte({tableRows, loading}) {
 }
 
 const buildRows = (rowsInput) => {
+	console.log("entrada build tercera tabla: ",rowsInput);
 	const rowsOutput = []
-
-	rowsInput?.registrosAgrupados?.map((bloque)=>{
+	// registros
+	rowsInput?.registros?.map((bloque)=>{
 
 		// Arma la primera fila "suma"
 		const objetoTotal = bloque?.total || {}
@@ -42,7 +43,7 @@ const buildRows = (rowsInput) => {
 
 	}) || []
 
-	// Arma la fila "total"
+	// totalGeneral
 	rowsOutput.push({...rowsInput.totalGeneral, tipo: "total", codTipo: "TOTAL GENERAL"});
 
 	return rowsOutput;
