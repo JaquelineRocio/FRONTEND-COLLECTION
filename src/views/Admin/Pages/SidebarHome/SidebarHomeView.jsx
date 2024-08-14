@@ -8,7 +8,7 @@ const SidebarHomeView = () => {
             <div className="py-5 px-7">            
                 <div className="flex mb-6">
                     <div>
-                        <h1 className="font-ralewaySemibold text-2xl">¿Hola, supervisor?</h1>
+                        <h1 className="font-ralewaySemibold text-2xl">Hola, supervisor</h1>
                         <h1 className="font-ralewayMedium text-base text-gray-500">¿Cómo está su gestión el día de hoy?</h1>
                     </div>
                 </div>

@@ -109,106 +109,8 @@ const SidebarDashboardView = () => {
 
     function handleOpen(){
         setOpen(open==true?false:true);
-
     }
 
-    async function handleGroupTables(){
-        setSpinnerShowGroupTables(true);
-        setLoadingAllTable(true);
-        if(!selectEntidad || !selectCartera || selectCartera.length === 0 || !selectFecha){
-                // alert("Tu sesión ha iniciado correctamente");
-                Swal.fire({
-                  position: "center",
-                //   icon: "success",
-                  title: "Necesario",
-                  text: 'Debe seleccionar por lo menos un valor para "Entidad", "Cartera" y "Fecha".',
-                  showConfirmButton: false,
-                  timer: 3000
-                });
-                setSpinnerShowGroupTables(false);
-                setLoadingAllTable(false);
-            return true;
-        }
-
-        try{
-            
-            // const codCarteras = selectCartera?.map(item => item.value).join(',') || null;
-            // const codPrioridad = selectPrioridad?.map(item => item.value).join(',') || null;
-            let codPrioridad = selectPrioridad.join(",");
-            codPrioridad = codPrioridad === "" ? null : codPrioridad
-
-            // let codMoneda = selectMoneda?.join(",");
-            let codMoneda = null;
-
-            codMoneda = selectMoneda == "" ? null : selectMoneda;
-
-            let codProducto = null;
-            codProducto = selectProducto == "" ? null : selectProducto
-            // let codProducto = selectProducto.join(",");
-            // codProducto = codProducto === "" ? null : codProducto
-
-            
-
-
-            const data = {
-                "producto": codProducto,
-                "campaña": "",
-                "macroRegiones": "",
-                "añoCastigo": "",
-                "moneda": "",
-                "estadoCuenta": "",
-                "mesCastigo": "",
-                "prioridad":codPrioridad,
-                "rangoEdad":""
-              }
-
-            
-            const response =  await Api.post(data,`/admin/tablon/dashboards?entidad=${selectEntidad}&mes=${selectFecha?.format('MM-YYYY')}&carteras=${selectCartera}`)
-            // const response =  await Api.post(data,`/admin/tablon/dashboards?entidad=${selectEntidad}&mes=08&carteras=${codCarteras}`)
-
-            // registroPrimeraTabla
-            setRegistroPrimeraTabla(response.data.dashboardGeneral);
-            // setRegistroPrimeraTabla([]);
-            setRegistroSegundaTabla(response.data.dashboardPrioridad);
-            setRegistroTerceraTabla();
-            setRegistroCuartaTabla(response.data.dashboardMaduracion);
-            setRegistroQuintaTabla(response.data.dashboardFechaCastigo);
-            setRegistroSextaTabla(response.data.dashboardRangoCampaña);
-            setRegistroSetimaTabla(response.data.dashboardProducto);
-            setRegistroOctavaTabla(response.data.dashboardZona);
-
-
-            setGroupOfTables(true);     // Mostramos grupo de tablas
-            setFirstTableOpen(true);
-            setLoadingAllTable(false);
-            setSpinnerShowGroupTables(false);
-        }catch(error){
-            setLoadingAllTable(false);
-            setSpinnerShowGroupTables(false);
-            if (error.message === 'Token expired') {
-                swal({
-                    title: "Sesión Expirada",
-                    text: "Su sesión ha expirado. Por favor, inicie sesión nuevamente para continuar.",
-                    icon: "warning",
-                    button: "OK"
-                }).then(() => {
-                    dispatch(unauthenticatedUser());
-                });
-            }else{
-                swal({
-                    title: "Error de consulta",
-                    text: "Hubo un error al obtener los datos, por favor vuelva a realizar su consulta.",
-                    icon: "warning",
-                    button: "OK"
-                })
-            }
-
-
-        }
-
-        setGroupOfTables(true);
-
-    }
     function closeAll(){
         setFirstTableOpen(false);
         setSecondTableOpen(false);
@@ -219,28 +121,21 @@ const SidebarDashboardView = () => {
         setSeventhTableOpen(false);
         setOctaveTableOpen(false);
         setGroupOfTables(false);
+        
     }
-    async function getDataTables(tipoTabla){
 
+    async function getDataTables(tipoTabla){
+    setSpinnerShowGroupTables(true);
 
         if(!selectEntidad || !selectCartera || selectCartera.length === 0 || !selectFecha){
-            // alert("Tu sesión ha iniciado correctamente");
-            Swal.fire({
-              position: "center",
-            //   icon: "success",
-              title: "Necesario",
-              text: 'Debe seleccionar por lo menos un valor para "Entidad", "Cartera" y "Fecha".',
-              showConfirmButton: false,
-              timer: 3000
-            });
+            alertas("camposVacios");
             setSpinnerShowGroupTables(false);
             setLoadingAllTable(false);
-        return true;
-    }
+            return true;
+        }
 
         setSpinnerShowGroupTables(true);
         console.log("Este es el tipo de tabla:", tipoTabla)
-        // setSpinnerShowGroupTables(true);
         let codPrioridad = selectPrioridad.join(",");
         codPrioridad = codPrioridad === "" ? null : codPrioridad
 
@@ -264,11 +159,7 @@ const SidebarDashboardView = () => {
             "tipo": tipoTabla
             }
               
-
-        console.log("valores de data: ", payload);
-        // console.log("valores de error: ", error);
-        // console.log("valores de lading: ", loading);
-        
+       
         switch (tipoTabla) {
         case "General":{
             setLoadingFirstTable(true);
@@ -278,11 +169,14 @@ const SidebarDashboardView = () => {
                 // setFirstTableOpen(true);
                 let {data, error, loading} = await testFetch.post(payload,`/admin/tablon/dashboards?entidad=${selectEntidad}&mes=${selectFecha?.format('MM-YYYY')}&carteras=${selectCartera}`); 
                 // let data = await SimulatorApi(500,false);
-                errorToken(error);
+
                 console.log("Integra datos para tabla 'General'. ");
-                setRegistroPrimeraTabla(data.data);
+                setRegistroPrimeraTabla(data?.data);
                 setGroupOfTables(true);
                 setFirstTableOpen(true); 
+                setLoadingFirstTable(false);
+
+                ErrorToken(error,dispatch);
             }
             setLoadingFirstTable(false);
             break;
@@ -294,10 +188,12 @@ const SidebarDashboardView = () => {
             if(!secondTableOpen){
                 console.log("Integra datos para tabla 'Prioridad'");
                 let {data, error, loading} = await testFetch.post(payload,`/admin/tablon/dashboards?entidad=${selectEntidad}&mes=${selectFecha?.format('MM-YYYY')}&carteras=${selectCartera}`); 
-                errorToken(error);
+                
                 // let data = await SimulatorApi(500,false);
                 
                 setRegistroSegundaTabla(data.data);
+                setLoadingSecondTable(false);
+                ErrorToken(error,dispatch);
             }
             setLoadingSecondTable(false);
             break;
@@ -308,10 +204,12 @@ const SidebarDashboardView = () => {
             if(!fourthTableOpen){
             // let data = await SimulatorApi(500,false);
             let {data, error, loading} = await testFetch.post(payload,`/admin/tablon/dashboards?entidad=${selectEntidad}&mes=${selectFecha?.format('MM-YYYY')}&carteras=${selectCartera}`); 
-            errorToken(error);
+            
             console.log("datos previos a tabla 3", data);
             setRegistroCuartaTabla(data.data);
             console.log("Integra datos para tabla 'Maduracion. ");
+            setLoadingFourthTable(false);
+            ErrorToken(error,dispatch);
             }
             setLoadingFourthTable(false);
             break;
@@ -322,9 +220,11 @@ const SidebarDashboardView = () => {
             if(!fifthTableOpen){
             // let data = await SimulatorApi(500,false);
             let {data, error, loading} = await testFetch.post(payload,`/admin/tablon/dashboards?entidad=${selectEntidad}&mes=${selectFecha?.format('MM-YYYY')}&carteras=${selectCartera}`); 
-            errorToken(error);
-            setRegistroQuintaTabla(data.data);
+            
+            setRegistroQuintaTabla(data?.data);
             console.log("Integra datos para tabla 'AÑO_CASTIGO'. ");
+            setLoadingFifthTable(false);
+            ErrorToken(error,dispatch);
             }
             setLoadingFifthTable(false);
             break;
@@ -335,7 +235,7 @@ const SidebarDashboardView = () => {
             if(!sixthTableOpen){
                 // let data = await SimulatorApi(500,false);
                 let {data, error, loading} = await testFetch.post(payload,`/admin/tablon/dashboards?entidad=${selectEntidad}&mes=${selectFecha?.format('MM-YYYY')}&carteras=${selectCartera}`); 
-                errorToken(error);
+                ErrorToken(error,dispatch);
                 setRegistroSextaTabla(data.data);
                 console.log("Integra datos para tabla 'RangoCampaña'. ");
             }
@@ -348,7 +248,7 @@ const SidebarDashboardView = () => {
             if(!seventhTableOpen){
                 // let data = await SimulatorApi(500,false);
                 let {data, error, loading} = await testFetch.post(payload,`/admin/tablon/dashboards?entidad=${selectEntidad}&mes=${selectFecha?.format('MM-YYYY')}&carteras=${selectCartera}`); 
-                errorToken(error);
+                ErrorToken(error,dispatch);
                 setRegistroSetimaTabla(data.data);
                 console.log("Integra datos para tabla 'CodProducto'. ");
             }
@@ -361,7 +261,7 @@ const SidebarDashboardView = () => {
             if(!octaveTableOpen){
             // let data = await SimulatorApi(500,false);
             let {data, error, loading} = await testFetch.post(payload,`/admin/tablon/dashboards?entidad=${selectEntidad}&mes=${selectFecha?.format('MM-YYYY')}&carteras=${selectCartera}`); 
-            errorToken(error);
+            ErrorToken(error,dispatch);
             setRegistroOctavaTabla(data.data);
             console.log("Integra datos para tabla 'MacroRegiones'. ");
             }
@@ -454,54 +354,12 @@ const SidebarDashboardView = () => {
           ]);
           setLoadingAllSelects(false);
         } catch (error) {
-            if (error.message === 'Token expired') {
-                
-                swal({
-                    title: "Sesión Expirada",
-                    text: "Su sesión ha expirado. Por favor, inicie sesión nuevamente para continuar.",
-                    icon: "warning",
-                    button: "OK"
-                }).then(() => {
-                    dispatch(unauthenticatedUser());
-                });
-
-
-            }else{
-                swal({
-                    title: "Error de consulta",
-                    text: "Hubo un error al obtener los datos, por favor vuelva a realizar su consulta.",
-                    icon: "warning",
-                    button: "OK"
-                })
-            }
-
-
-        setLoadingAllSelects(false);
+            ErrorToken(error,dispatch);
+            setLoadingAllSelects(false);
         }
     }
 
-    const errorToken = (error)=>{
-        if(error){
-            if(error =='Token expired' ){
-                swal({
-                    title: "Sesión Expirada",
-                    text: "Su sesión ha expirado. Por favor, inicie sesión nuevamente para continuar.",
-                    icon: "warning",
-                    button: "OK"
-                }).then(() => {
-                    dispatch(unauthenticatedUser());
-                });
-             }else{
-                swal({
-                    title: "Error de consulta",
-                    text: "Hubo un error al obtener los datos, por favor vuelva a realizar su consulta.",
-                    icon: "warning",
-                    button: "OK"
-                })
-             }
-        }
 
-    }
 
     useEffect(() => {
         loadSelects();
@@ -518,25 +376,9 @@ const SidebarDashboardView = () => {
             }));
             setOptionsCartera(carteraOptions);
         }
-        setLoadingFiltroCartera(loading);
+        setLoadingFiltroCartera(false);
         if(error){
-            if(error =='Token expired' ){
-                swal({
-                    title: "Sesión Expirada",
-                    text: "Su sesión ha expirado. Por favor, inicie sesión nuevamente para continuar.",
-                    icon: "warning",
-                    button: "OK"
-                }).then(() => {
-                    dispatch(unauthenticatedUser());
-                });
-             }else{
-                swal({
-                    title: "Error de consulta",
-                    text: "Hubo un error al obtener los datos, por favor vuelva a realizar su consulta.",
-                    icon: "warning",
-                    button: "OK"
-                })
-             }
+            ErrorToken(error,dispatch);
         }
 
     }
@@ -567,7 +409,7 @@ const SidebarDashboardView = () => {
     return(
         <>
             {/* <button className="bg-red-300" onClick={mostrardatos}>presiona para ver datos</button> */}
-            {firstTableOpen && <h3>esta abierto</h3>}
+            {/* {firstTableOpen && <h3>esta abierto</h3>} */}
             <div className="py-5 px-7 flex flex-col h-screen">
 
                 <div className=" flex mb-5">
@@ -611,8 +453,8 @@ const SidebarDashboardView = () => {
                     </div>
                 </div>
 
-                        
-                <div className={` ${groupOfTables==false?'hidden':''}`}>
+
+                {groupOfTables && <div>
                     {/* 1: Dashboard de Estado General de Cartera */}
                     <Accordion open={firstTableOpen} className=""  >
                         <AccordionHeader
@@ -774,8 +616,10 @@ const SidebarDashboardView = () => {
                         </AccordionBody>
                     </Accordion>
                 </div>
-
-                <div className={`h-full  flex items-center justify-center ${groupOfTables==true?'hidden':''}`}>
+                }
+                
+                {!groupOfTables &&               
+                <div className={`h-full  flex items-center justify-center`}>
                     <div className="h-20">
                         <div className={`py-8 ${spinnerShowGroupTables?'hidden':''}`}>                
                             <img src={filtro} alt="Portada" className="max-w-60 mx-auto "/>
@@ -784,6 +628,7 @@ const SidebarDashboardView = () => {
                         <MoonLoader color="#1A237E" size={40} loading={spinnerShowGroupTables}/>
                     </div>
                 </div>
+                }
 
             </div>
         </>
@@ -792,4 +637,75 @@ const SidebarDashboardView = () => {
 
 export default SidebarDashboardView;
 
-// const [spinnerShowGroupTables , setSpinnerShowGroupTables] = useState(false);
+function alertas(opcion){
+
+    if(opcion == "camposVacios"){
+        return(
+        Swal.fire({
+            position: "center",
+          //   icon: "success",
+            title: "Necesario",
+            text: 'Debe seleccionar por lo menos un valor para "Entidad", "Cartera" y "Fecha".',
+            showConfirmButton: false,
+            timer: 3000
+          })
+        )
+    }
+
+    if(opcion == "TokenExpired"){
+        console.log("funcion esperando a ser implementada");
+    }
+}
+
+
+// const ErrorToken = (error)=>{
+//     const dispatch = useDispatch();
+//     if(error){
+//         if(error.message =='Token expired' ){
+//             swal({
+//                 title: "Sesión Expiradassss",
+//                 text: "Su sesión ha expirado. Por favor, inicie sesión nuevamente para continuar.",
+//                 icon: "warning",
+//                 button: "OK"
+//             }).then(() => {
+//                 dispatch(unauthenticatedUser());
+//             });
+//          }else{
+//             swal({
+//                 title: "Error de consulta",
+//                 text: "Hubo un error al obtener los datos, por favor vuelva a realizar su consulta.",
+//                 icon: "warning",
+//                 button: "OK"
+//             })
+//          }
+//     }
+//     return null;
+
+// }
+
+const ErrorToken = (error, dispatch) => {
+
+    if (!error) {
+      return null; // No renderiza nada si no hay error
+    }
+  
+    if (error.message === 'Token expired') {
+      swal({
+        title: "Sesión Expirada",
+        text: "Su sesión ha expirado. Por favor, inicie sesión nuevamente para continuar.",
+        icon: "warning",
+        button: "OK"
+      }).then(() => {
+        dispatch(unauthenticatedUser());
+      });
+    } else {
+      swal({
+        title: "Error de consulta",
+        text: "Hubo un error al obtener los datos, por favor vuelva a realizar su consulta.",
+        icon: "warning",
+        button: "OK"
+      });
+    }
+  
+    return null; // Aquí se retorna JSX
+  };
