@@ -2,7 +2,7 @@
 const apiUrlEntrada = "http://161.132.55.33:8090"
 export class testFetch {
     static async get(url, apiUrl = apiUrlEntrada) {
-        console.log("url de consulta testFecht",apiUrl);
+        // console.log("url de consulta testFecht",apiUrl);
         let loading = true;
         let error = null;
         let data = null;
@@ -50,7 +50,7 @@ export class testFetch {
                 },
                 body: JSON.stringify(data),
             });
-            console.log("Este es el interior de response: ",response);
+            // console.log("Este es el interior de response: ",response);
             // const aux = await response.json();
             // console.log("Este es el interior de response 2: ",aux);
             loading = false;

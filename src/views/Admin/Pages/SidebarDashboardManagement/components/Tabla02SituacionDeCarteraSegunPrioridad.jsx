@@ -4,7 +4,7 @@ import MoonLoader from "react-spinners/MoonLoader";
 import PercentageBar from './PercentageBar';
 
 export default function Tabla02SituacionDeCarteraSegunPrioridad({tableRows, loading}) {
-	console.log("entrada registros tabla dos: ", tableRows);
+	// console.log("entrada registros tabla dos: ", tableRows);
 	
 	return (
 		<DataTable

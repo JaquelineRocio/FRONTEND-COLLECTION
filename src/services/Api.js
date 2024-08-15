@@ -30,8 +30,8 @@ export class Api {
 
     static get(url, apiUrl = apiUrlEntrada) {
 
-        console.log("Token, method GET: ",getToken());
-        console.log("Url, method Get: ", `${apiUrl}${url}`);
+        // console.log("Token, method GET: ",getToken());
+        // console.log("Url, method Get: ", `${apiUrl}${url}`);
 
         return fetch(`${apiUrl}${url}`, {
             method: 'GET',
@@ -41,7 +41,7 @@ export class Api {
             },
         })
         .then((response) => {
-          console.log("Respuesta de estatus get",response)
+        //   console.log("Respuesta de estatus get",response)
           if (!response.ok) {
                 if (response.status === 401) { // Si el estado es 401 (Unauthorized)
                     throw new Error('Token expired');
@@ -75,7 +75,7 @@ export class Api {
             body: JSON.stringify(data),
         })
         .then((response) => {
-            console.log("Respuesta de estatus post",response)
+            // console.log("Respuesta de estatus post",response)
             if (!response.ok) {
                 if (response.status === 401) { // Si el estado es 401 (Unauthorized)
                     throw new Error('Token expired');

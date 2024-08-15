@@ -329,22 +329,90 @@
 // export default UsoFormularioReactHookForm;
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
+// import { useState } from "react";
+// import SimulatorApi from "../../services/resources/SimulatorApi";
+// import { testFetch } from "../../hooks/testFetch";
+// import { useEffect } from "react";
+// function UsoFormularioReactHookForm() {
+
+
+//   // const [valor, setValor] = useState({});
+
+//   async function getData(){
+//     const result = await SimulatorApi(200, false);
+//     console.log(result);
+//   }
+
+//   const valor00 = {};
+//   if(valor00){
+//     console.log("objeto vacio")
+//   }
+
+//   const valor01 = [];
+//   if(valor01){
+//     console.log("array vacio")
+//   }
+
+//   const valor02 = "a";
+//   if(!valor02){
+//     console.log("cadena vacia")
+//   }
+
+//   const valor03 = null;
+//   if(valor03){
+//     console.log("valor null")
+//   }
+
+//   async function obtenerDatos (){
+//     const {data, loading, error}  = await testFetch.get('/cartera/entidad/1');
+//     console.log(data);
+//     console.log(loading);
+//     console.log(error);
+  
+//   }
+
+//   useEffect(()=>{
+//     obtenerDatos();
+//   }, [])
+  
+//   return (
+//     <>
+//         <button onClick={getData}>presiona para consumir api</button>
+//     </>
+//   );
+// }
+
+// export default UsoFormularioReactHookForm;
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------
 import { useState } from "react";
-import SimulatorApi from "../../services/resources/SimulatorApi";
 
 function UsoFormularioReactHookForm() {
 
-  // const [valor, setValor] = useState({});
-
-  async function getData(){
-    const result = await SimulatorApi(200, false);
-    console.log(result);
+  const [user, setUser] = useState({name:"juan", apellido: "ayala"})
+  let miValor = {};
+  const getData = () => {
+    let miObjeto = {name:"jose", apellido:"albert"}
+    console.log("user-parte-uno: ", user);
+    setUser(miObjeto);
+    console.log("user-parte-dos: ", user);
   }
 
+  const cambiarValor = () => {
+    miValor = {nuevo: "este es otro valor"}
+  }
 
+  const verNuevoValor = () => {
+    console.log("ver valor:", miValor);
+  }
+  
   return (
-    <>
-        <button onClick={getData}>presiona para consumir api</button>
+    <>  
+        <p>{user.name}</p>
+        <p>{user.apellido}</p>
+        <button className="bg-yellow-400" onClick={getData}>presiona</button>
+        <button className="bg-pink-400" onClick={cambiarValor}>presione para cambiar valor</button>
+        <button className="bg-blue-400" onClick={verNuevoValor}>presione para ver nuevo valor</button>
     </>
   );
 }

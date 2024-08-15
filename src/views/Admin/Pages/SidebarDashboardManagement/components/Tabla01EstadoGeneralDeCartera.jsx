@@ -4,7 +4,7 @@ import MoonLoader from "react-spinners/MoonLoader";
 import PercentageBar from './PercentageBar';
 
 export default function Tabla01EstadoGeneralDeCartera({tableRows, loading}) {
-console.log("mostrar filas de priemra tabla", tableRows);
+// console.log("mostrar filas de priemra tabla", tableRows);
 	return (
 		<DataTable
 			// title="Dashboard de cartera por tramo de importe"

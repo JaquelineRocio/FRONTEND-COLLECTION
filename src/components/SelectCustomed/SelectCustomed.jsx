@@ -15,7 +15,6 @@ const SelectCustomed = ({
     // const [value, setValue] = useState(valor);
     // const [selectLoading, setSelectLoading] = useState(false);
     const handleChange = (date) => {
-        console.log( "nuevo valor seleccionado", date);
         // setValue(date.target.value);
         setValor(date.target.value);
     }
