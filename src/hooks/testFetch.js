@@ -36,6 +36,8 @@ export class testFetch {
     }
 
     static async post(data, url, apiUrl = apiUrlEntrada) {
+
+        // conso
         let loading = true;
         let error = null;
         let responseData = null;

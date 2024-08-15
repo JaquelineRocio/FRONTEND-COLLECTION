@@ -37,6 +37,7 @@ import BotonClaro from "../../../../components/BotonClaro";
 // import ComponentSelectOneOpcion from "../../../../components/ComponentSelectOneOpcion";
 import DatePickerCustomed from "../../../../components/DatePickerCustomed/DatePickerCustomed";
 import SelectCustomed from "../../../../components/SelectCustomed/SelectCustomed";
+import SelectCustomedForArray from "../../../../components/SelectCustomedForArray/SelectCustomedForArray";
 import SelectMultipleCustomed from "../../../../components/SelectMultipleCustomed/SelectMultipleCustomed";
 // import {useFetch} from "./../../../../hooks/useFetch";
 import { testFetch } from "../../../../hooks/testFetch";
@@ -87,23 +88,39 @@ const SidebarDashboardView = () => {
      * 
      * Descripción: Variables que almacenan valor seleccioando por cada uno de los selects
      */
+    // Filtros Generales
+    const [selectFecha, setSelectFecha] = useState(null);
     const [selectEntidad, setSelectEntidad] = useState('');
     const [selectCartera, setSelectCartera] = useState([]);
-    // const [selectMes, setSelectMes] = useState('');
-    const [selectFecha, setSelectFecha] = useState(null);
-    const [selectPrioridad, setSelectPrioridad] = useState([]);
-    const [selectMoneda, setSelectMoneda] = useState('');
+    // Filtros Especifico
     const [selectProducto, setSelectProducto] = useState('');
+    const [selectRangoCampanha, setSelectRangoCampanha] = useState('');
+    const [selectMacroRegiones, setSelectMacroRegiones] = useState('');
+    const [selectAnhoCastigo, setSelectAnhoCastigo] = useState('');
+    const [selectMoneda, setSelectMoneda] = useState('')
+    const [selectEstadoCuenta, setSelectEstadoCuenta] = useState('');
+    const [selectMesCastigo, setSelectMesCastigo] = useState('');
+    // const [selectPrioridad, setSelectPrioridad] = useState([]);
+    const [selectPrioridad, setSelectPrioridad] = useState('');
+    const [selectRangoEdad, setSelectRangoEdad] = useState('');
+
 
     /**
-     * Descripción: variables que almacenan todas las opciones que van a contener los selects
+     * Descripción: variables que almacenan todas las opciones que van a contener los selects (todos los filtros)
      */
+    // Filtros Generales
     const [optionsEntidad, setOptionsEntidad] = useState([]);
     const [optionsCartera, setOptionsCartera] = useState([]);
-    // const [optionsMes, setOptionsMes] = useState([]);
-    const [optionsPrioridad, setOptionsPrioridad] = useState([]);
-    const [optionsMoneda, setOptionsMoneda] = useState([]);
-    const [optionsProducto, setOptionsProducto] = useState([]);
+    // Filtros Especificos
+    const [optionsProducto,      setOptionsProducto] = useState([]);
+    const [optionsRangoCampanha, setOptionsRangoCampanha] = useState([]);
+    const [optionsMacroRegiones, setOoptionsMacroRegiones] = useState([]);
+    const [optionsAnhoCastigo,   setOptionsAnhoCastigo] = useState([]);
+    const [optionsMoneda,        setOptionsMoneda] = useState([]);
+    const [optionsEstadoCuenta,  setOptionsEstadoCuenta] = useState([]);
+    const [optionsMesCastigo,    setOptionsMesCastigo] = useState([]);
+    const [optionsPrioridad,     setOptionsPrioridad] = useState([]);
+    const [optionsRangoEdad,     setOptionsRangoEdad] = useState([]);
 
 
     /**
@@ -118,7 +135,11 @@ const SidebarDashboardView = () => {
     const [loadingSeventhTable, setLoadingSeventhTable] = useState(false);
     const [loadingEighthTable, setLoadingEighthTable] = useState(false);
 
-    const [loadingAllSelects, setLoadingAllSelects] = useState(false);
+    /**
+     * Descripción: valores de loadign para indicar que filtros (selects) se están cargando
+     */
+    const [loadingFiltroGeneral, setLoadingFiltroGeneral] = useState(false);
+    const [loadingFiltroEspecifico, setLoadingFiltroEspecifico] = useState(false);
     const [loadingFiltroCartera,setLoadingFiltroCartera] = useState(false);
 
     /**
@@ -130,6 +151,11 @@ const SidebarDashboardView = () => {
      */
     let [bodyPayloadForIndividualTables, setBodyPayloadForIndividualTables] = useState({})
     let [urlPayloadForIndividualTables, setUrlPayloadForIndividualTables] = useState({})
+
+
+    const debouncedSelectFecha = useDebounce(selectFecha, 1000);
+    const debouncedSelectEntidad = useDebounce(selectEntidad, 1000);
+    const debouncedSelectCartera = useDebounce(selectCartera, 1000);
 
     function hideAllTables(){
         setFirstTableOpen(false);
@@ -184,8 +210,8 @@ const SidebarDashboardView = () => {
 
 
 
-        let codPrioridad = selectPrioridad.join(",");
-        codPrioridad = codPrioridad === "" ? null : codPrioridad
+        // let codPrioridad = selectPrioridad.join(",");
+        // codPrioridad = codPrioridad === "" ? null : codPrioridad
 
 
         // let codMoneda = null;
@@ -194,16 +220,53 @@ const SidebarDashboardView = () => {
         let codProducto = null;
         codProducto = selectProducto == "" ? null : selectProducto
 
+        let RangoCampanha = null;
+        RangoCampanha = selectRangoCampanha == "" ? null : selectRangoCampanha
+
+        let MacroRegiones = null;
+        MacroRegiones = selectMacroRegiones == "" ? null : selectMacroRegiones
+
+        let ANHO_CASTIGO = null;
+        ANHO_CASTIGO = selectAnhoCastigo == "" ? null : selectAnhoCastigo
+
+        let CodMoneda = null;
+        CodMoneda = selectMoneda == "" ? null : selectMoneda
+
+        let EstadoCuenta = null;
+        EstadoCuenta = selectEstadoCuenta == "" ? null : selectEstadoCuenta
+
+        let MES_CASTIGO = null;
+        MES_CASTIGO = selectMesCastigo == "" ? null : selectMesCastigo
+
+        let CodPrioridad = null;
+        CodPrioridad = selectPrioridad == "" ? null : selectPrioridad
+
+        let rangoEdad = null;
+        rangoEdad = selectRangoEdad == "" ? null : selectRangoEdad
+
+        // const payload = {
+        //     producto: codProducto,
+        //     campaña: null,
+        //     macroRegiones: null,
+        //     añoCastigo: null,
+        //     moneda: null,
+        //     estadoCuenta: null,
+        //     mesCastigo: null,
+        //     prioridad:codPrioridad,
+        //     rangoEdad:null,
+        //     tipo: "General"
+        // }
+
         const payload = {
             producto: codProducto,
-            campaña: null,
-            macroRegiones: null,
-            añoCastigo: null,
-            moneda: null,
-            estadoCuenta: null,
-            mesCastigo: null,
-            prioridad:codPrioridad,
-            rangoEdad:null,
+            campaña: RangoCampanha,
+            macroRegiones: MacroRegiones,
+            añoCastigo: ANHO_CASTIGO,
+            moneda: CodMoneda,
+            estadoCuenta: EstadoCuenta,
+            mesCastigo: MES_CASTIGO,
+            prioridad:CodPrioridad,
+            rangoEdad:rangoEdad,
             tipo: "General"
         }
 
@@ -244,62 +307,130 @@ const SidebarDashboardView = () => {
 
     }
 
-    // Carga contenido para selects principales
-    async function loadSelects() {
-        setLoadingAllSelects(true);
+    // Carga contenido para selects principales (filtros generales)
+    async function loadGeneralFilters() {
+        setLoadingFiltroGeneral(true);
         try {
-          const [entidadResponse, prioridadResponse, productoResponse, monedaResponse] = await Promise.all([
+        //   const [entidadResponse, prioridadResponse, productoResponse, monedaResponse] = await Promise.all([
+          const [entidadResponse, productoResponse] = await Promise.all([
             Api.get('/entidad'),
-            Api.get('/prioridad'),
+            // Api.get('/prioridad'),
             Api.get('/producto'),
-            Api.get('/moneda')
+            // Api.get('/moneda')
           ]);
-      
+          
+          // Obtenemos un array de objetos
           const entidadOptions = entidadResponse.map(option => ({
             value: option.codEntidad.toString(),
             label: option.desEntidad
           }));
 
-      
-          const prioridadOptions = prioridadResponse.map(option => ({
-            value: option.codPrioridad.toString(),
-            label: option.desPrioridad
-          }));
-      
+          // Obtenemos un array de objetos
+        //   const prioridadOptions = prioridadResponse.map(option => ({
+        //     value: option.codPrioridad.toString(),
+        //     label: option.desPrioridad
+        //   }));
+          
+          // Obtenemos un array de objetos
           const productoOptions = productoResponse.map(option => ({
             value: option.codProducto.toString(),
             label: option.desProducto
           }));
 
-          const monedaOptions = monedaResponse.map(option => ({
-            value: option.codMoneda.toString(),
-            label: option.desMoneda
-          }));
-      
-          setOptionsEntidad(entidadOptions);
-          setOptionsPrioridad(prioridadOptions);
-          setOptionsProducto(productoOptions);
-          setOptionsMoneda(monedaOptions);
-      
-        //   setOptionsMes([
-        //     { value: '1', label: 'Enero' },
-        //     { value: '2', label: 'Febrero' },
-        //     { value: '3', label: 'Marco' },
-        //     { value: '4', label: 'Abril' },
-        //     { value: '5', label: 'Mayo' },
-        //     { value: '6', label: 'Junio' },
-        //     { value: '7', label: 'Julio' },
-        //     { value: '8', label: 'Agosto' },
-        //     { value: '9', label: 'Setiembre' },
-        //     { value: '10', label: 'Octubre' },
-        //     { value: '11', label: 'Noviembre' },
-        //     { value: '12', label: 'Diciembre' },
+          // Obtenemos un array de objetos
+        //   const monedaOptions = monedaResponse.map(option => ({
+        //     value: option.codMoneda.toString(),
+        //     label: option.desMoneda
+        //   }));
 
-        //   ]);
-          setLoadingAllSelects(false);
+
+          setOptionsEntidad(entidadOptions);
+        //   setOptionsPrioridad(prioridadOptions);
+          setOptionsProducto(productoOptions);
+        //   setOptionsMoneda(monedaOptions);
+      
+        setLoadingFiltroGeneral(false);
         } catch (error) {
+            setLoadingFiltroGeneral(false);
             ErrorToken(error,dispatch);
-            setLoadingAllSelects(false);
+        }
+    }
+
+    // Carga contenido para selects secundarios (filtros especificos) - La carga de datos depende de los filtros generales
+    async function loadSpecificFilters(){
+        console.log("entra a loadSpecificFilters");
+        if(selectFecha != null && selectEntidad != '' && selectCartera.length != 0 ){
+            console.log("la condicion se cumple");
+            const payload = {
+                carteras: "4,1011",
+                entidad:"2",
+                mes:"02-2024"
+            }
+            let {data, error} = await testFetch.post(payload,`/admin/tablon/filtros-especificos`); 
+            console.log("valores de selects obtenidos (data)", data);
+            console.log("valores de selects obtenidos (error)", error);
+
+
+            // Modifica valores para RangoCampanha
+            const RangoCampanha = data?.data?.RangoCampaña?.map(valor => ({
+                value: valor, // Usar la misma valor como valor
+                label: valor  // Y como etiqueta
+            }));
+
+            // // Modifica valores para Macro regiones
+            const MacroRegiones = data?.data?.MacroRegiones?.map(valor => ({
+                value: valor, // Usar la misma valor como valor
+                label: valor  // Y como etiqueta
+            }));
+
+            
+            // // Modifica valores para AnhoCastigo
+            const AnhoCastigo = data?.data?.AÑO_CASTIGO?.map(valor => ({
+                value: valor, // Usar la misma valor como valor
+                label: valor  // Y como etiqueta
+            }));
+
+            // // Modifica valores para Moneda
+            const Moneda = data?.data?.CodMoneda?.map(valor => ({
+                value: valor, // Usar la misma valor como valor
+                label: valor  // Y como etiqueta
+            }));
+
+
+            // // Modifica valores para EstadoCuenta
+            const EstadoCuenta = data?.data?.EstadoCuenta?.map(valor => ({
+                value: valor, // Usar la misma valor como valor
+                label: valor  // Y como etiqueta
+            }));
+
+            // // Modifica valores para MesCastigo
+            const MesCastigo = data?.data?.MES_CASTIGO?.map(valor => ({
+                value: valor, // Usar la misma valor como valor
+                label: valor  // Y como etiqueta
+            }));
+
+            // // Modifica valores para Prioridad
+            const Prioridad = data?.data?.CodPrioridad?.map(valor => ({
+                value: valor, // Usar la misma valor como valor
+                label: valor  // Y como etiqueta
+            }));
+
+            // // Modifica valores para RangoEdad
+            const RangoEdad = data?.data?.rangoEdad?.map(valor => ({
+                value: valor, // Usar la misma valor como valor
+                label: valor  // Y como etiqueta
+            }));
+
+            // setOptionsProducto() --- valores dados en primera llamda de selects
+
+            setOptionsRangoCampanha(RangoCampanha);
+            setOoptionsMacroRegiones(MacroRegiones);
+            setOptionsAnhoCastigo(AnhoCastigo);
+            setOptionsMoneda(Moneda);
+            setOptionsEstadoCuenta(EstadoCuenta);
+            setOptionsMesCastigo(MesCastigo);
+            setOptionsPrioridad(Prioridad);
+            setOptionsRangoEdad(RangoEdad);
         }
     }
 
@@ -438,10 +569,22 @@ const SidebarDashboardView = () => {
         setSpinnerShowGroupTables(false);
     }
 
-    useEffect(() => {
-        loadSelects();
-    }, []);
+    // useEffect(() => {
+    //     console.log("valor de selectFecha:", selectFecha);
+    //     console.log("valor de selectEntidad:", selectEntidad);
+    //     console.log("valor de selectCartera:", selectCartera);
+    //     loadSpecificFilters();
+    // }, [selectFecha, selectEntidad, selectCartera]);
 
+    useEffect(() => {
+        if (debouncedSelectFecha && debouncedSelectEntidad && debouncedSelectCartera.length > 0) {
+            loadSpecificFilters();
+          }
+    }, [debouncedSelectFecha, debouncedSelectEntidad, debouncedSelectCartera]);
+
+    useEffect(() => {
+        loadGeneralFilters();
+    }, []);
 
     // Carga datos de select cartera cada vez que select entidad se modifica
     useEffect(() => {
@@ -453,10 +596,37 @@ const SidebarDashboardView = () => {
 
 
 
+    // Hook personalizado para Debounce
+    function useDebounce(value, delay) {
+        const [debouncedValue, setDebouncedValue] = useState(value);
+    
+        useEffect(() => {
+        const handler = setTimeout(() => {
+            setDebouncedValue(value);
+        }, delay);
+    
+        return () => {
+            clearTimeout(handler);
+        };
+        }, [value, delay]);
+    
+        return debouncedValue;
+    }
+
+
     return(
         <>
-            {/* <button onClick={accionesDeBotonBuscar}>Presiona para ralizar busqueda</button>
-            <button onClick={()=>{console.log(bodyPayloadForIndividualTables); console.log(urlPayloadForIndividualTables)}}>Presiona para mostrar contenido de nuevo payloadForIndividualTables</button> */}
+
+            {/* <SelectCustomedForArray  label="Producto"    valor={selectProducto}   setValor={setSelectProducto} options={optionsProducto} loading={loadingFiltroGeneral}    />
+            <SelectCustomedForArray  label="Rango de campaña"    valor={selectRangoCampanha}   setValor={setSelectRangoCampanha} options={optionsRangoCampanha} loading={loadingFiltroEspecifico}    />
+            <SelectCustomedForArray  label="Macroregiones"    valor={selectMacroRegiones}   setValor={setSelectMacroRegiones} options={optionsMacroRegiones} loading={loadingFiltroEspecifico}    />
+            <SelectCustomedForArray  label="Año de castigo"    valor={selectAnhoCastigo}   setValor={setSelectAnhoCastigo} options={optionsAnhoCastigo} loading={loadingFiltroEspecifico}    />
+            <SelectCustomedForArray  label="Moneda"    valor={selectMoneda}   setValor={setSelectMoneda} options={optionsMoneda} loading={loadingFiltroEspecifico}    />
+            <SelectCustomedForArray  label="Estado de cuenta"    valor={selectEstadoCuenta}   setValor={setSelectEstadoCuenta} options={optionsEstadoCuenta} loading={loadingFiltroEspecifico}    />
+            <SelectCustomedForArray  label="Mes castigo"    valor={selectMesCastigo}   setValor={setSelectMesCastigo} options={optionsMesCastigo} loading={loadingFiltroEspecifico}    />
+            <SelectCustomedForArray  label="Prioridad"    valor={selectMoneda}   setValor={setSelectMoneda} options={optionsMoneda} loading={loadingFiltroEspecifico}    />
+            <SelectCustomedForArray  label="Rango de edad"    valor={selectRangoEdad}   setValor={setSelectRangoEdad} options={optionsRangoEdad} loading={loadingFiltroEspecifico}    /> */}
+
             <div className="py-5 px-7 flex flex-col h-screen">
 
                 <div className=" flex mb-5">
@@ -466,6 +636,45 @@ const SidebarDashboardView = () => {
                         <h1 className="font-ralewayMedium text-base">Revisemos cómo ha ido la Gestión...</h1>
                     </div>
                 </div>
+
+
+
+
+                {/* <div className=" border-2 border-gray-200 rounded-lg">
+
+
+                    <div className=" bg-gray-200 text-blac pl-5 flex items-center font-ralewayBold text-base h-12">
+                        FILTROS
+                    </div>
+
+                    <div className="bg-white p-5">
+
+                        <div className="grid grid-cols-1 gap-5 md:grid-cols-5 2xl:grid-cols-6 ">
+                                               
+                            <h3 className="md:col-span-5 2xl:col-span-6 font-ralewaySemibold text-base text-gray-900">FILTROS GENERALES</h3>
+                            <div><DatePickerCustomed valor={selectFecha} setValor={setSelectFecha} requerido={true}/></div>
+                            <div><SelectCustomed label="Entidad *"    valor={selectEntidad}   setValor={setSelectEntidad} options={optionsEntidad} loading={loadingFiltroGeneral}   requerido={true}/></div>
+                            <div><SelectMultipleCustomed label="Cartera" valor={selectCartera}  setValor={setSelectCartera} options={optionsCartera} loading={loadingFiltroCartera}  requerido={true}/></div>
+                            <div className={`${open==true?'md:col-start-4 md:col-end-4 2xl:col-start-5 2xl:col-end-5':'hidden'}`} ><BotonClaro  className={`${open==true?'md:col-start-4 md:col-end-4 2xl:col-start-5 2xl:col-end-5':'hidden'} `} layout="LIMPIAR BÚSQUEDA" onClick={accionesDeBotonLimpiarBusqueda}/></div>
+                            <div className={`${open==true?'md:col-start-5 md:col-end-5 2xl:col-start-6 2xl:col-end-6':'hidden'}`}><BotonOscuro className={`${open==true?'md:col-start-5 md:col-end-5 2xl:col-start-6 2xl:col-end-6':'hidden'} `} layout="BUSCAR" onClick={accionesDeBotonBuscar}/></div>
+                            
+                            <div className={`md:col-span-5 2xl:col-span-6 transition-colors text-gray-900 font-ralewaySemibold flex`} onClick={()=>{setOpen(open==true?false:true);}}>  FILTROS ESPECÍFICOS <IoMdRemoveCircle className={`mt-0.5 ml-2 text-xl text-buttonColor-0  ${open==true?'hidden':''}`}/> <IoAddCircle className={`mt-0.5 ml-2 text-xl text-buttonColor-0  ${open==true?'':'hidden'}`}/> </div>
+
+                            <div className={` ${open==true?'hidden':''}`}><SelectMultipleCustomed label="Prioridad" valor={selectPrioridad}  setValor={setSelectPrioridad} options={optionsPrioridad} loading={loadingFiltroGeneral}  /></div>                               
+                            <div className={` ${open==true?'hidden':''}`}><SelectCustomed  label="Moneda"    valor={selectMoneda}   setValor={setSelectMoneda} options={optionsMoneda} loading={loadingFiltroGeneral}    /></div>                       
+                            <div className={` ${open==true?'hidden':''}`}><SelectCustomed   label="Producto"    valor={selectProducto}   setValor={setSelectProducto} options={optionsProducto} loading={loadingFiltroGeneral}    /></div>                       
+                            <div className={` ${open==true?'hidden':'md:col-start-4 md:col-end-4 2xl:col-start-5 2xl:col-end-5'} `}><BotonClaro  layout="LIMPIAR BÚSQUEDA" onClick={accionesDeBotonLimpiarBusqueda}/></div>
+                            <div className={` ${open==true?'hidden':'md:col-start-5 md:col-end-5 2xl:col-start-6 2xl:col-end-6'} `}><BotonOscuro  layout="BUSCAR" onClick={accionesDeBotonBuscar}/></div>
+
+                        </div>
+
+                    </div>
+                </div> */}
+
+
+
+
+
 
                 <div className=" border-2 border-gray-200 rounded-lg">
 
@@ -480,16 +689,27 @@ const SidebarDashboardView = () => {
                                                
                             <h3 className="md:col-span-5 2xl:col-span-6 font-ralewaySemibold text-base text-gray-900">FILTROS GENERALES</h3>
                             <div><DatePickerCustomed valor={selectFecha} setValor={setSelectFecha} requerido={true}/></div>
-                            <div><SelectCustomed label="Entidad *"    valor={selectEntidad}   setValor={setSelectEntidad} options={optionsEntidad} loading={loadingAllSelects}   requerido={true}/></div>
+                            <div><SelectCustomed label="Entidad *"    valor={selectEntidad}   setValor={setSelectEntidad} options={optionsEntidad} loading={loadingFiltroGeneral}   requerido={true}/></div>
                             <div><SelectMultipleCustomed label="Cartera" valor={selectCartera}  setValor={setSelectCartera} options={optionsCartera} loading={loadingFiltroCartera}  requerido={true}/></div>
                             <div className={`${open==true?'md:col-start-4 md:col-end-4 2xl:col-start-5 2xl:col-end-5':'hidden'}`} ><BotonClaro  className={`${open==true?'md:col-start-4 md:col-end-4 2xl:col-start-5 2xl:col-end-5':'hidden'} `} layout="LIMPIAR BÚSQUEDA" onClick={accionesDeBotonLimpiarBusqueda}/></div>
                             <div className={`${open==true?'md:col-start-5 md:col-end-5 2xl:col-start-6 2xl:col-end-6':'hidden'}`}><BotonOscuro className={`${open==true?'md:col-start-5 md:col-end-5 2xl:col-start-6 2xl:col-end-6':'hidden'} `} layout="BUSCAR" onClick={accionesDeBotonBuscar}/></div>
                             
                             <div className={`md:col-span-5 2xl:col-span-6 transition-colors text-gray-900 font-ralewaySemibold flex`} onClick={()=>{setOpen(open==true?false:true);}}>  FILTROS ESPECÍFICOS <IoMdRemoveCircle className={`mt-0.5 ml-2 text-xl text-buttonColor-0  ${open==true?'hidden':''}`}/> <IoAddCircle className={`mt-0.5 ml-2 text-xl text-buttonColor-0  ${open==true?'':'hidden'}`}/> </div>
 
-                            <div className={` ${open==true?'hidden':''}`}><SelectMultipleCustomed label="Prioridad" valor={selectPrioridad}  setValor={setSelectPrioridad} options={optionsPrioridad} loading={loadingAllSelects}  /></div>                               
-                            <div className={` ${open==true?'hidden':''}`}><SelectCustomed  label="Moneda"    valor={selectMoneda}   setValor={setSelectMoneda} options={optionsMoneda} loading={loadingAllSelects}    /></div>                       
-                            <div className={` ${open==true?'hidden':''}`}><SelectCustomed   label="Producto"    valor={selectProducto}   setValor={setSelectProducto} options={optionsProducto} loading={loadingAllSelects}    /></div>                       
+                            {/* <div className={` ${open==true?'hidden':''}`}><SelectMultipleCustomed label="Prioridad" valor={selectPrioridad}  setValor={setSelectPrioridad} options={optionsPrioridad} loading={loadingFiltroGeneral}  /></div>                               
+                            <div className={` ${open==true?'hidden':''}`}><SelectCustomed  label="Moneda"    valor={selectMoneda}   setValor={setSelectMoneda} options={optionsMoneda} loading={loadingFiltroGeneral}    /></div>                       
+                            <div className={` ${open==true?'hidden':''}`}><SelectCustomed   label="Producto"    valor={selectProducto}   setValor={setSelectProducto} options={optionsProducto} loading={loadingFiltroGeneral}    /></div> */}
+
+                            <div className={` ${open==true?'hidden':''}`}><SelectCustomedForArray  label="Producto"    valor={selectProducto}   setValor={setSelectProducto} options={optionsProducto} loading={loadingFiltroGeneral}    /></div>
+                            <div className={` ${open==true?'hidden':''}`}><SelectCustomedForArray  label="Rango de campaña"    valor={selectRangoCampanha}   setValor={setSelectRangoCampanha} options={optionsRangoCampanha} loading={loadingFiltroEspecifico}    /></div>
+                            <div className={` ${open==true?'hidden':''}`}><SelectCustomedForArray  label="Macroregiones"    valor={selectMacroRegiones}   setValor={setSelectMacroRegiones} options={optionsMacroRegiones} loading={loadingFiltroEspecifico}    /></div>
+                            <div className={`md:col-start-1 md:col-end-1 ${open==true?'hidden':''}`}><SelectCustomedForArray  label="Año de castigo"    valor={selectAnhoCastigo}   setValor={setSelectAnhoCastigo} options={optionsAnhoCastigo} loading={loadingFiltroEspecifico}    /></div>
+                            <div className={`md:col-start-2 md:col-end-2 ${open==true?'hidden':''}`}><SelectCustomedForArray  label="Moneda"    valor={selectMoneda}   setValor={setSelectMoneda} options={optionsMoneda} loading={loadingFiltroEspecifico}    /></div>
+                            <div className={`md:col-start-3 md:col-end-3 ${open==true?'hidden':''}`}><SelectCustomedForArray  label="Estado de cuenta"    valor={selectEstadoCuenta}   setValor={setSelectEstadoCuenta} options={optionsEstadoCuenta} loading={loadingFiltroEspecifico}    /></div>
+                            <div className={`md:col-start-1 md:col-end-1  ${open==true?'hidden':''}`}><SelectCustomedForArray  label="Mes castigo"    valor={selectMesCastigo}   setValor={setSelectMesCastigo} options={optionsMesCastigo} loading={loadingFiltroEspecifico}    /></div>
+                            <div className={`md:col-start-2 md:col-end-2 ${open==true?'hidden':''}`}><SelectCustomedForArray  label="Prioridad"    valor={selectMoneda}   setValor={setSelectMoneda} options={optionsMoneda} loading={loadingFiltroEspecifico}    /></div>
+                            {/* <div className={` ${open==true?'hidden':''}`}><SelectMultipleCustomed label="Prioridad" valor={selectPrioridad}  setValor={setSelectPrioridad} options={optionsPrioridad} loading={loadingFiltroGeneral}  /></div>   */}
+                            <div className={`md:col-start-3 md:col-end-3 ${open==true?'hidden':''}`}><SelectCustomedForArray  label="Rango de edad"    valor={selectRangoEdad}   setValor={setSelectRangoEdad} options={optionsRangoEdad} loading={loadingFiltroEspecifico}    /></div>
                             <div className={` ${open==true?'hidden':'md:col-start-4 md:col-end-4 2xl:col-start-5 2xl:col-end-5'} `}><BotonClaro  layout="LIMPIAR BÚSQUEDA" onClick={accionesDeBotonLimpiarBusqueda}/></div>
                             <div className={` ${open==true?'hidden':'md:col-start-5 md:col-end-5 2xl:col-start-6 2xl:col-end-6'} `}><BotonOscuro  layout="BUSCAR" onClick={accionesDeBotonBuscar}/></div>
 
@@ -497,6 +717,9 @@ const SidebarDashboardView = () => {
 
                     </div>
                 </div>
+
+
+
 
 
                 {showGroupOfTables && <div>
