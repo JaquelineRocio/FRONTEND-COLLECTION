@@ -10,9 +10,10 @@ const SelectCustomedForArray = ({
     loading = false,
     options = [],
     requerido = false,
+    desactivado = false,
 }) =>{
 
-    console.log("optiones entrantes para select de arryas", options);
+    // console.log("optiones entrantes para select de arryas", options);
     // const [value, setValue] = useState(valor);
     // const [selectLoading, setSelectLoading] = useState(false);
     const handleChange = (date) => {
@@ -23,6 +24,14 @@ const SelectCustomedForArray = ({
     const handleClear = () => {
         setValor(''); // Establece el valor a vacío o null según lo que maneje mejor tu aplicación
     };
+
+    const handleDisabled = () => {
+        if(desactivado == false && loading == false){ 
+          return false; 
+        }else{
+          return true; 
+        }  
+    }
 
     // useEffect(()=>{
     //     // if(selectLoading){
@@ -64,7 +73,9 @@ const SelectCustomedForArray = ({
                     // fontFamily: ['Raleway-Bold'],  // Aplicando Raleway-Medium
                 }}
                 // slotProps={{ textField: { size: 'small', } }}
-                disabled={loading}
+                // disabled={loading}
+
+                disabled={handleDisabled()}
                 >
                     <MenuItem value="" onClick={handleClear}>
                         <em>Limpiar</em>
