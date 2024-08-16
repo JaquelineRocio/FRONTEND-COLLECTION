@@ -1,6 +1,10 @@
 // const variable = import.meta.env.VITE_API_URL;
-const apiUrlEntrada = "https://poetic-tube-428221-a5.rj.r.appspot.com";
+// const apiUrlEntrada = "https://poetic-tube-428221-a5.rj.r.appspot.com";
+
 // const apiUrlEntrada = "https://cf0f-201-240-244-251.ngrok-free.app";
+const apiUrlEntrada = "http://161.132.55.33:8090";
+
+
 
 export class LoginApi {
 

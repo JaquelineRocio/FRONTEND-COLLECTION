@@ -2,7 +2,10 @@
 
 
 // const apiUrlEntrada = "http://127.0.0.1:3000";
-const apiUrlEntrada = "https://poetic-tube-428221-a5.rj.r.appspot.com";
+// const apiUrlEntrada = "https://poetic-tube-428221-a5.rj.r.appspot.com";
+const apiUrlEntrada = "http://161.132.55.33:8090";
+
+
 
 // const apiUrlEntrada = "https://cf0f-201-240-244-251.ngrok-free.app";
 
