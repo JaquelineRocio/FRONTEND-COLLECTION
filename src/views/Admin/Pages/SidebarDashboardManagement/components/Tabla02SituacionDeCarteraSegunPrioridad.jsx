@@ -26,7 +26,7 @@ export default function Tabla02SituacionDeCarteraSegunPrioridad({tableRows, load
 
 const buildRows = (rowsInput) => {
 	if (rowsInput && Object.keys(rowsInput).length > 0) {
-		console.log("entrada build tabla prioridad ",rowsInput);
+		// console.log("entrada build tabla prioridad ",rowsInput);
 		const rowsOutput = []
 		// registros
 		rowsInput?.registros?.map((bloque)=>{

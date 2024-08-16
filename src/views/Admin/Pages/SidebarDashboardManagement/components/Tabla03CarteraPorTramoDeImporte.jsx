@@ -24,7 +24,7 @@ console.log("datos detnro de tercera tabla",tableRows );
 }
 
 const buildRows = (rowsInput) => {
-	console.log("entrada build tercera tabla: ",rowsInput);
+	// console.log("entrada build tercera tabla: ",rowsInput);
 	const rowsOutput = []
 	// registros
 	rowsInput?.registros?.map((bloque)=>{

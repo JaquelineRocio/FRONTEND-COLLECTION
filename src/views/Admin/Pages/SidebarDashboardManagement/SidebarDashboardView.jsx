@@ -207,6 +207,12 @@ const SidebarDashboardView = () => {
         setSelectRangoEdad('');
     }
 
+    // Limpia valores seleccionados de filtros generales
+    function clearSelectedValuesFromGeneralFilters(){
+        setSelectFecha(null);
+        setSelectEntidad(''); 
+        setSelectCartera([]); 
+    }
 
     // Eliminamos todos los datos (filas) de todas las tablas
     function cleanDataFromAllTables(){
@@ -329,8 +335,11 @@ const SidebarDashboardView = () => {
         // escondemos todas las tablas individualmente
         hideAllTables();
 
-        // limpiamos todas las tablas
-        cleanDataFromAllTables();
+        // // limpiamos todas las tablas
+        // cleanDataFromAllTables();
+
+        // Limpiamos filtros generales
+        clearSelectedValuesFromGeneralFilters();
 
         // limpiamos valores seleccionados de todos los selects
         clearSelectdValuesFromAllSelects();

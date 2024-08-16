@@ -26,7 +26,7 @@ export default function Tabla05CarteraPorAnioMesDeCastigo({tableRows, loading}) 
 
 const buildRows = (rowsInput) => {
 	if (rowsInput && Object.keys(rowsInput).length > 0) {
-	console.log("entrada build: ",rowsInput);
+	// console.log("entrada build: ",rowsInput);
 	const rowsOutput = []
 	// registros
 	rowsInput?.registros?.map((bloque)=>{
