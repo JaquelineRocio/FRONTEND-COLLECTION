@@ -413,7 +413,7 @@ const datosVersionDos = {
                         "cob": "100.00%"
                     }
                 ],
-                "total": [
+                "total": 
                     {
                         "desCartera": "CASTIGO",
                         "clientes": 971,
@@ -440,7 +440,7 @@ const datosVersionDos = {
                         "porcentajeCalidadPDP": "59160000.00%",
                         "cob": "3.67%"
                     }
-                ]
+                
             },
             {
                 "cartera": "5",
@@ -474,7 +474,7 @@ const datosVersionDos = {
                         "cob": "100.00%"
                     }
                 ],
-                "total": [
+                "total": 
                     {
                         "desCartera": "MONOPRODUCTO",
                         "clientes": 2756,
@@ -501,7 +501,7 @@ const datosVersionDos = {
                         "porcentajeCalidadPDP": "171520000.00%",
                         "cob": "12.12%"
                     }
-                ]
+                
             },
             {
                 "cartera": "1011",
@@ -535,7 +535,7 @@ const datosVersionDos = {
                         "cob": "100.00%"
                     }
                 ],
-                "total": [
+                "total": 
                     {
                         "desCartera": "MULTIPRODUCTO",
                         "clientes": 145,
@@ -562,7 +562,7 @@ const datosVersionDos = {
                         "porcentajeCalidadPDP": "8260000.00%",
                         "cob": "0.49%"
                     }
-                ]
+                
             },
             {
                 "cartera": "1012",
@@ -596,7 +596,7 @@ const datosVersionDos = {
                         "cob": "100.00%"
                     }
                 ],
-                "total": [
+                "total": 
                     {
                         "desCartera": "CASTIGO",
                         "clientes": 8879,
@@ -623,12 +623,12 @@ const datosVersionDos = {
                         "porcentajeCalidadPDP": "446850000.00%",
                         "cob": "33.58%"
                     }
-                ]
+                
             },
             {
                 "cartera": "1023",
                 "subRegistros": [],
-                "total": []
+                "total": {}
             }
         ],
         "totalGeneral": [

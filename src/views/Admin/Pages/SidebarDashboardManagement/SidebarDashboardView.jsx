@@ -41,7 +41,24 @@ import SelectCustomedForArray from "../../../../components/SelectCustomedForArra
 import SelectMultipleCustomed from "../../../../components/SelectMultipleCustomed/SelectMultipleCustomed";
 // import {useFetch} from "./../../../../hooks/useFetch";
 import { testFetch } from "../../../../hooks/testFetch";
-// import SimulatorApi from "../../../../services/resources/SimulatorApi";
+import SimulatorApi from "../../../../services/resources/SimulatorApi";
+
+import { 
+    titulosParaTablaEstadoGeneralDeCartera,
+    titulosParaTablaSituacionDeCarteraSegunPrioridad,
+    // titulosParaTablaCarteraPorTramoDeImporte,
+    titulosParaTablaCarteraPorRangoDeMaduracion,
+    titulosParaTablaCarteraPorAnhoMesCastigo,
+    titulosParaTablaRangoDeCampanha,
+    titulosParaTablaCarteraPorTipoDeProducto,
+    titulosParaTablaCarteraPorZona
+ } from "./components/ColumnTitles";
+
+ import TableCustomed from "./components/TableCustomed";
+ import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
+ import { MdOutlineMoveUp } from "react-icons/md";
+ import { TbDragDrop } from "react-icons/tb";
+ import { HiSquare2Stack } from "react-icons/hi2";
 
 const SidebarDashboardView = () => {
 
@@ -164,6 +181,14 @@ const SidebarDashboardView = () => {
     const debouncedSelectEntidad = useDebounce(selectEntidad, 1000);
     const debouncedSelectCartera = useDebounce(selectCartera, 1000);
 
+    /**
+     * Variable que indica la cantidad de columnas que deben mostrarse al momento de
+     * reorganizar las tablas
+     */
+    const [numberOfColumns, setNumberOfColumns] = useState(1);
+    
+
+
     function hideAllTables(){
         setFirstTableOpen(false);
         setSecondTableOpen(false);
@@ -214,7 +239,7 @@ const SidebarDashboardView = () => {
         setSelectCartera([]); 
     }
 
-    // Eliminamos todos los datos (filas) de todas las tablas
+    // Eliminamos todos el contenido (filas) de todas las tablas
     function cleanDataFromAllTables(){
         setRegistroPrimeraTabla({});
         setRegistroSegundaTabla({});
@@ -311,10 +336,12 @@ const SidebarDashboardView = () => {
         setUrlPayloadForIndividualTables({selectEntidad: selectEntidad, selectFecha:selectFecha, selectCartera:selectCartera });
 
         let {data, error} = await testFetch.post(payload,`/admin/tablon/dashboards?entidad=${selectEntidad}&mes=${selectFecha?.format('MM-YYYY')}&carteras=${selectCartera}`); 
+        // let data = await SimulatorApi(1000,false);
+        // let error = null;
+        // console.log("data simulada", data);
 
         // setRegistroPrimeraTabla(data?.data);
         setRegistroPrimeraTabla(data?.data ?? {});
-
         // Desactiva spinner de primera tabla
         setLoadingFirstTable(false);
          // Muestra div contenedor de todas las tablas
@@ -632,13 +659,505 @@ const SidebarDashboardView = () => {
         setSpinnerShowGroupTables(false);
     }
 
+    // Construye el objeto que sera iterado para formar todas las tablas
+
+    const objetoDeDashboard = [
+        {
+            columnas: titulosParaTablaEstadoGeneralDeCartera,
+            filas: registroPrimeraTabla,
+            nombreDeTabla: "ESTADO GENERAL DE CARTERA DEL MES (PONER MES Y AÑO)",
+            masInformacion: {setTableOpen:setFirstTableOpen, tableOpen:firstTableOpen, loading:loadingFirstTable, getDataFromIndividualTables:getDataFromIndividualTables, typeOfRequest: "General"},
+            id: 'dashboard-1',
+            key:1
+        },
+        {
+            columnas: titulosParaTablaSituacionDeCarteraSegunPrioridad,
+            filas: registroSegundaTabla,
+            nombreDeTabla: "SITUACIÓN DE CARTERA SEGÚN PRIORIDAD",
+            masInformacion: {setTableOpen:setSecondTableOpen, tableOpen:secondTableOpen, loading:loadingSecondTable, getDataFromIndividualTables:getDataFromIndividualTables, typeOfRequest: "Prioridad"},
+            id: 'dashboard-2',
+            key:2
+
+        },
+        {
+            columnas: titulosParaTablaCarteraPorRangoDeMaduracion,
+            filas: registroCuartaTabla,
+            nombreDeTabla: "CARTERA POR RANGO DE MADURACIÓN",
+            masInformacion: {setTableOpen:setFourthTableOpen, tableOpen:fourthTableOpen, loading:loadingFourthTable, getDataFromIndividualTables:getDataFromIndividualTables, typeOfRequest: "Maduracion"},
+            id: 'dashboard-3',
+            key:3
+        },
+        {
+            columnas: titulosParaTablaCarteraPorAnhoMesCastigo,
+            filas: registroQuintaTabla,
+            nombreDeTabla: "CARTERA POR AÑO - MES DE CASTIGO",
+            masInformacion: {setTableOpen:setFifthTableOpen, tableOpen:fifthTableOpen, loading:loadingFifthTable, getDataFromIndividualTables:getDataFromIndividualTables, typeOfRequest: "AÑO_CASTIGO"},
+            id: 'dashboard-4',
+            key:4
+        },
+        {
+            columnas: titulosParaTablaRangoDeCampanha,
+            filas: registroSextaTabla,
+            nombreDeTabla: "DASHBOARD POR RANGO DE CAMPAÑA",
+            masInformacion: {setTableOpen:setSixthTableOpen, tableOpen:sixthTableOpen, loading:loadingSixthTable, getDataFromIndividualTables:getDataFromIndividualTables, typeOfRequest: "RangoCampaña"},
+            id: 'dashboard-5',
+            key:5
+        },
+        {
+            columnas: titulosParaTablaCarteraPorTipoDeProducto,
+            filas: registroSetimaTabla,
+            nombreDeTabla: "CARTERA POR TIPO DE PRODUCTO",
+            masInformacion: {setTableOpen:setSeventhTableOpen, tableOpen:seventhTableOpen, loading:loadingSeventhTable, getDataFromIndividualTables:getDataFromIndividualTables, typeOfRequest: "CodProducto"},
+            id: 'dashboard-6',
+            key:6
+        },
+        {
+            columnas: titulosParaTablaCarteraPorZona,
+            filas: registroOctavaTabla,
+            nombreDeTabla: "CARTERA POR ZONA",
+            masInformacion: {setTableOpen:setOctaveTableOpen, tableOpen:octaveTableOpen, loading:loadingEighthTable, getDataFromIndividualTables:getDataFromIndividualTables, typeOfRequest: "MacroRegiones"},
+            id: 'dashboard-7',
+            key:7
+        },
+    ]
+
+    const objetoDeDashboardTwo = {
+       'dashboard-1': {
+            columnas: titulosParaTablaEstadoGeneralDeCartera,
+            filas: registroPrimeraTabla,
+            nombreDeTabla: "ESTADO GENERAL DE CARTERA DEL MES (PONER MES Y AÑO)",
+            masInformacion: {setTableOpen:setFirstTableOpen, tableOpen:firstTableOpen, loading:loadingFirstTable, getDataFromIndividualTables:getDataFromIndividualTables, typeOfRequest: "General"},
+            id: 'dashboard-1',
+            key:1
+        },
+       'dashboard-2': {
+            columnas: titulosParaTablaSituacionDeCarteraSegunPrioridad,
+            filas: registroSegundaTabla,
+            nombreDeTabla: "SITUACIÓN DE CARTERA SEGÚN PRIORIDAD",
+            masInformacion: {setTableOpen:setSecondTableOpen, tableOpen:secondTableOpen, loading:loadingSecondTable, getDataFromIndividualTables:getDataFromIndividualTables, typeOfRequest: "Prioridad"},
+            id: 'dashboard-2',
+            key:2
+
+        },
+       'dashboard-3': {
+            columnas: titulosParaTablaCarteraPorRangoDeMaduracion,
+            filas: registroCuartaTabla,
+            nombreDeTabla: "CARTERA POR RANGO DE MADURACIÓN",
+            masInformacion: {setTableOpen:setFourthTableOpen, tableOpen:fourthTableOpen, loading:loadingFourthTable, getDataFromIndividualTables:getDataFromIndividualTables, typeOfRequest: "Maduracion"},
+            id: 'dashboard-3',
+            key:3
+        },
+       'dashboard-4': {
+            columnas: titulosParaTablaCarteraPorAnhoMesCastigo,
+            filas: registroQuintaTabla,
+            nombreDeTabla: "CARTERA POR AÑO - MES DE CASTIGO",
+            masInformacion: {setTableOpen:setFifthTableOpen, tableOpen:fifthTableOpen, loading:loadingFifthTable, getDataFromIndividualTables:getDataFromIndividualTables, typeOfRequest: "AÑO_CASTIGO"},
+            id: 'dashboard-4',
+            key:4
+        },
+       'dashboard-5': {
+            columnas: titulosParaTablaRangoDeCampanha,
+            filas: registroSextaTabla,
+            nombreDeTabla: "DASHBOARD POR RANGO DE CAMPAÑA",
+            masInformacion: {setTableOpen:setSixthTableOpen, tableOpen:sixthTableOpen, loading:loadingSixthTable, getDataFromIndividualTables:getDataFromIndividualTables, typeOfRequest: "RangoCampaña"},
+            id: 'dashboard-5',
+            key:5
+        },
+       'dashboard-6':{
+            columnas: titulosParaTablaCarteraPorTipoDeProducto,
+            filas: registroSetimaTabla,
+            nombreDeTabla: "CARTERA POR TIPO DE PRODUCTO",
+            masInformacion: {setTableOpen:setSeventhTableOpen, tableOpen:seventhTableOpen, loading:loadingSeventhTable, getDataFromIndividualTables:getDataFromIndividualTables, typeOfRequest: "CodProducto"},
+            id: 'dashboard-6',
+            key:6
+        },
+       'dashboard-7': {
+            columnas: titulosParaTablaCarteraPorZona,
+            filas: registroOctavaTabla,
+            nombreDeTabla: "CARTERA POR ZONA",
+            masInformacion: {setTableOpen:setOctaveTableOpen, tableOpen:octaveTableOpen, loading:loadingEighthTable, getDataFromIndividualTables:getDataFromIndividualTables, typeOfRequest: "MacroRegiones"},
+            id: 'dashboard-7',
+            key:7
+        },
+    }
+    
+    const initialData = {
+        // tasks: {
+        //     'dashboard-1': {
+        //         columnas: titulosParaTablaEstadoGeneralDeCartera,
+        //         filas: registroPrimeraTabla,
+        //         nombreDeTabla: "ESTADO GENERAL DE CARTERA DEL MES (PONER MES Y AÑO)",
+        //         masInformacion: {setTableOpen:setFirstTableOpen, tableOpen:firstTableOpen, loading:loadingFirstTable, getDataFromIndividualTables:getDataFromIndividualTables, typeOfRequest: "General"},
+        //         id: 'dashboard-1',
+        //         key:1
+        //     },
+        //     'dashboard-2': {
+        //         columnas: titulosParaTablaSituacionDeCarteraSegunPrioridad,
+        //         filas: registroSegundaTabla,
+        //         nombreDeTabla: "SITUACIÓN DE CARTERA SEGÚN PRIORIDAD",
+        //         masInformacion: {setTableOpen:setSecondTableOpen, tableOpen:secondTableOpen, loading:loadingSecondTable, getDataFromIndividualTables:getDataFromIndividualTables, typeOfRequest: "Prioridad"},
+        //         id: 'dashboard-2',
+        //         key:2
+    
+        //     },
+        //     'dashboard-3': {
+        //         columnas: titulosParaTablaCarteraPorRangoDeMaduracion,
+        //         filas: registroCuartaTabla,
+        //         nombreDeTabla: "CARTERA POR RANGO DE MADURACIÓN",
+        //         masInformacion: {setTableOpen:setFourthTableOpen, tableOpen:fourthTableOpen, loading:loadingFourthTable, getDataFromIndividualTables:getDataFromIndividualTables, typeOfRequest: "Maduracion"},
+        //         id: 'dashboard-3',
+        //         key:3
+        //     },
+        //     'dashboard-4': {
+        //         columnas: titulosParaTablaCarteraPorAnhoMesCastigo,
+        //         filas: registroQuintaTabla,
+        //         nombreDeTabla: "CARTERA POR AÑO - MES DE CASTIGO",
+        //         masInformacion: {setTableOpen:setFifthTableOpen, tableOpen:fifthTableOpen, loading:loadingFifthTable, getDataFromIndividualTables:getDataFromIndividualTables, typeOfRequest: "AÑO_CASTIGO"},
+        //         id: 'dashboard-4',
+        //         key:4
+        //     },
+        //     'dashboard-5': {
+        //         columnas: titulosParaTablaRangoDeCampanha,
+        //         filas: registroSextaTabla,
+        //         nombreDeTabla: "DASHBOARD POR RANGO DE CAMPAÑA",
+        //         masInformacion: {setTableOpen:setSixthTableOpen, tableOpen:sixthTableOpen, loading:loadingSixthTable, getDataFromIndividualTables:getDataFromIndividualTables, typeOfRequest: "RangoCampaña"},
+        //         id: 'dashboard-5',
+        //         key:5
+        //     },
+        //     'dashboard-6': {
+        //         columnas: titulosParaTablaCarteraPorTipoDeProducto,
+        //         filas: registroSetimaTabla,
+        //         nombreDeTabla: "CARTERA POR TIPO DE PRODUCTO",
+        //         masInformacion: {setTableOpen:setSeventhTableOpen, tableOpen:seventhTableOpen, loading:loadingSeventhTable, getDataFromIndividualTables:getDataFromIndividualTables, typeOfRequest: "CodProducto"},
+        //         id: 'dashboard-6',
+        //         key:6
+        //     },
+        //     'dashboard-7': {
+        //         columnas: titulosParaTablaCarteraPorZona,
+        //         filas: registroOctavaTabla,
+        //         nombreDeTabla: "CARTERA POR ZONA",
+        //         masInformacion: {setTableOpen:setOctaveTableOpen, tableOpen:octaveTableOpen, loading:loadingEighthTable, getDataFromIndividualTables:getDataFromIndividualTables, typeOfRequest: "MacroRegiones"},
+        //         id: 'dashboard-7',
+        //         key:7
+        //     },
+        //     // 'dashboard-8': objetoDeDashboard[7],
+        // },
+    
+        columns: {
+            'column-1':{
+                id: 'column-1',
+                title: 'To do',
+                taskIds: ['dashboard-1', 'dashboard-2', 'dashboard-3', 'dashboard-4','dashboard-5', 'dashboard-6', 'dashboard-7'],
+            },
+            'column-2':{
+                id: 'column-2',
+                title: 'In Progress',
+                taskIds: [],
+            },
+            'column-3':{
+                id: 'column-3',
+                title: 'Done',
+                taskIds: [],
+            },
+        },
+    
+        columnOrder: ['column-1'],
+        // columnOrder: ['column-1'],   
+    };
+
+    const [state, setState] = useState(initialData);
+    // setState(initialData);
+    
+
+    // Funciona que maneja el movimiento de elementos arrastrables
+    const onDragEnd = (result) => {
+
+        console.log("valores de cambio: ",result);
+        const {destination, source, draggableId} = result;
+
+        // Si el elemento (dragable) no tiene un destino (llevamos a un lugar don de no puede ubicarse). devolvemos nada
+        if(!destination){
+            return;
+        }
+
+        // si llevamos el elemento al mismo lugar de donse salio, no debe ocurrir nada.
+        if((destination.droppableId === source.droppableId) && (destination.index === source.index)){
+            return;
+        }
+
+
+        /**
+         *  Operaciones realizadas sobre elemento de origen
+         */
+        // Recuperamos la columna de donde movimos el elemento ( columna de origen)
+        const start = state.columns[source.droppableId];
+        // Recuperamos la columna donde vamos a colocar el elemento ( columna de origen)
+        const finish = state.columns[destination.droppableId];
+
+        // Verificamos si la columna de origen es la misma que la columna de destino
+        if(start === finish){
+            // Recuperamos la lista de elementos guardados en la columna
+            const newTaskIds = Array.from(start.taskIds)
+            // Eliminamos el indice (elemento dragable) que se movió de lugar
+            newTaskIds.splice(source.index, 1);
+            newTaskIds.splice(destination.index, 0, draggableId);
+
+            const newColumn = {
+                ...start,
+                taskIds:newTaskIds,
+            }
+
+            const newState = {
+                ...state,
+                columns: {
+                    ...state.columns,
+                    [newColumn.id]: newColumn,
+                }
+            }
+
+            setState(newState);
+
+            return;
+        }
+
+        // Hacemos una compia de todos os elemento que estan en el interior de la columna de origen
+        const startTaskIds = Array.from(start.taskIds)
+
+        // Eliminado de la copia el elmento que movemos (dragable)
+        startTaskIds.splice(source.index,1);
+
+        const newStart = {
+            ...start,
+            taskIds: startTaskIds,
+        };
+
+        // Hacemos una copia de todos los elemento de la columna donde esamos colocando el elmento arrastrado
+        const finishTaskIds = Array.from(finish.taskIds);
+        finishTaskIds.splice(destination.index, 0, draggableId);
+
+        const newFinish = {
+            ...finish,
+            taskIds: finishTaskIds,
+        };
+
+
+        // Creamos el objeto final que actualizara todo el json
+        const newState = {
+            ...state,
+            columns: {
+                ...state.columns,
+                [newStart.id]: newStart,
+                [newFinish.id]: newFinish,
+            },
+        }
+
+        setState(newState);
+    }
+
     // useEffect(() => {
     //     console.log("valor de selectFecha:", selectFecha);
     //     console.log("valor de selectEntidad:", selectEntidad);
     //     console.log("valor de selectCartera:", selectCartera);
     //     loadSpecificFilters();
     // }, [selectFecha, selectEntidad, selectCartera]);
+    const Column = ({column, tasks}) => {
+        // console.log("las columnas", column);
+        // console.log("los tasks",tasks );
+        return(
+            <div className="rounded">
+                {/* <h3>{column.title}</h3> */}
+                <Droppable droppableId={column.id}>
+                    {(provided, snapshot)=>{ console.log("valor snapshot",snapshot, " columna: ",column.id); return(
+                        <div
+                            className={`h-full ${numberOfColumns>1?'bg-tonosOscuros-0/10 px-4 pt-4':''} ${snapshot.isDraggingOver?'bg-tonosOscuros-0/20':''}`}
+                            ref={provided.innerRef}
+                            {...provided.droppableProps}
+                        >
+                            {tasks.map( (task,index)  => <Task key={task.id} task={task} index={index}></Task>)}
+                            {provided.placeholder}
+                        </div>
+                    )}}
+                </Droppable>
+            </div>
+        )
+    }
+    
+    const Task = ({task, index}) => {
+    
+    
+        // console.log("esto es lo que entra finalmente:", task);
+        return( 
+            <Draggable draggableId={task.id} index={index}>
+                {(provided, snapshot)=>(
+                    <div
+                        {...provided.draggableProps}
+                        className={`bg-white  border border-gray-300 rounded mb-4`}
+                        // innerRef={provided.innerRef}
+                        ref={provided.innerRef}
+                        // isDragging={snapshot.isDragging}
+                    >
+                        <div>
 
+                            <div className="flex h-10 justify-center items-center font-ralewaySemibold text-base text-tonosOscuros-1">
+
+                                {/* Icono para arrastrar tabla */}
+                                <div
+                                    className="bg-white text-gray-700  p-1 ml-4 flex rounded-full hover:bg-sidebarColor-0 hover:text-white active:bg-sidebarColor-0 active:text-white"
+                                    {...provided.dragHandleProps}
+                                >
+                                    {/* <MdOutlineMoveUp className="text-base"/> */}
+                                    {/* <TbDragDrop className="text-sm"/> */}
+                                    <HiSquare2Stack className="text-base "/>
+                                </div>
+
+                                {/* Título de tabla */}
+                                <div className={` pl-2 w-full text-nowrap overflow-hidden text-ellipsis`}
+                                    onClick={() => {
+                                        task.masInformacion.setTableOpen(task.masInformacion.tableOpen ==true?false:true ); 
+                                        console.log("valores de ta",task);
+                                        task.masInformacion.getDataFromIndividualTables(task.masInformacion.typeOfRequest);
+                                    }}
+                                >
+                                    {task.nombreDeTabla}
+                                </div>
+                            </div>
+  
+
+                            <div className={`bg-orange-400 ${task.masInformacion.tableOpen?"":"hidden"}`}>
+                            <TableCustomed
+                                key={task.key}
+                                tableRows={task.filas}
+                                tableColumns={task.columnas}
+                                loading={task.masInformacion.loading}
+                                nameOfTable={task.nombreDeTabla}
+                            />
+                            </div>
+
+                        </div>
+
+
+
+                                {/* <Accordion open={task.masInformacion.tableOpen} className="" key={`acordionkey${task.key}`} >
+                                    <AccordionHeader
+                                        onClick={() => {
+                                            task.masInformacion.setTableOpen(task.masInformacion.tableOpen ==true?false:true ); 
+                                            console.log("valores de ta",task);
+                                            task.masInformacion.getDataFromIndividualTables(task.masInformacion.typeOfRequest);
+                                        }}
+                                        
+                                        className={`hover:cursor-pointer border-b-0 transition-colors font-ralewayBold text-base text-tonosOscuros-1  ${
+                                            task.masInformacion.tableOpen? "hover:!text-blue-700" : ""
+                                        }`}
+                                    >
+                                        {task.nombreDeTabla}
+                                    </AccordionHeader>
+        
+                                    <AccordionBody className="pt-0 text-base font-normal">
+                                        <TableCustomed
+                                            key={task.key}
+                                            tableRows={task.filas}
+                                            tableColumns={task.columnas}
+                                            loading={task.masInformacion.loading}
+                                        />
+                                    </AccordionBody>
+                                </Accordion> */}
+
+                    </div>
+                )}
+            </Draggable>       
+        )
+    }
+
+    const modificarColumna = (data) => {
+
+
+        console.log("Mensaje recibido", data);
+        if(data == "unaColumna"){
+            const newColumn = {
+                'column-1':{
+                    id: 'column-1',
+                    title: 'To do',
+                    taskIds: ['dashboard-1', 'dashboard-2', 'dashboard-3', 'dashboard-4','dashboard-5', 'dashboard-6', 'dashboard-7'],
+                },
+                'column-2':{
+                    id: 'column-2',
+                    title: 'In Progress',
+                    taskIds: [],
+                },
+                'column-3':{
+                    id: 'column-3',
+                    title: 'Done',
+                    taskIds: [],
+                },
+            };
+            const newColumnOrder = {...initialData, columns: newColumn, columnOrder: ['column-1']};
+            setState(newColumnOrder);
+
+
+            // state.columns
+            // if( (state.columns?.['column-2']?.length || 0 ) === 0 && (state.columns?.['column-3']?.length || 0 )===0){
+            //     // const newState = {
+            //     //     ...
+            //     // }
+            //     console.log("escogimos una columna");
+            // }
+            setNumberOfColumns(1);
+            
+        }else if(data == "dosColumnas"){
+            // if( (state.columns?.['column-1']?.length || 0 ) === 0 && (state.columns?.['column-3']?.length || 0 )===0){
+                
+            //     console.log("escogimos dos columna");
+            // }
+            const newColumn = {
+                'column-1':{
+                    id: 'column-1',
+                    title: 'To do',
+                    taskIds: ['dashboard-1', 'dashboard-2', 'dashboard-3', 'dashboard-4'],
+                },
+                'column-2':{
+                    id: 'column-2',
+                    title: 'In Progress',
+                    taskIds: ['dashboard-5', 'dashboard-6', 'dashboard-7'],
+                },
+                'column-3':{
+                    id: 'column-3',
+                    title: 'Done',
+                    taskIds: [],
+                },
+            };
+            const newColumnOrder = {...initialData, columns: newColumn, columnOrder: ['column-1','column-2']};
+            setState(newColumnOrder);
+            
+            setNumberOfColumns(2);
+        }else if(data == "tresColumnas"){
+            const newColumn = {
+                'column-1':{
+                    id: 'column-1',
+                    title: 'To do',
+                    taskIds: ['dashboard-1', 'dashboard-2', 'dashboard-3'],
+                },
+                'column-2':{
+                    id: 'column-2',
+                    title: 'In Progress',
+                    taskIds: ['dashboard-4','dashboard-5', 'dashboard-6'],
+                },
+                'column-3':{
+                    id: 'column-3',
+                    title: 'Done',
+                    taskIds: ['dashboard-7'],
+                },
+            };
+            const newColumnOrder = {...initialData, columns: newColumn, columnOrder: ['column-1','column-2', 'column-3']};
+            setState(newColumnOrder);
+
+            // if( (state.columns?.['column-1']?.length || 0 ) === 0 && (state.columns?.['column-2']?.length || 0 )===0){
+                
+            //     console.log("escogimos tres columna");
+            // }
+            
+            setNumberOfColumns(3);
+        }
+    }
     useEffect(() => {
         setSpecificFiltersDisabled(true);
         clearSelectedValuesFromSpecificFilters();
@@ -659,8 +1178,6 @@ const SidebarDashboardView = () => {
     }, [selectEntidad]);
 
 
-
-
     // Hook personalizado para Debounce
     function useDebounce(value, delay) {
         const [debouncedValue, setDebouncedValue] = useState(value);
@@ -678,19 +1195,15 @@ const SidebarDashboardView = () => {
         return debouncedValue;
     }
 
+    function verDatos(){
+        console.log(initialData);
+    }
+
 
     return(
         <>
 
-            {/* <SelectCustomedForArray  label="Producto"    valor={selectProducto}   setValor={setSelectProducto} options={optionsProducto} loading={loadingFiltroGeneral}    />
-            <SelectCustomedForArray  label="Rango de campaña"    valor={selectRangoCampanha}   setValor={setSelectRangoCampanha} options={optionsRangoCampanha} loading={loadingFiltroEspecifico}    />
-            <SelectCustomedForArray  label="Macroregiones"    valor={selectMacroRegiones}   setValor={setSelectMacroRegiones} options={optionsMacroRegiones} loading={loadingFiltroEspecifico}    />
-            <SelectCustomedForArray  label="Año de castigo"    valor={selectAnhoCastigo}   setValor={setSelectAnhoCastigo} options={optionsAnhoCastigo} loading={loadingFiltroEspecifico}    />
-            <SelectCustomedForArray  label="Moneda"    valor={selectMoneda}   setValor={setSelectMoneda} options={optionsMoneda} loading={loadingFiltroEspecifico}    />
-            <SelectCustomedForArray  label="Estado de cuenta"    valor={selectEstadoCuenta}   setValor={setSelectEstadoCuenta} options={optionsEstadoCuenta} loading={loadingFiltroEspecifico}    />
-            <SelectCustomedForArray  label="Mes castigo"    valor={selectMesCastigo}   setValor={setSelectMesCastigo} options={optionsMesCastigo} loading={loadingFiltroEspecifico}    />
-            <SelectCustomedForArray  label="Prioridad"    valor={selectMoneda}   setValor={setSelectMoneda} options={optionsMoneda} loading={loadingFiltroEspecifico}    />
-            <SelectCustomedForArray  label="Rango de edad"    valor={selectRangoEdad}   setValor={setSelectRangoEdad} options={optionsRangoEdad} loading={loadingFiltroEspecifico}    /> */}
+            <button onClick={verDatos}>presione para ver registros</button>
 
             <div className="py-5 px-7 flex flex-col h-screen">
 
@@ -703,47 +1216,15 @@ const SidebarDashboardView = () => {
                 </div>
 
 
-                {/* <div className=" border-2 border-gray-200 rounded-lg">
+
+                <div className=" border-2 border-gray-200 rounded-lg mb-5 bg-purple-600">
 
 
-                    <div className=" bg-gray-200 text-blac pl-5 flex items-center font-ralewayBold text-base h-12">
+                    <div className=" bg-gray-200 text-black pl-5 flex items-center font-ralewayBold text-base h-12">
                         FILTROS
                     </div>
 
-                    <div className="bg-white p-5">
-
-                        <div className="grid grid-cols-1 gap-5 md:grid-cols-5 2xl:grid-cols-6 ">
-                                               
-                            <h3 className="md:col-span-5 2xl:col-span-6 font-ralewaySemibold text-base text-gray-900">FILTROS GENERALES</h3>
-                            <div><DatePickerCustomed valor={selectFecha} setValor={setSelectFecha} requerido={true}/></div>
-                            <div><SelectCustomed label="Entidad *"    valor={selectEntidad}   setValor={setSelectEntidad} options={optionsEntidad} loading={loadingFiltroGeneral}   requerido={true}/></div>
-                            <div><SelectMultipleCustomed label="Cartera" valor={selectCartera}  setValor={setSelectCartera} options={optionsCartera} loading={loadingFiltroCartera}  requerido={true}/></div>
-                            <div className={`${open==true?'md:col-start-4 md:col-end-4 2xl:col-start-5 2xl:col-end-5':'hidden'}`} ><BotonClaro  className={`${open==true?'md:col-start-4 md:col-end-4 2xl:col-start-5 2xl:col-end-5':'hidden'} `} layout="LIMPIAR BÚSQUEDA" onClick={accionesDeBotonLimpiarBusqueda}/></div>
-                            <div className={`${open==true?'md:col-start-5 md:col-end-5 2xl:col-start-6 2xl:col-end-6':'hidden'}`}><BotonOscuro className={`${open==true?'md:col-start-5 md:col-end-5 2xl:col-start-6 2xl:col-end-6':'hidden'} `} layout="BUSCAR" onClick={accionesDeBotonBuscar}/></div>
-                            
-                            <div className={`md:col-span-5 2xl:col-span-6 transition-colors text-gray-900 font-ralewaySemibold flex`} onClick={()=>{setOpen(open==true?false:true);}}>  FILTROS ESPECÍFICOS <IoMdRemoveCircle className={`mt-0.5 ml-2 text-xl text-buttonColor-0  ${open==true?'hidden':''}`}/> <IoAddCircle className={`mt-0.5 ml-2 text-xl text-buttonColor-0  ${open==true?'':'hidden'}`}/> </div>
-
-                            <div className={` ${open==true?'hidden':''}`}><SelectMultipleCustomed label="Prioridad" valor={selectPrioridad}  setValor={setSelectPrioridad} options={optionsPrioridad} loading={loadingFiltroGeneral}  /></div>                               
-                            <div className={` ${open==true?'hidden':''}`}><SelectCustomed  label="Moneda"    valor={selectMoneda}   setValor={setSelectMoneda} options={optionsMoneda} loading={loadingFiltroGeneral}    /></div>                       
-                            <div className={` ${open==true?'hidden':''}`}><SelectCustomed   label="Producto"    valor={selectProducto}   setValor={setSelectProducto} options={optionsProducto} loading={loadingFiltroGeneral}    /></div>                       
-                            <div className={` ${open==true?'hidden':'md:col-start-4 md:col-end-4 2xl:col-start-5 2xl:col-end-5'} `}><BotonClaro  layout="LIMPIAR BÚSQUEDA" onClick={accionesDeBotonLimpiarBusqueda}/></div>
-                            <div className={` ${open==true?'hidden':'md:col-start-5 md:col-end-5 2xl:col-start-6 2xl:col-end-6'} `}><BotonOscuro  layout="BUSCAR" onClick={accionesDeBotonBuscar}/></div>
-
-                        </div>
-
-                    </div>
-                </div> */}
-
-
-
-                <div className=" border-2 border-gray-200 rounded-lg">
-
-
-                    <div className=" bg-gray-200 text-blac pl-5 flex items-center font-ralewayBold text-base h-12">
-                        FILTROS
-                    </div>
-
-                    <div className="bg-white p-5">
+                    <div className="bg-white p-5 ">
 
                         <div className="grid grid-cols-1 gap-5 md:grid-cols-5 2xl:grid-cols-6 ">
                                                
@@ -780,171 +1261,96 @@ const SidebarDashboardView = () => {
 
 
 
+                {
+                    // objetoDeDashboard.map((item)=>(
 
+                    //         <Accordion open={item.masInformacion.tableOpen} className="" key={item.key} >
+                    //         <AccordionHeader
+                    //             onClick={() => {
+                    //                 item.masInformacion.setTableOpen(!item.masInformacion.tableOpen); 
+                    //                 item.masInformacion.getDataFromIndividualTables(item.masInformacion.typeOfRequest);
+                    //             }}
+                    //             className={`hover:cursor-pointer border-b-0 transition-colors font-ralewayBold text-base text-tonosOscuros-1  ${
+                    //                 item.masInformacion.tableOpen? "hover:!text-blue-700" : ""
+                    //             }`}
+                    //         >
+                    //             {item.nombreDeTabla}
+                    //         </AccordionHeader>
 
-                {showGroupOfTables && <div>
-                    {/* 1: Dashboard de Estado General de Cartera */}
-                    <Accordion open={firstTableOpen} className=""  >
-                        <AccordionHeader
-                        onClick={()=>{setFirstTableOpen(firstTableOpen==true?false:true); getDataFromIndividualTables("General")}}
-                        className={`hover:cursor-pointer border-b-0  transition-colors font-ralewayBold text-base text-tonosOscuros-1 ${
-                            secondTableOpen? "hover:!text-blue-700 " : ""
-                        }`}
-                        >
-                        {
-                            selectFecha==null? ('ESTADO GENERAL DE CARTERA DEL MES'):(
-                                `ESTADO GENERAL DE CARTERA DEL MES ${selectFecha?.format('MM')} Y AÑO ${selectFecha?.format('YYYY')}`
-                            )
-                        }
+                    //         <AccordionBody className="pt-0 text-base font-normal">
+                    //             <TableCustomed
+                    //                 key={item.key}
+                    //                 tableRows={item.filas}
+                    //                 tableColumns={item.columnas}
+                    //                 loading={item.masInformacion.loading}
+                    //             />
+                    //         </AccordionBody>
+                    //         </Accordion>
 
-                        
-                        </AccordionHeader>
-
-                        <AccordionBody className="pt-0 text-base font-normal">
-                            <Tabla01EstadoGeneralDeCartera
-                                tableRows={registroPrimeraTabla}
-                                loading={loadingFirstTable}
-                            />
-                        </AccordionBody>
-                    </Accordion>
-
-                    {/* 2: Dashboard de situación de Cartera según prioridad */}
-                    <Accordion open={secondTableOpen} >
-                        <AccordionHeader
-                         onClick={()=>{setSecondTableOpen(secondTableOpen==true?false:true);getDataFromIndividualTables("Prioridad");}}
-                        className={`hover:cursor-pointer border-b-0  transition-colors font-ralewayBold text-base text-tonosOscuros-1  ${
-                            secondTableOpen? "hover:!text-blue-700" : ""
-                        }`}
-                        >
-                        SITUACIÓN DE CARTERA SEGÚN PRIORIDAD
-                        </AccordionHeader>
-
-                        <AccordionBody className="pt-0 text-base font-normal">
-                            <Tabla02SituacionDeCarteraSegunPrioridad
-                                tableRows={registroSegundaTabla}
-                                loading={loadingSecondTable}
-                            />
-                        </AccordionBody>
-                    </Accordion>
-
-                    {/* 3: Dashboard de cartera por tramo de importe*/}
-                    {/* <Accordion open={thirdTableOpen} className="mb-2 px-4">
-                        <AccordionHeader
-                        onClick={handleThirdTable}
-                        className={`border-b-0 transition-colors text-3xl font-bold   ${
-                            secondTableOpen? "hover:!text-blue-700 text-3xl " : ""
-                        }`}
-                        >
-                        Cartera por tramo de importe
-                        </AccordionHeader>
-
-                        <AccordionBody className="pt-0 text-base font-normal">
-                            <TablaCarteraPorTramoDeImporte
-                                tableRows={registroTerceraTabla}
-                                loading={loadingAllTable}
-                            />
-                            
-                        </AccordionBody>
-                    </Accordion> */}
-
-                    {/* 4: Dashboard de cartera por rango de maduración*/}
-                    <Accordion open={fourthTableOpen} className=""  >
-                        <AccordionHeader
-                        onClick={()=>{setFourthTableOpen(fourthTableOpen==true?false:true);getDataFromIndividualTables("Maduracion");}}
-
-                        className={`hover:cursor-pointer border-b-0 transition-colors font-ralewayBold text-base text-tonosOscuros-1  ${
-                            secondTableOpen? "hover:!text-blue-700" : ""
-                        }`}
-                        >
-
-                        CARTERA POR RANGO DE MADURACIÓN
-                        </AccordionHeader>
-
-                        <AccordionBody className="pt-0 text-base font-normal">
-                            <Tabla04CarteraPorRangoDeMaduracion
-                                tableRows={registroCuartaTabla}
-                                loading={loadingFourthTable}
-                            />
-                        </AccordionBody>
-                    </Accordion>
-
-                    {/* 5: Dashboard de cartera por año - mes de castigo*/}
-                    <Accordion open={fifthTableOpen} className=""  >
-                        <AccordionHeader
-                        onClick={()=>{setFifthTableOpen(fifthTableOpen==true?false:true); getDataFromIndividualTables("AÑO_CASTIGO");}}
-                        className={`hover:cursor-pointer border-b-0 transition-colors font-ralewayBold text-base text-tonosOscuros-1   ${
-                            secondTableOpen? "hover:!text-blue-700 " : ""
-                        }`}
-                        >
-                        CARTERA POR AÑO - MES DE CASTIGO
-                        </AccordionHeader>
-
-                        <AccordionBody className="pt-0 text-base font-normal">
-                            <Tabla05CarteraPorAnioMesDeCastigo
-                                tableRows={registroQuintaTabla}
-                                loading={loadingFifthTable}
-                            />
-                        </AccordionBody>
-                    </Accordion>
-
-                    {/* 6: Dashboard por rango de campaña*/}
-                    <Accordion open={sixthTableOpen} className="" >
-                        <AccordionHeader
-                        onClick={()=>{setSixthTableOpen(sixthTableOpen==true?false:true); getDataFromIndividualTables("RangoCampaña");}}
-                        className={`hover:cursor-pointer border-b-0 transition-colors font-ralewayBold text-base text-tonosOscuros-1  ${
-                            secondTableOpen? "hover:!text-blue-700" : ""
-                        }`}
-                        >
-                        DASHBOARD POR RANGO DE CAMPAÑA
-                        </AccordionHeader>
-
-                        <AccordionBody className="pt-0 text-base font-normal">
-                            <Tabla06PorRangoDeCampanha
-                                tableRows={registroSextaTabla}
-                                loading={loadingSixthTable}
-                            />
-                        </AccordionBody>
-                    </Accordion>
-
-                    {/* 7: Dashboard de cartera por tipo de producto*/}
-                    <Accordion open={seventhTableOpen} className="" >
-                        <AccordionHeader
-                        onClick={()=>{setSeventhTableOpen(seventhTableOpen==true?false:true); getDataFromIndividualTables("CodProducto");}}
-                        className={`hover:cursor-pointer border-b-0 transition-colors font-ralewayBold text-base text-tonosOscuros-1  ${
-                            secondTableOpen? "hover:!text-blue-700" : ""
-                        }`}
-                        >
-                        CARTERA POR TIPO DE PRODUCTO
-                        </AccordionHeader>
-
-                        <AccordionBody className="pt-0 text-base font-normal">
-                            <Tabla07CarteraPorTipoDeProducto
-                                tableRows={registroSetimaTabla}
-                                loading={loadingSeventhTable}
-                            />
-                        </AccordionBody>
-                    </Accordion>
-
-                    {/* 8: Dashboard de cartera por zona*/}
-                    <Accordion open={octaveTableOpen} className="" >
-                        <AccordionHeader
-                        onClick={()=>{setOctaveTableOpen(octaveTableOpen==true?false:true); getDataFromIndividualTables("MacroRegiones");}}
-                        className={`hover:cursor-pointer border-b-0 transition-colors font-ralewayBold text-base text-tonosOscuros-1  ${
-                            secondTableOpen? "hover:!text-blue-700" : ""
-                        }`}
-                        >
-                        CARTERA POR ZONA
-                        </AccordionHeader>
-
-                        <AccordionBody className="pt-0 text-base font-normal">
-                            <Tabla08CarteraPorZona
-                                tableRows={registroOctavaTabla}
-                                loading={loadingEighthTable}
-                            />
-                        </AccordionBody>
-                    </Accordion>
-                </div>
+                    // ))
                 }
+
+                {/* <h3>-------------------------------------------------------------------------------------------------------------------------</h3> */}
+                <DragDropContext onDragEnd={onDragEnd}  >
+                        <div className="flex gap-2 justify-end pr-5 mb-2">
+                            <div onClick={()=>{modificarColumna("unaColumna")}} className="rounded-full bg-pink-100 px-3  h-8 pt-1.5 justify-center items-center text-sm font-ralewayBold    hover:cursor-pointer hover:bg-pink-700">
+                                1
+                            </div>
+                            <div onClick={()=>{modificarColumna("dosColumnas")}} className="rounded-full bg-amber-100 px-3 h-8 pt-1.5 justify-center items-center text-sm font-ralewayBold hover:cursor-pointer hover:bg-amber-900">
+                                2
+                            </div>
+                            <div onClick={()=>{modificarColumna("tresColumnas")}} className="rounded-full bg-blue-100 px-3 h-8 pt-1.5 justify-center items-center text-sm font-ralewayBold hover:cursor-pointer hover:bg-blue-900">
+                                3
+                            </div>
+                        </div>
+                        <div className={`${numberOfColumns==1?"grid-cols-1":""} ${numberOfColumns==2?"grid-cols-2":""} ${numberOfColumns==3?"grid-cols-3":""} grid gap-4`}>
+                            {
+                                state.columnOrder.map( (columnId) =>{
+                                    const column = state.columns[columnId];
+                                    // const tasks = column.taskIds.map( taskId => initialData.tasks[taskId])
+                                    // const tasks = column.taskIds.map( taskId => initialData.tasks[taskId])
+                                    const tasks = column.taskIds.map( taskId => objetoDeDashboardTwo[taskId])
+                                    return <Column key={column.id} column={column} tasks={tasks}/>
+                                })
+                            }
+                        </div>
+                    
+                </DragDropContext>
+
+
+
+                {/* <h3>-------------------------------------------------------------------------------------------------------------------------</h3> */}
+
+                {
+                //     showGroupOfTables && <div>
+
+                //     <Accordion open={fourthTableOpen} className=""  >
+                //         <AccordionHeader
+                //             onClick={()=>{setFourthTableOpen(fourthTableOpen==true?false:true); getDataFromIndividualTables("Maduracion");}}
+                //             className={`hover:cursor-pointer border-b-0 transition-colors font-ralewayBold text-base text-tonosOscuros-1  ${
+                //                 secondTableOpen? "hover:!text-blue-700" : ""
+                //             }`}
+                //         >
+                //             CARTERA POR RANGO DE MADURACIÓN
+                //         </AccordionHeader>
+
+                //         <AccordionBody className="pt-0 text-base font-normal">
+                //             <TableCustomed
+                //                 tableRows={[]}
+                //                 tableColumns={[]}
+                //                 loading={false}
+                //             />
+                //             {/* <Tabla04CarteraPorRangoDeMaduracion
+                //                 tableRows={registroCuartaTabla}
+                //                 loading={loadingFourthTable}
+                //             /> */}
+                //         </AccordionBody>
+                //     </Accordion>
+
+                // </div>
+                }
+
+
                 
                 {!showGroupOfTables &&               
                 <div className={`h-full  flex items-center justify-center`}>
@@ -1013,3 +1419,8 @@ const ErrorToken = (error, dispatch) => {
   
     return null; // Aquí se retorna JSX
 };
+
+
+// Descripción: Funciones para manejar las funcionalidades de drag and drop 
+ 
+

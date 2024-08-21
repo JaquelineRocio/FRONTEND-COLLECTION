@@ -2,14 +2,19 @@ import DataTable from 'react-data-table-component';
 import { Chip } from "@material-tailwind/react";
 import MoonLoader from "react-spinners/MoonLoader";
 import PercentageBar from './PercentageBar';
+/**
+ * tableRows, son las filas que se integrarán a la tabla
+ * tableColumns, son los titulos de las columnas
+ */
 
-export default function Tabla01EstadoGeneralDeCartera({tableRows, loading}) {
-// console.log("mostrar filas de priemra tabla", tableRows);
+export default function TableCustomed({tableRows, tableColumns = [], loading = false, nameOfTable=null}) {
+	// console.log("entrada registros tabla dos: ", tableRows);
+	
 	return (
 		<DataTable
 			// title="Dashboard de cartera por tramo de importe"
-			columns={columns}
-			data={buildRows(tableRows)}
+			columns={tableColumns}
+			data={buildRows(tableRows,nameOfTable)}
 			progressPending={loading}
 			progressComponent={<CustomLoader />}
 			pagination
@@ -19,36 +24,70 @@ export default function Tabla01EstadoGeneralDeCartera({tableRows, loading}) {
 			// onChangePage={handlePageChange}
 			conditionalRowStyles={conditionalRowStyles}
 			customStyles={customStyles}
+			paginationRowsPerPageOptions={[1,2,3,4,5,10, 15, 20, 25, 30]}
+			paginationPerPage={5} 
 		/>
 	);
 }
 
-const buildRows = (rowsInput) => {
-	if (rowsInput && Object.keys(rowsInput).length > 0) {
-	const rowsOutput = []
-
-	rowsInput?.registros?.map((bloque)=>{
-		// Arma las filas "fila"
-		bloque = {...bloque, tipo: "fila"}
-		rowsOutput.push(bloque);
-	}) || []
-
-	// Arma la fila "total"
-	rowsOutput.push({...rowsInput.total[0], tipo: "total"});
-
-	return rowsOutput;
+/**
+ *  * Esta funcion une todas las filas entregadas por el backend. el resultado es una coleccion (array de objetos) 
+ */
+const buildRows = (rowsInput,nameOfTable) => {
+	if(nameOfTable=="ESTADO GENERAL DE CARTERA DEL MES (PONER MES Y AÑO)"){
+		if (rowsInput && Object.keys(rowsInput).length > 0) {
+			const rowsOutput = []
+		
+			rowsInput?.registros?.map((bloque)=>{
+				// Arma las filas "fila"
+				bloque = {...bloque, tipo: "fila"}
+				rowsOutput.push(bloque);
+			}) || []
+		
+			// Arma la fila "total"
+			rowsOutput.push({...rowsInput.total[0], tipo: "total"});
+		
+			return rowsOutput;
+			}
+	}else{
+		if (rowsInput && Object.keys(rowsInput).length > 0) {
+			// console.log("entrada build tabla prioridad ",rowsInput);
+			const rowsOutput = []
+			// registros
+			rowsInput?.registros?.map((bloque)=>{
+		
+				// Arma la primera fila "suma"
+				const objetoTotal = bloque?.total || {}
+				rowsOutput.push({...objetoTotal, tipo: "suma", codTipo: objetoTotal.desCartera})
+		
+				// Arma las filas "fila"
+				bloque?.subRegistros?.map((row)=>{
+					row = {...row, tipo: "fila", porcentajeTotalPagos: bloque?.total["pagos"]}
+					rowsOutput.push(row)
+				}) || {}
+		
+				
+		
+			}) || []
+		
+			// totalGeneral
+			rowsOutput.push({...rowsInput.totalGeneral[0], tipo: "total", codTipo: "TOTAL GENERAL"});
+		
+			return rowsOutput;
+		}
 	}
+
+
 }
 
 const columns = [
 	{
-		// HECHO
-		name: <div>CARTERA</div>,
-		selector: row => row.desCartera,
+		name: 'PRIORIDAD',
+		selector: row => row.codTipo,
 		// sortable: true,
 		cell: row => (
-			<div title={row.desCartera} className='pl-4'>
-				{row.desCartera}
+			<div title={row.codTipo} className='pl-4'>
+				{row.codTipo}
 			</div>
 		),
 	},
@@ -189,86 +228,6 @@ const columns = [
 ];
 
 
-const CustomRowPagos = ({row}) => (
-
-			<div
-				// title={row.pagos}
-				// data-tag="allowRowEvents"
-				// style={{ color: 'grey', overflow: 'hidden', whiteSpace: 'wrap', textOverflow: 'ellipses' }}
-			>
-				
-				{
-					row.tipo == "suma" && row.pagos
-				}
-
-				{
-					row.tipo === "fila" && (row.pagos / row.porcentajeTotalPagos < 0.002) && (
-						// <Chip size="sm" color="red" value={row.pagos} />
-						<Chip size="sm" className="bg-red-200 text-black border-2 border-red-600" value={row.pagos} />
-					)
-				}
-
-				{
-				row.tipo === "fila" && ((row.pagos / row.porcentajeTotalPagos >= 0.002)&&(row.pagos / row.porcentajeTotalPagos < 0.0029)) && (
-						// <Chip size="sm" color="amber" value={row.pagos} />
-						<Chip size="sm" className="bg-yellow-200 text-black border-2 border-yellow-600" value={row.pagos} />
-					)
-				}
-
-				{
-					row.tipo === "fila" && (row.pagos / row.porcentajeTotalPagos > 0.0029) && (
-						<Chip size="sm" className="bg-lime-200 text-black border-2 border-lime-500" value={row.pagos} />
-						// <Chip size="sm" className="bg-red-200 text-black border-2 border-red-600" value={row.pagos} />
-						// <div  className="bg-teal-100 p-2 flex text-black border-2 border-teal-100"> {row.pagos}</div>
-					)
-				}
-
-				{
-					row.tipo == "total" && row.pagos
-				}
-
-			</div>
-
-);
-
-const CustomRowPagosSecondVersion = ({row}) => {
-
-	
-	return(
-	<>
-	{/* {row.pagos} */}
-		
-		{
-			row.tipo != "total" && row.numPagos
-		}
-
-		{
-			row.tipo === "fila" && (row.numPagos / row.porcentajeTotalPagos < 0.002) && (
-				<CustomBar children={row.numPagos} color="red" />
-			)
-		}
-
-		{
-			row.tipo === "fila" && ((row.numPagos / row.porcentajeTotalPagos >= 0.002)&&(row.pagos / row.porcentajeTotalPagos < 0.0029)) && (
-				<CustomBar children={row.numPagos} color="yellow" />
-			)
-		}
-
-		{
-			row.tipo === "fila" && (row.numPagos / row.porcentajeTotalPagos > 0.0029) && (
-				// <Chip size="sm" className="bg-lime-200 text-black border-2 border-lime-500" value={row.pagos} />
-				<CustomBar children={row.numPagos} color="green" />
-				// <h3>hola</h3>
-			)
-		}
-
-		{
-			row.tipo == "total" && row.numPagos
-		}
-
-	</>
-	)
-};
 
 const CustomBar = ({children, color}) => {
 
@@ -312,22 +271,6 @@ const CustomBar = ({children, color}) => {
 	);
 }
 
-const AdicionaComas = ({ value }) => {
-    if (value === undefined || value === null) {
-        return '';
-    }
-
-    // Convertir a número si es una cadena
-    const numero = typeof value === 'number' ? value : parseFloat(value.replace(/,/g, ''));
-
-    // Verificar si la conversión fue exitosa
-    if (isNaN(numero)) {
-        return value;
-    }
-
-    return numero.toLocaleString('en-US');
-};
-
 const CustomRowCD = ({row}) => (
 	<>		
 		{
@@ -362,6 +305,22 @@ const CustomRowPercentageEficiencia = ({row}) => (
 	
 );
 
+const AdicionaComas = ({ value }) => {
+    if (value === undefined || value === null) {
+        return '';
+    }
+
+    // Convertir a número si es una cadena
+    const numero = typeof value === 'number' ? value : parseFloat(value.replace(/,/g, ''));
+
+    // Verificar si la conversión fue exitosa
+    if (isNaN(numero)) {
+        return value;
+    }
+
+    return numero.toLocaleString('en-US');
+};
+
 const customStyles = {
 	// rows: {
 	// 	style: {
@@ -370,15 +329,15 @@ const customStyles = {
 	// },
 	headCells: {
 		style: {
-			// paddingLeft: '8px', // override the cell padding for head cells
-			// paddingRight: '8px',
-			backgroundColor: '#064469', // Usar el tono 500 del color rojo -------
+			paddingLeft: '8px', // override the cell padding for head cells
+			paddingRight: '8px',
+			backgroundColor: '#064469', // Usar el tono 500 del color rojo
 			fontSize: '14px',
 			color: '#FFFFFF',
 			textAlign: 'center', // Centrar el texto
-			justifyContent: 'center', // Asegura que el contenido esté centrado	
-			// whiteSpace: 'nowrap',
-			textOverflow: 'ellipsis',		
+			justifyContent: 'center', // Asegura que el contenido esté centrado			
+			// whiteSpace: 'nowrap', // Evita el ajuste de línea
+			textOverflow: 'ellipsis',
 		},
 	},
 	cells: {
@@ -388,12 +347,9 @@ const customStyles = {
 			textAlign: 'center', // Centrar el texto en las celdas de datos
 			justifyContent: 'center', // Asegura que el contenido esté centrado
 			whiteSpace: 'nowrap',
-
-			
 		},
 	},
 };
-
 
 const conditionalRowStyles = [
 	{
@@ -406,10 +362,9 @@ const conditionalRowStyles = [
 			// 	cursor: 'pointer',
 			// },
 		},
-
 	},
 	{
-		when: row => row.tipo == "total",	//-----
+		when: row => row.tipo == "total",
 		style: {
 			backgroundColor: '#9CCDDB',
 			color: 'black',

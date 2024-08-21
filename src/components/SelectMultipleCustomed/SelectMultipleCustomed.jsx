@@ -12,7 +12,7 @@ const SelectMultipleCustomed = ({
     requerido = false,
 }) =>{
 
-    // console.log("estamos en select multiple", options);
+    console.log("Entrada de valores a select multiple", options);
     // const [value, setValue] = useState(valor);
 
     // const [selectLoading, setSelectLoading] = useState(false);

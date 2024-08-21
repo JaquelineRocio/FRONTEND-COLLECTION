@@ -13,6 +13,7 @@
     "@emotion/react": "^11.13.0",
     "@emotion/styled": "^11.13.0",
     "@fontsource/roboto": "^5.0.13",
+    "@hello-pangea/dnd": "^16.6.0",
     "@heroicons/react": "^2.1.4",
     "@material-tailwind/react": "^2.1.9",
     "@mui/icons-material": "^5.15.20",
