@@ -110,7 +110,7 @@ const SidebarDashboardView = () => {
     const [selectEntidad, setSelectEntidad] = useState('');
     const [selectCartera, setSelectCartera] = useState([]);
     // Filtros Especifico
-    const [selectProducto, setSelectProducto] = useState('');
+    const [selectProducto, setSelectProducto] = useState([]);
     const [selectRangoCampanha, setSelectRangoCampanha] = useState([]);
     const [selectMacroRegiones, setSelectMacroRegiones] = useState([]);
     const [selectAnhoCastigo, setSelectAnhoCastigo] = useState('');
@@ -205,7 +205,7 @@ const SidebarDashboardView = () => {
         setSelectEntidad(''); 
         setSelectCartera([]); 
         // setSelectMes('');
-        setSelectProducto('');
+        setSelectProducto([]);
         setSelectRangoCampanha([]);
         setSelectMacroRegiones([]);
         setSelectAnhoCastigo('');     
@@ -221,7 +221,7 @@ const SidebarDashboardView = () => {
 
     // Limpia valores seleccionados de filtros especificos
     function clearSelectedValuesFromSpecificFilters(){
-        setSelectProducto('');
+        setSelectProducto([]);
         setSelectRangoCampanha([]);
         setSelectMacroRegiones([]);
         setSelectAnhoCastigo('');     
@@ -278,8 +278,8 @@ const SidebarDashboardView = () => {
         // let codMoneda = null;
         // codMoneda = selectMoneda == "" ? null : selectMoneda;
 
-        let codProducto = null;
-        codProducto = selectProducto == "" ? null : selectProducto
+        // let codProducto = null;
+        // codProducto = selectProducto == "" ? null : selectProducto
 
         // let RangoCampanha = null;
         // RangoCampanha = selectRangoCampanha == "" ? null : selectRangoCampanha
@@ -319,7 +319,7 @@ const SidebarDashboardView = () => {
         // }
 
         const payload = {
-            producto: codProducto,
+            producto: selectProducto,
             campaña: selectRangoCampanha,
             macroRegiones: selectMacroRegiones,
             añoCastigo: ANHO_CASTIGO,
@@ -1243,7 +1243,7 @@ const SidebarDashboardView = () => {
                             <div className={` ${open==true?'hidden':''}`}><SelectCustomed  label="Moneda"    valor={selectMoneda}   setValor={setSelectMoneda} options={optionsMoneda} loading={loadingFiltroGeneral}    /></div>                       
                             <div className={` ${open==true?'hidden':''}`}><SelectCustomed   label="Producto"    valor={selectProducto}   setValor={setSelectProducto} options={optionsProducto} loading={loadingFiltroGeneral}    /></div> */}
 
-                            <div className={`${open==true?'hidden':''}`}><SelectCustomedForArray  desactivado={specificFiltersDisabled} label="Producto" valor={selectProducto} setValor={setSelectProducto} options={optionsProducto} loading={loadingFiltroEspecifico}/></div>
+                            <div className={`${open==true?'hidden':''}`}><SelectMultipleCustomed  desactivado={specificFiltersDisabled} label="Producto" valor={selectProducto} setValor={setSelectProducto} options={optionsProducto} loading={loadingFiltroEspecifico}/></div>
                             <div className={`${open==true?'hidden':''}`}><SelectMultipleCustomed desactivado={specificFiltersDisabled} label="Rango de campaña" valor={selectRangoCampanha} setValor={setSelectRangoCampanha} options={optionsRangoCampanha} loading={loadingFiltroEspecifico}/></div>
                             <div className={`${open==true?'hidden':''}`}><SelectMultipleCustomed desactivado={specificFiltersDisabled} label="Macroregiones" valor={selectMacroRegiones} setValor={setSelectMacroRegiones} options={optionsMacroRegiones} loading={loadingFiltroEspecifico}/></div>
                             <div className={`md:col-start-1 md:col-end-1 ${open==true?'hidden':''}`}><SelectCustomedForArray desactivado={specificFiltersDisabled} label="Año de castigo" valor={selectAnhoCastigo} setValor={setSelectAnhoCastigo} options={optionsAnhoCastigo} loading={loadingFiltroEspecifico} /></div>

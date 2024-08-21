@@ -34,9 +34,7 @@ function Sidebar({openSidebar}){
                     </ul>
                     <div className="flex flex-col items-center mt-6 mb-6">
                             <img src={globalcorebankia} className={`w-14`}/>
-                            
                     </div>
-
             </div>
         </>
     )
