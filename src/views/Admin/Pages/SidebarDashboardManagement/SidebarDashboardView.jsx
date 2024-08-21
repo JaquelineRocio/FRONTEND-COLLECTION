@@ -110,15 +110,15 @@ const SidebarDashboardView = () => {
     const [selectEntidad, setSelectEntidad] = useState('');
     const [selectCartera, setSelectCartera] = useState([]);
     // Filtros Especifico
-    const [selectProducto, setSelectProducto] = useState([]);
+    const [selectProducto, setSelectProducto] = useState('');
     const [selectRangoCampanha, setSelectRangoCampanha] = useState([]);
     const [selectMacroRegiones, setSelectMacroRegiones] = useState([]);
-    const [selectAnhoCastigo, setSelectAnhoCastigo] = useState([]);
-    const [selectMoneda, setSelectMoneda] = useState([])
+    const [selectAnhoCastigo, setSelectAnhoCastigo] = useState('');
+    const [selectMoneda, setSelectMoneda] = useState('')
     const [selectEstadoCuenta, setSelectEstadoCuenta] = useState([]);
-    const [selectMesCastigo, setSelectMesCastigo] = useState([]);
+    const [selectMesCastigo, setSelectMesCastigo] = useState('');
     // const [selectPrioridad, setSelectPrioridad] = useState([]);
-    const [selectPrioridad, setSelectPrioridad] = useState([]);
+    const [selectPrioridad, setSelectPrioridad] = useState('');
     const [selectRangoEdad, setSelectRangoEdad] = useState([]);
 
 
@@ -205,15 +205,15 @@ const SidebarDashboardView = () => {
         setSelectEntidad(''); 
         setSelectCartera([]); 
         // setSelectMes('');
-        setSelectProducto([]);
+        setSelectProducto('');
         setSelectRangoCampanha([]);
         setSelectMacroRegiones([]);
-        setSelectAnhoCastigo([]);     
-        setSelectMoneda([]);
+        setSelectAnhoCastigo('');     
+        setSelectMoneda('');
         setSelectEstadoCuenta([]);
-        setSelectMesCastigo([]);
+        setSelectMesCastigo('');
         // setSelectPrioridad([]);
-        setSelectPrioridad([]);
+        setSelectPrioridad('');
         setSelectRangoEdad([]);
 
          
@@ -221,14 +221,14 @@ const SidebarDashboardView = () => {
 
     // Limpia valores seleccionados de filtros especificos
     function clearSelectedValuesFromSpecificFilters(){
-        setSelectProducto([]);
+        setSelectProducto('');
         setSelectRangoCampanha([]);
         setSelectMacroRegiones([]);
-        setSelectAnhoCastigo([]);     
-        setSelectMoneda([]);
+        setSelectAnhoCastigo('');     
+        setSelectMoneda('');
         setSelectEstadoCuenta([]);
-        setSelectMesCastigo([]);
-        setSelectPrioridad([]);
+        setSelectMesCastigo('');
+        setSelectPrioridad('');
         setSelectRangoEdad([]);
     }
 
@@ -278,8 +278,8 @@ const SidebarDashboardView = () => {
         // let codMoneda = null;
         // codMoneda = selectMoneda == "" ? null : selectMoneda;
 
-        // let codProducto = null;
-        // codProducto = selectProducto == "" ? null : selectProducto
+        let codProducto = null;
+        codProducto = selectProducto == "" ? null : selectProducto
 
         // let RangoCampanha = null;
         // RangoCampanha = selectRangoCampanha == "" ? null : selectRangoCampanha
@@ -287,20 +287,20 @@ const SidebarDashboardView = () => {
         // let MacroRegiones = null;
         // MacroRegiones = selectMacroRegiones == "" ? null : selectMacroRegiones
 
-        // let ANHO_CASTIGO = null;
-        // ANHO_CASTIGO = selectAnhoCastigo == "" ? null : selectAnhoCastigo
+        let ANHO_CASTIGO = null;
+        ANHO_CASTIGO = selectAnhoCastigo == "" ? null : selectAnhoCastigo
 
-        // let CodMoneda = null;
-        // CodMoneda = selectMoneda == "" ? null : selectMoneda
+        let CodMoneda = null;
+        CodMoneda = selectMoneda == "" ? null : selectMoneda
 
         // let EstadoCuenta = null;
         // EstadoCuenta = selectEstadoCuenta == "" ? null : selectEstadoCuenta
 
-        // let MES_CASTIGO = null;
-        // MES_CASTIGO = selectMesCastigo == "" ? null : selectMesCastigo
+        let MES_CASTIGO = null;
+        MES_CASTIGO = selectMesCastigo == "" ? null : selectMesCastigo
 
-        // let CodPrioridad = null;
-        // CodPrioridad = selectPrioridad == "" ? null : selectPrioridad
+        let CodPrioridad = null;
+        CodPrioridad = selectPrioridad == "" ? null : selectPrioridad
 
         // let rangoEdad = null;
         // rangoEdad = selectRangoEdad == "" ? null : selectRangoEdad
@@ -319,14 +319,14 @@ const SidebarDashboardView = () => {
         // }
 
         const payload = {
-            producto: selectProducto,
+            producto: codProducto,
             campaña: selectRangoCampanha,
             macroRegiones: selectMacroRegiones,
-            añoCastigo: selectAnhoCastigo,
-            moneda: selectMoneda,
+            añoCastigo: ANHO_CASTIGO,
+            moneda: CodMoneda,
             estadoCuenta: selectEstadoCuenta,
-            mesCastigo: selectMesCastigo,
-            prioridad:selectPrioridad,
+            mesCastigo: MES_CASTIGO,
+            prioridad:CodPrioridad,
             rangoEdad:selectRangoEdad,
             tipo: "General"
         }
@@ -445,8 +445,8 @@ const SidebarDashboardView = () => {
             }
 
             let {data, error} = await testFetch.post(payload,`/admin/tablon/filtros-especificos`); 
-            console.log("valores de selects obtenidos (data)", data);
-            console.log("valores de selects obtenidos (error)", error);
+            // console.log("valores de selects obtenidos (data)", data);
+            // console.log("valores de selects obtenidos (error)", error);
 
 
             // Modifica valores para Producto
@@ -455,15 +455,12 @@ const SidebarDashboardView = () => {
                 label: valor  // Y como etiqueta
             }));
 
-            console.log("valore de RangoCampanha", Producto);
 
             // Modifica valores para RangoCampanha
             const RangoCampanha = data?.data?.RangoCampaña?.map(valor => ({
                 value: valor, // Usar la misma valor como valor
                 label: valor  // Y como etiqueta
             }));
-
-            console.log("valore de RangoCampanha", RangoCampanha);
 
 
             // Modifica valores para Macro regiones
@@ -472,15 +469,12 @@ const SidebarDashboardView = () => {
                 label: valor  // Y como etiqueta
             }));
 
-            console.log("valore de MacroRegiones", MacroRegiones);
-          
             // Modifica valores para AnhoCastigo
             const AnhoCastigo = data?.data?.AÑO_CASTIGO?.map(valor => ({
                 value: valor, // Usar la misma valor como valor
                 label: valor  // Y como etiqueta
             }));
 
-            console.log("valore de AnhoCastigo", AnhoCastigo);
 
             // Modifica valores para Moneda
             const Moneda = data?.data?.CodMoneda?.map(valor => ({
@@ -975,10 +969,10 @@ const SidebarDashboardView = () => {
         // console.log("las columnas", column);
         // console.log("los tasks",tasks );
         return(
-            <div className="rounded">
+            <div className="rounded overflow-hidden">
                 {/* <h3>{column.title}</h3> */}
                 <Droppable droppableId={column.id}>
-                    {(provided, snapshot)=>{ console.log("valor snapshot",snapshot, " columna: ",column.id); return(
+                    {(provided, snapshot)=>{ return(
                         <div
                             className={`h-full ${numberOfColumns>1?'bg-tonosOscuros-0/10 px-4 pt-4':''} ${snapshot.isDraggingOver?'bg-tonosOscuros-0/20':''}`}
                             ref={provided.innerRef}
@@ -1213,9 +1207,6 @@ const SidebarDashboardView = () => {
 
     return(
         <>
-
-            <button onClick={verDatos}>presione para ver registros</button>
-
             <div className="py-5 px-7 flex flex-col h-screen">
 
                 <div className=" flex mb-5">
@@ -1252,14 +1243,14 @@ const SidebarDashboardView = () => {
                             <div className={` ${open==true?'hidden':''}`}><SelectCustomed  label="Moneda"    valor={selectMoneda}   setValor={setSelectMoneda} options={optionsMoneda} loading={loadingFiltroGeneral}    /></div>                       
                             <div className={` ${open==true?'hidden':''}`}><SelectCustomed   label="Producto"    valor={selectProducto}   setValor={setSelectProducto} options={optionsProducto} loading={loadingFiltroGeneral}    /></div> */}
 
-                            <div className={`${open==true?'hidden':''}`}><SelectMultipleCustomed desactivado={specificFiltersDisabled} label="Producto" valor={selectProducto} setValor={setSelectProducto} options={optionsProducto} loading={loadingFiltroEspecifico}/></div>
+                            <div className={`${open==true?'hidden':''}`}><SelectCustomedForArray  desactivado={specificFiltersDisabled} label="Producto" valor={selectProducto} setValor={setSelectProducto} options={optionsProducto} loading={loadingFiltroEspecifico}/></div>
                             <div className={`${open==true?'hidden':''}`}><SelectMultipleCustomed desactivado={specificFiltersDisabled} label="Rango de campaña" valor={selectRangoCampanha} setValor={setSelectRangoCampanha} options={optionsRangoCampanha} loading={loadingFiltroEspecifico}/></div>
                             <div className={`${open==true?'hidden':''}`}><SelectMultipleCustomed desactivado={specificFiltersDisabled} label="Macroregiones" valor={selectMacroRegiones} setValor={setSelectMacroRegiones} options={optionsMacroRegiones} loading={loadingFiltroEspecifico}/></div>
-                            <div className={`md:col-start-1 md:col-end-1 ${open==true?'hidden':''}`}><SelectMultipleCustomed desactivado={specificFiltersDisabled} label="Año de castigo" valor={selectAnhoCastigo} setValor={setSelectAnhoCastigo} options={optionsAnhoCastigo} loading={loadingFiltroEspecifico} /></div>
-                            <div className={`md:col-start-2 md:col-end-2 ${open==true?'hidden':''}`}><SelectMultipleCustomed desactivado={specificFiltersDisabled} label="Moneda" valor={selectMoneda} setValor={setSelectMoneda} options={optionsMoneda} loading={loadingFiltroEspecifico}/></div>
+                            <div className={`md:col-start-1 md:col-end-1 ${open==true?'hidden':''}`}><SelectCustomedForArray desactivado={specificFiltersDisabled} label="Año de castigo" valor={selectAnhoCastigo} setValor={setSelectAnhoCastigo} options={optionsAnhoCastigo} loading={loadingFiltroEspecifico} /></div>
+                            <div className={`md:col-start-2 md:col-end-2 ${open==true?'hidden':''}`}><SelectCustomedForArray desactivado={specificFiltersDisabled} label="Moneda" valor={selectMoneda} setValor={setSelectMoneda} options={optionsMoneda} loading={loadingFiltroEspecifico}/></div>
                             <div className={`md:col-start-3 md:col-end-3 ${open==true?'hidden':''}`}><SelectMultipleCustomed desactivado={specificFiltersDisabled} label="Estado de cuenta" valor={selectEstadoCuenta} setValor={setSelectEstadoCuenta} options={optionsEstadoCuenta} loading={loadingFiltroEspecifico} /></div>
-                            <div className={`md:col-start-1 md:col-end-1 ${open==true?'hidden':''}`}><SelectMultipleCustomed desactivado={specificFiltersDisabled} label="Mes castigo" valor={selectMesCastigo} setValor={setSelectMesCastigo} options={optionsMesCastigo} loading={loadingFiltroEspecifico} /></div>
-                            <div className={`md:col-start-2 md:col-end-2 ${open==true?'hidden':''}`}><SelectMultipleCustomed desactivado={specificFiltersDisabled} label="Prioridad" valor={selectPrioridad} setValor={setSelectPrioridad} options={optionsPrioridad} loading={loadingFiltroEspecifico} /></div>
+                            <div className={`md:col-start-1 md:col-end-1 ${open==true?'hidden':''}`}><SelectCustomedForArray desactivado={specificFiltersDisabled} label="Mes castigo" valor={selectMesCastigo} setValor={setSelectMesCastigo} options={optionsMesCastigo} loading={loadingFiltroEspecifico} /></div>
+                            <div className={`md:col-start-2 md:col-end-2 ${open==true?'hidden':''}`}><SelectCustomedForArray desactivado={specificFiltersDisabled} label="Prioridad" valor={selectPrioridad} setValor={setSelectPrioridad} options={optionsPrioridad} loading={loadingFiltroEspecifico} /></div>
                             {/*<div className={`                         ${open==true?'hidden':''}`}><SelectMultipleCustomed desactivado={specificFiltersDisabled} label="Prioridad" valor={selectPrioridad} setValor={setSelectPrioridad} options={optionsPrioridad} loading={loadingFiltroGeneral} /></div>*/}
                             <div className={`md:col-start-3 md:col-end-3 ${open==true?'hidden':''}`}><SelectMultipleCustomed desactivado={specificFiltersDisabled} label="Rango de edad" valor={selectRangoEdad} setValor={setSelectRangoEdad} options={optionsRangoEdad} loading={loadingFiltroEspecifico}/></div>
                             <div className={`${open==true?'hidden':'md:col-start-4 md:col-end-4 2xl:col-start-5 2xl:col-end-5'} `}><BotonClaro  layout="LIMPIAR BÚSQUEDA" onClick={accionesDeBotonLimpiarBusqueda}/></div>
@@ -1302,6 +1293,8 @@ const SidebarDashboardView = () => {
                 }
 
                 {/* <h3>-------------------------------------------------------------------------------------------------------------------------</h3> */}
+                {
+                showGroupOfTables && <div>
                 <DragDropContext onDragEnd={onDragEnd}  >
                         <div className="flex gap-2 justify-end pr-5 mb-2">
                             <div onClick={()=>{modificarColumna("unaColumna")}} className="rounded-full bg-pink-100 px-3  h-8 pt-1.5 justify-center items-center text-sm font-ralewayBold    hover:cursor-pointer hover:bg-pink-700">
@@ -1314,7 +1307,7 @@ const SidebarDashboardView = () => {
                                 3
                             </div>
                         </div>
-                        <div className={`${numberOfColumns==1?"grid-cols-1":""} ${numberOfColumns==2?"grid-cols-2":""} ${numberOfColumns==3?"grid-cols-3":""} grid gap-4`}>
+                        <div className={`${numberOfColumns==1?"grid-cols-1":""} ${numberOfColumns==2?"grid-cols-2":""} ${numberOfColumns==3?"grid-cols-3":""} grid gap-4 `}>
                             {
                                 state.columnOrder.map( (columnId) =>{
                                     const column = state.columns[columnId];
@@ -1328,8 +1321,8 @@ const SidebarDashboardView = () => {
                     
                 </DragDropContext>
 
-
-
+                </div>
+                }
                 {/* <h3>-------------------------------------------------------------------------------------------------------------------------</h3> */}
 
                 {

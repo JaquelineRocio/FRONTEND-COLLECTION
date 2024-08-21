@@ -9,12 +9,13 @@ import entidad from './../../../../public/imgs/sidebarIcons/entidad.svg';
 import accesos from './../../../../public/imgs/sidebarIcons/accesos.svg';
 import contactoeficazicono from './../../../../public/imgs/iconoscontactoeficaz/contactoeficazicono.svg';
 import contactoeficazcompleto from './../../../../public/imgs/iconoscontactoeficaz/contactoeficazcompleto.svg';
+import globalcorebankia from './../../../../public/imgs/miscelania/globalcorebankia.svg';
 
 function Sidebar({openSidebar}){
     
     return(
         <>
-            <div className={`bg-sidebarColor-0 fixed left-0 top-0 h-full w-[300px] z-50 overflow-y-auto ${openSidebar?'':' w-[90px] ml-[210px] transition-all'} style={{scrollbarWidth: 'thin', scrollbarColor: '#888 #f1f1f1'}} `}>
+            <div className={`flex flex-col justify-between bg-sidebarColor-0 fixed left-0 top-0 h-full w-[300px] z-50 overflow-y-auto ${openSidebar?'':' w-[90px] ml-[210px] transition-all'} style={{scrollbarWidth: 'thin', scrollbarColor: '#888 #f1f1f1'}} `}>
                     <ul>
 
                         <div className="flex flex-col items-center mt-6 mb-6">
@@ -31,8 +32,12 @@ function Sidebar({openSidebar}){
                         <ListItem open={openSidebar} to="gestionaccesos"        src={accesos}      name="Gestión de accesos"/>
                        
                     </ul>
+                    <div className="flex flex-col items-center mt-6 mb-6">
+                            <img src={globalcorebankia} className={`w-14`}/>
+                            
+                    </div>
 
-                </div>
+            </div>
         </>
     )
 }

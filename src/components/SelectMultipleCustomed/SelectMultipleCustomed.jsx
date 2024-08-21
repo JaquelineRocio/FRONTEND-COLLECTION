@@ -10,9 +10,10 @@ const SelectMultipleCustomed = ({
     loading = false,
     options = [],
     requerido = false,
+    desactivado = false,
 }) =>{
 
-    console.log("Entrada de valores a select multiple", options);
+    // console.log("Entrada de valores a select multiple", options);
     // const [value, setValue] = useState(valor);
 
     // const [selectLoading, setSelectLoading] = useState(false);
@@ -26,6 +27,13 @@ const SelectMultipleCustomed = ({
         setValor([]);
     }
 
+    const handleDisabled = () => {
+        if(desactivado == false && loading == false){ 
+          return false; 
+        }else{
+          return true; 
+        }  
+    }
     // useEffect(()=>{
     //     // if(selectLoading){
     //         console.log("el valor es verdadero");
@@ -99,7 +107,7 @@ const SelectMultipleCustomed = ({
                     // fontFamily: ['Raleway-Bold'],  // Aplicando Raleway-Medium
                 }}
                 // slotProps={{ textField: { size: 'small', } }}
-                disabled={loading}
+                disabled={handleDisabled()}
                 >
                     
                     {options?.map((item) => (
