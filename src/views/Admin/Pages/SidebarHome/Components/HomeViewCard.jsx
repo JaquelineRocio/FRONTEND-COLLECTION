@@ -5,7 +5,7 @@ import {
     Typography,
   } from "@material-tailwind/react";
   import logoContactoEficaz from '../../../../../../public/fondo.svg'
-  import globalcorebankia from './../../../../../../public/imgs/miscelania/globalcorebankia.svg';
+  import globalcorebankia from './../../../../../../public/imgs/miscelania/globalcorebankiaextendtext.svg';
   export function HomeViewCard() {
     return (
       <>
