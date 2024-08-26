@@ -4,8 +4,11 @@ const BotonClaro = ({layout = "INGRESE NOMBRE", className=null, onClick=null}) =
             <button className = {`   
               border-buttonColor-0
               text-buttonColor-0 h-10
-
+                 flex
+                 justify-center
+                 items-center 
                 px-2
+                py-7
                 font-ralewayBold
                 text-sm
                 rounded 

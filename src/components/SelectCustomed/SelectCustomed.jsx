@@ -37,11 +37,11 @@ const SelectCustomed = ({
             <InputLabel id="demo-simple-select-label"
             
             sx={{
-                top: '-7px', // Ajusta esto según sea necesario para alinear correctamente la etiqueta
-                backgroundColor: 'white', // Fondo para evitar que la línea corte el texto
+                // top: '-7px', // Ajusta esto según sea necesario para alinear correctamente la etiqueta
+                // backgroundColor: 'white', // Fondo para evitar que la línea corte el texto
                 // paddingLeft: '5px', // Espacio a la izquierda del texto de la etiqueta
                 // paddingRight: '5px' // Espacio a la derecha del texto de la etiqueta
-                marginBottom: '20px'
+                // marginBottom: '20px'
             }}
 
             
@@ -56,7 +56,7 @@ const SelectCustomed = ({
                 onChange={handleChange}
                 sx={{ 
                     // border: '5px solid red',
-                    height: '40px', 
+                    // height: '40px', 
                     // size: 'small',
                     // borderRadius: '10px',
                     // fontSize: '0.875rem', // Tamaño de letra más pequeño
@@ -70,7 +70,21 @@ const SelectCustomed = ({
                     </MenuItem>
                     {/* <MenuItem key={0} value={"ninguno"}> ninguno </MenuItem> */}
                     {options.map((item) => (
-                        <MenuItem key={item.value} value={item.value}>
+                        <MenuItem key={item.value} value={item.value}
+
+                        sx={{
+                            backgroundColor: valor === item.value ? "lightblue" : "white",
+                            '&.Mui-selected': {
+                                backgroundColor: "lightblue",
+                                '&:hover': {
+                                    backgroundColor: "darkblue",
+                                    color: "white",
+                                },
+                            },
+                        }}
+
+
+                        >
                             {item.label}
                         </MenuItem>
                     ))}

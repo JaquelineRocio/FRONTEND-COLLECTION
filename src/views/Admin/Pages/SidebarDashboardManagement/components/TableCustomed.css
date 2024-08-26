@@ -1,0 +1,12 @@
+@media (max-width: 400px) {
+    .react-data-table-component .rdt_Pagination {
+        font-size: 12px; 
+        padding: 10px; 
+    }
+    .react-data-table-component .rdt_Pagination select {
+        width: auto; 
+    }
+    .react-data-table-component .rdt_Pagination input {
+        width: 30px; 
+    }
+}

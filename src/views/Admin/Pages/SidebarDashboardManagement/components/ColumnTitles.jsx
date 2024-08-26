@@ -12,20 +12,24 @@ export const titulosParaTablaEstadoGeneralDeCartera = [
 		selector: row => row.desCartera,
 		// sortable: true,
 		cell: row => (
-			<div title={row.desCartera} className='pl-4'>
+			<div title={row.desCartera} style={{ textAlign: 'center' }}>
 				{row.desCartera}
 			</div>
 		),
+		width: "120px"
+		
 	},
 	{
 		name: <div>CLIENTES</div>,	
 		selector: row => row.clientes,
 		cell: row => <AdicionaComas value={row.clientes} />,
+		width: "80px"
 	},
 	{
 		name: <div>CUENTAS</div>, 
 		selector: row => row.cuentas,
 		cell: row => <AdicionaComas value={row.cuentas} />,
+		width: "80px"
 	},
 	{
 		name: <div>%CUENTAS</div>,
@@ -37,6 +41,7 @@ export const titulosParaTablaEstadoGeneralDeCartera = [
 		name: <div>CAPITAL</div>,
 		selector: row => row.capitalMN,
 		cell: row => <AdicionaComas value={row.capitalMN} />,
+
 	},
 	{
 		name: <div>%CAPITAL</div>,
@@ -47,6 +52,7 @@ export const titulosParaTablaEstadoGeneralDeCartera = [
 				{row.porcentajeCapital}
 			</div>
 		),
+		width: "80px"
 	},
 	{
 		name: <div>%CTC</div>,	
@@ -57,16 +63,19 @@ export const titulosParaTablaEstadoGeneralDeCartera = [
 				{row.porcentajeCtc}
 			</div>
 		),
+		width: "60px"
 	},
 	{
 		name: <div># CTC</div>,	
 		selector: row => row.numCtc,
 		cell: row => <AdicionaComas value={row.numCtc} />,
+		width: "60px"
 	},
 	{
 		name: <div># CD</div>,	
 		selector: row => row.numCd,
 		cell: row => <AdicionaComas value={row.numCd} />,
+		width: "60px"
 	},
 
 	{
@@ -74,6 +83,7 @@ export const titulosParaTablaEstadoGeneralDeCartera = [
 		selector: row => row.porcentajeCd,
 		// sortable: true,
 		cell: row => <CustomRowCD row={row} />,
+		width: "60px"
 	},
 	{
 		name: <div>%TC</div>,
@@ -83,11 +93,13 @@ export const titulosParaTablaEstadoGeneralDeCartera = [
 				{row.porcentajeTc}
 			</div>
 		),
+		width: "80px"
 	},
 	{
 		name: '# PDP',
 		selector: row => row.numPDP,
 		cell: row => <AdicionaComas value={row.numPDP} />,
+		width: "80px"
 	},
 	{
 		name: 'MONTO PDP',
@@ -98,6 +110,7 @@ export const titulosParaTablaEstadoGeneralDeCartera = [
 		name: <div>INT TOTAL</div>, // hecho
 		selector: row => row.intTotal,
 		cell: row => <AdicionaComas value={row.intTotal} />,
+		width: "80px"
 	},
 	{
 		name: 'INT AGENTE',
@@ -108,24 +121,28 @@ export const titulosParaTablaEstadoGeneralDeCartera = [
 		name: <div>INT CTC</div>,
 		selector: row => row.intCTC,
 		cell: row => <AdicionaComas value={row.intCTC} />,
+		width: "60px"
 	},
 	{
 		name: <div>INT CD</div>,
 		selector: row => row.intCD,
 		cell: row => <AdicionaComas value={row.intCD} />,
+		width: "60px"
 	},
 	{
 		name: <div># PAGOS</div>,
 		selector: row => row.numPagos,
 		cell: row => <AdicionaComas value={row.numPagos} />,
+		width: "80px"
 	},
 	{
 		name: <div>S/. PAGOS</div>,
 		selector: row => row.solesPagos,
 		cell: row => <AdicionaComas value={row.solesPagos} />,
+		width: "80px"
 	},
 	{
-		name: <div>%EFICIENCIA</div>,
+		name: '%EFICIENCIA',
 		selector: row => row.porcentajeEficiencia,
 		cell: row => (<CustomRowPercentageEficiencia row={row}/>),
 		// sortable: true,
@@ -134,6 +151,7 @@ export const titulosParaTablaEstadoGeneralDeCartera = [
 		name: <div>TICKET D. CAPITAL</div>,
 		selector: row => row.ticketCapital,
 		cell: row => <AdicionaComas value={row.ticketCapital} />,
+		width: "80px"
 	},
 	{
 		name: <div>TICKET PAGO</div>,
@@ -144,11 +162,13 @@ export const titulosParaTablaEstadoGeneralDeCartera = [
 	{
 		name: <div>%CALIDAD PDP</div>,
 		selector: row => row.porcentajeCalidadPDP,
+		width: "80px"
 		// sortable: true,
 	},
 	{
 		name: <div>%COB</div>,
 		selector: row => row.cob,
+		width: "60px"
 		// sortable: true,
 	},
 ];
@@ -169,11 +189,13 @@ export const titulosParaTablaSituacionDeCarteraSegunPrioridad = [
 		name: <div>CLIENTES</div>,	
 		selector: row => row.clientes,
 		cell: row => <AdicionaComas value={row.clientes} />,
+		width: "80px"
 	},
 	{
 		name: <div>CUENTAS</div>, 
 		selector: row => row.cuentas,
 		cell: row => <AdicionaComas value={row.cuentas} />,
+		width: "80px"
 	},
 	{
 		name: <div>%CUENTAS</div>,
@@ -185,6 +207,7 @@ export const titulosParaTablaSituacionDeCarteraSegunPrioridad = [
 		name: <div>CAPITAL</div>,
 		selector: row => row.capitalMN,
 		cell: row => <AdicionaComas value={row.capitalMN} />,
+
 	},
 	{
 		name: <div>%CAPITAL</div>,
@@ -195,6 +218,7 @@ export const titulosParaTablaSituacionDeCarteraSegunPrioridad = [
 				{row.porcentajeCapital}
 			</div>
 		),
+		width: "80px"
 	},
 	{
 		name: <div>%CTC</div>,	
@@ -205,16 +229,19 @@ export const titulosParaTablaSituacionDeCarteraSegunPrioridad = [
 				{row.porcentajeCtc}
 			</div>
 		),
+		width: "60px"
 	},
 	{
 		name: <div># CTC</div>,	
 		selector: row => row.numCtc,
 		cell: row => <AdicionaComas value={row.numCtc} />,
+		width: "60px"
 	},
 	{
 		name: <div># CD</div>,	
 		selector: row => row.numCd,
 		cell: row => <AdicionaComas value={row.numCd} />,
+		width: "60px"
 	},
 
 	{
@@ -222,6 +249,7 @@ export const titulosParaTablaSituacionDeCarteraSegunPrioridad = [
 		selector: row => row.porcentajeCd,
 		// sortable: true,
 		cell: row => <CustomRowCD row={row} />,
+		width: "60px"
 	},
 	{
 		name: <div>%TC</div>,
@@ -231,11 +259,13 @@ export const titulosParaTablaSituacionDeCarteraSegunPrioridad = [
 				{row.porcentajeTc}
 			</div>
 		),
+		width: "80px"
 	},
 	{
 		name: '# PDP',
 		selector: row => row.numPDP,
 		cell: row => <AdicionaComas value={row.numPDP} />,
+		width: "80px"
 	},
 	{
 		name: 'MONTO PDP',
@@ -246,6 +276,7 @@ export const titulosParaTablaSituacionDeCarteraSegunPrioridad = [
 		name: <div>INT TOTAL</div>, // hecho
 		selector: row => row.intTotal,
 		cell: row => <AdicionaComas value={row.intTotal} />,
+		width: "80px"
 	},
 	{
 		name: 'INT AGENTE',
@@ -256,24 +287,28 @@ export const titulosParaTablaSituacionDeCarteraSegunPrioridad = [
 		name: <div>INT CTC</div>,
 		selector: row => row.intCTC,
 		cell: row => <AdicionaComas value={row.intCTC} />,
+		width: "60px"
 	},
 	{
 		name: <div>INT CD</div>,
 		selector: row => row.intCD,
 		cell: row => <AdicionaComas value={row.intCD} />,
+		width: "60px"
 	},
 	{
 		name: <div># PAGOS</div>,
 		selector: row => row.numPagos,
 		cell: row => <AdicionaComas value={row.numPagos} />,
+		width: "80px"
 	},
 	{
 		name: <div>S/. PAGOS</div>,
 		selector: row => row.solesPagos,
 		cell: row => <AdicionaComas value={row.solesPagos} />,
+		width: "80px"
 	},
 	{
-		name: <div>%EFICIENCIA</div>,
+		name: '%EFICIENCIA',
 		selector: row => row.porcentajeEficiencia,
 		cell: row => (<CustomRowPercentageEficiencia row={row}/>),
 		// sortable: true,
@@ -282,6 +317,7 @@ export const titulosParaTablaSituacionDeCarteraSegunPrioridad = [
 		name: <div>TICKET D. CAPITAL</div>,
 		selector: row => row.ticketCapital,
 		cell: row => <AdicionaComas value={row.ticketCapital} />,
+		width: "80px"
 	},
 	{
 		name: <div>TICKET PAGO</div>,
@@ -292,11 +328,13 @@ export const titulosParaTablaSituacionDeCarteraSegunPrioridad = [
 	{
 		name: <div>%CALIDAD PDP</div>,
 		selector: row => row.porcentajeCalidadPDP,
+		width: "80px"
 		// sortable: true,
 	},
 	{
 		name: <div>%COB</div>,
 		selector: row => row.cob,
+		width: "60px"
 		// sortable: true,
 	},
 ];
@@ -316,22 +354,14 @@ export const titulosParaTablaCarteraPorTramoDeImporte= [
 	{
 		name: <div>CLIENTES</div>,	
 		selector: row => row.clientes,
-		// sortable: true,
-		cell: row => (
-			<div title={row.clientes}>
-				{row.clientes}
-			</div>
-		),
+		cell: row => <AdicionaComas value={row.clientes} />,
+		width: "80px"
 	},
 	{
 		name: <div>CUENTAS</div>, 
 		selector: row => row.cuentas,
-		// sortable: true,
-		cell: row => (
-			<div title={row.cuentas}>
-				{row.cuentas}
-			</div>
-		),
+		cell: row => <AdicionaComas value={row.cuentas} />,
+		width: "80px"
 	},
 	{
 		name: <div>%CUENTAS</div>,
@@ -343,6 +373,7 @@ export const titulosParaTablaCarteraPorTramoDeImporte= [
 		name: <div>CAPITAL</div>,
 		selector: row => row.capitalMN,
 		cell: row => <AdicionaComas value={row.capitalMN} />,
+
 	},
 	{
 		name: <div>%CAPITAL</div>,
@@ -353,6 +384,7 @@ export const titulosParaTablaCarteraPorTramoDeImporte= [
 				{row.porcentajeCapital}
 			</div>
 		),
+		width: "80px"
 	},
 	{
 		name: <div>%CTC</div>,	
@@ -363,26 +395,19 @@ export const titulosParaTablaCarteraPorTramoDeImporte= [
 				{row.porcentajeCtc}
 			</div>
 		),
+		width: "60px"
 	},
 	{
 		name: <div># CTC</div>,	
 		selector: row => row.numCtc,
-		// sortable: true,
-		cell: row => (
-			<div title={row.numCtc}>
-				{row.numCtc}
-			</div>
-		),
+		cell: row => <AdicionaComas value={row.numCtc} />,
+		width: "60px"
 	},
 	{
 		name: <div># CD</div>,	
 		selector: row => row.numCd,
-		// sortable: true,
-		cell: row => (
-			<div title={row.numCd}>
-				{row.numCd}
-			</div>
-		),
+		cell: row => <AdicionaComas value={row.numCd} />,
+		width: "60px"
 	},
 
 	{
@@ -390,6 +415,7 @@ export const titulosParaTablaCarteraPorTramoDeImporte= [
 		selector: row => row.porcentajeCd,
 		// sortable: true,
 		cell: row => <CustomRowCD row={row} />,
+		width: "60px"
 	},
 	{
 		name: <div>%TC</div>,
@@ -399,81 +425,56 @@ export const titulosParaTablaCarteraPorTramoDeImporte= [
 				{row.porcentajeTc}
 			</div>
 		),
+		width: "80px"
 	},
 	{
 		name: '# PDP',
 		selector: row => row.numPDP,
-		// sortable: true,
-		cell: row => (
-			<div title={row.numPDP}>
-				{row.numPDP}
-			</div>
-		),
+		cell: row => <AdicionaComas value={row.numPDP} />,
+		width: "80px"
 	},
 	{
 		name: 'MONTO PDP',
 		selector: row => row.montoPDP,
-		// sortable: true,
-		cell: row => (
-			<div title={row.montoPDP}>
-				{row.montoPDP}
-			</div>
-		),
+		cell: row => <AdicionaComas value={row.montoPDP} />,
 	},
 	{
 		name: <div>INT TOTAL</div>, // hecho
 		selector: row => row.intTotal,
-		cell: row => (
-			<div title={row.intTotal}>
-				{row.intTotal}
-			</div>
-		),
+		cell: row => <AdicionaComas value={row.intTotal} />,
+		width: "80px"
 	},
 	{
 		name: 'INT AGENTE',
 		selector: row => row.intAgente,
-		cell: row => (
-			<div title={row.intAgente}>
-				{row.intAgente}
-			</div>
-		),
+		cell: row => <AdicionaComas value={row.intAgente} />,
 	},
 	{
 		name: <div>INT CTC</div>,
 		selector: row => row.intCTC,
-		// sortable: true,
-		cell: row => (
-			<div title={row.intCTC}>
-				{row.intCTC}
-			</div>
-		),
+		cell: row => <AdicionaComas value={row.intCTC} />,
+		width: "60px"
 	},
 	{
 		name: <div>INT CD</div>,
 		selector: row => row.intCD,
-		// sortable: true,
-		cell: row => (
-			<div title={row.intCD}>
-				{row.intCD}
-			</div>
-		),
+		cell: row => <AdicionaComas value={row.intCD} />,
+		width: "60px"
 	},
 	{
 		name: <div># PAGOS</div>,
 		selector: row => row.numPagos,
-		// cell: row => <CustomRowPagosSecondVersion row={row} />,
+		cell: row => <AdicionaComas value={row.numPagos} />,
+		width: "80px"
 	},
 	{
 		name: <div>S/. PAGOS</div>,
-		// sortable: true,
-		cell: row => (
-			<div title={row.solesPagos}>
-				{row.solesPagos}
-			</div>
-		),
+		selector: row => row.solesPagos,
+		cell: row => <AdicionaComas value={row.solesPagos} />,
+		width: "80px"
 	},
 	{
-		name: <div>%EFICIENCIA</div>,
+		name: '%EFICIENCIA',
 		selector: row => row.porcentajeEficiencia,
 		cell: row => (<CustomRowPercentageEficiencia row={row}/>),
 		// sortable: true,
@@ -481,26 +482,25 @@ export const titulosParaTablaCarteraPorTramoDeImporte= [
 	{
 		name: <div>TICKET D. CAPITAL</div>,
 		selector: row => row.ticketCapital,
-		// sortable: true,
-		cell: row => (
-			<div title={row.ticketCapital}>
-				{row.ticketCapital}
-			</div>
-		),
+		cell: row => <AdicionaComas value={row.ticketCapital} />,
+		width: "80px"
 	},
 	{
 		name: <div>TICKET PAGO</div>,
 		selector: row => row.ticketPago,
+		cell: row => <AdicionaComas value={row.ticketPago} />,
 		// sortable: true,
 	},
 	{
 		name: <div>%CALIDAD PDP</div>,
 		selector: row => row.porcentajeCalidadPDP,
+		width: "80px"
 		// sortable: true,
 	},
 	{
 		name: <div>%COB</div>,
 		selector: row => row.cob,
+		width: "60px"
 		// sortable: true,
 	},
 ];
@@ -521,11 +521,13 @@ export const titulosParaTablaCarteraPorRangoDeMaduracion = [
 		name: <div>CLIENTES</div>,	
 		selector: row => row.clientes,
 		cell: row => <AdicionaComas value={row.clientes} />,
+		width: "80px"
 	},
 	{
 		name: <div>CUENTAS</div>, 
 		selector: row => row.cuentas,
 		cell: row => <AdicionaComas value={row.cuentas} />,
+		width: "80px"
 	},
 	{
 		name: <div>%CUENTAS</div>,
@@ -537,6 +539,7 @@ export const titulosParaTablaCarteraPorRangoDeMaduracion = [
 		name: <div>CAPITAL</div>,
 		selector: row => row.capitalMN,
 		cell: row => <AdicionaComas value={row.capitalMN} />,
+
 	},
 	{
 		name: <div>%CAPITAL</div>,
@@ -547,6 +550,7 @@ export const titulosParaTablaCarteraPorRangoDeMaduracion = [
 				{row.porcentajeCapital}
 			</div>
 		),
+		width: "80px"
 	},
 	{
 		name: <div>%CTC</div>,	
@@ -557,16 +561,19 @@ export const titulosParaTablaCarteraPorRangoDeMaduracion = [
 				{row.porcentajeCtc}
 			</div>
 		),
+		width: "60px"
 	},
 	{
 		name: <div># CTC</div>,	
 		selector: row => row.numCtc,
 		cell: row => <AdicionaComas value={row.numCtc} />,
+		width: "60px"
 	},
 	{
 		name: <div># CD</div>,	
 		selector: row => row.numCd,
 		cell: row => <AdicionaComas value={row.numCd} />,
+		width: "60px"
 	},
 
 	{
@@ -574,6 +581,7 @@ export const titulosParaTablaCarteraPorRangoDeMaduracion = [
 		selector: row => row.porcentajeCd,
 		// sortable: true,
 		cell: row => <CustomRowCD row={row} />,
+		width: "60px"
 	},
 	{
 		name: <div>%TC</div>,
@@ -583,11 +591,13 @@ export const titulosParaTablaCarteraPorRangoDeMaduracion = [
 				{row.porcentajeTc}
 			</div>
 		),
+		width: "80px"
 	},
 	{
 		name: '# PDP',
 		selector: row => row.numPDP,
 		cell: row => <AdicionaComas value={row.numPDP} />,
+		width: "80px"
 	},
 	{
 		name: 'MONTO PDP',
@@ -598,6 +608,7 @@ export const titulosParaTablaCarteraPorRangoDeMaduracion = [
 		name: <div>INT TOTAL</div>, // hecho
 		selector: row => row.intTotal,
 		cell: row => <AdicionaComas value={row.intTotal} />,
+		width: "80px"
 	},
 	{
 		name: 'INT AGENTE',
@@ -608,24 +619,28 @@ export const titulosParaTablaCarteraPorRangoDeMaduracion = [
 		name: <div>INT CTC</div>,
 		selector: row => row.intCTC,
 		cell: row => <AdicionaComas value={row.intCTC} />,
+		width: "60px"
 	},
 	{
 		name: <div>INT CD</div>,
 		selector: row => row.intCD,
 		cell: row => <AdicionaComas value={row.intCD} />,
+		width: "60px"
 	},
 	{
 		name: <div># PAGOS</div>,
 		selector: row => row.numPagos,
 		cell: row => <AdicionaComas value={row.numPagos} />,
+		width: "80px"
 	},
 	{
 		name: <div>S/. PAGOS</div>,
 		selector: row => row.solesPagos,
 		cell: row => <AdicionaComas value={row.solesPagos} />,
+		width: "80px"
 	},
 	{
-		name: <div>%EFICIENCIA</div>,
+		name: '%EFICIENCIA',
 		selector: row => row.porcentajeEficiencia,
 		cell: row => (<CustomRowPercentageEficiencia row={row}/>),
 		// sortable: true,
@@ -634,6 +649,7 @@ export const titulosParaTablaCarteraPorRangoDeMaduracion = [
 		name: <div>TICKET D. CAPITAL</div>,
 		selector: row => row.ticketCapital,
 		cell: row => <AdicionaComas value={row.ticketCapital} />,
+		width: "80px"
 	},
 	{
 		name: <div>TICKET PAGO</div>,
@@ -644,11 +660,13 @@ export const titulosParaTablaCarteraPorRangoDeMaduracion = [
 	{
 		name: <div>%CALIDAD PDP</div>,
 		selector: row => row.porcentajeCalidadPDP,
+		width: "80px"
 		// sortable: true,
 	},
 	{
 		name: <div>%COB</div>,
 		selector: row => row.cob,
+		width: "60px"
 		// sortable: true,
 	},
 ];
@@ -669,11 +687,13 @@ export const titulosParaTablaCarteraPorAnhoMesCastigo = [
 		name: <div>CLIENTES</div>,	
 		selector: row => row.clientes,
 		cell: row => <AdicionaComas value={row.clientes} />,
+		width: "80px"
 	},
 	{
 		name: <div>CUENTAS</div>, 
 		selector: row => row.cuentas,
 		cell: row => <AdicionaComas value={row.cuentas} />,
+		width: "80px"
 	},
 	{
 		name: <div>%CUENTAS</div>,
@@ -685,6 +705,7 @@ export const titulosParaTablaCarteraPorAnhoMesCastigo = [
 		name: <div>CAPITAL</div>,
 		selector: row => row.capitalMN,
 		cell: row => <AdicionaComas value={row.capitalMN} />,
+
 	},
 	{
 		name: <div>%CAPITAL</div>,
@@ -695,6 +716,7 @@ export const titulosParaTablaCarteraPorAnhoMesCastigo = [
 				{row.porcentajeCapital}
 			</div>
 		),
+		width: "80px"
 	},
 	{
 		name: <div>%CTC</div>,	
@@ -705,16 +727,19 @@ export const titulosParaTablaCarteraPorAnhoMesCastigo = [
 				{row.porcentajeCtc}
 			</div>
 		),
+		width: "60px"
 	},
 	{
 		name: <div># CTC</div>,	
 		selector: row => row.numCtc,
 		cell: row => <AdicionaComas value={row.numCtc} />,
+		width: "60px"
 	},
 	{
 		name: <div># CD</div>,	
 		selector: row => row.numCd,
 		cell: row => <AdicionaComas value={row.numCd} />,
+		width: "60px"
 	},
 
 	{
@@ -722,6 +747,7 @@ export const titulosParaTablaCarteraPorAnhoMesCastigo = [
 		selector: row => row.porcentajeCd,
 		// sortable: true,
 		cell: row => <CustomRowCD row={row} />,
+		width: "60px"
 	},
 	{
 		name: <div>%TC</div>,
@@ -731,11 +757,13 @@ export const titulosParaTablaCarteraPorAnhoMesCastigo = [
 				{row.porcentajeTc}
 			</div>
 		),
+		width: "80px"
 	},
 	{
 		name: '# PDP',
 		selector: row => row.numPDP,
 		cell: row => <AdicionaComas value={row.numPDP} />,
+		width: "80px"
 	},
 	{
 		name: 'MONTO PDP',
@@ -746,6 +774,7 @@ export const titulosParaTablaCarteraPorAnhoMesCastigo = [
 		name: <div>INT TOTAL</div>, // hecho
 		selector: row => row.intTotal,
 		cell: row => <AdicionaComas value={row.intTotal} />,
+		width: "80px"
 	},
 	{
 		name: 'INT AGENTE',
@@ -756,24 +785,28 @@ export const titulosParaTablaCarteraPorAnhoMesCastigo = [
 		name: <div>INT CTC</div>,
 		selector: row => row.intCTC,
 		cell: row => <AdicionaComas value={row.intCTC} />,
+		width: "60px"
 	},
 	{
 		name: <div>INT CD</div>,
 		selector: row => row.intCD,
 		cell: row => <AdicionaComas value={row.intCD} />,
+		width: "60px"
 	},
 	{
 		name: <div># PAGOS</div>,
 		selector: row => row.numPagos,
 		cell: row => <AdicionaComas value={row.numPagos} />,
+		width: "80px"
 	},
 	{
 		name: <div>S/. PAGOS</div>,
 		selector: row => row.solesPagos,
 		cell: row => <AdicionaComas value={row.solesPagos} />,
+		width: "80px"
 	},
 	{
-		name: <div>%EFICIENCIA</div>,
+		name: '%EFICIENCIA',
 		selector: row => row.porcentajeEficiencia,
 		cell: row => (<CustomRowPercentageEficiencia row={row}/>),
 		// sortable: true,
@@ -782,6 +815,7 @@ export const titulosParaTablaCarteraPorAnhoMesCastigo = [
 		name: <div>TICKET D. CAPITAL</div>,
 		selector: row => row.ticketCapital,
 		cell: row => <AdicionaComas value={row.ticketCapital} />,
+		width: "80px"
 	},
 	{
 		name: <div>TICKET PAGO</div>,
@@ -792,15 +826,16 @@ export const titulosParaTablaCarteraPorAnhoMesCastigo = [
 	{
 		name: <div>%CALIDAD PDP</div>,
 		selector: row => row.porcentajeCalidadPDP,
+		width: "80px"
 		// sortable: true,
 	},
 	{
 		name: <div>%COB</div>,
 		selector: row => row.cob,
+		width: "60px"
 		// sortable: true,
 	},
 ];
-
 // Para tabla numero seis
 export const titulosParaTablaRangoDeCampanha = [
 	{
@@ -817,11 +852,13 @@ export const titulosParaTablaRangoDeCampanha = [
 		name: <div>CLIENTES</div>,	
 		selector: row => row.clientes,
 		cell: row => <AdicionaComas value={row.clientes} />,
+		width: "80px"
 	},
 	{
 		name: <div>CUENTAS</div>, 
 		selector: row => row.cuentas,
 		cell: row => <AdicionaComas value={row.cuentas} />,
+		width: "80px"
 	},
 	{
 		name: <div>%CUENTAS</div>,
@@ -833,6 +870,7 @@ export const titulosParaTablaRangoDeCampanha = [
 		name: <div>CAPITAL</div>,
 		selector: row => row.capitalMN,
 		cell: row => <AdicionaComas value={row.capitalMN} />,
+
 	},
 	{
 		name: <div>%CAPITAL</div>,
@@ -843,6 +881,7 @@ export const titulosParaTablaRangoDeCampanha = [
 				{row.porcentajeCapital}
 			</div>
 		),
+		width: "80px"
 	},
 	{
 		name: <div>%CTC</div>,	
@@ -853,16 +892,19 @@ export const titulosParaTablaRangoDeCampanha = [
 				{row.porcentajeCtc}
 			</div>
 		),
+		width: "60px"
 	},
 	{
 		name: <div># CTC</div>,	
 		selector: row => row.numCtc,
 		cell: row => <AdicionaComas value={row.numCtc} />,
+		width: "60px"
 	},
 	{
 		name: <div># CD</div>,	
 		selector: row => row.numCd,
 		cell: row => <AdicionaComas value={row.numCd} />,
+		width: "60px"
 	},
 
 	{
@@ -870,6 +912,7 @@ export const titulosParaTablaRangoDeCampanha = [
 		selector: row => row.porcentajeCd,
 		// sortable: true,
 		cell: row => <CustomRowCD row={row} />,
+		width: "60px"
 	},
 	{
 		name: <div>%TC</div>,
@@ -879,11 +922,13 @@ export const titulosParaTablaRangoDeCampanha = [
 				{row.porcentajeTc}
 			</div>
 		),
+		width: "80px"
 	},
 	{
 		name: '# PDP',
 		selector: row => row.numPDP,
 		cell: row => <AdicionaComas value={row.numPDP} />,
+		width: "80px"
 	},
 	{
 		name: 'MONTO PDP',
@@ -894,6 +939,7 @@ export const titulosParaTablaRangoDeCampanha = [
 		name: <div>INT TOTAL</div>, // hecho
 		selector: row => row.intTotal,
 		cell: row => <AdicionaComas value={row.intTotal} />,
+		width: "80px"
 	},
 	{
 		name: 'INT AGENTE',
@@ -904,24 +950,28 @@ export const titulosParaTablaRangoDeCampanha = [
 		name: <div>INT CTC</div>,
 		selector: row => row.intCTC,
 		cell: row => <AdicionaComas value={row.intCTC} />,
+		width: "60px"
 	},
 	{
 		name: <div>INT CD</div>,
 		selector: row => row.intCD,
 		cell: row => <AdicionaComas value={row.intCD} />,
+		width: "60px"
 	},
 	{
 		name: <div># PAGOS</div>,
 		selector: row => row.numPagos,
 		cell: row => <AdicionaComas value={row.numPagos} />,
+		width: "80px"
 	},
 	{
 		name: <div>S/. PAGOS</div>,
 		selector: row => row.solesPagos,
 		cell: row => <AdicionaComas value={row.solesPagos} />,
+		width: "80px"
 	},
 	{
-		name: <div>%EFICIENCIA</div>,
+		name: '%EFICIENCIA',
 		selector: row => row.porcentajeEficiencia,
 		cell: row => (<CustomRowPercentageEficiencia row={row}/>),
 		// sortable: true,
@@ -930,6 +980,7 @@ export const titulosParaTablaRangoDeCampanha = [
 		name: <div>TICKET D. CAPITAL</div>,
 		selector: row => row.ticketCapital,
 		cell: row => <AdicionaComas value={row.ticketCapital} />,
+		width: "80px"
 	},
 	{
 		name: <div>TICKET PAGO</div>,
@@ -940,11 +991,13 @@ export const titulosParaTablaRangoDeCampanha = [
 	{
 		name: <div>%CALIDAD PDP</div>,
 		selector: row => row.porcentajeCalidadPDP,
+		width: "80px"
 		// sortable: true,
 	},
 	{
 		name: <div>%COB</div>,
 		selector: row => row.cob,
+		width: "60px"
 		// sortable: true,
 	},
 ];
@@ -965,11 +1018,13 @@ export const titulosParaTablaCarteraPorTipoDeProducto = [
 		name: <div>CLIENTES</div>,	
 		selector: row => row.clientes,
 		cell: row => <AdicionaComas value={row.clientes} />,
+		width: "80px"
 	},
 	{
 		name: <div>CUENTAS</div>, 
 		selector: row => row.cuentas,
 		cell: row => <AdicionaComas value={row.cuentas} />,
+		width: "80px"
 	},
 	{
 		name: <div>%CUENTAS</div>,
@@ -981,6 +1036,7 @@ export const titulosParaTablaCarteraPorTipoDeProducto = [
 		name: <div>CAPITAL</div>,
 		selector: row => row.capitalMN,
 		cell: row => <AdicionaComas value={row.capitalMN} />,
+
 	},
 	{
 		name: <div>%CAPITAL</div>,
@@ -991,6 +1047,7 @@ export const titulosParaTablaCarteraPorTipoDeProducto = [
 				{row.porcentajeCapital}
 			</div>
 		),
+		width: "80px"
 	},
 	{
 		name: <div>%CTC</div>,	
@@ -1001,16 +1058,19 @@ export const titulosParaTablaCarteraPorTipoDeProducto = [
 				{row.porcentajeCtc}
 			</div>
 		),
+		width: "60px"
 	},
 	{
 		name: <div># CTC</div>,	
 		selector: row => row.numCtc,
 		cell: row => <AdicionaComas value={row.numCtc} />,
+		width: "60px"
 	},
 	{
 		name: <div># CD</div>,	
 		selector: row => row.numCd,
 		cell: row => <AdicionaComas value={row.numCd} />,
+		width: "60px"
 	},
 
 	{
@@ -1018,6 +1078,7 @@ export const titulosParaTablaCarteraPorTipoDeProducto = [
 		selector: row => row.porcentajeCd,
 		// sortable: true,
 		cell: row => <CustomRowCD row={row} />,
+		width: "60px"
 	},
 	{
 		name: <div>%TC</div>,
@@ -1027,11 +1088,13 @@ export const titulosParaTablaCarteraPorTipoDeProducto = [
 				{row.porcentajeTc}
 			</div>
 		),
+		width: "80px"
 	},
 	{
 		name: '# PDP',
 		selector: row => row.numPDP,
 		cell: row => <AdicionaComas value={row.numPDP} />,
+		width: "80px"
 	},
 	{
 		name: 'MONTO PDP',
@@ -1042,6 +1105,7 @@ export const titulosParaTablaCarteraPorTipoDeProducto = [
 		name: <div>INT TOTAL</div>, // hecho
 		selector: row => row.intTotal,
 		cell: row => <AdicionaComas value={row.intTotal} />,
+		width: "80px"
 	},
 	{
 		name: 'INT AGENTE',
@@ -1052,24 +1116,28 @@ export const titulosParaTablaCarteraPorTipoDeProducto = [
 		name: <div>INT CTC</div>,
 		selector: row => row.intCTC,
 		cell: row => <AdicionaComas value={row.intCTC} />,
+		width: "60px"
 	},
 	{
 		name: <div>INT CD</div>,
 		selector: row => row.intCD,
 		cell: row => <AdicionaComas value={row.intCD} />,
+		width: "60px"
 	},
 	{
 		name: <div># PAGOS</div>,
 		selector: row => row.numPagos,
 		cell: row => <AdicionaComas value={row.numPagos} />,
+		width: "80px"
 	},
 	{
 		name: <div>S/. PAGOS</div>,
 		selector: row => row.solesPagos,
 		cell: row => <AdicionaComas value={row.solesPagos} />,
+		width: "80px"
 	},
 	{
-		name: <div>%EFICIENCIA</div>,
+		name: '%EFICIENCIA',
 		selector: row => row.porcentajeEficiencia,
 		cell: row => (<CustomRowPercentageEficiencia row={row}/>),
 		// sortable: true,
@@ -1078,6 +1146,7 @@ export const titulosParaTablaCarteraPorTipoDeProducto = [
 		name: <div>TICKET D. CAPITAL</div>,
 		selector: row => row.ticketCapital,
 		cell: row => <AdicionaComas value={row.ticketCapital} />,
+		width: "80px"
 	},
 	{
 		name: <div>TICKET PAGO</div>,
@@ -1088,11 +1157,13 @@ export const titulosParaTablaCarteraPorTipoDeProducto = [
 	{
 		name: <div>%CALIDAD PDP</div>,
 		selector: row => row.porcentajeCalidadPDP,
+		width: "80px"
 		// sortable: true,
 	},
 	{
 		name: <div>%COB</div>,
 		selector: row => row.cob,
+		width: "60px"
 		// sortable: true,
 	},
 ];
@@ -1113,11 +1184,13 @@ export const titulosParaTablaCarteraPorZona = [
 		name: <div>CLIENTES</div>,	
 		selector: row => row.clientes,
 		cell: row => <AdicionaComas value={row.clientes} />,
+		width: "80px"
 	},
 	{
 		name: <div>CUENTAS</div>, 
 		selector: row => row.cuentas,
 		cell: row => <AdicionaComas value={row.cuentas} />,
+		width: "80px"
 	},
 	{
 		name: <div>%CUENTAS</div>,
@@ -1129,6 +1202,7 @@ export const titulosParaTablaCarteraPorZona = [
 		name: <div>CAPITAL</div>,
 		selector: row => row.capitalMN,
 		cell: row => <AdicionaComas value={row.capitalMN} />,
+
 	},
 	{
 		name: <div>%CAPITAL</div>,
@@ -1139,6 +1213,7 @@ export const titulosParaTablaCarteraPorZona = [
 				{row.porcentajeCapital}
 			</div>
 		),
+		width: "80px"
 	},
 	{
 		name: <div>%CTC</div>,	
@@ -1149,16 +1224,19 @@ export const titulosParaTablaCarteraPorZona = [
 				{row.porcentajeCtc}
 			</div>
 		),
+		width: "60px"
 	},
 	{
 		name: <div># CTC</div>,	
 		selector: row => row.numCtc,
 		cell: row => <AdicionaComas value={row.numCtc} />,
+		width: "60px"
 	},
 	{
 		name: <div># CD</div>,	
 		selector: row => row.numCd,
 		cell: row => <AdicionaComas value={row.numCd} />,
+		width: "60px"
 	},
 
 	{
@@ -1166,6 +1244,7 @@ export const titulosParaTablaCarteraPorZona = [
 		selector: row => row.porcentajeCd,
 		// sortable: true,
 		cell: row => <CustomRowCD row={row} />,
+		width: "60px"
 	},
 	{
 		name: <div>%TC</div>,
@@ -1175,11 +1254,13 @@ export const titulosParaTablaCarteraPorZona = [
 				{row.porcentajeTc}
 			</div>
 		),
+		width: "80px"
 	},
 	{
 		name: '# PDP',
 		selector: row => row.numPDP,
 		cell: row => <AdicionaComas value={row.numPDP} />,
+		width: "80px"
 	},
 	{
 		name: 'MONTO PDP',
@@ -1190,6 +1271,7 @@ export const titulosParaTablaCarteraPorZona = [
 		name: <div>INT TOTAL</div>, // hecho
 		selector: row => row.intTotal,
 		cell: row => <AdicionaComas value={row.intTotal} />,
+		width: "80px"
 	},
 	{
 		name: 'INT AGENTE',
@@ -1200,24 +1282,28 @@ export const titulosParaTablaCarteraPorZona = [
 		name: <div>INT CTC</div>,
 		selector: row => row.intCTC,
 		cell: row => <AdicionaComas value={row.intCTC} />,
+		width: "60px"
 	},
 	{
 		name: <div>INT CD</div>,
 		selector: row => row.intCD,
 		cell: row => <AdicionaComas value={row.intCD} />,
+		width: "60px"
 	},
 	{
 		name: <div># PAGOS</div>,
 		selector: row => row.numPagos,
 		cell: row => <AdicionaComas value={row.numPagos} />,
+		width: "80px"
 	},
 	{
 		name: <div>S/. PAGOS</div>,
 		selector: row => row.solesPagos,
 		cell: row => <AdicionaComas value={row.solesPagos} />,
+		width: "80px"
 	},
 	{
-		name: <div>%EFICIENCIA</div>,
+		name: '%EFICIENCIA',
 		selector: row => row.porcentajeEficiencia,
 		cell: row => (<CustomRowPercentageEficiencia row={row}/>),
 		// sortable: true,
@@ -1226,6 +1312,7 @@ export const titulosParaTablaCarteraPorZona = [
 		name: <div>TICKET D. CAPITAL</div>,
 		selector: row => row.ticketCapital,
 		cell: row => <AdicionaComas value={row.ticketCapital} />,
+		width: "80px"
 	},
 	{
 		name: <div>TICKET PAGO</div>,
@@ -1236,11 +1323,13 @@ export const titulosParaTablaCarteraPorZona = [
 	{
 		name: <div>%CALIDAD PDP</div>,
 		selector: row => row.porcentajeCalidadPDP,
+		width: "80px"
 		// sortable: true,
 	},
 	{
 		name: <div>%COB</div>,
 		selector: row => row.cob,
+		width: "60px"
 		// sortable: true,
 	},
 ];

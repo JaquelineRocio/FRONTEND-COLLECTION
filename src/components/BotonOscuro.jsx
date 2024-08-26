@@ -4,8 +4,11 @@ const BotonOscuro = ({layout = "INGRESE NOMBRE", className="null", onClick=null}
             <button className={`
                 bg-buttonColor-0
                 text-white h-10
-                 
+                 flex
+                 justify-center
+                 items-center 
                 px-2
+                py-7
                 font-ralewayBold 
                 text-sm 
                 rounded

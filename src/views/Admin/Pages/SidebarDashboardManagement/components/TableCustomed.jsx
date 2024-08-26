@@ -2,6 +2,8 @@ import DataTable from 'react-data-table-component';
 import { Chip } from "@material-tailwind/react";
 import MoonLoader from "react-spinners/MoonLoader";
 import PercentageBar from './PercentageBar';
+// import './TableCustomed.css';
+// import styled from 'styled-components';
 /**
  * tableRows, son las filas que se integrarán a la tabla
  * tableColumns, son los titulos de las columnas
@@ -26,6 +28,8 @@ export default function TableCustomed({tableRows, tableColumns = [], loading = f
 			customStyles={customStyles}
 			paginationRowsPerPageOptions={[1,2,3,4,5,10, 15, 20, 25, 30]}
 			paginationPerPage={5} 
+			paginationComponentOptions={configuracionDeMensajes}
+			noDataComponent={<NoDataComponent />}
 		/>
 	);
 }
@@ -88,8 +92,8 @@ const customStyles = {
 	// },
 	headCells: {
 		style: {
-			// paddingLeft: '8px', // override the cell padding for head cells
-			// paddingRight: '8px',
+			paddingLeft: '6px', // override the cell padding for head cells
+			paddingRight: '6px',
 			backgroundColor: '#064469', // Usar el tono 500 del color rojo
 			fontSize: '14px',
 			color: '#FFFFFF',
@@ -97,17 +101,41 @@ const customStyles = {
 			justifyContent: 'center', // Asegura que el contenido esté centrado			
 			// whiteSpace: 'nowrap', // Evita el ajuste de línea
 			textOverflow: 'ellipsis',
+			borderRight: '1px solid #FFFFFF', // Línea vertical entre encabezados
 		},
 	},
 	cells: {
 		style: {
-			// paddingLeft: 'px', // override the cell padding for data cells
-			// paddingRight: '0px',
+			paddingLeft: '6px', // override the cell padding for data cells
+			paddingRight: '6px',
 			// textAlign: 'right', // Centrar el texto en las celdas de datos
-			justifyContent: 'center', // Asegura que el contenido esté centrado
+			justifyContent: 'right', // Asegura que el contenido esté centrado
 			whiteSpace: 'nowrap',
+			borderRight: '1px solid #DDD', // Línea vertical entre celdas
+			textOverflow: 'ellipsis',
+			// whiteSpace: 'nowrap', // Evita el ajuste de línea
 		},
 	},
+	pagination: {
+        style: {
+            minHeight: '12px', // Asegura que la paginación tenga suficiente altura
+            // backgroundColor: 'transparent', // Puedes cambiar el fondo si es necesario
+            // color: 'white', // Cambia el color del texto si es necesario
+			overflow: 'hidden',
+        },
+        pageButtonsStyle: {
+            borderRadius: '50%', // Hace que los botones de página sean redondos
+            height: '40px', // Altura de los botones
+            width: '40px', // Ancho de los botones
+            padding: '6px', // Espacio dentro de los botones
+            margin: '2px', // Margen entre botones
+            cursor: 'pointer', // Cursor como puntero
+            transition: '0.4s', // Suaviza la transición de estados
+            // color: 'white', // Color del texto
+            // fill: 'white', // Color del icono de los botones
+			className: 'pagination-buttons'
+        },
+    }
 };
 
 const conditionalRowStyles = [
@@ -145,3 +173,17 @@ const CustomLoader = () => (
 		//   <p>Cargando datos, por favor espera...</p>
 		// </div>
 );
+
+const configuracionDeMensajes = {
+	rowsPerPageText: 'Filas por página:',
+	rangeSeparatorText: 'de',
+	selectAllRowsItem: true,
+	selectAllRowsItemText: 'Todos',
+}
+
+const NoDataComponent = () => (
+    <div style={{ textAlign: 'center', padding: '50px' }}>
+        <p>No hay registros disponibles.</p>
+    </div>
+);
+

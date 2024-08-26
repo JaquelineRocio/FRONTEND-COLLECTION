@@ -243,6 +243,21 @@ const SidebarDashboardView = () => {
         setRegistroOctavaTabla({});
     }
 
+    // Elimina opciones que pueden ser seleccionado de todos los filtros
+    function cleanOptionsFromAllFilter(){
+        // setOptionsEntidad([]); // No se limpiará las opciones de entidad , pues ellas deben permanecer para que se pueda realizar otras busquedas
+        setOptionsCartera([]);
+        setOptionsProducto([]);
+        setOptionsRangoCampanha([]);
+        setOoptionsMacroRegiones([]);
+        setOptionsAnhoCastigo([]);
+        setOptionsMoneda([]);
+        setOptionsEstadoCuenta([]);
+        setOptionsMesCastigo([]);
+        setOptionsPrioridad([]);
+        setOptionsRangoEdad([]);
+    }
+
     async function accionesDeBotonBuscar(){
         if(!selectEntidad || !selectCartera || selectCartera.length === 0 || !selectFecha){
             alertas("camposVacios");
@@ -363,6 +378,8 @@ const SidebarDashboardView = () => {
         // limpiamos valores seleccionados de todos los selects
         clearSelectdValuesFromAllSelects();
 
+        // limpiamos lista de opciones que pueden ser seleccionados por los filtros
+        cleanOptionsFromAllFilter();
     }
 
     // Carga contenido para selects principales (filtros generales)
@@ -1012,7 +1029,7 @@ const SidebarDashboardView = () => {
                             </div>
   
 
-                            <div className={`bg-orange-400 ${task.masInformacion.tableOpen?"":"hidden"}`}>
+                            <div className={` ${task.masInformacion.tableOpen?"":"hidden"}`}>
                             <TableCustomed
                                 key={task.key}
                                 tableRows={task.filas}
@@ -1363,7 +1380,7 @@ function alertas(opcion){
             position: "center",
           //   icon: "success",
             title: "Necesario",
-            text: 'Debe seleccionar por lo menos un valor para "Entidad", "Cartera" y "Fecha".',
+            text: 'Debe seleccionar por lo menos un valor para "Fecha", "Entidad" y "Cartera".',
             showConfirmButton: false,
             timer: 3000
           })

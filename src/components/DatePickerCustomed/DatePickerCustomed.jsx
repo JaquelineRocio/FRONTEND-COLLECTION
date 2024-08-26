@@ -35,6 +35,10 @@ function DatePickerCustomed({
     setValor(newValue);
   };
 
+  const preventManualInput = (event) => {
+    event.preventDefault();
+  };
+
 
   return (
     <>
@@ -51,12 +55,18 @@ function DatePickerCustomed({
         value={valor}
         minDate={dayjs('2022-01-01')}
         maxDate={dayjs('2024-12-31')}
-        slotProps={{ textField: { size: 'small', } }}
+        // slotProps={{ textField: { size: 'small', } }}
         sx={{ 
             // border: '5px solid red',
             borderRadius: '10px',
             fontFamily: ['Raleway-Bold'],  // Aplicando Raleway-Medium
             width: '100%' 
+          }}
+        
+          slotProps={{
+            textField: {
+              onKeyDown: preventManualInput, // Evitar la entrada manual
+            },
           }}
         />
 
