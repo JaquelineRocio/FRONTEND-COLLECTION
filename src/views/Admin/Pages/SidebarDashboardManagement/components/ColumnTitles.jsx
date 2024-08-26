@@ -1352,7 +1352,7 @@ const CustomBar = ({children, color}) => {
 			ColorDeBorde = '#FE436E'; 
 			break;
 		default:
-			console.log("Ninguno de los valores anteriores")				
+			// console.log("Ninguno de los valores anteriores")				
 	}
 
     const barStyles = {
