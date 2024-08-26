@@ -17,14 +17,6 @@ import {
 import { Api } from "../../../../services/Api";
 import { Link } from "react-router-dom";
 // import TablaCarteraPorTramoDeImporte from "./components/Tabla03CarteraPorTramoDeImporte";
-import Tabla01EstadoGeneralDeCartera from "./components/Tabla01EstadoGeneralDeCartera";
-import Tabla02SituacionDeCarteraSegunPrioridad from "./components/Tabla02SituacionDeCarteraSegunPrioridad";
-// import Tabla03CarteraPorTramoDeImporte from "./components/Tabla03CarteraPorTramoDeImporte";
-import Tabla04CarteraPorRangoDeMaduracion from "./components/Tabla04CarteraPorRangoDeMaduracion";
-import Tabla05CarteraPorAnioMesDeCastigo from "./components/Tabla05CarteraPorAnioMesDeCastigo";
-import Tabla06PorRangoDeCampanha from "./components/Tabla06PorRangoDeCampanha";
-import Tabla07CarteraPorTipoDeProducto from "./components/Tabla07CarteraPorTipoDeProducto";
-import Tabla08CarteraPorZona from "./components/Tabla08CarteraPorZona";
 
 // import SelectElementSecondVersion from "./components/SelectElementSecondVersion";
 // import GridLoader from "react-spinners/GridLoader";
@@ -424,8 +416,6 @@ const SidebarDashboardView = () => {
 
     // Carga contenido para selects secundarios (filtros especificos) - La carga de datos depende de los filtros generales
     async function loadSpecificFilters(){
-        console.log("entra a loadSpecificFilters");
-
         if(selectFecha != null && selectEntidad != '' && selectCartera.length != 0 ){
             setSpecificFiltersDisabled(false);
             // Añade indicativo de carga (loading) para filtros especificos
@@ -554,7 +544,6 @@ const SidebarDashboardView = () => {
             case "General":{
                 setLoadingFirstTable(true);
                 // setRegistroPrimeraTabla({});
-                console.log("datos de general ", registroPrimeraTabla);
                 if(!firstTableOpen &&  Object.keys(registroPrimeraTabla).length === 0 ){
                     let {data, error} = await testFetch.post(bodyPayloadForIndividualTables,`/admin/tablon/dashboards?entidad=${urlPayloadForIndividualTables.selectEntidad}&mes=${urlPayloadForIndividualTables.selectFecha?.format('MM-YYYY')}&carteras=${urlPayloadForIndividualTables.selectCartera}`); 
                     // let data = await SimulatorApi(500,false);
@@ -573,7 +562,6 @@ const SidebarDashboardView = () => {
                 setLoadingSecondTable(true);
                 // setRegistroSegundaTabla({})
                 if(!secondTableOpen && Object.keys(registroSegundaTabla).length === 0){
-                    console.log("Integra datos para tabla 'Prioridad'");
                     let {data, error} = await testFetch.post(bodyPayloadForIndividualTables,`/admin/tablon/dashboards?entidad=${urlPayloadForIndividualTables.selectEntidad}&mes=${urlPayloadForIndividualTables.selectFecha?.format('MM-YYYY')}&carteras=${urlPayloadForIndividualTables.selectCartera}`); 
                     if(!error){
                         setRegistroSegundaTabla(data?.data ?? {});
@@ -629,7 +617,6 @@ const SidebarDashboardView = () => {
             case "CodProducto":{
                 setLoadingSeventhTable(true);
                 // setRegistroSetimaTabla({});
-                console.log("interior codProducto", registroSetimaTabla);
                 if(!seventhTableOpen && Object.keys(registroSetimaTabla).length === 0){
                     let {data, error} = await testFetch.post(bodyPayloadForIndividualTables,`/admin/tablon/dashboards?entidad=${urlPayloadForIndividualTables.selectEntidad}&mes=${urlPayloadForIndividualTables.selectFecha?.format('MM-YYYY')}&carteras=${urlPayloadForIndividualTables.selectCartera}`); 
                     if(!error){
@@ -644,7 +631,6 @@ const SidebarDashboardView = () => {
             case "MacroRegiones":{
                 setLoadingEighthTable(true);
                 // setRegistroOctavaTabla({})
-                console.log("interior macroregiones", registroOctavaTabla);
                 if(!octaveTableOpen && Object.keys(registroOctavaTabla).length === 0){
                     let {data, error} = await testFetch.post(bodyPayloadForIndividualTables,`/admin/tablon/dashboards?entidad=${urlPayloadForIndividualTables.selectEntidad}&mes=${urlPayloadForIndividualTables.selectFecha?.format('MM-YYYY')}&carteras=${urlPayloadForIndividualTables.selectCartera}`); 
                     if(!error){
@@ -657,7 +643,7 @@ const SidebarDashboardView = () => {
                 break;
             }
             default:
-                console.log("No hay consulta solicitada");
+                // console.log("No hay consulta solicitada");
         }
 
         setSpinnerShowGroupTables(false);
@@ -877,7 +863,6 @@ const SidebarDashboardView = () => {
     
     const onDragEnd = (result) => {
 
-        console.log("valores de cambio: ",result);
         const {destination, source, draggableId} = result;
 
         // Si el elemento (dragable) no tiene un destino (llevamos a un lugar don de no puede ubicarse). devolvemos nada
@@ -1019,7 +1004,6 @@ const SidebarDashboardView = () => {
                                 <div className={` pl-2 w-full text-nowrap overflow-hidden text-ellipsis`}
                                     onClick={() => {
                                         task.masInformacion.setTableOpen(task.masInformacion.tableOpen ==true?false:true ); 
-                                        console.log("valores de ta",task);
                                         task.masInformacion.getDataFromIndividualTables(task.masInformacion.typeOfRequest);
                                     }}
                                 >
@@ -1075,8 +1059,6 @@ const SidebarDashboardView = () => {
 
     const modificarColumna = (data) => {
 
-
-        console.log("Mensaje recibido", data);
         if(data == "unaColumna"){
             const newColumn = {
                 'column-1':{
@@ -1163,6 +1145,7 @@ const SidebarDashboardView = () => {
             setNumberOfColumns(3);
         }
     }
+
     useEffect(() => {
         setSpecificFiltersDisabled(true);
         clearSelectedValuesFromSpecificFilters();
@@ -1199,11 +1182,6 @@ const SidebarDashboardView = () => {
     
         return debouncedValue;
     }
-
-    function verDatos(){
-        console.log(initialData);
-    }
-
 
     return(
         <>
@@ -1392,9 +1370,6 @@ function alertas(opcion){
         )
     }
 
-    if(opcion == "TokenExpired"){
-        console.log("funcion esperando a ser implementada");
-    }
 }
 
 const ErrorToken = (error, dispatch) => {

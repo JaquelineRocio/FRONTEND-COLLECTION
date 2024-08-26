@@ -1,5 +1,6 @@
 // const apiUrlEntrada = "https://poetic-tube-428221-a5.rj.r.appspot.com";
-const apiUrlEntrada = "http://161.132.55.33:8090"
+// const apiUrlEntrada = "http://161.132.55.33:8090"
+const apiUrlEntrada = "https://backend.corebankia.com";
 export class testFetch {
     static async get(url, apiUrl = apiUrlEntrada) {
         // console.log("url de consulta testFecht",apiUrl);

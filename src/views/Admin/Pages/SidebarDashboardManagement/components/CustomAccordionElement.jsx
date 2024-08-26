@@ -10,8 +10,6 @@ export default function CustomAccordionElement() {
   const [open, setOpen] = React.useState(1);
  
   const handleOpen = (value) =>{
-    console.log('this is the value open', open);
-    console.log('this is the value valor',value);
     return setOpen(open === value ? 0 : value);
   }
  

@@ -2,7 +2,8 @@
 // const apiUrlEntrada = "https://poetic-tube-428221-a5.rj.r.appspot.com";
 
 // const apiUrlEntrada = "https://cf0f-201-240-244-251.ngrok-free.app";
-const apiUrlEntrada = "http://161.132.55.33:8090";
+// const apiUrlEntrada = "http://161.132.55.33:8090";
+const apiUrlEntrada = "https://backend.corebankia.com";
 
 
 
@@ -14,7 +15,6 @@ export class LoginApi {
             method: 'GET',
         })
         .then((response) => {
-            console.log("oooPrimerThen",response);
             if (!response.ok) {
                 throw new Error('error in get type network response');
             }
@@ -24,14 +24,12 @@ export class LoginApi {
             return data; // Devuelve los datos para que puedan ser usados
         })
         .catch((error) => {
-            console.log("mensaje obtenido 'get' ", error);
             throw error; // Vuelve a lanzar el error para que pueda ser capturado por el llamador
         });
     }
 
     static post(data, url, apiUrl = apiUrlEntrada) {
 
-        console.log(`Peticion POST LoginApi realizada a: ${apiUrl}${url}`);
         return fetch(`${apiUrl}${url}`, {    
             method: 'POST',
             headers: {
@@ -50,7 +48,6 @@ export class LoginApi {
             return data; // Devuelve los datos para que puedan ser usados
         })
         .catch((error) => {
-            console.log("mensaje obtenido 'post' ", error);
             throw error; // Vuelve a lanzar el error para que pueda ser capturado por el llamador
         });
     }

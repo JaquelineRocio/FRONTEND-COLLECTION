@@ -16,7 +16,7 @@ const ComponenteFecha = () => {
     const handleDateChange = (newDate) => {
         setDate(newDate);
         const formattedDate = format(newDate, 'yyyy-MM-dd'); // Formatea la fecha
-        console.log('Fecha seleccionada:', formattedDate); // Muestra la fecha en el console log
+        // console.log('Fecha seleccionada:', formattedDate); // Muestra la fecha en el console log
     };
 
     // Añade estilos personalizados para el input
