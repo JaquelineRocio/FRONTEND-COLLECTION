@@ -101,7 +101,7 @@ const customStyles = {
 			justifyContent: 'center', // Asegura que el contenido esté centrado			
 			// whiteSpace: 'nowrap', // Evita el ajuste de línea
 			textOverflow: 'ellipsis',
-			borderRight: '1px solid #FFFFFF', // Línea vertical entre encabezados
+			borderRight: '1px solid rgba(2, 28, 43)', // Línea vertical entre encabezados
 		},
 	},
 	cells: {
