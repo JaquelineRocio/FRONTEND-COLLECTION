@@ -83,7 +83,7 @@ export const titulosParaTablaEstadoGeneralDeCartera = [
 		selector: row => row.porcentajeCd,
 		// sortable: true,
 		cell: row => <CustomRowCD row={row} />,
-		width: "60px"
+		width: "70px"
 	},
 	{
 		name: <div>%TC</div>,
@@ -184,6 +184,7 @@ export const titulosParaTablaSituacionDeCarteraSegunPrioridad = [
 				{row.codTipo}
 			</div>
 		),
+		width: "120px"
 	},
 	{
 		name: <div>CLIENTES</div>,	
@@ -249,7 +250,7 @@ export const titulosParaTablaSituacionDeCarteraSegunPrioridad = [
 		selector: row => row.porcentajeCd,
 		// sortable: true,
 		cell: row => <CustomRowCD row={row} />,
-		width: "60px"
+		width: "70px"
 	},
 	{
 		name: <div>%TC</div>,
@@ -355,7 +356,7 @@ export const titulosParaTablaCarteraPorTramoDeImporte= [
 		name: <div>CLIENTES</div>,	
 		selector: row => row.clientes,
 		cell: row => <AdicionaComas value={row.clientes} />,
-		width: "80px"
+		width: "120px"
 	},
 	{
 		name: <div>CUENTAS</div>, 
@@ -415,7 +416,7 @@ export const titulosParaTablaCarteraPorTramoDeImporte= [
 		selector: row => row.porcentajeCd,
 		// sortable: true,
 		cell: row => <CustomRowCD row={row} />,
-		width: "60px"
+		width: "70px"
 	},
 	{
 		name: <div>%TC</div>,
@@ -516,6 +517,7 @@ export const titulosParaTablaCarteraPorRangoDeMaduracion = [
 				{row.codTipo}
 			</div>
 		),
+		width: "120px"
 	},
 	{
 		name: <div>CLIENTES</div>,	
@@ -581,7 +583,7 @@ export const titulosParaTablaCarteraPorRangoDeMaduracion = [
 		selector: row => row.porcentajeCd,
 		// sortable: true,
 		cell: row => <CustomRowCD row={row} />,
-		width: "60px"
+		width: "70px"
 	},
 	{
 		name: <div>%TC</div>,
@@ -682,6 +684,7 @@ export const titulosParaTablaCarteraPorAnhoMesCastigo = [
 				{row.codTipo}
 			</div>
 		),
+		width: "120px"
 	},
 	{
 		name: <div>CLIENTES</div>,	
@@ -747,7 +750,7 @@ export const titulosParaTablaCarteraPorAnhoMesCastigo = [
 		selector: row => row.porcentajeCd,
 		// sortable: true,
 		cell: row => <CustomRowCD row={row} />,
-		width: "60px"
+		width: "70px"
 	},
 	{
 		name: <div>%TC</div>,
@@ -847,6 +850,7 @@ export const titulosParaTablaRangoDeCampanha = [
 				{row.codTipo}
 			</div>
 		),
+		width: "120px"
 	},
 	{
 		name: <div>CLIENTES</div>,	
@@ -912,7 +916,7 @@ export const titulosParaTablaRangoDeCampanha = [
 		selector: row => row.porcentajeCd,
 		// sortable: true,
 		cell: row => <CustomRowCD row={row} />,
-		width: "60px"
+		width: "70px"
 	},
 	{
 		name: <div>%TC</div>,
@@ -1013,6 +1017,7 @@ export const titulosParaTablaCarteraPorTipoDeProducto = [
 				{row.codTipo}
 			</div>
 		),
+		width: "120px"
 	},
 	{
 		name: <div>CLIENTES</div>,	
@@ -1078,7 +1083,7 @@ export const titulosParaTablaCarteraPorTipoDeProducto = [
 		selector: row => row.porcentajeCd,
 		// sortable: true,
 		cell: row => <CustomRowCD row={row} />,
-		width: "60px"
+		width: "70px"
 	},
 	{
 		name: <div>%TC</div>,
@@ -1179,6 +1184,7 @@ export const titulosParaTablaCarteraPorZona = [
 				{row.codTipo}
 			</div>
 		),
+		width: "120px"
 	},
 	{
 		name: <div>CLIENTES</div>,	
@@ -1244,7 +1250,7 @@ export const titulosParaTablaCarteraPorZona = [
 		selector: row => row.porcentajeCd,
 		// sortable: true,
 		cell: row => <CustomRowCD row={row} />,
-		width: "60px"
+		width: "70px"
 	},
 	{
 		name: <div>%TC</div>,

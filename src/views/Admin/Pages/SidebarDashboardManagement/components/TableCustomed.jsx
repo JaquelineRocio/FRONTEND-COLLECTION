@@ -49,7 +49,7 @@ const buildRows = (rowsInput,nameOfTable) => {
 			}) || []
 		
 			// Arma la fila "total"
-			rowsOutput.push({...rowsInput.total[0], tipo: "total"});
+			rowsOutput.push({...rowsInput?.total[0], tipo: "total" || 0});
 		
 			return rowsOutput;
 			}
@@ -66,8 +66,13 @@ const buildRows = (rowsInput,nameOfTable) => {
 		
 				// Arma las filas "fila"
 				bloque?.subRegistros?.map((row)=>{
-					row = {...row, tipo: "fila", porcentajeTotalPagos: bloque?.total["pagos"]}
+					
+					// Comentamos porque no necesitamos esta columna
+					row = {...row, tipo: "fila"}
+					// row = {...row, tipo: "fila", porcentajeTotalPagos: bloque?.total["pagos"]}
+					// row = {...row, tipo: "fila", porcentajeTotalPagos: bloque?.total?.pagos || 0}
 					rowsOutput.push(row)
+					console.log("entramos en condicion critica", row);
 				}) || {}
 		
 				
@@ -76,8 +81,9 @@ const buildRows = (rowsInput,nameOfTable) => {
 		
 			// totalGeneral
 			rowsOutput.push({...rowsInput.totalGeneral[0], tipo: "total", codTipo: "TOTAL GENERAL"});
-		
+			console.log("filas armadas", rowsOutput);
 			return rowsOutput;
+
 		}
 	}
 
