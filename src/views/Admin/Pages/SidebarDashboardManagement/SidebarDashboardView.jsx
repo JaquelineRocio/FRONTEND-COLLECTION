@@ -327,7 +327,7 @@ const SidebarDashboardView = () => {
 
         const payload = {
             producto: selectProducto,
-            campaña: selectRangoCampanha,
+            rangocampaña: selectRangoCampanha,
             macroRegiones: selectMacroRegiones,
             añoCastigo: ANHO_CASTIGO,
             moneda: CodMoneda,
@@ -346,6 +346,15 @@ const SidebarDashboardView = () => {
         // let data = await SimulatorApi(1000,false);
         // let error = null;
         // console.log("data simulada", data);
+
+        // Damos informacion del payload a las talbas
+        if(data != null ){
+            if(data.data != null){
+                data.data.payloadBody = payload;
+                data.data.payloadUrl = {selectEntidad:selectEntidad, selectFecha: selectFecha, selectCartera: selectCartera};
+            }
+
+        }
 
         // setRegistroPrimeraTabla(data?.data);
         setRegistroPrimeraTabla(data?.data ?? {});
@@ -565,6 +574,13 @@ const SidebarDashboardView = () => {
                     let {data, error} = await testFetch.post(bodyPayloadForIndividualTables,`/admin/tablon/dashboards?entidad=${urlPayloadForIndividualTables.selectEntidad}&mes=${urlPayloadForIndividualTables.selectFecha?.format('MM-YYYY')}&carteras=${urlPayloadForIndividualTables.selectCartera}`); 
                     // let data = await SimulatorApi(500,false);
                     if(!error){
+
+                        if(data != null){
+                            if(data.data != null){
+                            data.data.payloadBody = bodyPayloadForIndividualTables;
+                            data.data.payloadUrl = urlPayloadForIndividualTables;
+                            }    
+                        }
                         setRegistroPrimeraTabla(data?.data ?? {});
                     }
                     setShowGroupOfTables(true);
@@ -581,6 +597,14 @@ const SidebarDashboardView = () => {
                 if(!secondTableOpen && Object.keys(registroSegundaTabla).length === 0){
                     let {data, error} = await testFetch.post(bodyPayloadForIndividualTables,`/admin/tablon/dashboards?entidad=${urlPayloadForIndividualTables.selectEntidad}&mes=${urlPayloadForIndividualTables.selectFecha?.format('MM-YYYY')}&carteras=${urlPayloadForIndividualTables.selectCartera}`); 
                     if(!error){
+
+                        if(data != null){
+                            if(data.data != null){
+                            data.data.payloadBody = bodyPayloadForIndividualTables;
+                            data.data.payloadUrl = urlPayloadForIndividualTables;
+                            }    
+                        }
+
                         setRegistroSegundaTabla(data?.data ?? {});
                     }                
                     setLoadingSecondTable(false);
@@ -595,6 +619,14 @@ const SidebarDashboardView = () => {
                 if(!fourthTableOpen && Object.keys(registroCuartaTabla).length === 0){
                     let {data, error} = await testFetch.post(bodyPayloadForIndividualTables,`/admin/tablon/dashboards?entidad=${urlPayloadForIndividualTables.selectEntidad}&mes=${urlPayloadForIndividualTables.selectFecha?.format('MM-YYYY')}&carteras=${urlPayloadForIndividualTables.selectCartera}`); 
                     if(!error){
+
+                        if(data != null){
+                            if(data.data != null){
+                            data.data.payloadBody = bodyPayloadForIndividualTables;
+                            data.data.payloadUrl = urlPayloadForIndividualTables;
+                            }    
+                        }
+
                         setRegistroCuartaTabla(data?.data ?? {});
                     }
                     setLoadingFourthTable(false);
@@ -609,6 +641,14 @@ const SidebarDashboardView = () => {
                 if(!fifthTableOpen && Object.keys(registroQuintaTabla).length === 0){
                     let {data, error} = await testFetch.post(bodyPayloadForIndividualTables,`/admin/tablon/dashboards?entidad=${urlPayloadForIndividualTables.selectEntidad}&mes=${urlPayloadForIndividualTables.selectFecha?.format('MM-YYYY')}&carteras=${urlPayloadForIndividualTables.selectCartera}`); 
                     if(!error){
+
+                        if(data != null){
+                            if(data.data != null){
+                            data.data.payloadBody = bodyPayloadForIndividualTables;
+                            data.data.payloadUrl = urlPayloadForIndividualTables;
+                            }    
+                        }
+
                         setRegistroQuintaTabla(data?.data ?? {});
                     }
                     setLoadingFifthTable(false);
@@ -623,6 +663,13 @@ const SidebarDashboardView = () => {
                 if(!sixthTableOpen && Object.keys(registroSextaTabla).length === 0){
                     let {data, error} = await testFetch.post(bodyPayloadForIndividualTables,`/admin/tablon/dashboards?entidad=${urlPayloadForIndividualTables.selectEntidad}&mes=${urlPayloadForIndividualTables.selectFecha?.format('MM-YYYY')}&carteras=${urlPayloadForIndividualTables.selectCartera}`); 
                     if(!error){
+
+                        if(data != null){
+                            if(data.data != null){
+                            data.data.payloadBody = bodyPayloadForIndividualTables;
+                            data.data.payloadUrl = urlPayloadForIndividualTables;
+                            }    
+                        }
                         setRegistroSextaTabla(data?.data ?? {});
                     }
                     setLoadingSixthTable(false);
@@ -637,6 +684,13 @@ const SidebarDashboardView = () => {
                 if(!seventhTableOpen && Object.keys(registroSetimaTabla).length === 0){
                     let {data, error} = await testFetch.post(bodyPayloadForIndividualTables,`/admin/tablon/dashboards?entidad=${urlPayloadForIndividualTables.selectEntidad}&mes=${urlPayloadForIndividualTables.selectFecha?.format('MM-YYYY')}&carteras=${urlPayloadForIndividualTables.selectCartera}`); 
                     if(!error){
+                        if(data != null){
+                            if(data.data != null){
+                            data.data.payloadBody = bodyPayloadForIndividualTables;
+                            data.data.payloadUrl = urlPayloadForIndividualTables;
+                            }    
+                        }
+
                         setRegistroSetimaTabla(data?.data ?? {});                    
                     }
                     setLoadingSeventhTable(false);
@@ -651,6 +705,14 @@ const SidebarDashboardView = () => {
                 if(!octaveTableOpen && Object.keys(registroOctavaTabla).length === 0){
                     let {data, error} = await testFetch.post(bodyPayloadForIndividualTables,`/admin/tablon/dashboards?entidad=${urlPayloadForIndividualTables.selectEntidad}&mes=${urlPayloadForIndividualTables.selectFecha?.format('MM-YYYY')}&carteras=${urlPayloadForIndividualTables.selectCartera}`); 
                     if(!error){
+
+                        if(data != null){
+                            if(data.data != null){
+                            data.data.payloadBody = bodyPayloadForIndividualTables;
+                            data.data.payloadUrl = urlPayloadForIndividualTables;
+                            }    
+                        }
+
                         setRegistroOctavaTabla(data?.data ?? {});
                     }
                     setLoadingEighthTable(false);
@@ -672,7 +734,7 @@ const SidebarDashboardView = () => {
         {
             columnas: titulosParaTablaEstadoGeneralDeCartera,
             filas: registroPrimeraTabla,
-            nombreDeTabla: "ESTADO GENERAL DE CARTERA DEL MES (PONER MES Y AÑO)",
+            nombreDeTabla: "ESTADO GENERAL DE CARTERA",
             masInformacion: {setTableOpen:setFirstTableOpen, tableOpen:firstTableOpen, loading:loadingFirstTable, getDataFromIndividualTables:getDataFromIndividualTables, typeOfRequest: "General"},
             id: 'dashboard-1',
             key:1
@@ -680,7 +742,7 @@ const SidebarDashboardView = () => {
         {
             columnas: titulosParaTablaSituacionDeCarteraSegunPrioridad,
             filas: registroSegundaTabla,
-            nombreDeTabla: "SITUACIÓN DE CARTERA SEGÚN PRIORIDAD",
+            nombreDeTabla: "CARTERA SEGÚN PRIORIDAD",
             masInformacion: {setTableOpen:setSecondTableOpen, tableOpen:secondTableOpen, loading:loadingSecondTable, getDataFromIndividualTables:getDataFromIndividualTables, typeOfRequest: "Prioridad"},
             id: 'dashboard-2',
             key:2
@@ -705,7 +767,7 @@ const SidebarDashboardView = () => {
         {
             columnas: titulosParaTablaRangoDeCampanha,
             filas: registroSextaTabla,
-            nombreDeTabla: "DASHBOARD POR RANGO DE CAMPAÑA",
+            nombreDeTabla: "CARTERA POR RANGO DE CAMPAÑA",
             masInformacion: {setTableOpen:setSixthTableOpen, tableOpen:sixthTableOpen, loading:loadingSixthTable, getDataFromIndividualTables:getDataFromIndividualTables, typeOfRequest: "RangoCampaña"},
             id: 'dashboard-5',
             key:5
@@ -732,7 +794,7 @@ const SidebarDashboardView = () => {
        'dashboard-1': {
             columnas: titulosParaTablaEstadoGeneralDeCartera,
             filas: registroPrimeraTabla,
-            nombreDeTabla: "ESTADO GENERAL DE CARTERA DEL MES (PONER MES Y AÑO)",
+            nombreDeTabla: "ESTADO GENERAL DE CARTERA",
             masInformacion: {setTableOpen:setFirstTableOpen, tableOpen:firstTableOpen, loading:loadingFirstTable, getDataFromIndividualTables:getDataFromIndividualTables, typeOfRequest: "General"},
             id: 'dashboard-1',
             key:1
@@ -740,7 +802,7 @@ const SidebarDashboardView = () => {
        'dashboard-2': {
             columnas: titulosParaTablaSituacionDeCarteraSegunPrioridad,
             filas: registroSegundaTabla,
-            nombreDeTabla: "SITUACIÓN DE CARTERA SEGÚN PRIORIDAD",
+            nombreDeTabla: "CARTERA SEGÚN PRIORIDAD",
             masInformacion: {setTableOpen:setSecondTableOpen, tableOpen:secondTableOpen, loading:loadingSecondTable, getDataFromIndividualTables:getDataFromIndividualTables, typeOfRequest: "Prioridad"},
             id: 'dashboard-2',
             key:2
@@ -765,7 +827,7 @@ const SidebarDashboardView = () => {
        'dashboard-5': {
             columnas: titulosParaTablaRangoDeCampanha,
             filas: registroSextaTabla,
-            nombreDeTabla: "DASHBOARD POR RANGO DE CAMPAÑA",
+            nombreDeTabla: "CARTERA POR RANGO DE CAMPAÑA",
             masInformacion: {setTableOpen:setSixthTableOpen, tableOpen:sixthTableOpen, loading:loadingSixthTable, getDataFromIndividualTables:getDataFromIndividualTables, typeOfRequest: "RangoCampaña"},
             id: 'dashboard-5',
             key:5
@@ -793,7 +855,7 @@ const SidebarDashboardView = () => {
         //     'dashboard-1': {
         //         columnas: titulosParaTablaEstadoGeneralDeCartera,
         //         filas: registroPrimeraTabla,
-        //         nombreDeTabla: "ESTADO GENERAL DE CARTERA DEL MES (PONER MES Y AÑO)",
+        //         nombreDeTabla: "ESTADO GENERAL DE CARTERA",
         //         masInformacion: {setTableOpen:setFirstTableOpen, tableOpen:firstTableOpen, loading:loadingFirstTable, getDataFromIndividualTables:getDataFromIndividualTables, typeOfRequest: "General"},
         //         id: 'dashboard-1',
         //         key:1

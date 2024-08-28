@@ -1,7 +1,7 @@
 const data = {
-    version: "v1",
-    description: "Se mejoró los select de opción multiple",
-    date: "17:03 - 26 de agosto 2024"
+    version: "v3",
+    description: "Corrige error en spinner",
+    date: "16:17 - 27 de agosto 2024"
 }
 
 export default data;

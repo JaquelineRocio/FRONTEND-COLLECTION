@@ -28,7 +28,8 @@ import PageNotFound from "./../views/miscellany/PageNotFound";
 import EnConstruccion from "./../views/miscellany/EnConstruccion";
 // import FlexTailwind from "../views/ExampleView/GridTailwind";
 // import SidebarAccessManagementView from "../views/Admin/Pages/SidebarAccessManagement/SidebarAccessManagementView";
-
+import ReactExcel from "../views/ExampleView/ReactExcel";
+import ContruccionDeTabla from "../views/ExampleView/ContruccionDeTabla";
 
 const DeleteSession = ({children}) => {
   const dispatch = useDispatch();
@@ -101,8 +102,12 @@ const Route = () => {
       },
       {
         path: 'examples',
-        element: <UsoFormularioReactHookForm/>
-      }    
+        element: <ReactExcel/>
+      },
+      {
+        path: 'examplestwo',
+        element: <ContruccionDeTabla/>
+      }      
   ]);
   
   return <RouterProvider router={router} />;

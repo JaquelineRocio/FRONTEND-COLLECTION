@@ -10,7 +10,6 @@ import PercentageBar from './PercentageBar';
  */
 
 export default function TableCustomed({tableRows, tableColumns = [], loading = false, nameOfTable=null}) {
-	// console.log("entrada registros tabla dos: ", tableRows);
 	
 	return (
 		<DataTable
@@ -38,52 +37,49 @@ export default function TableCustomed({tableRows, tableColumns = [], loading = f
  *  * Esta funcion une todas las filas entregadas por el backend. el resultado es una coleccion (array de objetos) 
  */
 const buildRows = (rowsInput,nameOfTable) => {
-	if(nameOfTable=="ESTADO GENERAL DE CARTERA DEL MES (PONER MES Y AÑO)"){
+	if(nameOfTable=="ESTADO GENERAL DE CARTERA"){
+
 		if (rowsInput && Object.keys(rowsInput).length > 0) {
-			const rowsOutput = []
-		
+			const rowsOutput = []	
 			rowsInput?.registros?.map((bloque)=>{
+
+				// Arma la primera fila "suma"
+				// Esta fila no existe para la primera tabla "Estado general de cartera del mes "
+				// const objetoTotal = bloque?.total || {}
+				// rowsOutput.push({...objetoTotal, tipo: "suma", codTipo: objetoTotal.desCartera, payloadUrl: rowsInput.payloadUrl, payloadBody: rowsInput.payloadBody})
+
 				// Arma las filas "fila"
-				bloque = {...bloque, tipo: "fila"}
+				bloque = {...bloque, tipo: "fila", payloadUrl: rowsInput.payloadUrl, payloadBody: rowsInput.payloadBody}
 				rowsOutput.push(bloque);
+
 			}) || []
 		
 			// Arma la fila "total"
 			rowsOutput.push({...rowsInput?.total[0], tipo: "total" || 0});
-		
 			return rowsOutput;
-			}
+		}
+
 	}else{
+
 		if (rowsInput && Object.keys(rowsInput).length > 0) {
-			// console.log("entrada build tabla prioridad ",rowsInput);
 			const rowsOutput = []
-			// registros
 			rowsInput?.registros?.map((bloque)=>{
-		
+
 				// Arma la primera fila "suma"
 				const objetoTotal = bloque?.total || {}
-				rowsOutput.push({...objetoTotal, tipo: "suma", codTipo: objetoTotal.desCartera})
+				rowsOutput.push({...objetoTotal, tipo: "suma", codTipo: objetoTotal.desCartera, payloadUrl: rowsInput.payloadUrl, payloadBody: rowsInput.payloadBody})
 		
 				// Arma las filas "fila"
 				bloque?.subRegistros?.map((row)=>{
-					
-					// Comentamos porque no necesitamos esta columna
-					row = {...row, tipo: "fila"}
-					// row = {...row, tipo: "fila", porcentajeTotalPagos: bloque?.total["pagos"]}
-					// row = {...row, tipo: "fila", porcentajeTotalPagos: bloque?.total?.pagos || 0}
+					row = {...row, tipo: "fila",  payloadUrl: rowsInput.payloadUrl, payloadBody: rowsInput.payloadBody}
 					rowsOutput.push(row)
-					console.log("entramos en condicion critica", row);
 				}) || {}
-		
-				
-		
+
 			}) || []
 		
-			// totalGeneral
+			// Arma la fila "total" | armamos tambien "totalGeneral". el resto de tablas tienen el TOTAL GENERAL
 			rowsOutput.push({...rowsInput.totalGeneral[0], tipo: "total", codTipo: "TOTAL GENERAL"});
-			console.log("filas armadas", rowsOutput);
 			return rowsOutput;
-
 		}
 	}
 
