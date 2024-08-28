@@ -1527,7 +1527,7 @@ const GetData = async (children, dispatch) => {
 	// Construimos el payload
 	let payload = {
 		"producto": [], 
-		"campaña": [],    
+		"rangocampaña": [],    
 		"macroRegiones": [], 
 		"añoCastigo":  null,
 		"moneda": null,
@@ -1601,7 +1601,7 @@ const GetData = async (children, dispatch) => {
 			// Cuando el tipo es suma, e payload tiene que ser vacio, tal cual se muestra.
 		}else if(children.tipo == "fila"){
 			console.log("rango campaña fila");
-			payload.campaña[0] = children.codTipo;
+			payload.rangocampaña[0] = children.codTipo;
 			downloadData.Fila = children.codTipo; 
 		}
 	}else if(children?.payloadBody?.tipo =="CodProducto"){
