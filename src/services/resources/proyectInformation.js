@@ -1,7 +1,7 @@
 const data = {
-    version: "v4",
-    description: "Corrige exportar excel de rango de campaña",
-    date: "15:55 - 28 de agosto 2024"
+    version: "v5",
+    description: "Maneja valores vacios en selects",
+    date: "14:38 - 29 de agosto 2024"
 }
 
 export default data;

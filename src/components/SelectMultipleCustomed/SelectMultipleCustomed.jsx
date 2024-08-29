@@ -60,7 +60,8 @@ const SelectMultipleCustomed = ({
                     }}
                     
                     >
-                        <span>{item.label}</span>
+                        {/* <span>{item.label}</span> */}
+                        <span className={`${ !item.label?"text-red-500": ""}`}>{item.label || "SIN INFO"}</span>
                     </MenuItem>
                 ))}
             </Select>
