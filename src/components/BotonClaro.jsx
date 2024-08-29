@@ -6,7 +6,10 @@ const BotonClaro = ({layout = "INGRESE NOMBRE", className=null, onClick=null}) =
               text-buttonColor-0 h-10
                  flex
                  justify-center
-                 items-center 
+                 items-center
+                 active:bg-[#f3f3f3] 
+                 active:text-[#001862]
+                 active:border-[#001862]
                 px-2
                 py-7
                 font-ralewayBold

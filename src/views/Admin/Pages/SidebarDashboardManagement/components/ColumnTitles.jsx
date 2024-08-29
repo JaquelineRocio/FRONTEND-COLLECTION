@@ -1645,9 +1645,9 @@ const DownloadExcel = ({children}) => {
 	const dispatch = useDispatch();
 	// return <button onClick={()=>{GetData(children)}}   className="bg-green-400 px-6 rounded py-1 text-white hover:bg-green-500 font-ralewayRegular">Excel</button>
 	if(children?.tipo == "suma" || children?.tipo == "fila"){
-		return <button onClick={()=>{GetData(children,dispatch)}}   className="bg-green-400 px-6 rounded py-1 text-white hover:bg-green-500 font-ralewayRegular">Excel</button>
+		return <button onClick={()=>{GetData(children,dispatch)}}   className="bg-green-400 px-6 rounded py-1 text-white hover:bg-green-500 font-ralewayRegular active:bg-green-900 ">Excel</button>
 	}else{
-		return <button onClick={()=>{GetData(children,dispatch)}}  disabled  className="bg-gray-400 px-6 rounded py-1 text-white cursor-not-allowed  font-ralewayRegular">Excel</button>
+		return <button onClick={()=>{GetData(children,dispatch)}}  disabled  className="bg-gray-400 px-6 rounded py-1 text-white cursor-not-allowed  font-ralewayRegular active:bg-green-900 ">Excel</button>
 	}
 	
 }
