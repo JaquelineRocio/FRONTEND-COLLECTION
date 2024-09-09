@@ -1077,7 +1077,7 @@ export const titulosParaTablaCarteraPorTipoDeProducto = [
 				{formatValue(row.codTipo)}
 			</div>
 		),
-		width: "120px"
+		width: "140px"
 	},
 	{
 		name: <div>CLIENTES</div>,	
