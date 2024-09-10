@@ -1,4 +1,4 @@
-import PercentageBar from "./PercentageBar";
+
 
 /**
  * Aquí se configuran los nombres de los titulos de todas las tablas
@@ -13,7 +13,7 @@ export const titulosParaTablaEstadoGeneralDeCartera = [
 		// sortable: true,
 		cell: row => (
 			<div title={row.desCartera} className="w-full text-center">
-				{formatValue(row.desCartera)}
+				{convertirNuloEnVacio(row.desCartera)}
 			</div>
 		),
 		width: "120px"
@@ -22,25 +22,25 @@ export const titulosParaTablaEstadoGeneralDeCartera = [
 	{
 		name: <div>CLIENTES</div>,	
 		selector: row => row.clientes,
-		cell: row => <AdicionaComas value={formatValue(row.clientes)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.clientes)} />,
 		width: "80px"
 	},
 	{
 		name: <div>CUENTAS</div>, 
 		selector: row => row.cuentas,
-		cell: row => <AdicionaComas value={formatValue(row.cuentas)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.cuentas)} />,
 		width: "80px"
 	},
 	{
 		name: <div>%CUENTAS</div>,
 		selector: row => row.porcentajeCuentas,
-		cell: row => formatValue(row.porcentajeCuentas),
+		cell: row => convertirNuloEnVacio(row.porcentajeCuentas),
 		// sortable: true,
 	},
 	{
 		name: <div>CAPITAL</div>,
 		selector: row => row.capitalMN,
-		cell: row => <AdicionaComas value={formatValue(row.capitalMN)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.capitalMN)} />,
 		width: "120px"
 	},
 	{
@@ -49,7 +49,7 @@ export const titulosParaTablaEstadoGeneralDeCartera = [
 		// sortable: true,
 		cell: row => (
 			<div title={row.porcentajeCapital}>
-				{formatValue(row.porcentajeCapital)}
+				{convertirNuloEnVacio(row.porcentajeCapital)}
 			</div>
 		),
 		width: "80px"
@@ -60,7 +60,7 @@ export const titulosParaTablaEstadoGeneralDeCartera = [
 		// sortable: true,
 		cell: row => (
 			<div title={row.porcentajeCtc}>
-				{formatValue(row.porcentajeCtc)}
+				{convertirNuloEnVacio(row.porcentajeCtc)}
 			</div>
 		),
 		width: "60px"
@@ -68,22 +68,19 @@ export const titulosParaTablaEstadoGeneralDeCartera = [
 	{
 		name: <div># CTC</div>,	
 		selector: row => row.numCtc,
-		cell: row => <AdicionaComas value={formatValue(row.numCtc)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numCtc)} />,
 		width: "60px"
 	},
 	{
 		name: <div># CD</div>,	
 		selector: row => row.numCd,
-		cell: row => <AdicionaComas value={formatValue(row.numCd)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numCd)} />,
 		width: "60px"
 	},
-
 	{
 		name: <div>%CD</div>,
 		selector: row => row.porcentajeCd,
-		cell: row => formatValue(row.porcentajeCuentas),
-		// sortable: true,
-		// cell: row => <CustomRowCD row={row} />,
+		cell: row => <CustomRowCD row={row} />,
 		width: "70px"
 	},
 	{
@@ -91,7 +88,7 @@ export const titulosParaTablaEstadoGeneralDeCartera = [
 		selector: row => row.porcentajeTc,
 		cell: row => (
 			<div title={row.porcentajeTc}>
-				{formatValue(row.porcentajeTc)}
+				{convertirNuloEnVacio(row.porcentajeTc)}
 			</div>
 		),
 		width: "80px"
@@ -99,60 +96,60 @@ export const titulosParaTablaEstadoGeneralDeCartera = [
 	{
 		name: '# PDP',
 		selector: row => row.numPDP,
-		cell: row => <AdicionaComas value={formatValue(row.numPDP)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numPDP)} />,
 		width: "80px"
 	},
 	{
 		name: 'MONTO PDP',
 		selector: row => row.montoPDP,
-		cell: row => <AdicionaComas value={formatValue(row.montoPDP)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.montoPDP)} />,
 		width: "130px"
 	},
 	{
 		name: <div>INT TOTAL</div>, // hecho
 		selector: row => row.intTotal,
-		cell: row => <AdicionaComas value={formatValue(row.intTotal)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intTotal)} />,
 		width: "80px"
 	},
 	{
 		name: 'INT AGENTE',
 		selector: row => row.intAgente,
-		cell: row => <AdicionaComas value={formatValue(row.intAgente)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intAgente)} />,
 	},
 	{
 		name: <div>INT CTC</div>,
 		selector: row => row.intCTC,
-		cell: row => <AdicionaComas value={formatValue(row.intCTC)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intCTC)} />,
 		width: "60px"
 	},
 	{
 		name: <div>INT CD</div>,
 		selector: row => row.intCD,
-		cell: row => <AdicionaComas value={formatValue(row.intCD)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intCD)} />,
 		width: "60px"
 	},
 	{
 		name: <div># PAGOS</div>,
 		selector: row => row.numPagos,
-		cell: row => <AdicionaComas value={formatValue(row.numPagos)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numPagos)} />,
 		width: "100px"
 	},
 	{
 		name: <div>S/. PAGOS</div>,
 		selector: row => row.solesPagos,
-		cell: row => <AdicionaComas value={formatValue(row.solesPagos)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.solesPagos)} />,
 		width: "100px"
 	},
 	{
 		name: '%EFICIENCIA',
 		selector: row => row.porcentajeEficiencia,
-		cell: row => formatValue(row.porcentajeEficiencia)
+		cell: row => convertirNuloEnVacio(row.porcentajeEficiencia)
 		// sortable: true,
 	},
 	{
 		name: <div>TICKET D. CAPITAL</div>,
 		selector: row => row.ticketCapital,
-		cell: row => <AdicionaComas value={formatValue(row.ticketCapital)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.ticketCapital)} />,
 		width: "80px"
 	},
 	{
@@ -164,14 +161,14 @@ export const titulosParaTablaEstadoGeneralDeCartera = [
 	{
 		name: <div>%CALIDAD PDP</div>,
 		selector: row => row.porcentajeCalidadPDP,
-		cell: row => formatValue(row.porcentajeCalidadPDP),
+		cell: row => convertirNuloEnVacio(row.porcentajeCalidadPDP),
 		width: "80px"
 		// sortable: true,
 	},
 	{
 		name: <div>%COB</div>,
 		selector: row => row.cob,
-		cell: row => formatValue(row.cob),
+		cell: row => convertirNuloEnVacio(row.cob),
 		width: "60px"
 		// sortable: true,
 	},
@@ -191,7 +188,7 @@ export const titulosParaTablaSituacionDeCarteraSegunPrioridad = [
 		// sortable: true,
 		cell: row => (
 			<div title={row.codTipo} className="w-full text-center">
-				{formatValue(row.codTipo)}
+				{convertirNuloEnVacio(row.codTipo)}
 			</div>
 		),
 		width: "120px"
@@ -199,25 +196,25 @@ export const titulosParaTablaSituacionDeCarteraSegunPrioridad = [
 	{
 		name: <div>CLIENTES</div>,	
 		selector: row => row.clientes,
-		cell: row => <AdicionaComas value={formatValue(row.clientes)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.clientes)} />,
 		width: "80px"
 	},
 	{
 		name: <div>CUENTAS</div>, 
 		selector: row => row.cuentas,
-		cell: row => <AdicionaComas value={formatValue(row.cuentas)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.cuentas)} />,
 		width: "80px"
 	},
 	{
 		name: <div>%CUENTAS</div>,
 		selector: row => row.porcentajeCuentas,
-		cell: row => formatValue(row.porcentajeCuentas),
+		cell: row => convertirNuloEnVacio(row.porcentajeCuentas),
 		// sortable: true,
 	},
 	{
 		name: <div>CAPITAL</div>,
 		selector: row => row.capitalMN,
-		cell: row => <AdicionaComas value={formatValue(row.capitalMN)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.capitalMN)} />,
 		width: "120px"
 	},
 	{
@@ -226,7 +223,7 @@ export const titulosParaTablaSituacionDeCarteraSegunPrioridad = [
 		// sortable: true,
 		cell: row => (
 			<div title={row.porcentajeCapital}>
-				{formatValue(row.porcentajeCapital)}
+				{convertirNuloEnVacio(row.porcentajeCapital)}
 			</div>
 		),
 		width: "80px"
@@ -237,7 +234,7 @@ export const titulosParaTablaSituacionDeCarteraSegunPrioridad = [
 		// sortable: true,
 		cell: row => (
 			<div title={row.porcentajeCtc}>
-				{formatValue(row.porcentajeCtc)}
+				{convertirNuloEnVacio(row.porcentajeCtc)}
 			</div>
 		),
 		width: "60px"
@@ -245,22 +242,20 @@ export const titulosParaTablaSituacionDeCarteraSegunPrioridad = [
 	{
 		name: <div># CTC</div>,	
 		selector: row => row.numCtc,
-		cell: row => <AdicionaComas value={formatValue(row.numCtc)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numCtc)} />,
 		width: "60px"
 	},
 	{
 		name: <div># CD</div>,	
 		selector: row => row.numCd,
-		cell: row => <AdicionaComas value={formatValue(row.numCd)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numCd)} />,
 		width: "60px"
 	},
 
 	{
 		name: <div>%CD</div>,
 		selector: row => row.porcentajeCd,
-		cell: row => formatValue(row.porcentajeCuentas),
-		// sortable: true,
-		// cell: row => <CustomRowCD row={row} />,
+		cell: row => <CustomRowCD row={row} />,
 		width: "70px"
 	},
 	{
@@ -268,7 +263,7 @@ export const titulosParaTablaSituacionDeCarteraSegunPrioridad = [
 		selector: row => row.porcentajeTc,
 		cell: row => (
 			<div title={row.porcentajeTc}>
-				{formatValue(row.porcentajeTc)}
+				{convertirNuloEnVacio(row.porcentajeTc)}
 			</div>
 		),
 		width: "80px"
@@ -276,60 +271,60 @@ export const titulosParaTablaSituacionDeCarteraSegunPrioridad = [
 	{
 		name: '# PDP',
 		selector: row => row.numPDP,
-		cell: row => <AdicionaComas value={formatValue(row.numPDP)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numPDP)} />,
 		width: "80px"
 	},
 	{
 		name: 'MONTO PDP',
 		selector: row => row.montoPDP,
-		cell: row => <AdicionaComas value={formatValue(row.montoPDP)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.montoPDP)} />,
 		width: "130px"
 	},
 	{
 		name: <div>INT TOTAL</div>, // hecho
 		selector: row => row.intTotal,
-		cell: row => <AdicionaComas value={formatValue(row.intTotal)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intTotal)} />,
 		width: "80px"
 	},
 	{
 		name: 'INT AGENTE',
 		selector: row => row.intAgente,
-		cell: row => <AdicionaComas value={formatValue(row.intAgente)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intAgente)} />,
 	},
 	{
 		name: <div>INT CTC</div>,
 		selector: row => row.intCTC,
-		cell: row => <AdicionaComas value={formatValue(row.intCTC)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intCTC)} />,
 		width: "60px"
 	},
 	{
 		name: <div>INT CD</div>,
 		selector: row => row.intCD,
-		cell: row => <AdicionaComas value={formatValue(row.intCD)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intCD)} />,
 		width: "60px"
 	},
 	{
 		name: <div># PAGOS</div>,
 		selector: row => row.numPagos,
-		cell: row => <AdicionaComas value={formatValue(row.numPagos)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numPagos)} />,
 		width: "100px"
 	},
 	{
 		name: <div>S/. PAGOS</div>,
 		selector: row => row.solesPagos,
-		cell: row => <AdicionaComas value={formatValue(row.solesPagos)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.solesPagos)} />,
 		width: "100px"
 	},
 	{
 		name: '%EFICIENCIA',
 		selector: row => row.porcentajeEficiencia,
-		cell: row => formatValue(row.porcentajeEficiencia)
+		cell: row => convertirNuloEnVacio(row.porcentajeEficiencia)
 		// sortable: true,
 	},
 	{
 		name: <div>TICKET D. CAPITAL</div>,
 		selector: row => row.ticketCapital,
-		cell: row => <AdicionaComas value={formatValue(row.ticketCapital)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.ticketCapital)} />,
 		width: "80px"
 	},
 	{
@@ -341,14 +336,14 @@ export const titulosParaTablaSituacionDeCarteraSegunPrioridad = [
 	{
 		name: <div>%CALIDAD PDP</div>,
 		selector: row => row.porcentajeCalidadPDP,
-		cell: row => formatValue(row.porcentajeCalidadPDP),
+		cell: row => convertirNuloEnVacio(row.porcentajeCalidadPDP),
 		width: "80px"
 		// sortable: true,
 	},
 	{
 		name: <div>%COB</div>,
 		selector: row => row.cob,
-		cell: row => formatValue(row.cob),
+		cell: row => convertirNuloEnVacio(row.cob),
 		width: "60px"
 		// sortable: true,
 	},
@@ -368,32 +363,32 @@ export const titulosParaTablaCarteraPorTramoDeImporte= [
 		// sortable: true,
 		cell: row => (
 			<div title={row.codTipo} className="w-full text-center">
-				{formatValue(row.codTipo)}
+				{convertirNuloEnVacio(row.codTipo)}
 			</div>
 		),
 	},
 	{
 		name: <div>CLIENTES</div>,	
 		selector: row => row.clientes,
-		cell: row => <AdicionaComas value={formatValue(row.clientes)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.clientes)} />,
 		width: "80px"
 	},
 	{
 		name: <div>CUENTAS</div>, 
 		selector: row => row.cuentas,
-		cell: row => <AdicionaComas value={formatValue(row.cuentas)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.cuentas)} />,
 		width: "80px"
 	},
 	{
 		name: <div>%CUENTAS</div>,
 		selector: row => row.porcentajeCuentas,
-		cell: row => formatValue(row.porcentajeCuentas),
+		cell: row => convertirNuloEnVacio(row.porcentajeCuentas),
 		// sortable: true,
 	},
 	{
 		name: <div>CAPITAL</div>,
 		selector: row => row.capitalMN,
-		cell: row => <AdicionaComas value={formatValue(row.capitalMN)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.capitalMN)} />,
 		width: "120px"
 	},
 	{
@@ -402,7 +397,7 @@ export const titulosParaTablaCarteraPorTramoDeImporte= [
 		// sortable: true,
 		cell: row => (
 			<div title={row.porcentajeCapital}>
-				{formatValue(row.porcentajeCapital)}
+				{convertirNuloEnVacio(row.porcentajeCapital)}
 			</div>
 		),
 		width: "80px"
@@ -413,7 +408,7 @@ export const titulosParaTablaCarteraPorTramoDeImporte= [
 		// sortable: true,
 		cell: row => (
 			<div title={row.porcentajeCtc}>
-				{formatValue(row.porcentajeCtc)}
+				{convertirNuloEnVacio(row.porcentajeCtc)}
 			</div>
 		),
 		width: "60px"
@@ -421,22 +416,19 @@ export const titulosParaTablaCarteraPorTramoDeImporte= [
 	{
 		name: <div># CTC</div>,	
 		selector: row => row.numCtc,
-		cell: row => <AdicionaComas value={formatValue(row.numCtc)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numCtc)} />,
 		width: "60px"
 	},
 	{
 		name: <div># CD</div>,	
 		selector: row => row.numCd,
-		cell: row => <AdicionaComas value={formatValue(row.numCd)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numCd)} />,
 		width: "60px"
 	},
-
 	{
 		name: <div>%CD</div>,
 		selector: row => row.porcentajeCd,
-		cell: row => formatValue(row.porcentajeCuentas),
-		// sortable: true,
-		// cell: row => <CustomRowCD row={row} />,
+		cell: row => <CustomRowCD row={row} />,
 		width: "70px"
 	},
 	{
@@ -444,7 +436,7 @@ export const titulosParaTablaCarteraPorTramoDeImporte= [
 		selector: row => row.porcentajeTc,
 		cell: row => (
 			<div title={row.porcentajeTc}>
-				{formatValue(row.porcentajeTc)}
+				{convertirNuloEnVacio(row.porcentajeTc)}
 			</div>
 		),
 		width: "80px"
@@ -452,60 +444,60 @@ export const titulosParaTablaCarteraPorTramoDeImporte= [
 	{
 		name: '# PDP',
 		selector: row => row.numPDP,
-		cell: row => <AdicionaComas value={formatValue(row.numPDP)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numPDP)} />,
 		width: "80px"
 	},
 	{
 		name: 'MONTO PDP',
 		selector: row => row.montoPDP,
-		cell: row => <AdicionaComas value={formatValue(row.montoPDP)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.montoPDP)} />,
 		width: "130px"
 	},
 	{
 		name: <div>INT TOTAL</div>, // hecho
 		selector: row => row.intTotal,
-		cell: row => <AdicionaComas value={formatValue(row.intTotal)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intTotal)} />,
 		width: "80px"
 	},
 	{
 		name: 'INT AGENTE',
 		selector: row => row.intAgente,
-		cell: row => <AdicionaComas value={formatValue(row.intAgente)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intAgente)} />,
 	},
 	{
 		name: <div>INT CTC</div>,
 		selector: row => row.intCTC,
-		cell: row => <AdicionaComas value={formatValue(row.intCTC)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intCTC)} />,
 		width: "60px"
 	},
 	{
 		name: <div>INT CD</div>,
 		selector: row => row.intCD,
-		cell: row => <AdicionaComas value={formatValue(row.intCD)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intCD)} />,
 		width: "60px"
 	},
 	{
 		name: <div># PAGOS</div>,
 		selector: row => row.numPagos,
-		cell: row => <AdicionaComas value={formatValue(row.numPagos)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numPagos)} />,
 		width: "100px"
 	},
 	{
 		name: <div>S/. PAGOS</div>,
 		selector: row => row.solesPagos,
-		cell: row => <AdicionaComas value={formatValue(row.solesPagos)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.solesPagos)} />,
 		width: "100px"
 	},
 	{
 		name: '%EFICIENCIA',
 		selector: row => row.porcentajeEficiencia,
-		cell: row => formatValue(row.porcentajeEficiencia)
+		cell: row => convertirNuloEnVacio(row.porcentajeEficiencia)
 		// sortable: true,
 	},
 	{
 		name: <div>TICKET D. CAPITAL</div>,
 		selector: row => row.ticketCapital,
-		cell: row => <AdicionaComas value={formatValue(row.ticketCapital)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.ticketCapital)} />,
 		width: "80px"
 	},
 	{
@@ -517,14 +509,14 @@ export const titulosParaTablaCarteraPorTramoDeImporte= [
 	{
 		name: <div>%CALIDAD PDP</div>,
 		selector: row => row.porcentajeCalidadPDP,
-		cell: row => formatValue(row.porcentajeCalidadPDP),
+		cell: row => convertirNuloEnVacio(row.porcentajeCalidadPDP),
 		width: "80px"
 		// sortable: true,
 	},
 	{
 		name: <div>%COB</div>,
 		selector: row => row.cob,
-		cell: row => formatValue(row.cob),
+		cell: row => convertirNuloEnVacio(row.cob),
 		width: "60px"
 		// sortable: true,
 	},
@@ -544,7 +536,7 @@ export const titulosParaTablaCarteraPorRangoDeMaduracion = [
 		// sortable: true,
 		cell: row => (
 			<div title={row.codTipo} className="w-full text-center">
-				{formatValue(row.codTipo)}
+				{convertirNuloEnVacio(row.codTipo)}
 			</div>
 		),
 		width: "120px"
@@ -552,25 +544,25 @@ export const titulosParaTablaCarteraPorRangoDeMaduracion = [
 	{
 		name: <div>CLIENTES</div>,	
 		selector: row => row.clientes,
-		cell: row => <AdicionaComas value={formatValue(row.clientes)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.clientes)} />,
 		width: "80px"
 	},
 	{
 		name: <div>CUENTAS</div>, 
 		selector: row => row.cuentas,
-		cell: row => <AdicionaComas value={formatValue(row.cuentas)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.cuentas)} />,
 		width: "80px"
 	},
 	{
 		name: <div>%CUENTAS</div>,
 		selector: row => row.porcentajeCuentas,
-		cell: row => formatValue(row.porcentajeCuentas),
+		cell: row => convertirNuloEnVacio(row.porcentajeCuentas),
 		// sortable: true,
 	},
 	{
 		name: <div>CAPITAL</div>,
 		selector: row => row.capitalMN,
-		cell: row => <AdicionaComas value={formatValue(row.capitalMN)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.capitalMN)} />,
 		width: "120px"
 	},
 	{
@@ -579,7 +571,7 @@ export const titulosParaTablaCarteraPorRangoDeMaduracion = [
 		// sortable: true,
 		cell: row => (
 			<div title={row.porcentajeCapital}>
-				{formatValue(row.porcentajeCapital)}
+				{convertirNuloEnVacio(row.porcentajeCapital)}
 			</div>
 		),
 		width: "80px"
@@ -590,7 +582,7 @@ export const titulosParaTablaCarteraPorRangoDeMaduracion = [
 		// sortable: true,
 		cell: row => (
 			<div title={row.porcentajeCtc}>
-				{formatValue(row.porcentajeCtc)}
+				{convertirNuloEnVacio(row.porcentajeCtc)}
 			</div>
 		),
 		width: "60px"
@@ -598,22 +590,19 @@ export const titulosParaTablaCarteraPorRangoDeMaduracion = [
 	{
 		name: <div># CTC</div>,	
 		selector: row => row.numCtc,
-		cell: row => <AdicionaComas value={formatValue(row.numCtc)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numCtc)} />,
 		width: "60px"
 	},
 	{
 		name: <div># CD</div>,	
 		selector: row => row.numCd,
-		cell: row => <AdicionaComas value={formatValue(row.numCd)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numCd)} />,
 		width: "60px"
 	},
-
 	{
 		name: <div>%CD</div>,
 		selector: row => row.porcentajeCd,
-		cell: row => formatValue(row.porcentajeCuentas),
-		// sortable: true,
-		// cell: row => <CustomRowCD row={row} />,
+		cell: row => <CustomRowCD row={row} />,
 		width: "70px"
 	},
 	{
@@ -621,7 +610,7 @@ export const titulosParaTablaCarteraPorRangoDeMaduracion = [
 		selector: row => row.porcentajeTc,
 		cell: row => (
 			<div title={row.porcentajeTc}>
-				{formatValue(row.porcentajeTc)}
+				{convertirNuloEnVacio(row.porcentajeTc)}
 			</div>
 		),
 		width: "80px"
@@ -629,60 +618,60 @@ export const titulosParaTablaCarteraPorRangoDeMaduracion = [
 	{
 		name: '# PDP',
 		selector: row => row.numPDP,
-		cell: row => <AdicionaComas value={formatValue(row.numPDP)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numPDP)} />,
 		width: "80px"
 	},
 	{
 		name: 'MONTO PDP',
 		selector: row => row.montoPDP,
-		cell: row => <AdicionaComas value={formatValue(row.montoPDP)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.montoPDP)} />,
 		width: "130px"
 	},
 	{
 		name: <div>INT TOTAL</div>, // hecho
 		selector: row => row.intTotal,
-		cell: row => <AdicionaComas value={formatValue(row.intTotal)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intTotal)} />,
 		width: "80px"
 	},
 	{
 		name: 'INT AGENTE',
 		selector: row => row.intAgente,
-		cell: row => <AdicionaComas value={formatValue(row.intAgente)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intAgente)} />,
 	},
 	{
 		name: <div>INT CTC</div>,
 		selector: row => row.intCTC,
-		cell: row => <AdicionaComas value={formatValue(row.intCTC)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intCTC)} />,
 		width: "60px"
 	},
 	{
 		name: <div>INT CD</div>,
 		selector: row => row.intCD,
-		cell: row => <AdicionaComas value={formatValue(row.intCD)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intCD)} />,
 		width: "60px"
 	},
 	{
 		name: <div># PAGOS</div>,
 		selector: row => row.numPagos,
-		cell: row => <AdicionaComas value={formatValue(row.numPagos)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numPagos)} />,
 		width: "100px"
 	},
 	{
 		name: <div>S/. PAGOS</div>,
 		selector: row => row.solesPagos,
-		cell: row => <AdicionaComas value={formatValue(row.solesPagos)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.solesPagos)} />,
 		width: "100px"
 	},
 	{
 		name: '%EFICIENCIA',
 		selector: row => row.porcentajeEficiencia,
-		cell: row => formatValue(row.porcentajeEficiencia)
+		cell: row => convertirNuloEnVacio(row.porcentajeEficiencia)
 		// sortable: true,
 	},
 	{
 		name: <div>TICKET D. CAPITAL</div>,
 		selector: row => row.ticketCapital,
-		cell: row => <AdicionaComas value={formatValue(row.ticketCapital)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.ticketCapital)} />,
 		width: "80px"
 	},
 	{
@@ -694,14 +683,14 @@ export const titulosParaTablaCarteraPorRangoDeMaduracion = [
 	{
 		name: <div>%CALIDAD PDP</div>,
 		selector: row => row.porcentajeCalidadPDP,
-		cell: row => formatValue(row.porcentajeCalidadPDP),
+		cell: row => convertirNuloEnVacio(row.porcentajeCalidadPDP),
 		width: "80px"
 		// sortable: true,
 	},
 	{
 		name: <div>%COB</div>,
 		selector: row => row.cob,
-		cell: row => formatValue(row.cob),
+		cell: row => convertirNuloEnVacio(row.cob),
 		width: "60px"
 		// sortable: true,
 	},
@@ -721,7 +710,7 @@ export const titulosParaTablaCarteraPorAnhoMesCastigo = [
 		// sortable: true,
 		cell: row => (
 			<div title={row.codTipo} className="w-full text-center">
-				{formatValue(row.codTipo)}
+				{convertirNuloEnVacio(row.codTipo)}
 			</div>
 		),
 		width: "120px"
@@ -729,25 +718,25 @@ export const titulosParaTablaCarteraPorAnhoMesCastigo = [
 	{
 		name: <div>CLIENTES</div>,	
 		selector: row => row.clientes,
-		cell: row => <AdicionaComas value={formatValue(row.clientes)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.clientes)} />,
 		width: "80px"
 	},
 	{
 		name: <div>CUENTAS</div>, 
 		selector: row => row.cuentas,
-		cell: row => <AdicionaComas value={formatValue(row.cuentas)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.cuentas)} />,
 		width: "80px"
 	},
 	{
 		name: <div>%CUENTAS</div>,
 		selector: row => row.porcentajeCuentas,
-		cell: row => formatValue(row.porcentajeCuentas),
+		cell: row => convertirNuloEnVacio(row.porcentajeCuentas),
 		// sortable: true,
 	},
 	{
 		name: <div>CAPITAL</div>,
 		selector: row => row.capitalMN,
-		cell: row => <AdicionaComas value={formatValue(row.capitalMN)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.capitalMN)} />,
 		width: "120px"
 	},
 	{
@@ -756,7 +745,7 @@ export const titulosParaTablaCarteraPorAnhoMesCastigo = [
 		// sortable: true,
 		cell: row => (
 			<div title={row.porcentajeCapital}>
-				{formatValue(row.porcentajeCapital)}
+				{convertirNuloEnVacio(row.porcentajeCapital)}
 			</div>
 		),
 		width: "80px"
@@ -767,7 +756,7 @@ export const titulosParaTablaCarteraPorAnhoMesCastigo = [
 		// sortable: true,
 		cell: row => (
 			<div title={row.porcentajeCtc}>
-				{formatValue(row.porcentajeCtc)}
+				{convertirNuloEnVacio(row.porcentajeCtc)}
 			</div>
 		),
 		width: "60px"
@@ -775,22 +764,19 @@ export const titulosParaTablaCarteraPorAnhoMesCastigo = [
 	{
 		name: <div># CTC</div>,	
 		selector: row => row.numCtc,
-		cell: row => <AdicionaComas value={formatValue(row.numCtc)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numCtc)} />,
 		width: "60px"
 	},
 	{
 		name: <div># CD</div>,	
 		selector: row => row.numCd,
-		cell: row => <AdicionaComas value={formatValue(row.numCd)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numCd)} />,
 		width: "60px"
 	},
-
 	{
 		name: <div>%CD</div>,
 		selector: row => row.porcentajeCd,
-		cell: row => formatValue(row.porcentajeCuentas),
-		// sortable: true,
-		// cell: row => <CustomRowCD row={row} />,
+		cell: row => <CustomRowCD row={row} />,
 		width: "70px"
 	},
 	{
@@ -798,7 +784,7 @@ export const titulosParaTablaCarteraPorAnhoMesCastigo = [
 		selector: row => row.porcentajeTc,
 		cell: row => (
 			<div title={row.porcentajeTc}>
-				{formatValue(row.porcentajeTc)}
+				{convertirNuloEnVacio(row.porcentajeTc)}
 			</div>
 		),
 		width: "80px"
@@ -806,60 +792,60 @@ export const titulosParaTablaCarteraPorAnhoMesCastigo = [
 	{
 		name: '# PDP',
 		selector: row => row.numPDP,
-		cell: row => <AdicionaComas value={formatValue(row.numPDP)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numPDP)} />,
 		width: "80px"
 	},
 	{
 		name: 'MONTO PDP',
 		selector: row => row.montoPDP,
-		cell: row => <AdicionaComas value={formatValue(row.montoPDP)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.montoPDP)} />,
 		width: "130px"
 	},
 	{
 		name: <div>INT TOTAL</div>, // hecho
 		selector: row => row.intTotal,
-		cell: row => <AdicionaComas value={formatValue(row.intTotal)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intTotal)} />,
 		width: "80px"
 	},
 	{
 		name: 'INT AGENTE',
 		selector: row => row.intAgente,
-		cell: row => <AdicionaComas value={formatValue(row.intAgente)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intAgente)} />,
 	},
 	{
 		name: <div>INT CTC</div>,
 		selector: row => row.intCTC,
-		cell: row => <AdicionaComas value={formatValue(row.intCTC)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intCTC)} />,
 		width: "60px"
 	},
 	{
 		name: <div>INT CD</div>,
 		selector: row => row.intCD,
-		cell: row => <AdicionaComas value={formatValue(row.intCD)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intCD)} />,
 		width: "60px"
 	},
 	{
 		name: <div># PAGOS</div>,
 		selector: row => row.numPagos,
-		cell: row => <AdicionaComas value={formatValue(row.numPagos)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numPagos)} />,
 		width: "100px"
 	},
 	{
 		name: <div>S/. PAGOS</div>,
 		selector: row => row.solesPagos,
-		cell: row => <AdicionaComas value={formatValue(row.solesPagos)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.solesPagos)} />,
 		width: "100px"
 	},
 	{
 		name: '%EFICIENCIA',
 		selector: row => row.porcentajeEficiencia,
-		cell: row => formatValue(row.porcentajeEficiencia)
+		cell: row => convertirNuloEnVacio(row.porcentajeEficiencia)
 		// sortable: true,
 	},
 	{
 		name: <div>TICKET D. CAPITAL</div>,
 		selector: row => row.ticketCapital,
-		cell: row => <AdicionaComas value={formatValue(row.ticketCapital)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.ticketCapital)} />,
 		width: "80px"
 	},
 	{
@@ -871,14 +857,14 @@ export const titulosParaTablaCarteraPorAnhoMesCastigo = [
 	{
 		name: <div>%CALIDAD PDP</div>,
 		selector: row => row.porcentajeCalidadPDP,
-		cell: row => formatValue(row.porcentajeCalidadPDP),
+		cell: row => convertirNuloEnVacio(row.porcentajeCalidadPDP),
 		width: "80px"
 		// sortable: true,
 	},
 	{
 		name: <div>%COB</div>,
 		selector: row => row.cob,
-		cell: row => formatValue(row.cob),
+		cell: row => convertirNuloEnVacio(row.cob),
 		width: "60px"
 		// sortable: true,
 	},
@@ -897,7 +883,7 @@ export const titulosParaTablaRangoDeCampanha = [
 		// sortable: true,
 		cell: row => (
 			<div title={row.codTipo} className="w-full text-center">
-				{formatValue(row.codTipo)}
+				{convertirNuloEnVacio(row.codTipo)}
 			</div>
 		),
 		width: "120px"
@@ -905,25 +891,25 @@ export const titulosParaTablaRangoDeCampanha = [
 	{
 		name: <div>CLIENTES</div>,	
 		selector: row => row.clientes,
-		cell: row => <AdicionaComas value={formatValue(row.clientes)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.clientes)} />,
 		width: "80px"
 	},
 	{
 		name: <div>CUENTAS</div>, 
 		selector: row => row.cuentas,
-		cell: row => <AdicionaComas value={formatValue(row.cuentas)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.cuentas)} />,
 		width: "80px"
 	},
 	{
 		name: <div>%CUENTAS</div>,
 		selector: row => row.porcentajeCuentas,
-		cell: row => formatValue(row.porcentajeCuentas),
+		cell: row => convertirNuloEnVacio(row.porcentajeCuentas),
 		// sortable: true,
 	},
 	{
 		name: <div>CAPITAL</div>,
 		selector: row => row.capitalMN,
-		cell: row => <AdicionaComas value={formatValue(row.capitalMN)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.capitalMN)} />,
 		width: "120px"
 	},
 	{
@@ -932,7 +918,7 @@ export const titulosParaTablaRangoDeCampanha = [
 		// sortable: true,
 		cell: row => (
 			<div title={row.porcentajeCapital}>
-				{formatValue(row.porcentajeCapital)}
+				{convertirNuloEnVacio(row.porcentajeCapital)}
 			</div>
 		),
 		width: "80px"
@@ -943,7 +929,7 @@ export const titulosParaTablaRangoDeCampanha = [
 		// sortable: true,
 		cell: row => (
 			<div title={row.porcentajeCtc}>
-				{formatValue(row.porcentajeCtc)}
+				{convertirNuloEnVacio(row.porcentajeCtc)}
 			</div>
 		),
 		width: "60px"
@@ -951,22 +937,19 @@ export const titulosParaTablaRangoDeCampanha = [
 	{
 		name: <div># CTC</div>,	
 		selector: row => row.numCtc,
-		cell: row => <AdicionaComas value={formatValue(row.numCtc)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numCtc)} />,
 		width: "60px"
 	},
 	{
 		name: <div># CD</div>,	
 		selector: row => row.numCd,
-		cell: row => <AdicionaComas value={formatValue(row.numCd)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numCd)} />,
 		width: "60px"
 	},
-
 	{
 		name: <div>%CD</div>,
 		selector: row => row.porcentajeCd,
-		cell: row => formatValue(row.porcentajeCuentas),
-		// sortable: true,
-		// cell: row => <CustomRowCD row={row} />,
+		cell: row => <CustomRowCD row={row} />,
 		width: "70px"
 	},
 	{
@@ -974,7 +957,7 @@ export const titulosParaTablaRangoDeCampanha = [
 		selector: row => row.porcentajeTc,
 		cell: row => (
 			<div title={row.porcentajeTc}>
-				{formatValue(row.porcentajeTc)}
+				{convertirNuloEnVacio(row.porcentajeTc)}
 			</div>
 		),
 		width: "80px"
@@ -982,60 +965,60 @@ export const titulosParaTablaRangoDeCampanha = [
 	{
 		name: '# PDP',
 		selector: row => row.numPDP,
-		cell: row => <AdicionaComas value={formatValue(row.numPDP)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numPDP)} />,
 		width: "80px"
 	},
 	{
 		name: 'MONTO PDP',
 		selector: row => row.montoPDP,
-		cell: row => <AdicionaComas value={formatValue(row.montoPDP)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.montoPDP)} />,
 		width: "130px"
 	},
 	{
 		name: <div>INT TOTAL</div>, // hecho
 		selector: row => row.intTotal,
-		cell: row => <AdicionaComas value={formatValue(row.intTotal)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intTotal)} />,
 		width: "80px"
 	},
 	{
 		name: 'INT AGENTE',
 		selector: row => row.intAgente,
-		cell: row => <AdicionaComas value={formatValue(row.intAgente)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intAgente)} />,
 	},
 	{
 		name: <div>INT CTC</div>,
 		selector: row => row.intCTC,
-		cell: row => <AdicionaComas value={formatValue(row.intCTC)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intCTC)} />,
 		width: "60px"
 	},
 	{
 		name: <div>INT CD</div>,
 		selector: row => row.intCD,
-		cell: row => <AdicionaComas value={formatValue(row.intCD)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intCD)} />,
 		width: "60px"
 	},
 	{
 		name: <div># PAGOS</div>,
 		selector: row => row.numPagos,
-		cell: row => <AdicionaComas value={formatValue(row.numPagos)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numPagos)} />,
 		width: "100px"
 	},
 	{
 		name: <div>S/. PAGOS</div>,
 		selector: row => row.solesPagos,
-		cell: row => <AdicionaComas value={formatValue(row.solesPagos)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.solesPagos)} />,
 		width: "100px"
 	},
 	{
 		name: '%EFICIENCIA',
 		selector: row => row.porcentajeEficiencia,
-		cell: row => formatValue(row.porcentajeEficiencia)
+		cell: row => convertirNuloEnVacio(row.porcentajeEficiencia)
 		// sortable: true,
 	},
 	{
 		name: <div>TICKET D. CAPITAL</div>,
 		selector: row => row.ticketCapital,
-		cell: row => <AdicionaComas value={formatValue(row.ticketCapital)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.ticketCapital)} />,
 		width: "80px"
 	},
 	{
@@ -1047,14 +1030,14 @@ export const titulosParaTablaRangoDeCampanha = [
 	{
 		name: <div>%CALIDAD PDP</div>,
 		selector: row => row.porcentajeCalidadPDP,
-		cell: row => formatValue(row.porcentajeCalidadPDP),
+		cell: row => convertirNuloEnVacio(row.porcentajeCalidadPDP),
 		width: "80px"
 		// sortable: true,
 	},
 	{
 		name: <div>%COB</div>,
 		selector: row => row.cob,
-		cell: row => formatValue(row.cob),
+		cell: row => convertirNuloEnVacio(row.cob),
 		width: "60px"
 		// sortable: true,
 	},
@@ -1074,7 +1057,7 @@ export const titulosParaTablaCarteraPorTipoDeProducto = [
 		// sortable: true,
 		cell: row => (
 			<div title={row.codTipo} className="w-full text-center">
-				{formatValue(row.codTipo)}
+				{convertirNuloEnVacio(row.codTipo)}
 			</div>
 		),
 		width: "140px"
@@ -1082,25 +1065,25 @@ export const titulosParaTablaCarteraPorTipoDeProducto = [
 	{
 		name: <div>CLIENTES</div>,	
 		selector: row => row.clientes,
-		cell: row => <AdicionaComas value={formatValue(row.clientes)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.clientes)} />,
 		width: "100px"
 	},
 	{
 		name: <div>CUENTAS</div>, 
 		selector: row => row.cuentas,
-		cell: row => <AdicionaComas value={formatValue(row.cuentas)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.cuentas)} />,
 		width: "80px"
 	},
 	{
 		name: <div>%CUENTAS</div>,
 		selector: row => row.porcentajeCuentas,
-		cell: row => formatValue(row.porcentajeCuentas),
+		cell: row => convertirNuloEnVacio(row.porcentajeCuentas),
 		// sortable: true,
 	},
 	{
 		name: <div>CAPITAL</div>,
 		selector: row => row.capitalMN,
-		cell: row => <AdicionaComas value={formatValue(row.capitalMN)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.capitalMN)} />,
 		width: "120px"
 	},
 	{
@@ -1109,7 +1092,7 @@ export const titulosParaTablaCarteraPorTipoDeProducto = [
 		// sortable: true,
 		cell: row => (
 			<div title={row.porcentajeCapital}>
-				{formatValue(row.porcentajeCapital)}
+				{convertirNuloEnVacio(row.porcentajeCapital)}
 			</div>
 		),
 		width: "80px"
@@ -1120,7 +1103,7 @@ export const titulosParaTablaCarteraPorTipoDeProducto = [
 		// sortable: true,
 		cell: row => (
 			<div title={row.porcentajeCtc}>
-				{formatValue(row.porcentajeCtc)}
+				{convertirNuloEnVacio(row.porcentajeCtc)}
 			</div>
 		),
 		width: "60px"
@@ -1128,22 +1111,19 @@ export const titulosParaTablaCarteraPorTipoDeProducto = [
 	{
 		name: <div># CTC</div>,	
 		selector: row => row.numCtc,
-		cell: row => <AdicionaComas value={formatValue(row.numCtc)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numCtc)} />,
 		width: "60px"
 	},
 	{
 		name: <div># CD</div>,	
 		selector: row => row.numCd,
-		cell: row => <AdicionaComas value={formatValue(row.numCd)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numCd)} />,
 		width: "60px"
 	},
-
 	{
 		name: <div>%CD</div>,
 		selector: row => row.porcentajeCd,
-		cell: row => formatValue(row.porcentajeCuentas),
-		// sortable: true,
-		// cell: row => <CustomRowCD row={row} />,
+		cell: row => <CustomRowCD row={row} />,
 		width: "70px"
 	},
 	{
@@ -1151,7 +1131,7 @@ export const titulosParaTablaCarteraPorTipoDeProducto = [
 		selector: row => row.porcentajeTc,
 		cell: row => (
 			<div title={row.porcentajeTc}>
-				{formatValue(row.porcentajeTc)}
+				{convertirNuloEnVacio(row.porcentajeTc)}
 			</div>
 		),
 		width: "80px"
@@ -1159,60 +1139,60 @@ export const titulosParaTablaCarteraPorTipoDeProducto = [
 	{
 		name: '# PDP',
 		selector: row => row.numPDP,
-		cell: row => <AdicionaComas value={formatValue(row.numPDP)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numPDP)} />,
 		width: "80px"
 	},
 	{
 		name: 'MONTO PDP',
 		selector: row => row.montoPDP,
-		cell: row => <AdicionaComas value={formatValue(row.montoPDP)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.montoPDP)} />,
 		width: "130px"
 	},
 	{
 		name: <div>INT TOTAL</div>, // hecho
 		selector: row => row.intTotal,
-		cell: row => <AdicionaComas value={formatValue(row.intTotal)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intTotal)} />,
 		width: "80px"
 	},
 	{
 		name: 'INT AGENTE',
 		selector: row => row.intAgente,
-		cell: row => <AdicionaComas value={formatValue(row.intAgente)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intAgente)} />,
 	},
 	{
 		name: <div>INT CTC</div>,
 		selector: row => row.intCTC,
-		cell: row => <AdicionaComas value={formatValue(row.intCTC)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intCTC)} />,
 		width: "60px"
 	},
 	{
 		name: <div>INT CD</div>,
 		selector: row => row.intCD,
-		cell: row => <AdicionaComas value={formatValue(row.intCD)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intCD)} />,
 		width: "60px"
 	},
 	{
 		name: <div># PAGOS</div>,
 		selector: row => row.numPagos,
-		cell: row => <AdicionaComas value={formatValue(row.numPagos)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numPagos)} />,
 		width: "100px"
 	},
 	{
 		name: <div>S/. PAGOS</div>,
 		selector: row => row.solesPagos,
-		cell: row => <AdicionaComas value={formatValue(row.solesPagos)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.solesPagos)} />,
 		width: "100px"
 	},
 	{
 		name: '%EFICIENCIA',
 		selector: row => row.porcentajeEficiencia,
-		cell: row => formatValue(row.porcentajeEficiencia)
+		cell: row => convertirNuloEnVacio(row.porcentajeEficiencia)
 		// sortable: true,
 	},
 	{
 		name: <div>TICKET D. CAPITAL</div>,
 		selector: row => row.ticketCapital,
-		cell: row => <AdicionaComas value={formatValue(row.ticketCapital)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.ticketCapital)} />,
 		width: "80px"
 	},
 	{
@@ -1224,14 +1204,14 @@ export const titulosParaTablaCarteraPorTipoDeProducto = [
 	{
 		name: <div>%CALIDAD PDP</div>,
 		selector: row => row.porcentajeCalidadPDP,
-		cell: row => formatValue(row.porcentajeCalidadPDP),
+		cell: row => convertirNuloEnVacio(row.porcentajeCalidadPDP),
 		width: "80px"
 		// sortable: true,
 	},
 	{
 		name: <div>%COB</div>,
 		selector: row => row.cob,
-		cell: row => formatValue(row.cob),
+		cell: row => convertirNuloEnVacio(row.cob),
 		width: "60px"
 		// sortable: true,
 	},
@@ -1251,7 +1231,7 @@ export const titulosParaTablaCarteraPorZona = [
 		// sortable: true,
 		cell: row => (
 			<div title={row.codTipo} className="w-full text-center">
-				{formatValue(row.codTipo)}
+				{convertirNuloEnVacio(row.codTipo)}
 			</div>
 		),
 		width: "120px"
@@ -1259,25 +1239,25 @@ export const titulosParaTablaCarteraPorZona = [
 	{
 		name: <div>CLIENTES</div>,	
 		selector: row => row.clientes,
-		cell: row => <AdicionaComas value={formatValue(row.clientes)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.clientes)} />,
 		width: "80px"
 	},
 	{
 		name: <div>CUENTAS</div>, 
 		selector: row => row.cuentas,
-		cell: row => <AdicionaComas value={formatValue(row.cuentas)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.cuentas)} />,
 		width: "80px"
 	},
 	{
 		name: <div>%CUENTAS</div>,
 		selector: row => row.porcentajeCuentas,
-		cell: row => formatValue(row.porcentajeCuentas),
+		cell: row => convertirNuloEnVacio(row.porcentajeCuentas),
 		// sortable: true,
 	},
 	{
 		name: <div>CAPITAL</div>,
 		selector: row => row.capitalMN,
-		cell: row => <AdicionaComas value={formatValue(row.capitalMN)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.capitalMN)} />,
 		width: "120px"
 	},
 	{
@@ -1286,7 +1266,7 @@ export const titulosParaTablaCarteraPorZona = [
 		// sortable: true,
 		cell: row => (
 			<div title={row.porcentajeCapital}>
-				{formatValue(row.porcentajeCapital)}
+				{convertirNuloEnVacio(row.porcentajeCapital)}
 			</div>
 		),
 		width: "80px"
@@ -1297,7 +1277,7 @@ export const titulosParaTablaCarteraPorZona = [
 		// sortable: true,
 		cell: row => (
 			<div title={row.porcentajeCtc}>
-				{formatValue(row.porcentajeCtc)}
+				{convertirNuloEnVacio(row.porcentajeCtc)}
 			</div>
 		),
 		width: "60px"
@@ -1305,22 +1285,19 @@ export const titulosParaTablaCarteraPorZona = [
 	{
 		name: <div># CTC</div>,	
 		selector: row => row.numCtc,
-		cell: row => <AdicionaComas value={formatValue(row.numCtc)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numCtc)} />,
 		width: "60px"
 	},
 	{
 		name: <div># CD</div>,	
 		selector: row => row.numCd,
-		cell: row => <AdicionaComas value={formatValue(row.numCd)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numCd)} />,
 		width: "60px"
 	},
-
 	{
 		name: <div>%CD</div>,
 		selector: row => row.porcentajeCd,
-		cell: row => formatValue(row.porcentajeCuentas),
-		// sortable: true,
-		// cell: row => <CustomRowCD row={row} />,
+		cell: row => <CustomRowCD row={row} />,
 		width: "70px"
 	},
 	{
@@ -1328,7 +1305,7 @@ export const titulosParaTablaCarteraPorZona = [
 		selector: row => row.porcentajeTc,
 		cell: row => (
 			<div title={row.porcentajeTc}>
-				{formatValue(row.porcentajeTc)}
+				{convertirNuloEnVacio(row.porcentajeTc)}
 			</div>
 		),
 		width: "80px"
@@ -1336,60 +1313,60 @@ export const titulosParaTablaCarteraPorZona = [
 	{
 		name: '# PDP',
 		selector: row => row.numPDP,
-		cell: row => <AdicionaComas value={formatValue(row.numPDP)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numPDP)} />,
 		width: "80px"
 	},
 	{
 		name: 'MONTO PDP',
 		selector: row => row.montoPDP,
-		cell: row => <AdicionaComas value={formatValue(row.montoPDP)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.montoPDP)} />,
 		width: "130px"
 	},
 	{
 		name: <div>INT TOTAL</div>, // hecho
 		selector: row => row.intTotal,
-		cell: row => <AdicionaComas value={formatValue(row.intTotal)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intTotal)} />,
 		width: "80px"
 	},
 	{
 		name: 'INT AGENTE',
 		selector: row => row.intAgente,
-		cell: row => <AdicionaComas value={formatValue(row.intAgente)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intAgente)} />,
 	},
 	{
 		name: <div>INT CTC</div>,
 		selector: row => row.intCTC,
-		cell: row => <AdicionaComas value={formatValue(row.intCTC)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intCTC)} />,
 		width: "60px"
 	},
 	{
 		name: <div>INT CD</div>,
 		selector: row => row.intCD,
-		cell: row => <AdicionaComas value={formatValue(row.intCD)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intCD)} />,
 		width: "60px"
 	},
 	{
 		name: <div># PAGOS</div>,
 		selector: row => row.numPagos,
-		cell: row => <AdicionaComas value={formatValue(row.numPagos)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numPagos)} />,
 		width: "100px"
 	},
 	{
 		name: <div>S/. PAGOS</div>,
 		selector: row => row.solesPagos,
-		cell: row => <AdicionaComas value={formatValue(row.solesPagos)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.solesPagos)} />,
 		width: "100px"
 	},
 	{
 		name: '%EFICIENCIA',
 		selector: row => row.porcentajeEficiencia,
-		cell: row => formatValue(row.porcentajeEficiencia)
+		cell: row => convertirNuloEnVacio(row.porcentajeEficiencia)
 		// sortable: true,
 	},
 	{
 		name: <div>TICKET D. CAPITAL</div>,
 		selector: row => row.ticketCapital,
-		cell: row => <AdicionaComas value={formatValue(row.ticketCapital)} />,
+		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.ticketCapital)} />,
 		width: "80px"
 	},
 	{
@@ -1401,14 +1378,14 @@ export const titulosParaTablaCarteraPorZona = [
 	{
 		name: <div>%CALIDAD PDP</div>,
 		selector: row => row.porcentajeCalidadPDP,
-		cell: row => formatValue(row.porcentajeCalidadPDP),
+		cell: row => convertirNuloEnVacio(row.porcentajeCalidadPDP),
 		width: "80px"
 		// sortable: true,
 	},
 	{
 		name: <div>%COB</div>,
 		selector: row => row.cob,
-		cell: row => formatValue(row.cob),
+		cell: row => convertirNuloEnVacio(row.cob),
 		width: "60px"
 		// sortable: true,
 	},
@@ -1427,6 +1404,7 @@ import swal from "sweetalert";
 import { unauthenticatedUser } from "../../../../../store/authSlice";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
+import PercentageBar from "./PercentageBar";
 
 const CustomBar = ({children, color}) => {
 
@@ -1470,22 +1448,27 @@ const CustomBar = ({children, color}) => {
 	);
 }
 
-const CustomRowCD = ({row}) => (
-	<>		
+const CustomRowCD = ({row}) => {
+	const valor = convertirNuloEnVacio(row.porcentajeCd);
+	// console.log("valores para la fila cd % ", row);
+ return (
+	
+	<>	
+
 		{
-			row.tipo == "suma" && row.porcentajeCd
+			row.tipo == "suma" && valor
 		}
 
 		{
-			row.tipo === "fila" && <PercentageBar percentage={row.porcentajeCd}/>
+			row.tipo === "fila" && <PercentageBar percentage={valor}/>
 		}
 
 		{
-			row.tipo == "total" && row.porcentajeCd
+			row.tipo == "total" && valor
 		}
 
 	</>	
-);
+)};
 
 const CustomRowPercentageEficiencia = ({row}) => (
 	<>
@@ -1513,6 +1496,7 @@ const AdicionaComas = ({ value }) => {
     const numero = typeof value === 'number' ? value : parseFloat(value.replace(/,/g, ''));
 
     // Verificar si la conversión fue exitosa
+	// no es un numero? (devuelve value si el valor que entra en el if no es un numero)
     if (isNaN(numero)) {
         return value;
     }
@@ -1522,7 +1506,7 @@ const AdicionaComas = ({ value }) => {
 
 const GetData = async (children, dispatch) => {
 	// const dispatch = useDispatch();
-	console.log(children);
+	console.log("datos por fila:", children);
 
 	// Construimos el payload
 	let payload = {
@@ -1555,6 +1539,20 @@ const GetData = async (children, dispatch) => {
 	downloadData.CodigoDeCartera = children?.codCartera;
 	
 
+
+	payload.producto = children.payloadBody.producto;
+	payload.rangocampaña = children.payloadBody.rangocampaña;
+	payload.macroRegiones = children.payloadBody.macroRegiones;
+	payload.añoCastigo = children.payloadBody.añoCastigo;
+	payload.moneda = children.payloadBody.moneda;
+	payload.estadoCuenta = children.payloadBody.estadoCuenta;
+	payload.mesCastigo = children.payloadBody.mesCastigo;
+	payload.prioridad = children.payloadBody.prioridad;
+	payload.rangoEdad = children.payloadBody.rangoEdad;
+	payload.tipo = children.payloadBody.tipo;
+
+
+
 	/***
 	 * la variable "tipo" almacena el tipo de tabla. estos son : "General", "Prioridad", "Maduracion", "AÑO_CASTIGO", "RangoCampaña", "CodProducto", "MacroRegiones".
 	 * Nota: Cuando se presiona sobre el botón exportar excel, cada fila envia dos datos: el tipo de fila (fila, suma o total) y el tipo de tabla ("General", "Prioridad",
@@ -1566,14 +1564,57 @@ const GetData = async (children, dispatch) => {
 		 * filas de la tabla "General" son carteras, a diferencia de las otras tablas que tienen filas que 
 		 * son carteras y también tienen filas que son subgrupos de las filas Cartera 
 		 */
+		// llenamos datos de filtros especificos
+		payload.producto = children.payloadBody.producto;
+		payload.rangocampaña = children.payloadBody.rangocampaña;
+		payload.macroRegiones = children.payloadBody.macroRegiones;
+		payload.añoCastigo = children.payloadBody.añoCastigo;
+		payload.moneda = children.payloadBody.moneda;
+		payload.estadoCuenta = children.payloadBody.estadoCuenta;
+		payload.mesCastigo = children.payloadBody.mesCastigo;
+		payload.prioridad = children.payloadBody.prioridad;
+		payload.rangoEdad = children.payloadBody.rangoEdad;
+		payload.tipo = children.payloadBody.tipo;
+
 		downloadData.Filtro = "Estado General de Cartera";
 	}else if(children?.payloadBody?.tipo =="Prioridad"){
 		downloadData.Filtro = "Cartera Según Prioridad";
 		if(children.tipo == "suma"){
 			// Cuando el tipo es suma, e payload tiene que ser vacio, tal cual se muestra.
 		}else if(children.tipo == "fila"){
+			
+			// llenamos datos de filtros especificos
+			payload.producto = children.payloadBody.producto;
+			payload.rangocampaña = children.payloadBody.rangocampaña;
+			payload.macroRegiones = children.payloadBody.macroRegiones;
+			payload.añoCastigo = children.payloadBody.añoCastigo;
+			payload.moneda = children.payloadBody.moneda;
+			payload.estadoCuenta = children.payloadBody.estadoCuenta;
+			payload.mesCastigo = children.payloadBody.mesCastigo;
+			payload.prioridad = children.payloadBody.prioridad;
+			payload.rangoEdad = children.payloadBody.rangoEdad;
+			payload.tipo = children.payloadBody.tipo;
+
+			// llenamos datos de filtros especificos
 			payload.prioridad = children.codTipo;
+
+			// "producto": [], 
+			// "rangocampaña": [],    
+			// "macroRegiones": [], 
+			// "añoCastigo":  null,
+			// "moneda": null,
+			// "estadoCuenta": [],
+			// "mesCastigo": null,
+			// "prioridad": null,
+			// "rangoEdad":[],
+			// "tipo":null,
+			// "maduracion": null ,
+
+
+
 			downloadData.Fila = children.codTipo;
+			
+
 		}
 
 	}else if(children?.payloadBody?.tipo =="Maduracion"){
@@ -1581,6 +1622,18 @@ const GetData = async (children, dispatch) => {
 		if(children.tipo == "suma"){
 			// Cuando el tipo es suma, e payload tiene que ser vacio, tal cual se muestra.
 		}else if(children.tipo == "fila"){
+			// llenamos datos de filtros especificos
+			payload.producto = children.payloadBody.producto;
+			payload.rangocampaña = children.payloadBody.rangocampaña;
+			payload.macroRegiones = children.payloadBody.macroRegiones;
+			payload.añoCastigo = children.payloadBody.añoCastigo;
+			payload.moneda = children.payloadBody.moneda;
+			payload.estadoCuenta = children.payloadBody.estadoCuenta;
+			payload.mesCastigo = children.payloadBody.mesCastigo;
+			payload.prioridad = children.payloadBody.prioridad;
+			payload.rangoEdad = children.payloadBody.rangoEdad;
+			payload.tipo = children.payloadBody.tipo;
+			// llenamos datos de filtros especificos
 			payload.maduracion = children.codTipo;
 			downloadData.Fila = children.codTipo;
 		}
@@ -1589,6 +1642,18 @@ const GetData = async (children, dispatch) => {
 		if(children.tipo == "suma"){
 			// Cuando el tipo es suma, e payload tiene que ser vacio, tal cual se muestra.
 		}else if(children.tipo == "fila"){
+			// llenamos datos de filtros especificos
+			payload.producto = children.payloadBody.producto;
+			payload.rangocampaña = children.payloadBody.rangocampaña;
+			payload.macroRegiones = children.payloadBody.macroRegiones;
+			payload.añoCastigo = children.payloadBody.añoCastigo;
+			payload.moneda = children.payloadBody.moneda;
+			payload.estadoCuenta = children.payloadBody.estadoCuenta;
+			payload.mesCastigo = children.payloadBody.mesCastigo;
+			payload.prioridad = children.payloadBody.prioridad;
+			payload.rangoEdad = children.payloadBody.rangoEdad;
+			payload.tipo = children.payloadBody.tipo;
+			// llenamos datos de filtros especificos
 			const fechaYmes = children.codTipo.split(" - ");
 			payload.añoCastigo = fechaYmes[0];
 			payload.mesCastigo = fechaYmes[1];
@@ -1600,6 +1665,18 @@ const GetData = async (children, dispatch) => {
 			console.log("rango campaña suma");
 			// Cuando el tipo es suma, e payload tiene que ser vacio, tal cual se muestra.
 		}else if(children.tipo == "fila"){
+			// llenamos datos de filtros especificos
+			payload.producto = children.payloadBody.producto;
+			payload.rangocampaña = children.payloadBody.rangocampaña;
+			payload.macroRegiones = children.payloadBody.macroRegiones;
+			payload.añoCastigo = children.payloadBody.añoCastigo;
+			payload.moneda = children.payloadBody.moneda;
+			payload.estadoCuenta = children.payloadBody.estadoCuenta;
+			payload.mesCastigo = children.payloadBody.mesCastigo;
+			payload.prioridad = children.payloadBody.prioridad;
+			payload.rangoEdad = children.payloadBody.rangoEdad;
+			payload.tipo = children.payloadBody.tipo;
+			// llenamos datos de filtros especificos
 			console.log("rango campaña fila");
 			payload.rangocampaña[0] = children.codTipo;
 			downloadData.Fila = children.codTipo; 
@@ -1611,6 +1688,18 @@ const GetData = async (children, dispatch) => {
 			console.log("entramos en suma de producto")
 			// Cuando el tipo es suma, e payload tiene que ser vacio, tal cual se muestra.
 		}else if(children.tipo == "fila"){
+			// llenamos datos de filtros especificos
+			payload.producto = children.payloadBody.producto;
+			payload.rangocampaña = children.payloadBody.rangocampaña;
+			payload.macroRegiones = children.payloadBody.macroRegiones;
+			payload.añoCastigo = children.payloadBody.añoCastigo;
+			payload.moneda = children.payloadBody.moneda;
+			payload.estadoCuenta = children.payloadBody.estadoCuenta;
+			payload.mesCastigo = children.payloadBody.mesCastigo;
+			payload.prioridad = children.payloadBody.prioridad;
+			payload.rangoEdad = children.payloadBody.rangoEdad;
+			payload.tipo = children.payloadBody.tipo;
+			// llenamos datos de filtros especificos
 			console.log("entramos en fila de producto")
 			payload.producto[0] = children.codTipo;
 			downloadData.Fila = children.codTipo;
@@ -1620,6 +1709,19 @@ const GetData = async (children, dispatch) => {
 		if(children.tipo == "suma"){
 			// Cuando el tipo es suma, e payload tiene que ser vacio, tal cual se muestra.
 		}else if(children.tipo == "fila"){
+			// llenamos datos de filtros especificos
+			payload.producto = children.payloadBody.producto;
+			payload.rangocampaña = children.payloadBody.rangocampaña;
+			payload.macroRegiones = children.payloadBody.macroRegiones;
+			payload.añoCastigo = children.payloadBody.añoCastigo;
+			payload.moneda = children.payloadBody.moneda;
+			payload.estadoCuenta = children.payloadBody.estadoCuenta;
+			payload.mesCastigo = children.payloadBody.mesCastigo;
+			payload.prioridad = children.payloadBody.prioridad;
+			payload.rangoEdad = children.payloadBody.rangoEdad;
+			payload.tipo = children.payloadBody.tipo;
+
+			// llenamos datos de filtros especificos
 			// Tomar en cuenta que el backend esta enviado archivos "sin info" que es un valor que no existe para hacer la busqueda.
 			// probablemente esto genere errores en la consulta
 			payload.macroRegiones[0] = children.codTipo;
@@ -1773,8 +1875,13 @@ function s2ab(s) {
     return buf;
 }
 
-const formatValue = (value) => {
-    return value === null ? "Vacío" : value;
+// const convertirNuloEnVacio = (value) => {
+//     return value === null ? "Vacío" : value;
+// };
+
+// si el valor que ingresa es undefined o es null se convertirá en la palabra "Vacio"
+const convertirNuloEnVacio = (value) => {
+    return value?? "Vacío";
 };
 
 const ErrorToken = (error, dispatch) => {

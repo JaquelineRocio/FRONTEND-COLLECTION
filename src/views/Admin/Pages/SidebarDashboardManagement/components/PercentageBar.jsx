@@ -1,7 +1,11 @@
 const PercentageBar  = ({ percentage}) => {
 
     const Intensity = (percentage) => {
-        const porcentajeNumero = parseFloat(percentage, 10);  
+        const porcentajeNumero = parseFloat(percentage);
+        
+        if(Number.isNaN(porcentajeNumero)){
+            return percentage;
+        }
         return porcentajeNumero;
     }
 
