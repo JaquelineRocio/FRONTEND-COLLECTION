@@ -135,7 +135,7 @@ export const loginUser = createAsyncThunk(
       const response = await LoginApi.post(data, '/auth/login');
       return response;
     }catch(error){
-      console.log("pppError",error);
+      console.log("Error",error);
       return thunkAPI.rejectWithValue(error);
     }
   }

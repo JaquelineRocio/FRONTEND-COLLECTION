@@ -2,12 +2,9 @@
 
 
 // const apiUrlEntrada = "http://127.0.0.1:3000";
-const apiUrlEntrada = "https://poetic-tube-428221-a5.rj.r.appspot.com";
-// const apiUrlEntrada = "http://161.132.55.33:8090";
-// const apiUrlEntrada = "https://161.132.55.33";
-// const apiUrlEntrada = "https://backend.corebankia.com";
+const apiUrlEntrada = "https://crack-lamp-435704-g6.rj.r.appspot.com";
 
-// const apiUrlEntrada = "https://cf0f-201-240-244-251.ngrok-free.app";
+// const apiUrlEntrada = "https://bb43-2001-1388-6460-e97b-e5e6-ffe1-f2b-1cbf.ngrok-free.app";
 
 export function getToken (){
     const persistRoot = localStorage.getItem('persist:root');
@@ -40,10 +37,16 @@ export class Api {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${getToken()}`
+                'Authorization': `Bearer ${getToken()}`,
+                'ngrok-skip-browser-warning': '1' // Agrega este encabezado
             },
         })
-        .then((response) => {
+        .then(async (response) => {
+            // console.log("Estado de la respuesta:", response.status);
+            // const contentType = response.headers.get('content-type');
+            // console.log("Content-Type:", contentType);
+            // const text = await response.text();
+            // console.log("Contenido de la respuesta:", text);
         //   console.log("Respuesta de estatus get",response)
           if (!response.ok) {
                 if (response.status === 401) { // Si el estado es 401 (Unauthorized)

@@ -1,7 +1,7 @@
-const apiUrlEntrada = "https://poetic-tube-428221-a5.rj.r.appspot.com";
 
-// const apiUrlEntrada = "http://161.132.55.33:8090"
-// const apiUrlEntrada = "https://backend.corebankia.com";
+const apiUrlEntrada = "https://crack-lamp-435704-g6.rj.r.appspot.com";
+// const apiUrlEntrada = "https://bb43-2001-1388-6460-e97b-e5e6-ffe1-f2b-1cbf.ngrok-free.app";
+
 export class testFetch {
     static async get(url, apiUrl = apiUrlEntrada) {
         // console.log("url de consulta testFecht",apiUrl);
@@ -14,7 +14,8 @@ export class testFetch {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${getToken()}`
+                    'Authorization': `Bearer ${getToken()}`,
+                    'ngrok-skip-browser-warning': '1' // Agrega este encabezado
                 },
             });
 

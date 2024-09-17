@@ -71,8 +71,8 @@ const buildRows = (rowsInput,nameOfTable) => {
 		
 				// Arma las filas "fila"
 				bloque?.subRegistros?.map((row)=>{
-					row = {...row, tipo: "fila",  payloadUrl: rowsInput.payloadUrl, payloadBody: rowsInput.payloadBody}
-					rowsOutput.push(row)
+					// row = {...row, tipo: "fila",  totalNumPagos: objetoTotal.numPagos, totalSolesPagos: objetoTotal.solesPagos,  totalIntTotal:objetoTotal.intTotal  ,payloadUrl: rowsInput.payloadUrl, payloadBody: rowsInput.payloadBody}
+					rowsOutput.push({   ...row, tipo: "fila",  totalNumPagos: objetoTotal.numPagos, totalSolesPagos: objetoTotal.solesPagos,  totalIntTotal:objetoTotal.intTotal, totalCuentas:objetoTotal.cuentas, totalCapitalMN:objetoTotal.capitalMN   ,payloadUrl: rowsInput.payloadUrl, payloadBody: rowsInput.payloadBody})
 				}) || {}
 
 			}) || []
@@ -87,11 +87,11 @@ const buildRows = (rowsInput,nameOfTable) => {
 }
 
 const customStyles = {
-	// rows: {
-	// 	style: {
-	// 		minHeight: '72px', // override the row height
-	// 	},
-	// },
+	rows: {
+		style: {
+			minHeight: '30px', // Altura mínima de las filas
+		},
+	},
 	headCells: {
 		style: {
 			paddingLeft: '6px', // override the cell padding for head cells
@@ -108,13 +108,14 @@ const customStyles = {
 	},
 	cells: {
 		style: {
-			paddingLeft: '6px', // override the cell padding for data cells
-			paddingRight: '6px',
+			paddingLeft: '0px', // override the cell padding for data cells
+			paddingRight: '0px',
 			// textAlign: 'right', // Centrar el texto en las celdas de datos
 			justifyContent: 'right', // Asegura que el contenido esté centrado
 			whiteSpace: 'nowrap',
 			borderRight: '1px solid #DDD', // Línea vertical entre celdas
 			textOverflow: 'ellipsis',
+			// backgroundColor: '#064469',
 			// whiteSpace: 'nowrap', // Evita el ajuste de línea
 		},
 	},

@@ -1,10 +1,6 @@
 // const variable = import.meta.env.VITE_API_URL;
-const apiUrlEntrada = "https://poetic-tube-428221-a5.rj.r.appspot.com";
-
-// const apiUrlEntrada = "https://cf0f-201-240-244-251.ngrok-free.app";
-// const apiUrlEntrada = "http://161.132.55.33:8090";
-// const apiUrlEntrada = "https://backend.corebankia.com";
-
+const apiUrlEntrada = "https://crack-lamp-435704-g6.rj.r.appspot.com";
+// const apiUrlEntrada = "https://bb43-2001-1388-6460-e97b-e5e6-ffe1-f2b-1cbf.ngrok-free.app";
 
 
 export class LoginApi {
@@ -15,8 +11,15 @@ export class LoginApi {
             method: 'GET',
         })
         .then((response) => {
+            
             if (!response.ok) {
-                throw new Error('error in get type network response');
+
+                console.log("accedemos al bloque de errores:", response);
+                if (response.status === 500) {
+                    throw new Error('Ocurrio un error');
+                }
+
+                    throw new Error('error in get type network response');
             }
             return response.json();
         })
@@ -39,8 +42,11 @@ export class LoginApi {
         })
         .then((response) => {
           if (!response.ok) {
-            
-            throw new Error('error in post type network response');
+            console.log("accedemos al bloque de errores:", response);
+                // if (response.status === 500) {
+                //     throw new Error('Ocurrio un error');
+                // }
+                throw new Error('error in post type network response');
           }
           return response.json();
         })

@@ -563,7 +563,7 @@ const SidebarDashboardView = () => {
 
     }
 
-    // Obtiene datos a partir de tablas individuales
+    // Obtiene datos a partir de tablas individuales -- Se realiza esta peticion cada vez que se presiona en "mostrar tabla"
     async function getDataFromIndividualTables(tipoTabla){
         bodyPayloadForIndividualTables = {...bodyPayloadForIndividualTables, tipo: tipoTabla};
         switch (tipoTabla) {

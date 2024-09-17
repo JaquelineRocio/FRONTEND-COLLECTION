@@ -27,23 +27,54 @@ const Login = () => {
     
     const {register, handleSubmit, formState:{errors}} = useForm();
 
+        // const onSubmit = handleSubmit(data => {
+        //     setLoading(true);
+        //     dispatch(loginUser(data)).then((response)=>{
+
+        //       console.log("respuesta de login :", response);
+        //       if(response.type=="auth/loginUser/fulfilled"){
+        //         navigate("/dashboard");
+        //       }else{
+        //         setLoading(false);
+        //         Swal.fire({
+        //           // position: 'top-end',
+        //           icon: "error",
+        //           title: "Usuario o contraseña incorrectos",
+        //           showCancelButton: false,
+        //           timer: 1500
+        //         });
+        //       }
+        //     });
+        // })
+
         const onSubmit = handleSubmit(data => {
-            setLoading(true);
-            dispatch(loginUser(data)).then((response)=>{
-              if(response.type=="auth/loginUser/fulfilled"){
-                navigate("/dashboard");
-              }else{
-                setLoading(false);
-                Swal.fire({
-                  // position: 'top-end',
-                  icon: "error",
-                  title: "Usuario o contraseña incorrectos",
-                  showCancelButton: false,
-                  timer: 1500
-                });
-              }
+          setLoading(true);
+          dispatch(loginUser(data))
+          .unwrap()
+          .then((response)=>{
+
+            // console.log("respuesta de login :", response);
+
+              navigate("/dashboard");
+
+          }).catch((error) => {
+            console.log("este es el error", error);
+              let messageError = null;
+            if(error.message=="Ocurrio un error"){
+              messageError = "Ha ocurrido un error. Por favor, intente más tarde";
+            }else{
+              messageError = "Usuario o contraseña incorrectos";
+            }
+            
+            setLoading(false);
+            Swal.fire({
+              icon: "error",
+              title: messageError, // Aquí accedes al mensaje de error
+              showCancelButton: false,
+              timer: 1500
             });
-        })
+          });
+        });
 
         const reglasUsuario = {
           required:{value: true, message: "Error: El nombre es requerido"},

@@ -30,6 +30,7 @@ import EnConstruccion from "./../views/miscellany/EnConstruccion";
 // import SidebarAccessManagementView from "../views/Admin/Pages/SidebarAccessManagement/SidebarAccessManagementView";
 import ReactExcel from "../views/ExampleView/ReactExcel";
 import ContruccionDeTabla from "../views/ExampleView/ContruccionDeTabla";
+import HooksReact from "../views/ExampleView/HooksReact";
 
 const DeleteSession = ({children}) => {
   const dispatch = useDispatch();
@@ -65,49 +66,52 @@ const Route = () => {
         element: <DeleteSession> <Login/> </DeleteSession>
       },
       {
-          path: '/dashboard',
-          element: <ProtectedRoute element={<MainLayout />} />,
-          children: [
-            {
-              index: true,
-              element: <SidebarHomeView/>
-            },
-            {
-              path: "gestiondashboard",
-              element: <SidebarDashboardView/>
-            },
-            {
-              path: "gestiondecliente",
-              // element: <SidebarClientManagerView/>
-              element: <EnConstruccion/>
-            },
-            {
-              path: "gestioninformacion",
-              element: <EnConstruccion/>
-            },
-            {
-              path: "gestioncomunicacion",
-              element: <EnConstruccion/>
-            },
-            {
-              path: "gestionentidades",
-              element: <EnConstruccion/>
-            },
-            {
-              path: "gestionaccesos",
-              element: <EnConstruccion/>
-            }
-          ],
-
+        path: '/dashboard',
+        element: <ProtectedRoute element={<MainLayout />} />,
+        children: [
+          {
+            index: true,
+            element: <SidebarHomeView/>
+          },
+          {
+            path: "gestiondashboard",
+            element: <SidebarDashboardView/>
+          },
+          {
+            path: "gestiondecliente",
+            // element: <SidebarClientManagerView/>
+            element: <EnConstruccion/>
+          },
+          {
+            path: "gestioninformacion",
+            element: <EnConstruccion/>
+          },
+          {
+            path: "gestioncomunicacion",
+            element: <EnConstruccion/>
+          },
+          {
+            path: "gestionentidades",
+            element: <EnConstruccion/>
+          },
+          {
+            path: "gestionaccesos",
+            element: <EnConstruccion/>
+          }
+        ],
       },
       {
-        path: 'examples',
+        path: '/examples',
         element: <ReactExcel/>
       },
       {
         path: 'examplestwo',
         element: <ContruccionDeTabla/>
-      }      
+      },
+      {
+        path: 'hooksreact',
+        element: <HooksReact/>
+      }          
   ]);
   
   return <RouterProvider router={router} />;

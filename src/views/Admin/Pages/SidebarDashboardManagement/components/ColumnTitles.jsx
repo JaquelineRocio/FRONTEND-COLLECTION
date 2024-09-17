@@ -22,25 +22,25 @@ export const titulosParaTablaEstadoGeneralDeCartera = [
 	{
 		name: <div>CLIENTES</div>,	
 		selector: row => row.clientes,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.clientes)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.clientes)} /></div>,
 		width: "80px"
 	},
 	{
 		name: <div>CUENTAS</div>, 
 		selector: row => row.cuentas,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.cuentas)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.cuentas)} /></div>,
 		width: "80px"
 	},
 	{
 		name: <div>%CUENTAS</div>,
 		selector: row => row.porcentajeCuentas,
-		cell: row => convertirNuloEnVacio(row.porcentajeCuentas),
+		cell: row => <div className='px-2'> {convertirNuloEnVacio(row.porcentajeCuentas)} </div>,
 		// sortable: true,
 	},
 	{
 		name: <div>CAPITAL</div>,
 		selector: row => row.capitalMN,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.capitalMN)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.capitalMN)} /></div>,
 		width: "120px"
 	},
 	{
@@ -48,7 +48,7 @@ export const titulosParaTablaEstadoGeneralDeCartera = [
 		selector: row => row.porcentajeCapital,
 		// sortable: true,
 		cell: row => (
-			<div title={row.porcentajeCapital}>
+			<div title={row.porcentajeCapital} className='px-2'>
 				{convertirNuloEnVacio(row.porcentajeCapital)}
 			</div>
 		),
@@ -59,7 +59,7 @@ export const titulosParaTablaEstadoGeneralDeCartera = [
 		selector: row => row.porcentajeCtc,
 		// sortable: true,
 		cell: row => (
-			<div title={row.porcentajeCtc}>
+			<div title={row.porcentajeCtc} className='px-2'>
 				{convertirNuloEnVacio(row.porcentajeCtc)}
 			</div>
 		),
@@ -68,26 +68,28 @@ export const titulosParaTablaEstadoGeneralDeCartera = [
 	{
 		name: <div># CTC</div>,	
 		selector: row => row.numCtc,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numCtc)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.numCtc)} /></div>,
 		width: "60px"
 	},
 	{
 		name: <div># CD</div>,	
 		selector: row => row.numCd,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numCd)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.numCd)} /></div>,
 		width: "60px"
 	},
+
 	{
 		name: <div>%CD</div>,
 		selector: row => row.porcentajeCd,
-		cell: row => <CustomRowCD row={row} />,
+		// cell: row => <CustomRowCD row={row} />,
+		cell: row => <div className='px-2'>{convertirNuloEnVacio(row.porcentajeCd)}</div>,
 		width: "70px"
 	},
 	{
 		name: <div>%TC</div>,
 		selector: row => row.porcentajeTc,
 		cell: row => (
-			<div title={row.porcentajeTc}>
+			<div title={row.porcentajeTc} className='px-2'>
 				{convertirNuloEnVacio(row.porcentajeTc)}
 			</div>
 		),
@@ -96,85 +98,85 @@ export const titulosParaTablaEstadoGeneralDeCartera = [
 	{
 		name: '# PDP',
 		selector: row => row.numPDP,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numPDP)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.numPDP)} /></div>,
 		width: "80px"
 	},
 	{
 		name: 'MONTO PDP',
 		selector: row => row.montoPDP,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.montoPDP)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.montoPDP)} /></div>,
 		width: "130px"
 	},
 	{
 		name: <div>INT TOTAL</div>, // hecho
 		selector: row => row.intTotal,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intTotal)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.intTotal)} /></div>,
 		width: "80px"
 	},
 	{
 		name: 'INT AGENTE',
 		selector: row => row.intAgente,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intAgente)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.intAgente)} /></div>,
 	},
 	{
 		name: <div>INT CTC</div>,
 		selector: row => row.intCTC,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intCTC)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.intCTC)} /></div>,
 		width: "60px"
 	},
 	{
 		name: <div>INT CD</div>,
 		selector: row => row.intCD,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intCD)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.intCD)} /></div>,
 		width: "60px"
 	},
 	{
 		name: <div># PAGOS</div>,
 		selector: row => row.numPagos,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numPagos)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.numPagos)} /></div>,
 		width: "100px"
 	},
 	{
 		name: <div>S/. PAGOS</div>,
 		selector: row => row.solesPagos,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.solesPagos)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.solesPagos)} /></div>,
 		width: "100px"
 	},
 	{
 		name: '%EFICIENCIA',
 		selector: row => row.porcentajeEficiencia,
-		cell: row => convertirNuloEnVacio(row.porcentajeEficiencia)
+		cell: row => <div className='px-2'>{convertirNuloEnVacio(row.porcentajeEficiencia)}</div>
 		// sortable: true,
 	},
 	{
 		name: <div>TICKET D. CAPITAL</div>,
 		selector: row => row.ticketCapital,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.ticketCapital)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.ticketCapital)} /></div>,
 		width: "80px"
 	},
 	{
 		name: <div>TICKET PAGO</div>,
 		selector: row => row.ticketPago,
-		cell: row => <AdicionaComas value={row.ticketPago} />,
+		cell: row => <div className='px-2'><AdicionaComas value={row.ticketPago} /></div>,
 		// sortable: true,
 	},
 	{
 		name: <div>%CALIDAD PDP</div>,
 		selector: row => row.porcentajeCalidadPDP,
-		cell: row => convertirNuloEnVacio(row.porcentajeCalidadPDP),
+		cell: row => <div className='px-2'>{convertirNuloEnVacio(row.porcentajeCalidadPDP)}</div>,
 		width: "80px"
 		// sortable: true,
 	},
 	{
 		name: <div>%COB</div>,
 		selector: row => row.cob,
-		cell: row => convertirNuloEnVacio(row.cob),
+		cell: row => <div className='px-2'>{convertirNuloEnVacio(row.cob)}</div>,
 		width: "60px"
 		// sortable: true,
 	},
 	{
 		name: <div>Descargar</div>,
-		selector: row => <DownloadExcel>{row}</DownloadExcel>,
+		selector: row => <div className='px-2'><DownloadExcel>{row}</DownloadExcel></div>,
 		width: "100px"
 		// sortable: true,
 	},
@@ -196,25 +198,25 @@ export const titulosParaTablaSituacionDeCarteraSegunPrioridad = [
 	{
 		name: <div>CLIENTES</div>,	
 		selector: row => row.clientes,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.clientes)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.clientes)} /></div>,
 		width: "80px"
 	},
 	{
 		name: <div>CUENTAS</div>, 
 		selector: row => row.cuentas,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.cuentas)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.cuentas)} /></div>,
 		width: "80px"
 	},
 	{
 		name: <div>%CUENTAS</div>,
 		selector: row => row.porcentajeCuentas,
-		cell: row => convertirNuloEnVacio(row.porcentajeCuentas),
+		cell: row => <div className='px-2'> {convertirNuloEnVacio(row.porcentajeCuentas)} </div>,
 		// sortable: true,
 	},
 	{
 		name: <div>CAPITAL</div>,
 		selector: row => row.capitalMN,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.capitalMN)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.capitalMN)} /></div>,
 		width: "120px"
 	},
 	{
@@ -222,7 +224,7 @@ export const titulosParaTablaSituacionDeCarteraSegunPrioridad = [
 		selector: row => row.porcentajeCapital,
 		// sortable: true,
 		cell: row => (
-			<div title={row.porcentajeCapital}>
+			<div title={row.porcentajeCapital} className='px-2'>
 				{convertirNuloEnVacio(row.porcentajeCapital)}
 			</div>
 		),
@@ -233,7 +235,7 @@ export const titulosParaTablaSituacionDeCarteraSegunPrioridad = [
 		selector: row => row.porcentajeCtc,
 		// sortable: true,
 		cell: row => (
-			<div title={row.porcentajeCtc}>
+			<div title={row.porcentajeCtc} className='px-2'>
 				{convertirNuloEnVacio(row.porcentajeCtc)}
 			</div>
 		),
@@ -242,27 +244,26 @@ export const titulosParaTablaSituacionDeCarteraSegunPrioridad = [
 	{
 		name: <div># CTC</div>,	
 		selector: row => row.numCtc,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numCtc)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.numCtc)} /></div>,
 		width: "60px"
 	},
 	{
 		name: <div># CD</div>,	
 		selector: row => row.numCd,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numCd)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.numCd)} /></div>,
 		width: "60px"
 	},
-
 	{
 		name: <div>%CD</div>,
 		selector: row => row.porcentajeCd,
 		cell: row => <CustomRowCD row={row} />,
-		width: "70px"
+		width: "80px"
 	},
 	{
 		name: <div>%TC</div>,
 		selector: row => row.porcentajeTc,
 		cell: row => (
-			<div title={row.porcentajeTc}>
+			<div title={row.porcentajeTc} className='px-2'>
 				{convertirNuloEnVacio(row.porcentajeTc)}
 			</div>
 		),
@@ -271,85 +272,90 @@ export const titulosParaTablaSituacionDeCarteraSegunPrioridad = [
 	{
 		name: '# PDP',
 		selector: row => row.numPDP,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numPDP)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.numPDP)} /></div>,
 		width: "80px"
 	},
 	{
 		name: 'MONTO PDP',
 		selector: row => row.montoPDP,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.montoPDP)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.montoPDP)} /></div>,
 		width: "130px"
 	},
 	{
 		name: <div>INT TOTAL</div>, // hecho
 		selector: row => row.intTotal,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intTotal)} />,
+		// cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.intTotal)} /></div>,
+		cell: row => <PorcentajeIntTotal value={row}/>,
 		width: "80px"
 	},
 	{
 		name: 'INT AGENTE',
 		selector: row => row.intAgente,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intAgente)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.intAgente)} /></div>,
 	},
 	{
 		name: <div>INT CTC</div>,
 		selector: row => row.intCTC,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intCTC)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.intCTC)} /></div>,
 		width: "60px"
 	},
 	{
 		name: <div>INT CD</div>,
 		selector: row => row.intCD,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intCD)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.intCD)} /></div>,
 		width: "60px"
 	},
 	{
 		name: <div># PAGOS</div>,
 		selector: row => row.numPagos,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numPagos)} />,
+		// cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numPagos)} />,
+		cell: row => <TresColoresNumPagos value={row}/>,
 		width: "100px"
 	},
 	{
 		name: <div>S/. PAGOS</div>,
 		selector: row => row.solesPagos,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.solesPagos)} />,
+		// cell: row => <AdicionaComas value={convertirNuloEnVacio(row.solesPagos)} />,
+		cell: row => <TresColoresSolesPagos value={row} />,
+		
 		width: "100px"
 	},
 	{
 		name: '%EFICIENCIA',
 		selector: row => row.porcentajeEficiencia,
-		cell: row => convertirNuloEnVacio(row.porcentajeEficiencia)
+		// cell: row => <div className='px-2'>{convertirNuloEnVacio(row.porcentajeEficiencia)}</div>
+		cell: row => <CustomRowPercentageEficiencia row={row}/>
 		// sortable: true,
 	},
 	{
 		name: <div>TICKET D. CAPITAL</div>,
 		selector: row => row.ticketCapital,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.ticketCapital)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.ticketCapital)} /></div>,
 		width: "80px"
 	},
 	{
 		name: <div>TICKET PAGO</div>,
 		selector: row => row.ticketPago,
-		cell: row => <AdicionaComas value={row.ticketPago} />,
+		cell: row => <div className='px-2'><AdicionaComas value={row.ticketPago} /></div>,
 		// sortable: true,
 	},
 	{
 		name: <div>%CALIDAD PDP</div>,
 		selector: row => row.porcentajeCalidadPDP,
-		cell: row => convertirNuloEnVacio(row.porcentajeCalidadPDP),
+		cell: row => <div className='px-2'>{convertirNuloEnVacio(row.porcentajeCalidadPDP)}</div>,
 		width: "80px"
 		// sortable: true,
 	},
 	{
 		name: <div>%COB</div>,
 		selector: row => row.cob,
-		cell: row => convertirNuloEnVacio(row.cob),
+		cell: row => <div className='px-2'>{convertirNuloEnVacio(row.cob)}</div>,
 		width: "60px"
 		// sortable: true,
 	},
 	{
 		name: <div>Descargar</div>,
-		selector: row => <DownloadExcel>{row}</DownloadExcel>,
+		selector: row => <div className='px-2'><DownloadExcel>{row}</DownloadExcel></div>,
 		width: "100px"
 		// sortable: true,
 	},
@@ -370,25 +376,25 @@ export const titulosParaTablaCarteraPorTramoDeImporte= [
 	{
 		name: <div>CLIENTES</div>,	
 		selector: row => row.clientes,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.clientes)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.clientes)} /></div>,
 		width: "80px"
 	},
 	{
 		name: <div>CUENTAS</div>, 
 		selector: row => row.cuentas,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.cuentas)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.cuentas)} /></div>,
 		width: "80px"
 	},
 	{
 		name: <div>%CUENTAS</div>,
 		selector: row => row.porcentajeCuentas,
-		cell: row => convertirNuloEnVacio(row.porcentajeCuentas),
+		cell: row => <div className='px-2'> {convertirNuloEnVacio(row.porcentajeCuentas)} </div>,
 		// sortable: true,
 	},
 	{
 		name: <div>CAPITAL</div>,
 		selector: row => row.capitalMN,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.capitalMN)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.capitalMN)} /></div>,
 		width: "120px"
 	},
 	{
@@ -396,7 +402,7 @@ export const titulosParaTablaCarteraPorTramoDeImporte= [
 		selector: row => row.porcentajeCapital,
 		// sortable: true,
 		cell: row => (
-			<div title={row.porcentajeCapital}>
+			<div title={row.porcentajeCapital} className='px-2'>
 				{convertirNuloEnVacio(row.porcentajeCapital)}
 			</div>
 		),
@@ -407,7 +413,7 @@ export const titulosParaTablaCarteraPorTramoDeImporte= [
 		selector: row => row.porcentajeCtc,
 		// sortable: true,
 		cell: row => (
-			<div title={row.porcentajeCtc}>
+			<div title={row.porcentajeCtc} className='px-2'>
 				{convertirNuloEnVacio(row.porcentajeCtc)}
 			</div>
 		),
@@ -416,15 +422,16 @@ export const titulosParaTablaCarteraPorTramoDeImporte= [
 	{
 		name: <div># CTC</div>,	
 		selector: row => row.numCtc,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numCtc)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.numCtc)} /></div>,
 		width: "60px"
 	},
 	{
 		name: <div># CD</div>,	
 		selector: row => row.numCd,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numCd)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.numCd)} /></div>,
 		width: "60px"
 	},
+
 	{
 		name: <div>%CD</div>,
 		selector: row => row.porcentajeCd,
@@ -435,7 +442,7 @@ export const titulosParaTablaCarteraPorTramoDeImporte= [
 		name: <div>%TC</div>,
 		selector: row => row.porcentajeTc,
 		cell: row => (
-			<div title={row.porcentajeTc}>
+			<div title={row.porcentajeTc} className='px-2'>
 				{convertirNuloEnVacio(row.porcentajeTc)}
 			</div>
 		),
@@ -444,85 +451,89 @@ export const titulosParaTablaCarteraPorTramoDeImporte= [
 	{
 		name: '# PDP',
 		selector: row => row.numPDP,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numPDP)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.numPDP)} /></div>,
 		width: "80px"
 	},
 	{
 		name: 'MONTO PDP',
 		selector: row => row.montoPDP,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.montoPDP)} />,
-		width: "130px"
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.montoPDP)} /></div>,
 	},
 	{
 		name: <div>INT TOTAL</div>, // hecho
 		selector: row => row.intTotal,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intTotal)} />,
+		// cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.intTotal)} /></div>,
+		cell: row => <PorcentajeIntTotal value={row}/>,
 		width: "80px"
 	},
 	{
 		name: 'INT AGENTE',
 		selector: row => row.intAgente,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intAgente)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.intAgente)} /></div>,
 	},
 	{
 		name: <div>INT CTC</div>,
 		selector: row => row.intCTC,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intCTC)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.intCTC)} /></div>,
 		width: "60px"
 	},
 	{
 		name: <div>INT CD</div>,
 		selector: row => row.intCD,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intCD)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.intCD)} /></div>,
 		width: "60px"
 	},
 	{
 		name: <div># PAGOS</div>,
 		selector: row => row.numPagos,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numPagos)} />,
+		// cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numPagos)} />,
+		cell: row => <TresColoresNumPagos value={row}/>,
 		width: "100px"
 	},
 	{
 		name: <div>S/. PAGOS</div>,
 		selector: row => row.solesPagos,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.solesPagos)} />,
+		// cell: row => <AdicionaComas value={convertirNuloEnVacio(row.solesPagos)} />,
+		cell: row => <TresColoresSolesPagos value={row} />,
+		
 		width: "100px"
 	},
 	{
 		name: '%EFICIENCIA',
 		selector: row => row.porcentajeEficiencia,
-		cell: row => convertirNuloEnVacio(row.porcentajeEficiencia)
+		// cell: row => <div className='px-2'>{convertirNuloEnVacio(row.porcentajeEficiencia)}</div>
+		cell: row => <CustomRowPercentageEficiencia row={row}/>
 		// sortable: true,
 	},
 	{
 		name: <div>TICKET D. CAPITAL</div>,
 		selector: row => row.ticketCapital,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.ticketCapital)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.ticketCapital)} /></div>,
 		width: "80px"
 	},
 	{
 		name: <div>TICKET PAGO</div>,
 		selector: row => row.ticketPago,
-		cell: row => <AdicionaComas value={row.ticketPago} />,
+		cell: row => <div className='px-2'><AdicionaComas value={row.ticketPago} /></div>,
 		// sortable: true,
 	},
 	{
 		name: <div>%CALIDAD PDP</div>,
 		selector: row => row.porcentajeCalidadPDP,
-		cell: row => convertirNuloEnVacio(row.porcentajeCalidadPDP),
+		cell: row => <div className='px-2'>{convertirNuloEnVacio(row.porcentajeCalidadPDP)}</div>,
 		width: "80px"
 		// sortable: true,
 	},
 	{
 		name: <div>%COB</div>,
 		selector: row => row.cob,
-		cell: row => convertirNuloEnVacio(row.cob),
+		cell: row => <div className='px-2'>{convertirNuloEnVacio(row.cob)}</div>,
 		width: "60px"
 		// sortable: true,
 	},
 	{
 		name: <div>Descargar</div>,
-		selector: row => <DownloadExcel>{row}</DownloadExcel>,
+		selector: row => <div className='px-2'><DownloadExcel>{row}</DownloadExcel></div>,
 		width: "100px"
 		// sortable: true,
 	},
@@ -544,25 +555,25 @@ export const titulosParaTablaCarteraPorRangoDeMaduracion = [
 	{
 		name: <div>CLIENTES</div>,	
 		selector: row => row.clientes,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.clientes)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.clientes)} /></div>,
 		width: "80px"
 	},
 	{
 		name: <div>CUENTAS</div>, 
 		selector: row => row.cuentas,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.cuentas)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.cuentas)} /></div>,
 		width: "80px"
 	},
 	{
 		name: <div>%CUENTAS</div>,
 		selector: row => row.porcentajeCuentas,
-		cell: row => convertirNuloEnVacio(row.porcentajeCuentas),
+		cell: row => <div className='px-2'> {convertirNuloEnVacio(row.porcentajeCuentas)} </div>,
 		// sortable: true,
 	},
 	{
 		name: <div>CAPITAL</div>,
 		selector: row => row.capitalMN,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.capitalMN)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.capitalMN)} /></div>,
 		width: "120px"
 	},
 	{
@@ -570,7 +581,7 @@ export const titulosParaTablaCarteraPorRangoDeMaduracion = [
 		selector: row => row.porcentajeCapital,
 		// sortable: true,
 		cell: row => (
-			<div title={row.porcentajeCapital}>
+			<div title={row.porcentajeCapital} className='px-2'>
 				{convertirNuloEnVacio(row.porcentajeCapital)}
 			</div>
 		),
@@ -581,7 +592,7 @@ export const titulosParaTablaCarteraPorRangoDeMaduracion = [
 		selector: row => row.porcentajeCtc,
 		// sortable: true,
 		cell: row => (
-			<div title={row.porcentajeCtc}>
+			<div title={row.porcentajeCtc} className='px-2'>
 				{convertirNuloEnVacio(row.porcentajeCtc)}
 			</div>
 		),
@@ -590,15 +601,16 @@ export const titulosParaTablaCarteraPorRangoDeMaduracion = [
 	{
 		name: <div># CTC</div>,	
 		selector: row => row.numCtc,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numCtc)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.numCtc)} /></div>,
 		width: "60px"
 	},
 	{
 		name: <div># CD</div>,	
 		selector: row => row.numCd,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numCd)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.numCd)} /></div>,
 		width: "60px"
 	},
+
 	{
 		name: <div>%CD</div>,
 		selector: row => row.porcentajeCd,
@@ -609,7 +621,7 @@ export const titulosParaTablaCarteraPorRangoDeMaduracion = [
 		name: <div>%TC</div>,
 		selector: row => row.porcentajeTc,
 		cell: row => (
-			<div title={row.porcentajeTc}>
+			<div title={row.porcentajeTc} className='px-2'>
 				{convertirNuloEnVacio(row.porcentajeTc)}
 			</div>
 		),
@@ -618,85 +630,90 @@ export const titulosParaTablaCarteraPorRangoDeMaduracion = [
 	{
 		name: '# PDP',
 		selector: row => row.numPDP,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numPDP)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.numPDP)} /></div>,
 		width: "80px"
 	},
 	{
 		name: 'MONTO PDP',
 		selector: row => row.montoPDP,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.montoPDP)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.montoPDP)} /></div>,
 		width: "130px"
 	},
 	{
 		name: <div>INT TOTAL</div>, // hecho
 		selector: row => row.intTotal,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intTotal)} />,
+		// cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.intTotal)} /></div>,
+		cell: row => <PorcentajeIntTotal value={row}/>,
 		width: "80px"
 	},
 	{
 		name: 'INT AGENTE',
 		selector: row => row.intAgente,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intAgente)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.intAgente)} /></div>,
 	},
 	{
 		name: <div>INT CTC</div>,
 		selector: row => row.intCTC,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intCTC)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.intCTC)} /></div>,
 		width: "60px"
 	},
 	{
 		name: <div>INT CD</div>,
 		selector: row => row.intCD,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intCD)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.intCD)} /></div>,
 		width: "60px"
 	},
 	{
 		name: <div># PAGOS</div>,
 		selector: row => row.numPagos,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numPagos)} />,
+		// cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numPagos)} />,
+		cell: row => <TresColoresNumPagos value={row}/>,
 		width: "100px"
 	},
 	{
 		name: <div>S/. PAGOS</div>,
 		selector: row => row.solesPagos,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.solesPagos)} />,
+		// cell: row => <AdicionaComas value={convertirNuloEnVacio(row.solesPagos)} />,
+		cell: row => <TresColoresSolesPagos value={row} />,
+		
 		width: "100px"
 	},
 	{
 		name: '%EFICIENCIA',
 		selector: row => row.porcentajeEficiencia,
-		cell: row => convertirNuloEnVacio(row.porcentajeEficiencia)
+		// cell: row => <div className='px-2'>{convertirNuloEnVacio(row.porcentajeEficiencia)}</div>
+		cell: row => <CustomRowPercentageEficiencia row={row}/>
 		// sortable: true,
 	},
 	{
 		name: <div>TICKET D. CAPITAL</div>,
 		selector: row => row.ticketCapital,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.ticketCapital)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.ticketCapital)} /></div>,
 		width: "80px"
 	},
 	{
 		name: <div>TICKET PAGO</div>,
 		selector: row => row.ticketPago,
-		cell: row => <AdicionaComas value={row.ticketPago} />,
+		cell: row => <div className='px-2'><AdicionaComas value={row.ticketPago} /></div>,
 		// sortable: true,
 	},
 	{
 		name: <div>%CALIDAD PDP</div>,
 		selector: row => row.porcentajeCalidadPDP,
-		cell: row => convertirNuloEnVacio(row.porcentajeCalidadPDP),
+		cell: row => <div className='px-2'>{convertirNuloEnVacio(row.porcentajeCalidadPDP)}</div>,
 		width: "80px"
 		// sortable: true,
 	},
 	{
 		name: <div>%COB</div>,
 		selector: row => row.cob,
-		cell: row => convertirNuloEnVacio(row.cob),
+		cell: row => <div className='px-2'>{convertirNuloEnVacio(row.cob)}</div>,
 		width: "60px"
 		// sortable: true,
 	},
 	{
 		name: <div>Descargar</div>,
-		selector: row => <DownloadExcel>{row}</DownloadExcel>,
+		selector: row => <div className='px-2'><DownloadExcel>{row}</DownloadExcel></div>,
 		width: "100px"
 		// sortable: true,
 	},
@@ -718,25 +735,25 @@ export const titulosParaTablaCarteraPorAnhoMesCastigo = [
 	{
 		name: <div>CLIENTES</div>,	
 		selector: row => row.clientes,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.clientes)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.clientes)} /></div>,
 		width: "80px"
 	},
 	{
 		name: <div>CUENTAS</div>, 
 		selector: row => row.cuentas,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.cuentas)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.cuentas)} /></div>,
 		width: "80px"
 	},
 	{
 		name: <div>%CUENTAS</div>,
 		selector: row => row.porcentajeCuentas,
-		cell: row => convertirNuloEnVacio(row.porcentajeCuentas),
+		cell: row => <div className='px-2'> {convertirNuloEnVacio(row.porcentajeCuentas)} </div>,
 		// sortable: true,
 	},
 	{
 		name: <div>CAPITAL</div>,
 		selector: row => row.capitalMN,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.capitalMN)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.capitalMN)} /></div>,
 		width: "120px"
 	},
 	{
@@ -744,7 +761,7 @@ export const titulosParaTablaCarteraPorAnhoMesCastigo = [
 		selector: row => row.porcentajeCapital,
 		// sortable: true,
 		cell: row => (
-			<div title={row.porcentajeCapital}>
+			<div title={row.porcentajeCapital} className='px-2'>
 				{convertirNuloEnVacio(row.porcentajeCapital)}
 			</div>
 		),
@@ -755,7 +772,7 @@ export const titulosParaTablaCarteraPorAnhoMesCastigo = [
 		selector: row => row.porcentajeCtc,
 		// sortable: true,
 		cell: row => (
-			<div title={row.porcentajeCtc}>
+			<div title={row.porcentajeCtc} className='px-2'>
 				{convertirNuloEnVacio(row.porcentajeCtc)}
 			</div>
 		),
@@ -764,15 +781,16 @@ export const titulosParaTablaCarteraPorAnhoMesCastigo = [
 	{
 		name: <div># CTC</div>,	
 		selector: row => row.numCtc,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numCtc)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.numCtc)} /></div>,
 		width: "60px"
 	},
 	{
 		name: <div># CD</div>,	
 		selector: row => row.numCd,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numCd)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.numCd)} /></div>,
 		width: "60px"
 	},
+
 	{
 		name: <div>%CD</div>,
 		selector: row => row.porcentajeCd,
@@ -783,7 +801,7 @@ export const titulosParaTablaCarteraPorAnhoMesCastigo = [
 		name: <div>%TC</div>,
 		selector: row => row.porcentajeTc,
 		cell: row => (
-			<div title={row.porcentajeTc}>
+			<div title={row.porcentajeTc} className='px-2'>
 				{convertirNuloEnVacio(row.porcentajeTc)}
 			</div>
 		),
@@ -792,85 +810,90 @@ export const titulosParaTablaCarteraPorAnhoMesCastigo = [
 	{
 		name: '# PDP',
 		selector: row => row.numPDP,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numPDP)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.numPDP)} /></div>,
 		width: "80px"
 	},
 	{
 		name: 'MONTO PDP',
 		selector: row => row.montoPDP,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.montoPDP)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.montoPDP)} /></div>,
 		width: "130px"
 	},
 	{
 		name: <div>INT TOTAL</div>, // hecho
 		selector: row => row.intTotal,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intTotal)} />,
+		// cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.intTotal)} /></div>,
+		cell: row => <PorcentajeIntTotal value={row}/>,
 		width: "80px"
 	},
 	{
 		name: 'INT AGENTE',
 		selector: row => row.intAgente,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intAgente)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.intAgente)} /></div>,
 	},
 	{
 		name: <div>INT CTC</div>,
 		selector: row => row.intCTC,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intCTC)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.intCTC)} /></div>,
 		width: "60px"
 	},
 	{
 		name: <div>INT CD</div>,
 		selector: row => row.intCD,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intCD)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.intCD)} /></div>,
 		width: "60px"
 	},
 	{
 		name: <div># PAGOS</div>,
 		selector: row => row.numPagos,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numPagos)} />,
+		// cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numPagos)} />,
+		cell: row => <TresColoresNumPagos value={row}/>,
 		width: "100px"
 	},
 	{
 		name: <div>S/. PAGOS</div>,
 		selector: row => row.solesPagos,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.solesPagos)} />,
+		// cell: row => <AdicionaComas value={convertirNuloEnVacio(row.solesPagos)} />,
+		cell: row => <TresColoresSolesPagos value={row} />,
+		
 		width: "100px"
 	},
 	{
 		name: '%EFICIENCIA',
 		selector: row => row.porcentajeEficiencia,
-		cell: row => convertirNuloEnVacio(row.porcentajeEficiencia)
+		// cell: row => <div className='px-2'>{convertirNuloEnVacio(row.porcentajeEficiencia)}</div>
+		cell: row => <CustomRowPercentageEficiencia row={row}/>
 		// sortable: true,
 	},
 	{
 		name: <div>TICKET D. CAPITAL</div>,
 		selector: row => row.ticketCapital,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.ticketCapital)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.ticketCapital)} /></div>,
 		width: "80px"
 	},
 	{
 		name: <div>TICKET PAGO</div>,
 		selector: row => row.ticketPago,
-		cell: row => <AdicionaComas value={row.ticketPago} />,
+		cell: row => <div className='px-2'><AdicionaComas value={row.ticketPago} /></div>,
 		// sortable: true,
 	},
 	{
 		name: <div>%CALIDAD PDP</div>,
 		selector: row => row.porcentajeCalidadPDP,
-		cell: row => convertirNuloEnVacio(row.porcentajeCalidadPDP),
+		cell: row => <div className='px-2'>{convertirNuloEnVacio(row.porcentajeCalidadPDP)}</div>,
 		width: "80px"
 		// sortable: true,
 	},
 	{
 		name: <div>%COB</div>,
 		selector: row => row.cob,
-		cell: row => convertirNuloEnVacio(row.cob),
+		cell: row => <div className='px-2'>{convertirNuloEnVacio(row.cob)}</div>,
 		width: "60px"
 		// sortable: true,
 	},
 	{
 		name: <div>Descargar</div>,
-		selector: row => <DownloadExcel>{row}</DownloadExcel>,
+		selector: row => <div className='px-2'><DownloadExcel>{row}</DownloadExcel></div>,
 		width: "100px"
 		// sortable: true,
 	},
@@ -891,44 +914,46 @@ export const titulosParaTablaRangoDeCampanha = [
 	{
 		name: <div>CLIENTES</div>,	
 		selector: row => row.clientes,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.clientes)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.clientes)} /></div>,
 		width: "80px"
 	},
 	{
 		name: <div>CUENTAS</div>, 
 		selector: row => row.cuentas,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.cuentas)} />,
-		width: "80px"
+		// cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.cuentas)} /></div>,
+		cell: row => <PorcentajeCuentasDos>{row}</PorcentajeCuentasDos>,
+		width: "100px"
 	},
 	{
 		name: <div>%CUENTAS</div>,
 		selector: row => row.porcentajeCuentas,
-		cell: row => convertirNuloEnVacio(row.porcentajeCuentas),
+		cell: row => <PorcentajeCuentas>{row}</PorcentajeCuentas>,
+		width: "100px"
 		// sortable: true,
 	},
 	{
 		name: <div>CAPITAL</div>,
 		selector: row => row.capitalMN,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.capitalMN)} />,
+		// cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.capitalMN)} /></div>,
+		cell: row => <PorcentajeCapitalDos>{row}</PorcentajeCapitalDos>,
+
 		width: "120px"
 	},
 	{
 		name: <div>%CAPITAL</div>,
 		selector: row => row.porcentajeCapital,
 		// sortable: true,
-		cell: row => (
-			<div title={row.porcentajeCapital}>
-				{convertirNuloEnVacio(row.porcentajeCapital)}
-			</div>
-		),
-		width: "80px"
+		// cell: row => (<div title={row.porcentajeCapital} className='px-2'>	{convertirNuloEnVacio(row.porcentajeCapital)}</div>
+		cell: row => <PorcentajeCapital>{row}</PorcentajeCapital>,
+		
+		width: "120px"
 	},
 	{
 		name: <div>%CTC</div>,	
 		selector: row => row.porcentajeCtc,
 		// sortable: true,
 		cell: row => (
-			<div title={row.porcentajeCtc}>
+			<div title={row.porcentajeCtc} className='px-2'>
 				{convertirNuloEnVacio(row.porcentajeCtc)}
 			</div>
 		),
@@ -937,26 +962,29 @@ export const titulosParaTablaRangoDeCampanha = [
 	{
 		name: <div># CTC</div>,	
 		selector: row => row.numCtc,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numCtc)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.numCtc)} /></div>,
 		width: "60px"
 	},
 	{
 		name: <div># CD</div>,	
 		selector: row => row.numCd,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numCd)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.numCd)} /></div>,
 		width: "60px"
 	},
+
 	{
 		name: <div>%CD</div>,
 		selector: row => row.porcentajeCd,
-		cell: row => <CustomRowCD row={row} />,
+		// cell: row => <CustomRowCD row={row} />,
+		// cell: row => <div className='px-2'>{convertirNuloEnVacio(row.porcentajeCd)}</div>,
+		cell: row => <TresColoresPorcentajeCD value={row}/>,
 		width: "70px"
 	},
 	{
 		name: <div>%TC</div>,
 		selector: row => row.porcentajeTc,
 		cell: row => (
-			<div title={row.porcentajeTc}>
+			<div title={row.porcentajeTc} className='px-2'>
 				{convertirNuloEnVacio(row.porcentajeTc)}
 			</div>
 		),
@@ -965,85 +993,90 @@ export const titulosParaTablaRangoDeCampanha = [
 	{
 		name: '# PDP',
 		selector: row => row.numPDP,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numPDP)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.numPDP)} /></div>,
 		width: "80px"
 	},
 	{
 		name: 'MONTO PDP',
 		selector: row => row.montoPDP,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.montoPDP)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.montoPDP)} /></div>,
 		width: "130px"
 	},
 	{
 		name: <div>INT TOTAL</div>, // hecho
 		selector: row => row.intTotal,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intTotal)} />,
+		// cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.intTotal)} /></div>,
+		cell: row => <TresColoresPorcentajeIntTotal>{row}</TresColoresPorcentajeIntTotal>,
+		
 		width: "80px"
 	},
 	{
 		name: 'INT AGENTE',
 		selector: row => row.intAgente,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intAgente)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.intAgente)} /></div>,
 	},
 	{
 		name: <div>INT CTC</div>,
 		selector: row => row.intCTC,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intCTC)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.intCTC)} /></div>,
 		width: "60px"
 	},
 	{
 		name: <div>INT CD</div>,
 		selector: row => row.intCD,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intCD)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.intCD)} /></div>,
 		width: "60px"
 	},
 	{
 		name: <div># PAGOS</div>,
 		selector: row => row.numPagos,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numPagos)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.numPagos)} /></div>,
 		width: "100px"
 	},
 	{
 		name: <div>S/. PAGOS</div>,
 		selector: row => row.solesPagos,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.solesPagos)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.solesPagos)} /></div>,
 		width: "100px"
 	},
 	{
 		name: '%EFICIENCIA',
 		selector: row => row.porcentajeEficiencia,
-		cell: row => convertirNuloEnVacio(row.porcentajeEficiencia)
+		// cell: row => <div className='px-2'>{convertirNuloEnVacio(row.porcentajeEficiencia)}</div>
+		cell: row => <TresColoresporcentajeEficiencia value={row}/>
+		
+
 		// sortable: true,
 	},
 	{
 		name: <div>TICKET D. CAPITAL</div>,
 		selector: row => row.ticketCapital,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.ticketCapital)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.ticketCapital)} /></div>,
 		width: "80px"
 	},
 	{
 		name: <div>TICKET PAGO</div>,
 		selector: row => row.ticketPago,
-		cell: row => <AdicionaComas value={row.ticketPago} />,
+		cell: row => <div className='px-2'><AdicionaComas value={row.ticketPago} /></div>,
 		// sortable: true,
 	},
 	{
 		name: <div>%CALIDAD PDP</div>,
 		selector: row => row.porcentajeCalidadPDP,
-		cell: row => convertirNuloEnVacio(row.porcentajeCalidadPDP),
+		cell: row => <div className='px-2'>{convertirNuloEnVacio(row.porcentajeCalidadPDP)}</div>,
 		width: "80px"
 		// sortable: true,
 	},
 	{
 		name: <div>%COB</div>,
 		selector: row => row.cob,
-		cell: row => convertirNuloEnVacio(row.cob),
+		cell: row => <div className='px-2'>{convertirNuloEnVacio(row.cob)}</div>,
 		width: "60px"
 		// sortable: true,
 	},
 	{
 		name: <div>Descargar</div>,
-		selector: row => <DownloadExcel>{row}</DownloadExcel>,
+		selector: row => <div className='px-2'><DownloadExcel>{row}</DownloadExcel></div>,
 		width: "100px"
 		// sortable: true,
 	},
@@ -1065,44 +1098,48 @@ export const titulosParaTablaCarteraPorTipoDeProducto = [
 	{
 		name: <div>CLIENTES</div>,	
 		selector: row => row.clientes,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.clientes)} />,
-		width: "100px"
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.clientes)} /></div>,
+		width: "80px"
 	},
 	{
 		name: <div>CUENTAS</div>, 
 		selector: row => row.cuentas,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.cuentas)} />,
+		// cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.cuentas)} /></div>,
+		cell: row => <PorcentajeCuentasDos>{row}</PorcentajeCuentasDos>,
 		width: "80px"
 	},
 	{
 		name: <div>%CUENTAS</div>,
 		selector: row => row.porcentajeCuentas,
-		cell: row => convertirNuloEnVacio(row.porcentajeCuentas),
+		// cell: row => <div className='px-2'> {convertirNuloEnVacio(row.porcentajeCuentas)} </div>,
+		cell: row => <PorcentajeCuentas>{row}</PorcentajeCuentas>,
 		// sortable: true,
 	},
 	{
 		name: <div>CAPITAL</div>,
 		selector: row => row.capitalMN,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.capitalMN)} />,
+		// cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.capitalMN)} /></div>,
+		cell: row => <PorcentajeCapitalDos>{row}</PorcentajeCapitalDos>,
 		width: "120px"
 	},
 	{
 		name: <div>%CAPITAL</div>,
 		selector: row => row.porcentajeCapital,
 		// sortable: true,
-		cell: row => (
-			<div title={row.porcentajeCapital}>
-				{convertirNuloEnVacio(row.porcentajeCapital)}
-			</div>
-		),
-		width: "80px"
+		// cell: row => (
+		// 	<div title={row.porcentajeCapital} className='px-2'>
+		// 		{convertirNuloEnVacio(row.porcentajeCapital)}
+		// 	</div>
+		// ),
+		cell: row => <PorcentajeCapital>{row}</PorcentajeCapital>,
+		width: "120px"
 	},
 	{
 		name: <div>%CTC</div>,	
 		selector: row => row.porcentajeCtc,
 		// sortable: true,
 		cell: row => (
-			<div title={row.porcentajeCtc}>
+			<div title={row.porcentajeCtc} className='px-2'>
 				{convertirNuloEnVacio(row.porcentajeCtc)}
 			</div>
 		),
@@ -1111,26 +1148,28 @@ export const titulosParaTablaCarteraPorTipoDeProducto = [
 	{
 		name: <div># CTC</div>,	
 		selector: row => row.numCtc,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numCtc)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.numCtc)} /></div>,
 		width: "60px"
 	},
 	{
 		name: <div># CD</div>,	
 		selector: row => row.numCd,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numCd)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.numCd)} /></div>,
 		width: "60px"
 	},
+
 	{
 		name: <div>%CD</div>,
 		selector: row => row.porcentajeCd,
-		cell: row => <CustomRowCD row={row} />,
+		// cell: row => <CustomRowCD row={row} />,
+		cell: row => <div className='px-2'>{row.porcentajeCd}</div>,
 		width: "70px"
 	},
 	{
 		name: <div>%TC</div>,
 		selector: row => row.porcentajeTc,
 		cell: row => (
-			<div title={row.porcentajeTc}>
+			<div title={row.porcentajeTc} className='px-2'>
 				{convertirNuloEnVacio(row.porcentajeTc)}
 			</div>
 		),
@@ -1139,85 +1178,88 @@ export const titulosParaTablaCarteraPorTipoDeProducto = [
 	{
 		name: '# PDP',
 		selector: row => row.numPDP,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numPDP)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.numPDP)} /></div>,
 		width: "80px"
 	},
 	{
 		name: 'MONTO PDP',
 		selector: row => row.montoPDP,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.montoPDP)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.montoPDP)} /></div>,
 		width: "130px"
 	},
 	{
 		name: <div>INT TOTAL</div>, // hecho
 		selector: row => row.intTotal,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intTotal)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.intTotal)} /></div>,
 		width: "80px"
 	},
 	{
 		name: 'INT AGENTE',
 		selector: row => row.intAgente,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intAgente)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.intAgente)} /></div>,
 	},
 	{
 		name: <div>INT CTC</div>,
 		selector: row => row.intCTC,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intCTC)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.intCTC)} /></div>,
 		width: "60px"
 	},
 	{
 		name: <div>INT CD</div>,
 		selector: row => row.intCD,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intCD)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.intCD)} /></div>,
 		width: "60px"
 	},
 	{
 		name: <div># PAGOS</div>,
 		selector: row => row.numPagos,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numPagos)} />,
+		// cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.numPagos)} /></div>,
+		cell: row => <PorcentajeNumPagos value={row}/>,
 		width: "100px"
 	},
 	{
 		name: <div>S/. PAGOS</div>,
 		selector: row => row.solesPagos,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.solesPagos)} />,
+		// cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.solesPagos)} /></div>,
+		cell: row => <PorcentajeSolesPagos value={row}/>,
 		width: "100px"
 	},
 	{
 		name: '%EFICIENCIA',
 		selector: row => row.porcentajeEficiencia,
-		cell: row => convertirNuloEnVacio(row.porcentajeEficiencia)
+		// cell: row => <div className='px-2'>{convertirNuloEnVacio(row.porcentajeEficiencia)}</div>
+		cell: row => <CustomRowPercentageEficiencia row={row}/>
 		// sortable: true,
 	},
 	{
 		name: <div>TICKET D. CAPITAL</div>,
 		selector: row => row.ticketCapital,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.ticketCapital)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.ticketCapital)} /></div>,
 		width: "80px"
 	},
 	{
 		name: <div>TICKET PAGO</div>,
 		selector: row => row.ticketPago,
-		cell: row => <AdicionaComas value={row.ticketPago} />,
+		cell: row => <div className='px-2'><AdicionaComas value={row.ticketPago} /></div>,
 		// sortable: true,
 	},
 	{
 		name: <div>%CALIDAD PDP</div>,
 		selector: row => row.porcentajeCalidadPDP,
-		cell: row => convertirNuloEnVacio(row.porcentajeCalidadPDP),
+		cell: row => <div className='px-2'>{convertirNuloEnVacio(row.porcentajeCalidadPDP)}</div>,
 		width: "80px"
 		// sortable: true,
 	},
 	{
 		name: <div>%COB</div>,
 		selector: row => row.cob,
-		cell: row => convertirNuloEnVacio(row.cob),
+		cell: row => <div className='px-2'>{convertirNuloEnVacio(row.cob)}</div>,
 		width: "60px"
 		// sortable: true,
 	},
 	{
 		name: <div>Descargar</div>,
-		selector: row => <DownloadExcel>{row}</DownloadExcel>,
+		selector: row => <div className='px-2'><DownloadExcel>{row}</DownloadExcel></div>,
 		width: "100px"
 		// sortable: true,
 	},
@@ -1239,25 +1281,25 @@ export const titulosParaTablaCarteraPorZona = [
 	{
 		name: <div>CLIENTES</div>,	
 		selector: row => row.clientes,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.clientes)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.clientes)} /></div>,
 		width: "80px"
 	},
 	{
 		name: <div>CUENTAS</div>, 
 		selector: row => row.cuentas,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.cuentas)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.cuentas)} /></div>,
 		width: "80px"
 	},
 	{
 		name: <div>%CUENTAS</div>,
 		selector: row => row.porcentajeCuentas,
-		cell: row => convertirNuloEnVacio(row.porcentajeCuentas),
+		cell: row => <div className='px-2'> {convertirNuloEnVacio(row.porcentajeCuentas)} </div>,
 		// sortable: true,
 	},
 	{
 		name: <div>CAPITAL</div>,
 		selector: row => row.capitalMN,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.capitalMN)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.capitalMN)} /></div>,
 		width: "120px"
 	},
 	{
@@ -1265,7 +1307,7 @@ export const titulosParaTablaCarteraPorZona = [
 		selector: row => row.porcentajeCapital,
 		// sortable: true,
 		cell: row => (
-			<div title={row.porcentajeCapital}>
+			<div title={row.porcentajeCapital} className='px-2'>
 				{convertirNuloEnVacio(row.porcentajeCapital)}
 			</div>
 		),
@@ -1276,7 +1318,7 @@ export const titulosParaTablaCarteraPorZona = [
 		selector: row => row.porcentajeCtc,
 		// sortable: true,
 		cell: row => (
-			<div title={row.porcentajeCtc}>
+			<div title={row.porcentajeCtc} className='px-2'>
 				{convertirNuloEnVacio(row.porcentajeCtc)}
 			</div>
 		),
@@ -1285,26 +1327,28 @@ export const titulosParaTablaCarteraPorZona = [
 	{
 		name: <div># CTC</div>,	
 		selector: row => row.numCtc,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numCtc)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.numCtc)} /></div>,
 		width: "60px"
 	},
 	{
 		name: <div># CD</div>,	
 		selector: row => row.numCd,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numCd)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.numCd)} /></div>,
 		width: "60px"
 	},
+
 	{
 		name: <div>%CD</div>,
 		selector: row => row.porcentajeCd,
-		cell: row => <CustomRowCD row={row} />,
+		// cell: row => <CustomRowCD row={row} />,
+		cell: row => <div className='px-2'>{row.porcentajeCd}</div>,
 		width: "70px"
 	},
 	{
 		name: <div>%TC</div>,
 		selector: row => row.porcentajeTc,
 		cell: row => (
-			<div title={row.porcentajeTc}>
+			<div title={row.porcentajeTc} className='px-2'>
 				{convertirNuloEnVacio(row.porcentajeTc)}
 			</div>
 		),
@@ -1313,7 +1357,7 @@ export const titulosParaTablaCarteraPorZona = [
 	{
 		name: '# PDP',
 		selector: row => row.numPDP,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numPDP)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.numPDP)} /></div>,
 		width: "80px"
 	},
 	{
@@ -1325,73 +1369,73 @@ export const titulosParaTablaCarteraPorZona = [
 	{
 		name: <div>INT TOTAL</div>, // hecho
 		selector: row => row.intTotal,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intTotal)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.intTotal)} /></div>,
 		width: "80px"
 	},
 	{
 		name: 'INT AGENTE',
 		selector: row => row.intAgente,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intAgente)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.intAgente)} /></div>,
 	},
 	{
 		name: <div>INT CTC</div>,
 		selector: row => row.intCTC,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intCTC)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.intCTC)} /></div>,
 		width: "60px"
 	},
 	{
 		name: <div>INT CD</div>,
 		selector: row => row.intCD,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.intCD)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.intCD)} /></div>,
 		width: "60px"
 	},
 	{
 		name: <div># PAGOS</div>,
 		selector: row => row.numPagos,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.numPagos)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.numPagos)} /></div>,
 		width: "100px"
 	},
 	{
 		name: <div>S/. PAGOS</div>,
 		selector: row => row.solesPagos,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.solesPagos)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.solesPagos)} /></div>,
 		width: "100px"
 	},
 	{
 		name: '%EFICIENCIA',
 		selector: row => row.porcentajeEficiencia,
-		cell: row => convertirNuloEnVacio(row.porcentajeEficiencia)
+		cell: row => <div className='px-2'>{convertirNuloEnVacio(row.porcentajeEficiencia)}</div>
 		// sortable: true,
 	},
 	{
 		name: <div>TICKET D. CAPITAL</div>,
 		selector: row => row.ticketCapital,
-		cell: row => <AdicionaComas value={convertirNuloEnVacio(row.ticketCapital)} />,
+		cell: row => <div className='px-2'><AdicionaComas value={convertirNuloEnVacio(row.ticketCapital)} /></div>,
 		width: "80px"
 	},
 	{
 		name: <div>TICKET PAGO</div>,
 		selector: row => row.ticketPago,
-		cell: row => <AdicionaComas value={row.ticketPago} />,
+		cell: row => <div className='px-2'><AdicionaComas value={row.ticketPago} /></div>,
 		// sortable: true,
 	},
 	{
 		name: <div>%CALIDAD PDP</div>,
 		selector: row => row.porcentajeCalidadPDP,
-		cell: row => convertirNuloEnVacio(row.porcentajeCalidadPDP),
+		cell: row => <div className='px-2'>{convertirNuloEnVacio(row.porcentajeCalidadPDP)}</div>,
 		width: "80px"
 		// sortable: true,
 	},
 	{
 		name: <div>%COB</div>,
 		selector: row => row.cob,
-		cell: row => convertirNuloEnVacio(row.cob),
+		cell: row => <div className='px-2'>{convertirNuloEnVacio(row.cob)}</div>,
 		width: "60px"
 		// sortable: true,
 	},
 	{
 		name: <div>Descargar</div>,
-		selector: row => <DownloadExcel>{row}</DownloadExcel>,
+		selector: row => <div className='px-2'><DownloadExcel>{row}</DownloadExcel></div>,
 		width: "100px"
 		// sortable: true,
 	},
@@ -1405,6 +1449,7 @@ import { unauthenticatedUser } from "../../../../../store/authSlice";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 import PercentageBar from "./PercentageBar";
+import { ChildFriendly, Rowing } from '@mui/icons-material';
 
 const CustomBar = ({children, color}) => {
 
@@ -1460,7 +1505,7 @@ const CustomRowCD = ({row}) => {
 		}
 
 		{
-			row.tipo === "fila" && <PercentageBar percentage={valor}/>
+			row.tipo === "fila" && <PercentageBar percentage={valor} show={valor}/>
 		}
 
 		{
@@ -1470,22 +1515,25 @@ const CustomRowCD = ({row}) => {
 	</>	
 )};
 
-const CustomRowPercentageEficiencia = ({row}) => (
+const CustomRowPercentageEficiencia = ({row}) => {
+	const valor = convertirNuloEnVacio(row.porcentajeEficiencia);
+	return(
 	<>
 		{
-			row.tipo == "suma" && row.porcentajeEficiencia
+			row.tipo == "suma" && valor
 		}
 
 		{
-			row.tipo === "fila" && <PercentageBar percentage={row.porcentajeEficiencia}/>
+			row.tipo === "fila" &&  <PercentageBar percentage={valor} show={valor}/>
+			
 		}
 
 		{
-			row.tipo === "total" && row.porcentajeEficiencia
+			row.tipo === "total" && valor
 		}
 	</>	
 	
-);
+)};
 
 const AdicionaComas = ({ value }) => {
     if (value === undefined || value === null) {
@@ -1503,6 +1551,263 @@ const AdicionaComas = ({ value }) => {
 
     return numero.toLocaleString('en-US');
 };
+
+
+
+/**
+ * Los valores que se ingrean son numero enteros, 
+ */
+const TresColores = ({valor, totalDeValor}) => {
+	return(
+		<>
+		{valor != 0 ?  
+
+		( 
+			<>
+			{/* Pinta cuando es menor al 0.2 porciento */}
+			{
+				valor/totalDeValor < 0.2 && <div className='bg-red-300  w-full h-full px-2 flex items-center justify-end'>{ <AdicionaComas value={convertirNuloEnVacio(valor)} /> }</div>
+			}
+			{/* Pinta cuando el valor es >= 0.2% y <0.29% */}
+			{
+				(valor/totalDeValor >= 0.2 && valor/totalDeValor < 0.29) && <div className='bg-yellow-300  w-full h-full px-2 flex items-center justify-end'>{<AdicionaComas value={convertirNuloEnVacio(valor)} />}</div>
+			}
+			{/* Pinta cuando es >0.29% */}
+			{
+				valor/totalDeValor >= 0.29 && <div className='bg-green-200 w-full h-full px-2 flex items-center justify-end'>{<AdicionaComas value={convertirNuloEnVacio(valor)} />}</div>
+			}
+			</>	
+		): (<div className='bg-red-200 w-full h-full px-2 flex items-center justify-end'>{valor}</div> )
+
+		}
+		</>
+	)
+}
+/**
+ * se deben ingresa un valor porcentual. ejem: 50% no 50
+ */
+const TresColoresPorcentaje = ({value}) => {
+
+	console.log("valores de %cd :",value );
+	//quita signo porcentual. ejem: 50% a 50
+	const valorNumerico = parseFloat(value);
+
+	//convierte a franccion. ejem 50 = 0.5
+	const porcentajeFormatoFraccion = valorNumerico/100
+	return(
+		<>
+		{porcentajeFormatoFraccion != 0 ?  
+
+		( 
+			<>
+			{/* Pinta cuando es menor al 0.2 porciento */}
+			{
+				porcentajeFormatoFraccion < 0.2 && <div className='bg-red-300  w-full h-full px-2 flex items-center justify-end'>{ <AdicionaComas value={convertirNuloEnVacio(value)} /> }</div>
+			}
+			{/* Pinta cuando el valor es >= 0.2% y <0.29% */}
+			{
+				(porcentajeFormatoFraccion>= 0.2 && porcentajeFormatoFraccion < 0.29) && <div className='bg-yellow-300  w-full h-full px-2 flex items-center justify-end'>{<AdicionaComas value={convertirNuloEnVacio(value)} />}</div>
+			}
+			{/* Pinta cuando es >0.29% */}
+			{
+				porcentajeFormatoFraccion >= 0.29 && <div className='bg-green-200 w-full h-full px-2 flex items-center justify-end'>{<AdicionaComas value={convertirNuloEnVacio(value)} />}</div>
+			}
+			</>	
+		): (<div className='bg-red-200 w-full h-full px-2 flex items-center justify-end'>{value}</div> )
+
+		}
+		</>
+	)
+}
+
+//Crear una funaion para
+const TresColoresNumPagos = ({value}) => {
+
+		return(
+			<>
+			{
+				value.tipo == "fila"? 
+					<TresColores valor={value.numPagos} totalDeValor={value.totalNumPagos}/>
+				: 	<AdicionaComas value={convertirNuloEnVacio(value.numPagos)} />
+
+			}
+			</>
+		)
+}
+
+const TresColoresSolesPagos = ({value}) => {
+		return(
+			<>
+			{
+				value.tipo == "fila"? 
+					<TresColores valor={value.solesPagos} totalDeValor={value.totalSolesPagos}/>
+				: 	<AdicionaComas value={convertirNuloEnVacio(value.solesPagos)} />
+			
+			}			
+			</>
+		)
+}
+
+// El llenado es exclusicamente con una barra verde
+const PorcentajeIntTotal = ({value}) => {
+	const porcentaje = (value.intTotal/value.totalIntTotal)*100;
+	// console.log("porcentaje", porcentaje, "valores de fila: ",value);
+	
+	return(
+		<>
+		{
+			value.tipo == "fila"? 
+				<PercentageBar percentage={porcentaje} show={value.intTotal}/>
+			: 	
+				<AdicionaComas value={convertirNuloEnVacio(value.intTotal)}/> 
+		}			
+		</>
+	)
+}
+
+const PorcentajeCuentas = ({children}) => {
+	return(
+		<>
+			{
+				children.tipo == "fila"? <PercentageBar percentage={children.porcentajeCuentas} show={children.porcentajeCuentas}/>: <div className='w-full h-full px-2 flex items-center justify-end'>{convertirNuloEnVacio(children.porcentajeCuentas)}</div>
+			}
+		</>
+	)
+}
+
+const PorcentajeCapital = ({children}) => {
+	return(
+		<>
+			{
+				children.tipo == "fila"? <PercentageBar percentage={children.porcentajeCapital} show={children.porcentajeCapital}/>: <div className='w-full h-full px-2 flex items-center justify-end'>{convertirNuloEnVacio(children.porcentajeCuentas)}</div>
+			}
+		</>
+	)
+}
+
+// Imprime valores de la columna capital, este codigo no trabaja directamente con porcentaje. 
+const PorcentajeCapitalDos = ({children}) => {
+	const porcentaje = (children.capitalMN/children.totalCapitalMN)*100;
+	const valor = <AdicionaComas value={convertirNuloEnVacio(children.capitalMN)}/>
+	// console.log("porcentaje", porcentaje, "valores de fila: ",value);
+	
+	return(
+		<>
+		{
+			children.tipo == "fila"? 
+				<PercentageBar percentage={porcentaje} show={valor}/>
+			: 	
+			<div className='w-full h-full px-2 flex items-center justify-end'><AdicionaComas value={convertirNuloEnVacio(children.capitalMN)}/> </div>
+		}			
+		</>
+	)
+}
+
+const PorcentajeCuentasDos = ({children}) => {
+	const porcentaje = (children.cuentas/children.totalCuentas)*100;
+	const valor = <AdicionaComas value={convertirNuloEnVacio(children.cuentas)}/>
+	console.log("este es el valor convertido de cuentas: ", valor);
+	// console.log("porcentaje", porcentaje, "valores de fila: ",value);
+	
+	return(
+		<>
+		{
+			children.tipo == "fila"? 
+			<PercentageBar percentage={porcentaje} show={valor}/>
+			: 	
+			<div className='w-full h-full px-2 flex items-center justify-end'><AdicionaComas value={convertirNuloEnVacio(children.cuentas)}/> </div>
+		}			
+		</>
+	)
+}
+
+
+// Pintar %cd, int total, y %eficiencia
+const TresColoresPorcentajeCD = ({value}) => {
+
+
+	return(
+		<>
+		{
+			value.tipo == "fila"? 
+				<TresColoresPorcentaje value={value.porcentajeCd}/>
+			: 	convertirNuloEnVacio(value.porcentajeCd)
+
+		}
+		</>
+	)
+}
+
+const TresColoresporcentajeEficiencia= ({value}) => {
+
+
+	return(
+		<>
+		{
+			value.tipo == "fila"? 
+				<TresColoresPorcentaje value={value.porcentajeEficiencia}/>
+			: 	convertirNuloEnVacio(value.porcentajeEficiencia)
+
+		}
+		</>
+	)
+}
+
+// Imprime valores de la columna capital, este codigo no trabaja directamente con porcentaje. 
+const TresColoresPorcentajeIntTotal = ({children}) => {
+	const porcentaje = (children.intTotal/children.totalIntTotal)*100;
+	const valor = <AdicionaComas value={convertirNuloEnVacio(children.intTotal)}/>
+	// console.log("porcentaje", porcentaje, "valores de fila: ",value);
+	
+	return(
+		<>
+		{
+			children.tipo == "fila"? 
+				<PercentageBar percentage={porcentaje} show={valor}/>
+			: 	
+			<div className='w-full h-full px-2 flex items-center justify-end'><AdicionaComas value={convertirNuloEnVacio(children.intTotal)}/> </div>
+		}			
+		</>
+	)
+}
+
+
+const PorcentajeNumPagos = ({value}) => {
+const porcentaje = (value.numPagos/value.totalNumPagos)*100;
+const valorParaMostrar = <AdicionaComas value={value.numPagos}/>
+	return(
+		<>
+		{
+			value.tipo == "fila"? 
+				// <TresColores valor={value.numPagos} totalDeValor={value.totalNumPagos}/>
+				<PercentageBar percentage={porcentaje} show={valorParaMostrar}/>
+			: 	
+			<div className='w-full h-full px-2 flex items-center justify-end'><AdicionaComas value={convertirNuloEnVacio(value.numPagos)} /></div>
+
+		}
+		</>
+	)
+}
+
+const PorcentajeSolesPagos = ({value}) => {
+	const porcentaje = (value.solesPagos/value.totalSolesPagos)*100;
+	const valorParaMostrar = <AdicionaComas value={value.solesPagos}/>
+		return(
+			<>
+			{
+				value.tipo == "fila"? 
+					// <TresColores valor={value.numPagos} totalDeValor={value.totalNumPagos}/>
+					<PercentageBar percentage={porcentaje} show={valorParaMostrar}/>
+				: 	
+				<div className='w-full h-full px-2 flex items-center justify-end'><AdicionaComas value={convertirNuloEnVacio(value.solesPagos)} /></div>
+	
+			}
+			</>
+		)
+	}
+	
+
+
 
 const GetData = async (children, dispatch) => {
 	// const dispatch = useDispatch();

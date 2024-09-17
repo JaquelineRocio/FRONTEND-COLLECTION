@@ -17,11 +17,7 @@ const SidebarHomeView = () => {
                     <div className="col-span-4">
                         <HomeViewCard/>
                     </div>
-
-                    
                 </div>
-                
-
                 <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-5 gap-5">
                 <Link to='gestiondashboard' >   <div className="w-90 grow shrik-0"><ButtonWithImage/></div></Link>
                 </div>
