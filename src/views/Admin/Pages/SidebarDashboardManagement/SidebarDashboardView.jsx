@@ -186,6 +186,7 @@ const SidebarDashboardView = () => {
     const fetchToDate = useFetchApi();
     const fetchParaEntidad = useFetchApi();
     const fetchParaCartera= useFetchApi();
+    const fetchBotonBuscar= useFetchApi();
 
     //Variable para fecha, (se carga cuando enla primera carga de la vista)
     const [date, setDate] = useState({initial:null, end:null})
@@ -217,8 +218,6 @@ const SidebarDashboardView = () => {
         // setSelectPrioridad([]);
         setSelectPrioridad('');
         setSelectRangoEdad([]);
-
-         
     }
 
     // Limpia valores seleccionados de filtros especificos
@@ -354,12 +353,12 @@ const SidebarDashboardView = () => {
         // Almacenamos en payload secundario datos para que tablas individuales aun puedan hacer consultas
         setBodyPayloadForIndividualTables({...payload});
         setUrlPayloadForIndividualTables({selectEntidad: selectEntidad, selectFecha:selectFecha, selectCartera:selectCartera });
-
+        // let {data, error} = await fetchBotonBuscar.postMethod(payload,`/admin/tablon/dashboards?entidad=${selectEntidad}&mes=${selectFecha?.format('MM-YYYY')}&carteras=${selectCartera}`); 
         let {data, error} = await testFetch.post(payload,`/admin/tablon/dashboards?entidad=${selectEntidad}&mes=${selectFecha?.format('MM-YYYY')}&carteras=${selectCartera}`); 
         // let data = await SimulatorApi(1000,false);
         // let error = null;
         // console.log("data simulada", data);
-
+        console.log("despues de obtener registros")
         // Damos informacion del payload a las talbas
         if(data != null ){
             if(data.data != null){

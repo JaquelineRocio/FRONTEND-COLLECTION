@@ -89,18 +89,20 @@ const SelectMultipleCustomed = ({
                         label={
                             loading?
                             (
-                                <div style={{ display: 'flex', alignItems: 'center'}}>
+                                <div style={{  alignItems: 'center'}}>
                                 <CircularProgress size={24} sx={{ marginRight: 2 }} />
-                                {label}
+                                
                                 </div>
                             ) : (
                                 
+                                // <div className="bg-pink-400  mr-5 overflow-hidden">
+                                // {label}
+                                // </div>
                                 label
-                                
                             )
                         } 
                         variant="outlined" 
-                        required={requerido}
+                        required={loading?(null):(requerido)}
                         InputProps={{
                             ...params.InputProps,
                             style: {
@@ -119,8 +121,10 @@ const SelectMultipleCustomed = ({
                             "& .MuiInputBase-input": {
                               paddingTop: 0,
                               paddingBottom: 0,
-                              width: "2px",
+                              width: "100%",
                             //   background: "blue",
+                              overflow: "hidden",
+
                             },
                         }}
                     />

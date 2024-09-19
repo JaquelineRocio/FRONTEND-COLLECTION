@@ -61,8 +61,8 @@ const useFetchApi = () =>{
             }
 
             if (!response.ok) {
-                console.log("contendio de la respusta !ok 1: ", response); // me va a devolver todo el objeto
-                console.log("contendio de la respusta !ok 2: ", result);  // { "error": "Token JWT expirado" }
+                // console.log("contendio de la respusta !ok 1: ", response); // me va a devolver todo el objeto
+                // console.log("contendio de la respusta !ok 2: ", result);  // { "error": "Token JWT expirado" }
                 if (response.status === 401) {
                     throw new Error('Token expired');
                 } else {

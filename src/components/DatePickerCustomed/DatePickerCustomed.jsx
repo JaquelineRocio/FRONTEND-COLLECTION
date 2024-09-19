@@ -6,7 +6,7 @@ import EditCalendarRoundedIcon from '@mui/icons-material/EditCalendarRounded';
 import IconButton from '@mui/material/IconButton';
 import './DatePickerCustomed.css';
 import dayjs from 'dayjs';
-import { FormControl, FormHelperText } from '@mui/material';
+import { CircularProgress, FormControl, FormHelperText } from '@mui/material';
 
 
 // const StyledDatePicker  = styled(DatePicker)`
@@ -45,11 +45,12 @@ function DatePickerCustomed({
 
   return (
     <>
+    
     <FormControl  fullWidth>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DatePicker
         onChange={handleDateChange} 
-        label={ loading? "Cargando.." : "Fecha"}
+        label={ loading? <CircularProgress size={24} sx={{ marginRight: 2 }} /> : "Fecha"}
         views={['year', 'month']}
         slots={{
           openPickerIcon: EditCalendarRoundedIcon,
