@@ -1450,6 +1450,7 @@ import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 import PercentageBar from "./PercentageBar";
 import { ChildFriendly, Rowing } from '@mui/icons-material';
+import manageErrorAndSessionUtils from '../../../../../utils/manageErrorAndSessionUtils';
 
 const CustomBar = ({children, color}) => {
 
@@ -2043,7 +2044,7 @@ const GetData = async (children, dispatch) => {
 	}
 
 	let {data, error} = await testFetch.post(payload,`/admin/tablon/datos-descarga?entidad=${children.payloadUrl.selectEntidad}&mes=${children.payloadUrl?.selectFecha?.format('MM-YYYY')}&carteras=${children.codCartera}`); 
-	ErrorToken(error,dispatch);
+	manageErrorAndSessionUtils(error,dispatch);
 	DescargarExcelUnaSolaHoja(data?.data, downloadData);
 	return null;
 }
@@ -2187,33 +2188,6 @@ function s2ab(s) {
 // si el valor que ingresa es undefined o es null se convertirá en la palabra "Vacio"
 const convertirNuloEnVacio = (value) => {
     return value?? "Vacío";
-};
-
-const ErrorToken = (error, dispatch) => {
-
-    if (!error) {
-      return null; // No renderiza nada si no hay error
-    }
-  
-    if (error.message === 'Token expired') {
-      swal({
-        title: "Sesión Expirada",
-        text: "Su sesión ha expirado. Por favor, inicie sesión nuevamente para continuar.",
-        icon: "warning",
-        button: "OK"
-      }).then(() => {
-        dispatch(unauthenticatedUser());
-      });
-    } else {
-      swal({
-        title: "Error de consulta",
-        text: "Hubo un error al obtener los datos, por favor vuelva a realizar su consulta.",
-        icon: "warning",
-        button: "OK"
-      });
-    }
-  
-    return null; // Aquí se retorna JSX
 };
 
 

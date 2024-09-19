@@ -34,6 +34,8 @@ import SelectMultipleCustomed from "../../../../components/SelectMultipleCustome
 // import {useFetch} from "./../../../../hooks/useFetch";
 import { testFetch } from "../../../../hooks/testFetch";
 import SimulatorApi from "../../../../services/resources/SimulatorApi";
+import useFetchApi from "../../../../hooks/useFetchApi";
+
 
 import { 
     titulosParaTablaEstadoGeneralDeCartera,
@@ -51,6 +53,8 @@ import {
  import { MdOutlineMoveUp } from "react-icons/md";
  import { TbDragDrop } from "react-icons/tb";
  import { HiSquare2Stack } from "react-icons/hi2";
+
+ import manageErrorAndSessionUtils from "../../../../utils/manageErrorAndSessionUtils";
 
 const SidebarDashboardView = () => {
 
@@ -179,6 +183,11 @@ const SidebarDashboardView = () => {
      */
     const [numberOfColumns, setNumberOfColumns] = useState(1);
     
+    const fetchToDate = useFetchApi();
+    const fetchParaEntidad = useFetchApi();
+
+    //Variable para fecha, (se carga cuando enla primera carga de la vista)
+    const [date, setDate] = useState({initial:null, end:null})
 
 
     function hideAllTables(){
@@ -228,7 +237,8 @@ const SidebarDashboardView = () => {
     function clearSelectedValuesFromGeneralFilters(){
         setSelectFecha(null);
         setSelectEntidad(''); 
-        setSelectCartera([]); 
+        // setSelectCartera([]); 
+        // setSelectCartera(null);
     }
 
     // Eliminamos todos el contenido (filas) de todas las tablas
@@ -259,6 +269,8 @@ const SidebarDashboardView = () => {
     }
 
     async function accionesDeBotonBuscar(){
+
+        // console.log("opciones selecionas de select multiple ",selectCartera );
         if(!selectEntidad || !selectCartera || selectCartera.length === 0 || !selectFecha){
             alertas("camposVacios");
             return true;
@@ -367,7 +379,7 @@ const SidebarDashboardView = () => {
         // Muestra primera tabla
         setFirstTableOpen(true);
 
-        ErrorToken(error,dispatch);
+        manageErrorAndSessionUtils(error,dispatch);
     }
 
     function accionesDeBotonLimpiarBusqueda(){
@@ -436,8 +448,29 @@ const SidebarDashboardView = () => {
         setLoadingFiltroGeneral(false);
         } catch (error) {
             setLoadingFiltroGeneral(false);
-            ErrorToken(error,dispatch);
+            manageErrorAndSessionUtils(error,dispatch);
         }
+    }
+
+    // Obtiene datos para llenar filtro "fecha"
+    const getOptionToEntidad = async () => {
+        const body = {"mes":selectFecha?.format('MM-YYYY'), "entidad":null, "carteras":null}
+        const url = "/admin/tablon/filtros-generales"
+
+        // La condicion solo se ejcuta si hay algun valor para fecha, si no hay valor, la api devolverá fechas
+        if(selectFecha){
+            const response = await fetchParaEntidad.postMethod(body, url);
+            procesarDatos(response, setOptionsEntidad, "setOptionsEntidad"  ,dispatch);
+        }
+
+    }
+
+    // Obtiene datos para llenar filtro "Entidad"
+    const getOptionToData = async () => {
+        const body = {"mes":null, "entidad":null, "carteras":null}
+        const url = "/admin/tablon/filtros-generales"
+        const response = await fetchToDate.postMethod(body, url);
+        procesarDatos(response, setDate, "setDate"  ,dispatch);
     }
 
     // Carga contenido para selects secundarios (filtros especificos) - La carga de datos depende de los filtros generales
@@ -539,7 +572,7 @@ const SidebarDashboardView = () => {
             setLoadingFiltroEspecifico(false);
 
             // Verifica validad de token en cada peticion
-            ErrorToken(error, dispatch)
+            manageErrorAndSessionUtils(error, dispatch)
         }
         
     }
@@ -558,7 +591,7 @@ const SidebarDashboardView = () => {
         }
         setLoadingFiltroCartera(false);
         if(error){
-            ErrorToken(error,dispatch);
+            manageErrorAndSessionUtils(error,dispatch);
         }
 
     }
@@ -586,7 +619,7 @@ const SidebarDashboardView = () => {
                     setShowGroupOfTables(true);
                     // setFirstTableOpen(true); 
                     setLoadingFirstTable(false);
-                    ErrorToken(error,dispatch);
+                    manageErrorAndSessionUtils(error,dispatch);
                 }
                 setLoadingFirstTable(false);
                 break;
@@ -608,7 +641,7 @@ const SidebarDashboardView = () => {
                         setRegistroSegundaTabla(data?.data ?? {});
                     }                
                     setLoadingSecondTable(false);
-                    ErrorToken(error,dispatch);
+                    manageErrorAndSessionUtils(error,dispatch);
                 }
                 setLoadingSecondTable(false);
                 break;
@@ -630,7 +663,7 @@ const SidebarDashboardView = () => {
                         setRegistroCuartaTabla(data?.data ?? {});
                     }
                     setLoadingFourthTable(false);
-                    ErrorToken(error,dispatch);
+                    manageErrorAndSessionUtils(error,dispatch);
                 }
                 setLoadingFourthTable(false);
                 break;
@@ -652,7 +685,7 @@ const SidebarDashboardView = () => {
                         setRegistroQuintaTabla(data?.data ?? {});
                     }
                     setLoadingFifthTable(false);
-                    ErrorToken(error,dispatch);
+                    manageErrorAndSessionUtils(error,dispatch);
                 }
                 setLoadingFifthTable(false);
                 break;
@@ -673,7 +706,7 @@ const SidebarDashboardView = () => {
                         setRegistroSextaTabla(data?.data ?? {});
                     }
                     setLoadingSixthTable(false);
-                    ErrorToken(error,dispatch);
+                    manageErrorAndSessionUtils(error,dispatch);
                 }
                 setLoadingSixthTable(false);
                 break;
@@ -694,7 +727,7 @@ const SidebarDashboardView = () => {
                         setRegistroSetimaTabla(data?.data ?? {});                    
                     }
                     setLoadingSeventhTable(false);
-                    ErrorToken(error,dispatch);
+                    manageErrorAndSessionUtils(error,dispatch);
                 }
                 setLoadingSeventhTable(false);
                 break;
@@ -716,7 +749,7 @@ const SidebarDashboardView = () => {
                         setRegistroOctavaTabla(data?.data ?? {});
                     }
                     setLoadingEighthTable(false);
-                    ErrorToken(error,dispatch);   
+                    manageErrorAndSessionUtils(error,dispatch);   
                 }
                 setLoadingEighthTable(false);
                 break;
@@ -1233,9 +1266,18 @@ const SidebarDashboardView = () => {
           }
     }, [debouncedSelectFecha, debouncedSelectEntidad, debouncedSelectCartera]);
 
+    // Carga vaores para primer filtro "fecha"
     useEffect(() => {
-        loadGeneralFilters();
+        // loadGeneralFilters();
+        getOptionToData();
     }, []);
+
+    // Carga vaores para segundo filtro "Entidad" - depende de fecha
+    useEffect(()=>{
+        getOptionToEntidad();
+    },[selectFecha])
+
+
 
     // Carga datos de select cartera cada vez que select entidad se modifica
     useEffect(() => {
@@ -1288,8 +1330,8 @@ const SidebarDashboardView = () => {
                         <div className="grid grid-cols-1 gap-5 md:grid-cols-5 2xl:grid-cols-6 ">
                                                
                             <h3 className="md:col-span-5 2xl:col-span-6 font-ralewaySemibold text-base text-gray-900">FILTROS GENERALES</h3>
-                            <div><DatePickerCustomed valor={selectFecha} setValor={setSelectFecha} requerido={true}/></div>
-                            <div><SelectCustomed label="Entidad *" valor={selectEntidad} setValor={setSelectEntidad} options={optionsEntidad} loading={loadingFiltroGeneral} requerido={true}/></div>
+                            <div><DatePickerCustomed valor={selectFecha} setValor={setSelectFecha} requerido={true} loading={fetchToDate.loading} initalDate={date.initial} endDate={date.end}/></div>
+                            <div><SelectCustomed label="Entidad *" valor={selectEntidad} setValor={setSelectEntidad} options={optionsEntidad} loading={fetchParaEntidad.loading} requerido={true}/></div>
                             <div><SelectMultipleCustomed label="Cartera" valor={selectCartera} setValor={setSelectCartera} options={optionsCartera} loading={loadingFiltroCartera} requerido={true}/></div>
                             <div className={`${open==true?'md:col-start-4 md:col-end-4 2xl:col-start-5 2xl:col-end-5':'hidden'}`} ><BotonClaro  className={`${open==true?'md:col-start-4 md:col-end-4 2xl:col-start-5 2xl:col-end-5':'hidden'} `} layout="LIMPIAR BÚSQUEDA" onClick={accionesDeBotonLimpiarBusqueda}/></div>
                             <div className={`${open==true?'md:col-start-5 md:col-end-5 2xl:col-start-6 2xl:col-end-6':'hidden'}`}><BotonOscuro className={`${open==true?'md:col-start-5 md:col-end-5 2xl:col-start-6 2xl:col-end-6':'hidden'} `} layout="BUSCAR" onClick={accionesDeBotonBuscar}/></div>
@@ -1450,35 +1492,46 @@ function alertas(opcion){
     }
 
 }
-
-const ErrorToken = (error, dispatch) => {
-
-    if (!error) {
-      return null; // No renderiza nada si no hay error
-    }
-  
-    if (error.message === 'Token expired') {
-      swal({
-        title: "Sesión Expirada",
-        text: "Su sesión ha expirado. Por favor, inicie sesión nuevamente para continuar.",
-        icon: "warning",
-        button: "OK"
-      }).then(() => {
-        dispatch(unauthenticatedUser());
-      });
-    } else {
-      swal({
-        title: "Error de consulta",
-        text: "Hubo un error al obtener los datos, por favor vuelva a realizar su consulta.",
-        icon: "warning",
-        button: "OK"
-      });
-    }
-  
-    return null; // Aquí se retorna JSX
-};
-
-
-// Descripción: Funciones para manejar las funcionalidades de drag and drop 
  
+
+/**
+ * @param {json}     response  - es la erspuesta obtenida de la peticoin a una api
+ * @param {useState} setUseState - ingresa el hook de estado "useState"
+ * @param {string}   condicion - indica que bloque de codigo se ejecutará
+ * @param {function} dispatch - en necesario para interactuar con redux, exclusivamente para el login
+ */
+const procesarDatos = (response, setUseState, condicion, dispatch) => {
+
+    // Si hay error, quiere decir que no hay data (data igual a null)
+    // Si existe errores setData se deja como esta
+    if(response.error){
+        console.log("Existe errores");
+        manageErrorAndSessionUtils(response.error, dispatch);
+    }else{
+
+        if(condicion == "setDate"){
+
+            const initialDate = response.data?.data[0]
+            const endDate = response.data?.data[response.data.data.length - 1]
+            setUseState({initial:`${initialDate?.Year}-${initialDate?.Month}-01`, end:`${endDate?.Year}-${endDate?.Month}-01`});
+
+        }else if(condicion == "setOptionsEntidad"){
+
+            const entidadOptions = response.data?.data.map(option => ({
+                value: option.CodEntidad,
+                // value: option.codEntidad,
+                label: option.Entidad
+            }));
+            setUseState(entidadOptions);
+
+        }else if(condicion == "ghi"){
+            console.log(condicion);
+        }else if(condicion == "jkl"){
+            console.log(condicion);
+        }else if(condicion == "mno"){
+            console.log(condicion);
+        }
+
+    }
+}
 

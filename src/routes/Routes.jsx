@@ -31,6 +31,8 @@ import EnConstruccion from "./../views/miscellany/EnConstruccion";
 import ReactExcel from "../views/ExampleView/ReactExcel";
 import ContruccionDeTabla from "../views/ExampleView/ContruccionDeTabla";
 import HooksReact from "../views/ExampleView/HooksReact";
+import SelectComponent from "../views/ExampleView/SelectComponent";
+import SelectMaterialUI from "../views/ExampleView/SelectMaterialUI";
 
 const DeleteSession = ({children}) => {
   const dispatch = useDispatch();
@@ -111,7 +113,17 @@ const Route = () => {
       {
         path: 'hooksreact',
         element: <HooksReact/>
-      }          
+      },
+      {
+        path: 'select',
+        element: <SelectComponent/>
+      },
+      {
+        path: 'selectmaterialui',
+        element: <SelectMaterialUI/>
+      }           
+      
+      
   ]);
   
   return <RouterProvider router={router} />;

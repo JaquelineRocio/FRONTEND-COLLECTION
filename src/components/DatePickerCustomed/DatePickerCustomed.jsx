@@ -29,6 +29,9 @@ function DatePickerCustomed({
   valor,
   setValor,
   requerido = false,
+  initalDate = null,
+  endDate = null,
+  loading = false,
 }) {
 
   const handleDateChange = (newValue) => {
@@ -46,16 +49,20 @@ function DatePickerCustomed({
       <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DatePicker
         onChange={handleDateChange} 
-        label="Fecha"
+        label={ loading? "Cargando.." : "Fecha"}
         views={['year', 'month']}
         slots={{
           openPickerIcon: EditCalendarRoundedIcon,
 
         }}
         value={valor}
-        minDate={dayjs('2022-01-01')}
-        maxDate={dayjs('2024-12-31')}
+        // minDate={dayjs('2022-01-01')}
+        // maxDate={dayjs('2024-12-31')}
+        minDate={initalDate ? dayjs(initalDate) : dayjs()}
+        maxDate={endDate ? dayjs(endDate) : dayjs()}
         // slotProps={{ textField: { size: 'small', } }}
+
+        disabled={loading}
         sx={{ 
             // border: '5px solid red',
             borderRadius: '10px',
