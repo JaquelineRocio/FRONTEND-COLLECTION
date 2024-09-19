@@ -185,6 +185,7 @@ const SidebarDashboardView = () => {
     
     const fetchToDate = useFetchApi();
     const fetchParaEntidad = useFetchApi();
+    const fetchParaCartera= useFetchApi();
 
     //Variable para fecha, (se carga cuando enla primera carga de la vista)
     const [date, setDate] = useState({initial:null, end:null})
@@ -403,56 +404,15 @@ const SidebarDashboardView = () => {
         cleanOptionsFromAllFilter();
     }
 
-    // Carga contenido para selects principales (filtros generales)
-    async function loadGeneralFilters() {
-        setLoadingFiltroGeneral(true);
-        try {
-        //   const [entidadResponse, prioridadResponse, productoResponse, monedaResponse] = await Promise.all([
-          const [entidadResponse, productoResponse] = await Promise.all([
-            Api.get('/entidad'),
-            // Api.get('/prioridad'),
-            // Api.get('/producto'),
-            // Api.get('/moneda')
-          ]);
-          
-          // Obtenemos un array de objetos
-          const entidadOptions = entidadResponse.map(option => ({
-            value: option.codEntidad.toString(),
-            label: option.desEntidad
-          }));
-
-          // Obtenemos un array de objetos
-        //   const prioridadOptions = prioridadResponse.map(option => ({
-        //     value: option.codPrioridad.toString(),
-        //     label: option.desPrioridad
-        //   }));
-          
-          // Obtenemos un array de objetos
-        //   const productoOptions = productoResponse.map(option => ({
-        //     value: option.codProducto.toString(),
-        //     label: option.desProducto
-        //   }));
-
-          // Obtenemos un array de objetos
-        //   const monedaOptions = monedaResponse.map(option => ({
-        //     value: option.codMoneda.toString(),
-        //     label: option.desMoneda
-        //   }));
-
-
-          setOptionsEntidad(entidadOptions);
-        //   setOptionsPrioridad(prioridadOptions);
-        //   setOptionsProducto(productoOptions);
-        //   setOptionsMoneda(monedaOptions);
-      
-        setLoadingFiltroGeneral(false);
-        } catch (error) {
-            setLoadingFiltroGeneral(false);
-            manageErrorAndSessionUtils(error,dispatch);
-        }
+    // Obtiene datos para llenar filtro "Fecha"
+    const getOptionToData = async () => {
+        const body = {"mes":null, "entidad":null, "carteras":null}
+        const url = "/admin/tablon/filtros-generales"
+        const response = await fetchToDate.postMethod(body, url);
+        procesarDatos(response, setDate, "setDate"  ,dispatch);
     }
 
-    // Obtiene datos para llenar filtro "fecha"
+    // Obtiene datos para llenar filtro "Entidad"
     const getOptionToEntidad = async () => {
         const body = {"mes":selectFecha?.format('MM-YYYY'), "entidad":null, "carteras":null}
         const url = "/admin/tablon/filtros-generales"
@@ -462,15 +422,17 @@ const SidebarDashboardView = () => {
             const response = await fetchParaEntidad.postMethod(body, url);
             procesarDatos(response, setOptionsEntidad, "setOptionsEntidad"  ,dispatch);
         }
-
     }
 
-    // Obtiene datos para llenar filtro "Entidad"
-    const getOptionToData = async () => {
-        const body = {"mes":null, "entidad":null, "carteras":null}
+    // Obtiene datos para llenar filtro "Cartera"
+    const getOptionToCartera = async () => {
+        const body = {"mes":selectFecha?.format('MM-YYYY'), "entidad":selectEntidad, "carteras":null}
         const url = "/admin/tablon/filtros-generales"
-        const response = await fetchToDate.postMethod(body, url);
-        procesarDatos(response, setDate, "setDate"  ,dispatch);
+        // La condicion solo se ejcuta si hay algun valor para fecha y si tambien hay un valor para entidad
+        if(selectFecha && selectEntidad){
+            const response = await fetchParaCartera.postMethod(body, url);
+            procesarDatos(response, setOptionsCartera, "setOptionsCartera"  ,dispatch);
+        }
     }
 
     // Carga contenido para selects secundarios (filtros especificos) - La carga de datos depende de los filtros generales
@@ -577,24 +539,7 @@ const SidebarDashboardView = () => {
         
     }
 
-    // Carga contenido para selec cartera -- este select depende de entidad
-    async function getOptionsToCartera() {
-        setLoadingFiltroCartera(true);
-        setSelectCartera([]);
-        const {data, error} = await testFetch.get(`/cartera/entidad/${selectEntidad}`);        // const {data, error, loading} = useFetch(urlFetch);
-        if (data && Array.isArray(data)) {
-            const carteraOptions = data.map(option => ({
-                value: option.codCartera.toString(),
-                label: option.desCartera
-            }));
-            setOptionsCartera(carteraOptions);
-        }
-        setLoadingFiltroCartera(false);
-        if(error){
-            manageErrorAndSessionUtils(error,dispatch);
-        }
 
-    }
 
     // Obtiene datos a partir de tablas individuales -- Se realiza esta peticion cada vez que se presiona en "mostrar tabla"
     async function getDataFromIndividualTables(tipoTabla){
@@ -1281,9 +1226,7 @@ const SidebarDashboardView = () => {
 
     // Carga datos de select cartera cada vez que select entidad se modifica
     useEffect(() => {
-        if(selectEntidad){
-            getOptionsToCartera();  
-        }
+        getOptionToCartera();
     }, [selectEntidad]);
 
 
@@ -1332,7 +1275,7 @@ const SidebarDashboardView = () => {
                             <h3 className="md:col-span-5 2xl:col-span-6 font-ralewaySemibold text-base text-gray-900">FILTROS GENERALES</h3>
                             <div><DatePickerCustomed valor={selectFecha} setValor={setSelectFecha} requerido={true} loading={fetchToDate.loading} initalDate={date.initial} endDate={date.end}/></div>
                             <div><SelectCustomed label="Entidad *" valor={selectEntidad} setValor={setSelectEntidad} options={optionsEntidad} loading={fetchParaEntidad.loading} requerido={true}/></div>
-                            <div><SelectMultipleCustomed label="Cartera" valor={selectCartera} setValor={setSelectCartera} options={optionsCartera} loading={loadingFiltroCartera} requerido={true}/></div>
+                            <div><SelectMultipleCustomed label="Cartera" valor={selectCartera} setValor={setSelectCartera} options={optionsCartera} loading={fetchParaCartera.loading} requerido={true}/></div>
                             <div className={`${open==true?'md:col-start-4 md:col-end-4 2xl:col-start-5 2xl:col-end-5':'hidden'}`} ><BotonClaro  className={`${open==true?'md:col-start-4 md:col-end-4 2xl:col-start-5 2xl:col-end-5':'hidden'} `} layout="LIMPIAR BÚSQUEDA" onClick={accionesDeBotonLimpiarBusqueda}/></div>
                             <div className={`${open==true?'md:col-start-5 md:col-end-5 2xl:col-start-6 2xl:col-end-6':'hidden'}`}><BotonOscuro className={`${open==true?'md:col-start-5 md:col-end-5 2xl:col-start-6 2xl:col-end-6':'hidden'} `} layout="BUSCAR" onClick={accionesDeBotonBuscar}/></div>
                             
@@ -1519,13 +1462,18 @@ const procesarDatos = (response, setUseState, condicion, dispatch) => {
 
             const entidadOptions = response.data?.data.map(option => ({
                 value: option.CodEntidad,
-                // value: option.codEntidad,
                 label: option.Entidad
             }));
             setUseState(entidadOptions);
 
-        }else if(condicion == "ghi"){
-            console.log(condicion);
+        }else if(condicion == "setOptionsCartera"){
+
+            const carteraOptions = response.data?.data.map(option => ({
+                value: option.CodCartera,
+                label: option.Cartera
+            }));
+            setUseState(carteraOptions);
+
         }else if(condicion == "jkl"){
             console.log(condicion);
         }else if(condicion == "mno"){

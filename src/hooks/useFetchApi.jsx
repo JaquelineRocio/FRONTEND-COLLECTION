@@ -74,6 +74,7 @@ const useFetchApi = () =>{
             // setError(null);
             
         } catch (err) {
+            // ignoramos el error de tipo "AbortError"
             if (err.name === 'AbortError') {
                 console.log('Petición abortada');
                 // No establecer el error para peticiones abortadas
