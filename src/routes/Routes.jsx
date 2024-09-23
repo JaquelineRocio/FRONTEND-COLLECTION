@@ -33,6 +33,7 @@ import ContruccionDeTabla from "../views/ExampleView/ContruccionDeTabla";
 import HooksReact from "../views/ExampleView/HooksReact";
 import SelectComponent from "../views/ExampleView/SelectComponent";
 import SelectMaterialUI from "../views/ExampleView/SelectMaterialUI";
+// import Debug from "../views/ExampleView/Debug";
 
 const DeleteSession = ({children}) => {
   const dispatch = useDispatch();
@@ -121,7 +122,11 @@ const Route = () => {
       {
         path: 'selectmaterialui',
         element: <SelectMaterialUI/>
-      }           
+      },
+      // {
+      //   path: 'debug',
+      //   element: <Debug/>
+      // }            
       
       
   ]);

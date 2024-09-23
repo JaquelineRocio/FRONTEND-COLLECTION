@@ -58,14 +58,44 @@ const Login = () => {
               navigate("/dashboard");
 
           }).catch((error) => {
-            console.log("este es el error", error);
-              let messageError = null;
-            if(error.message=="Ocurrio un error"){
-              messageError = "Ha ocurrido un error. Por favor, intente más tarde";
-            }else{
-              messageError = "Usuario o contraseña incorrectos";
-            }
-            
+            // console.log("nombre", error.name);
+            // console.log("mensaje", error.message);
+            // console.log("stack", error.stack);
+            //   let messageError = null;
+            // if(error.message=="Ocurrio un error" || error.message=="error in get type network response" ){
+            //   messageError = "Ha ocurrido un error. Por favor, intente más tarde";
+            // }if(error.message=="Failed to fetch"){
+            //   messageError = "Ha ocurrido un error. Por favor, intente más tarde";
+            // }else{
+            //   messageError = "Usuario o contraseña incorrectos";
+            // }
+              console.log("codigo de error: ",error.status);
+              console.log("mensaje de error: ",error.message);
+             let messageError = null;
+              // errores de http, (promesas resuetas)
+              if(error.message=="Solicitud inválida (400)" ){
+                messageError = "Ha ocurrido un error. Por favor, intente más tarde";
+              }else if(error.message=="No autorizado (401)"){
+                messageError = "Ha ocurrido un error. Por favor, intente más tarde";
+              }else if(error.message=="Recurso no encontrado (404)"){
+                messageError = "Ha ocurrido un error. Por favor, intente más tarde";
+              }else if(error.message=="Error interno del servidor (500)"){
+                messageError = "Usuario o contraseña incorrectos";
+
+                // aqui debemos ubicar el error de contraseña 
+              }else if(error.message==`Error desconocido (${error.message})`){
+                messageError = `Ha ocurrido un error. Por favor, intente más tarde(${error.message})`;
+              }else if(error.message==`Failed to fetch`){
+                messageError = "Ha ocurrido un error. Por favor, intente más tarde";
+              }else{
+                messageError = "Usuario o contraseña incorrectos";
+              }
+              
+              // // errores de red, (no existe conexion con base de datos)
+              // if(error.message=="Failed to fetch" ){
+              //   messageError = "Solicitud inválida (400)";
+              // }
+
             setLoading(false);
             Swal.fire({
               icon: "error",

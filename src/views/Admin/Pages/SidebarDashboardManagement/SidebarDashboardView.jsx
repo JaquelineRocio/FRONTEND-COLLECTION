@@ -358,7 +358,7 @@ const SidebarDashboardView = () => {
         // let data = await SimulatorApi(1000,false);
         // let error = null;
         // console.log("data simulada", data);
-        console.log("despues de obtener registros")
+        // console.log("despues de obtener registros")
         // Damos informacion del payload a las talbas
         if(data != null ){
             if(data.data != null){
@@ -428,7 +428,12 @@ const SidebarDashboardView = () => {
         const body = {"mes":selectFecha?.format('MM-YYYY'), "entidad":selectEntidad, "carteras":null}
         const url = "/admin/tablon/filtros-generales"
         // La condicion solo se ejcuta si hay algun valor para fecha y si tambien hay un valor para entidad
+
+        setOptionsCartera([]);
+        setSelectCartera([]);
         if(selectFecha && selectEntidad){
+
+            // console.log("limpmiar cartare")
             const response = await fetchParaCartera.postMethod(body, url);
             procesarDatos(response, setOptionsCartera, "setOptionsCartera"  ,dispatch);
         }
@@ -1447,7 +1452,7 @@ const procesarDatos = (response, setUseState, condicion, dispatch) => {
     // Si hay error, quiere decir que no hay data (data igual a null)
     // Si existe errores setData se deja como esta
     if(response.error){
-        console.log("Existe errores");
+        console.log("Existe errores:", response.error);
         manageErrorAndSessionUtils(response.error, dispatch);
     }else{
 
