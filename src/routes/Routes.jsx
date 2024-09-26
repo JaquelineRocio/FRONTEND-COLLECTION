@@ -82,8 +82,8 @@ const Route = () => {
           },
           {
             path: "gestiondecliente",
-            // element: <SidebarClientManagerView/>
-            element: <EnConstruccion/>
+            element: <SidebarClientManagerView/>
+            // element: <EnConstruccion/>
           },
           {
             path: "gestioninformacion",

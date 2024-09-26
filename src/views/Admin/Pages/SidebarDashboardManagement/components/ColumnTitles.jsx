@@ -1812,7 +1812,7 @@ const PorcentajeSolesPagos = ({value}) => {
 
 const GetData = async (children, dispatch) => {
 	// const dispatch = useDispatch();
-	console.log("datos por fila:", children);
+	console.log("Valores dentro de fila. inicial:", children);
 
 	// Construimos el payload
 	let payload = {
@@ -1829,6 +1829,8 @@ const GetData = async (children, dispatch) => {
 		"maduracion": null ,
 	};
 
+	console.log("datos por fila:", children);
+
 	// Almacena detalles como filtros usados para realizar la descarga de registros de excel
 	let downloadData = {
 		Fecha:"-",
@@ -1838,7 +1840,15 @@ const GetData = async (children, dispatch) => {
         Filtro:"-",
         Fila:"-",
 	}
-	downloadData.Fecha = children?.payloadUrl?.selectFecha?.format('MM-YYYY');
+
+	// const fecha = new Date(children?.payloadUrl?.selectFecha);
+	// const formattedFecha = fecha.toLocaleDateString('es-ES');
+	// downloadData.Fecha = formattedFecha;
+	// console.log("valor de fecha: ",formattedFecha );
+
+	
+	// downloadData.Fecha = formatDatechildren?.payloadUrl?.selectFecha?.format('MM-YYYY');
+	downloadData.Fecha = formatDate(children?.payloadUrl?.selectFecha);
 	downloadData.Entidad = children?.payloadUrl?.selectEntidad;
 	downloadData.Cartera = children?.desCartera;
 
@@ -1870,17 +1880,6 @@ const GetData = async (children, dispatch) => {
 		 * filas de la tabla "General" son carteras, a diferencia de las otras tablas que tienen filas que 
 		 * son carteras y también tienen filas que son subgrupos de las filas Cartera 
 		 */
-		// llenamos datos de filtros especificos
-		payload.producto = children.payloadBody.producto;
-		payload.rangocampaña = children.payloadBody.rangocampaña;
-		payload.macroRegiones = children.payloadBody.macroRegiones;
-		payload.añoCastigo = children.payloadBody.añoCastigo;
-		payload.moneda = children.payloadBody.moneda;
-		payload.estadoCuenta = children.payloadBody.estadoCuenta;
-		payload.mesCastigo = children.payloadBody.mesCastigo;
-		payload.prioridad = children.payloadBody.prioridad;
-		payload.rangoEdad = children.payloadBody.rangoEdad;
-		payload.tipo = children.payloadBody.tipo;
 
 		downloadData.Filtro = "Estado General de Cartera";
 	}else if(children?.payloadBody?.tipo =="Prioridad"){
@@ -1889,34 +1888,9 @@ const GetData = async (children, dispatch) => {
 			// Cuando el tipo es suma, e payload tiene que ser vacio, tal cual se muestra.
 		}else if(children.tipo == "fila"){
 			
-			// llenamos datos de filtros especificos
-			payload.producto = children.payloadBody.producto;
-			payload.rangocampaña = children.payloadBody.rangocampaña;
-			payload.macroRegiones = children.payloadBody.macroRegiones;
-			payload.añoCastigo = children.payloadBody.añoCastigo;
-			payload.moneda = children.payloadBody.moneda;
-			payload.estadoCuenta = children.payloadBody.estadoCuenta;
-			payload.mesCastigo = children.payloadBody.mesCastigo;
-			payload.prioridad = children.payloadBody.prioridad;
-			payload.rangoEdad = children.payloadBody.rangoEdad;
-			payload.tipo = children.payloadBody.tipo;
 
 			// llenamos datos de filtros especificos
 			payload.prioridad = children.codTipo;
-
-			// "producto": [], 
-			// "rangocampaña": [],    
-			// "macroRegiones": [], 
-			// "añoCastigo":  null,
-			// "moneda": null,
-			// "estadoCuenta": [],
-			// "mesCastigo": null,
-			// "prioridad": null,
-			// "rangoEdad":[],
-			// "tipo":null,
-			// "maduracion": null ,
-
-
 
 			downloadData.Fila = children.codTipo;
 			
@@ -1929,17 +1903,6 @@ const GetData = async (children, dispatch) => {
 			// Cuando el tipo es suma, e payload tiene que ser vacio, tal cual se muestra.
 		}else if(children.tipo == "fila"){
 			// llenamos datos de filtros especificos
-			payload.producto = children.payloadBody.producto;
-			payload.rangocampaña = children.payloadBody.rangocampaña;
-			payload.macroRegiones = children.payloadBody.macroRegiones;
-			payload.añoCastigo = children.payloadBody.añoCastigo;
-			payload.moneda = children.payloadBody.moneda;
-			payload.estadoCuenta = children.payloadBody.estadoCuenta;
-			payload.mesCastigo = children.payloadBody.mesCastigo;
-			payload.prioridad = children.payloadBody.prioridad;
-			payload.rangoEdad = children.payloadBody.rangoEdad;
-			payload.tipo = children.payloadBody.tipo;
-			// llenamos datos de filtros especificos
 			payload.maduracion = children.codTipo;
 			downloadData.Fila = children.codTipo;
 		}
@@ -1948,17 +1911,7 @@ const GetData = async (children, dispatch) => {
 		if(children.tipo == "suma"){
 			// Cuando el tipo es suma, e payload tiene que ser vacio, tal cual se muestra.
 		}else if(children.tipo == "fila"){
-			// llenamos datos de filtros especificos
-			payload.producto = children.payloadBody.producto;
-			payload.rangocampaña = children.payloadBody.rangocampaña;
-			payload.macroRegiones = children.payloadBody.macroRegiones;
-			payload.añoCastigo = children.payloadBody.añoCastigo;
-			payload.moneda = children.payloadBody.moneda;
-			payload.estadoCuenta = children.payloadBody.estadoCuenta;
-			payload.mesCastigo = children.payloadBody.mesCastigo;
-			payload.prioridad = children.payloadBody.prioridad;
-			payload.rangoEdad = children.payloadBody.rangoEdad;
-			payload.tipo = children.payloadBody.tipo;
+
 			// llenamos datos de filtros especificos
 			const fechaYmes = children.codTipo.split(" - ");
 			payload.añoCastigo = fechaYmes[0];
@@ -1972,17 +1925,6 @@ const GetData = async (children, dispatch) => {
 			// Cuando el tipo es suma, e payload tiene que ser vacio, tal cual se muestra.
 		}else if(children.tipo == "fila"){
 			// llenamos datos de filtros especificos
-			payload.producto = children.payloadBody.producto;
-			payload.rangocampaña = children.payloadBody.rangocampaña;
-			payload.macroRegiones = children.payloadBody.macroRegiones;
-			payload.añoCastigo = children.payloadBody.añoCastigo;
-			payload.moneda = children.payloadBody.moneda;
-			payload.estadoCuenta = children.payloadBody.estadoCuenta;
-			payload.mesCastigo = children.payloadBody.mesCastigo;
-			payload.prioridad = children.payloadBody.prioridad;
-			payload.rangoEdad = children.payloadBody.rangoEdad;
-			payload.tipo = children.payloadBody.tipo;
-			// llenamos datos de filtros especificos
 			console.log("rango campaña fila");
 			payload.rangocampaña[0] = children.codTipo;
 			downloadData.Fila = children.codTipo; 
@@ -1995,17 +1937,6 @@ const GetData = async (children, dispatch) => {
 			// Cuando el tipo es suma, e payload tiene que ser vacio, tal cual se muestra.
 		}else if(children.tipo == "fila"){
 			// llenamos datos de filtros especificos
-			payload.producto = children.payloadBody.producto;
-			payload.rangocampaña = children.payloadBody.rangocampaña;
-			payload.macroRegiones = children.payloadBody.macroRegiones;
-			payload.añoCastigo = children.payloadBody.añoCastigo;
-			payload.moneda = children.payloadBody.moneda;
-			payload.estadoCuenta = children.payloadBody.estadoCuenta;
-			payload.mesCastigo = children.payloadBody.mesCastigo;
-			payload.prioridad = children.payloadBody.prioridad;
-			payload.rangoEdad = children.payloadBody.rangoEdad;
-			payload.tipo = children.payloadBody.tipo;
-			// llenamos datos de filtros especificos
 			console.log("entramos en fila de producto")
 			payload.producto[0] = children.codTipo;
 			downloadData.Fila = children.codTipo;
@@ -2015,18 +1946,6 @@ const GetData = async (children, dispatch) => {
 		if(children.tipo == "suma"){
 			// Cuando el tipo es suma, e payload tiene que ser vacio, tal cual se muestra.
 		}else if(children.tipo == "fila"){
-			// llenamos datos de filtros especificos
-			payload.producto = children.payloadBody.producto;
-			payload.rangocampaña = children.payloadBody.rangocampaña;
-			payload.macroRegiones = children.payloadBody.macroRegiones;
-			payload.añoCastigo = children.payloadBody.añoCastigo;
-			payload.moneda = children.payloadBody.moneda;
-			payload.estadoCuenta = children.payloadBody.estadoCuenta;
-			payload.mesCastigo = children.payloadBody.mesCastigo;
-			payload.prioridad = children.payloadBody.prioridad;
-			payload.rangoEdad = children.payloadBody.rangoEdad;
-			payload.tipo = children.payloadBody.tipo;
-
 			// llenamos datos de filtros especificos
 			// Tomar en cuenta que el backend esta enviado archivos "sin info" que es un valor que no existe para hacer la busqueda.
 			// probablemente esto genere errores en la consulta
@@ -2042,8 +1961,9 @@ const GetData = async (children, dispatch) => {
 		});
 		return null;
 	}
-
-	let {data, error} = await testFetch.post(payload,`/admin/tablon/datos-descarga?entidad=${children.payloadUrl.selectEntidad}&mes=${children.payloadUrl?.selectFecha?.format('MM-YYYY')}&carteras=${children.codCartera}`); 
+	console.log("Valores dentro de fila. final:", children);
+	let {data, error} = await testFetch.post(payload,`/admin/tablon/datos-descarga?entidad=${children.payloadUrl.selectEntidad}&mes=${formatDate(children?.payloadUrl?.selectFecha)}&carteras=${children.codCartera}`); 
+	
 	manageErrorAndSessionUtils(error,dispatch);
 	DescargarExcelUnaSolaHoja(data?.data, downloadData);
 	return null;
@@ -2190,5 +2110,29 @@ const convertirNuloEnVacio = (value) => {
     return value?? "Vacío";
 };
 
+
+// Convierte un strin a un objeto fecha
+const formatDate = (selectFechaStr) => {
+	// Verificar si se proporcionó una cadena de fecha
+	if (!selectFechaStr) {
+		// Manejar la ausencia de selectFecha según corresponda
+		return null;
+	}
+
+	const fecha = new Date(selectFechaStr);
+
+	// Verificar si la fecha es válida
+	if (isNaN(fecha.getTime())) {
+		// Manejar la fecha inválida según corresponda
+		return null;
+	}
+
+	// Extraer mes y año
+	const mes = String(fecha.getMonth() + 1).padStart(2, '0'); // getMonth() devuelve 0-11
+	const año = fecha.getFullYear();
+
+	// Formatear la fecha como "MM-YYYY"
+	return `${mes}-${año}`;
+};
 
 

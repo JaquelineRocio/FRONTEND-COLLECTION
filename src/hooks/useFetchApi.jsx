@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 // const apiUrlEntrada = "https://backend.corebankia.com";
 // const apiUrlEntrada = "https://corebankia.uc.r.appspot.com";
 // const apiUrlEntrada = "https://crack-lamp-435704-g6.rj.r.appspot.com";
-const apiUrlEntrada = "http://ec2-18-218-211-151.us-east-2.compute.amazonaws.com:8080"
+const apiUrlEntrada = " https://backend.corebankia.com"
 
 const useFetchApi = () =>{
     const [loading, setLoading] = useState(false);

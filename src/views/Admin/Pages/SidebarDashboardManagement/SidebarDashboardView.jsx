@@ -547,6 +547,7 @@ const SidebarDashboardView = () => {
 
     // Obtiene datos a partir de tablas individuales -- Se realiza esta peticion cada vez que se presiona en "mostrar tabla"
     async function getDataFromIndividualTables(tipoTabla){
+        console.log("ejecuta: getDataFromIndividualTables ");
         bodyPayloadForIndividualTables = {...bodyPayloadForIndividualTables, tipo: tipoTabla};
         switch (tipoTabla) {
             case "General":{
@@ -559,8 +560,19 @@ const SidebarDashboardView = () => {
 
                         if(data != null){
                             if(data.data != null){
-                            data.data.payloadBody = bodyPayloadForIndividualTables;
-                            data.data.payloadUrl = urlPayloadForIndividualTables;
+                            /**
+                             * Debemos hacer una copia profunda del objeto bodyPayloadForIndividualTables y urlPayloadForIndividualTables.
+                             * pues estos objetos contienen array en sus propiedades y puede tambien tener otros objetos.
+                             * si hacemos la copia de manera superciail, es decir copiando con "spread operation" (uso de puntos sucesivos ...)
+                             * las propiedades que tengan un array (ejem: {valorUno: [1,2,3,], valorDos: "otro valor" }) copiaran su referencia 
+                             */
+                            
+                            // data.data.payloadBody = {...bodyPayloadForIndividualTables};
+                            // data.data.payloadUrl = {...urlPayloadForIndividualTables};
+                            
+                            // aqui estamos realizando una copia profunda de ambos objetos
+                            data.data.payloadBody = JSON.parse(JSON.stringify(bodyPayloadForIndividualTables));
+                            data.data.payloadUrl = JSON.parse(JSON.stringify(bodyPayloadForIndividualTables));
                             }    
                         }
                         setRegistroPrimeraTabla(data?.data ?? {});
@@ -582,8 +594,13 @@ const SidebarDashboardView = () => {
 
                         if(data != null){
                             if(data.data != null){
-                            data.data.payloadBody = bodyPayloadForIndividualTables;
-                            data.data.payloadUrl = urlPayloadForIndividualTables;
+
+
+                                // data.data.payloadBody = {...bodyPayloadForIndividualTables};
+                                // data.data.payloadUrl = {...urlPayloadForIndividualTables};
+                                
+                                data.data.payloadBody = JSON.parse(JSON.stringify(bodyPayloadForIndividualTables));
+                                data.data.payloadUrl = JSON.parse(JSON.stringify(urlPayloadForIndividualTables));
                             }    
                         }
 
@@ -604,8 +621,11 @@ const SidebarDashboardView = () => {
 
                         if(data != null){
                             if(data.data != null){
-                            data.data.payloadBody = bodyPayloadForIndividualTables;
-                            data.data.payloadUrl = urlPayloadForIndividualTables;
+                                JSON.parse(JSON.stringify(bodyPayloadForIndividualTables));
+                                // data.data.payloadBody = {...bodyPayloadForIndividualTables};
+                                // data.data.payloadUrl = {...urlPayloadForIndividualTables};
+                                data.data.payloadBody = JSON.parse(JSON.stringify(bodyPayloadForIndividualTables));
+                                data.data.payloadUrl = JSON.parse(JSON.stringify(urlPayloadForIndividualTables));
                             }    
                         }
 
@@ -626,8 +646,10 @@ const SidebarDashboardView = () => {
 
                         if(data != null){
                             if(data.data != null){
-                            data.data.payloadBody = bodyPayloadForIndividualTables;
-                            data.data.payloadUrl = urlPayloadForIndividualTables;
+                                // data.data.payloadBody = {...bodyPayloadForIndividualTables};
+                                // data.data.payloadUrl = {...urlPayloadForIndividualTables};
+                                data.data.payloadBody = JSON.parse(JSON.stringify(bodyPayloadForIndividualTables));
+                                data.data.payloadUrl = JSON.parse(JSON.stringify(urlPayloadForIndividualTables));
                             }    
                         }
 
@@ -648,8 +670,10 @@ const SidebarDashboardView = () => {
 
                         if(data != null){
                             if(data.data != null){
-                            data.data.payloadBody = bodyPayloadForIndividualTables;
-                            data.data.payloadUrl = urlPayloadForIndividualTables;
+                                // data.data.payloadBody = {...bodyPayloadForIndividualTables};
+                                // data.data.payloadUrl = {...urlPayloadForIndividualTables};
+                                data.data.payloadBody = JSON.parse(JSON.stringify(bodyPayloadForIndividualTables));
+                                data.data.payloadUrl = JSON.parse(JSON.stringify(urlPayloadForIndividualTables));
                             }    
                         }
                         setRegistroSextaTabla(data?.data ?? {});
@@ -668,8 +692,10 @@ const SidebarDashboardView = () => {
                     if(!error){
                         if(data != null){
                             if(data.data != null){
-                            data.data.payloadBody = bodyPayloadForIndividualTables;
-                            data.data.payloadUrl = urlPayloadForIndividualTables;
+                                // data.data.payloadBody = {...bodyPayloadForIndividualTables};
+                                // data.data.payloadUrl = {...urlPayloadForIndividualTables};
+                                data.data.payloadBody = JSON.parse(JSON.stringify(bodyPayloadForIndividualTables));
+                                data.data.payloadUrl = JSON.parse(JSON.stringify(urlPayloadForIndividualTables));
                             }    
                         }
 
@@ -690,8 +716,10 @@ const SidebarDashboardView = () => {
 
                         if(data != null){
                             if(data.data != null){
-                            data.data.payloadBody = bodyPayloadForIndividualTables;
-                            data.data.payloadUrl = urlPayloadForIndividualTables;
+                                // data.data.payloadBody = {...bodyPayloadForIndividualTables};
+                                // data.data.payloadUrl = {...urlPayloadForIndividualTables};
+                                data.data.payloadBody = JSON.parse(JSON.stringify(bodyPayloadForIndividualTables));
+                                data.data.payloadUrl = JSON.parse(JSON.stringify(urlPayloadForIndividualTables));
                             }    
                         }
 
@@ -1297,8 +1325,8 @@ const SidebarDashboardView = () => {
                             <div className={`md:col-start-3 md:col-end-3 ${open==true?'hidden':''}`}><SelectMultipleCustomed desactivado={specificFiltersDisabled} label="Estado de cuenta" valor={selectEstadoCuenta} setValor={setSelectEstadoCuenta} options={optionsEstadoCuenta} loading={loadingFiltroEspecifico} /></div>
                             <div className={`md:col-start-1 md:col-end-1 ${open==true?'hidden':''}`}><SelectCustomedForArray desactivado={specificFiltersDisabled} label="Mes castigo" valor={selectMesCastigo} setValor={setSelectMesCastigo} options={optionsMesCastigo} loading={loadingFiltroEspecifico} /></div>
                             <div className={`md:col-start-2 md:col-end-2 ${open==true?'hidden':''}`}><SelectCustomedForArray desactivado={specificFiltersDisabled} label="Prioridad" valor={selectPrioridad} setValor={setSelectPrioridad} options={optionsPrioridad} loading={loadingFiltroEspecifico} /></div>
-                            {/*<div className={`                         ${open==true?'hidden':''}`}><SelectMultipleCustomed desactivado={specificFiltersDisabled} label="Prioridad" valor={selectPrioridad} setValor={setSelectPrioridad} options={optionsPrioridad} loading={loadingFiltroGeneral} /></div>*/}
                             <div className={`md:col-start-3 md:col-end-3 ${open==true?'hidden':''}`}><SelectMultipleCustomed desactivado={specificFiltersDisabled} label="Rango de edad" valor={selectRangoEdad} setValor={setSelectRangoEdad} options={optionsRangoEdad} loading={loadingFiltroEspecifico}/></div>
+                            
                             <div className={`${open==true?'hidden':'md:col-start-4 md:col-end-4 2xl:col-start-5 2xl:col-end-5'} `}><BotonClaro  layout="LIMPIAR BÚSQUEDA" onClick={accionesDeBotonLimpiarBusqueda}/></div>
                             <div className={`${open==true?'hidden':'md:col-start-5 md:col-end-5 2xl:col-start-6 2xl:col-end-6'} `}><BotonOscuro  layout="BUSCAR" onClick={accionesDeBotonBuscar}/></div>
 

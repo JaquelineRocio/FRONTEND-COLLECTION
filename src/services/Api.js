@@ -2,7 +2,8 @@
 
 
 // const apiUrlEntrada = "http://127.0.0.1:3000";
-const apiUrlEntrada = "https://crack-lamp-435704-g6.rj.r.appspot.com";
+// const apiUrlEntrada = "https://crack-lamp-435704-g6.rj.r.appspot.com";
+const apiUrlEntrada = "http://ec2-18-218-211-151.us-east-2.compute.amazonaws.com:8080"
 
 // const apiUrlEntrada = "https://bb43-2001-1388-6460-e97b-e5e6-ffe1-f2b-1cbf.ngrok-free.app";
 
