@@ -75,16 +75,20 @@ const useFetchApi = () =>{
             // setError(null);
             
         } catch (err) {
+            // console.log("bloque catch: ", err);
             // ignoramos el error de tipo "AbortError"
             if (err.name === 'AbortError') {
-                console.log('Petición abortada');
+                // console.log('Petición abortada');
                 // No establecer el error para peticiones abortadas
+                setError(err);
+                errores = err;
             } else {
                 setError(err);
                 errores = err;
             }
             
         } finally{
+            // console.log("bloque finally");
             if (currentRequestId === requestIdRef.current) {
                 setLoading(false);
             }

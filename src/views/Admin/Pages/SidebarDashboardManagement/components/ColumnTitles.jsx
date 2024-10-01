@@ -1451,6 +1451,11 @@ import { saveAs } from "file-saver";
 import PercentageBar from "./PercentageBar";
 import { ChildFriendly, Rowing } from '@mui/icons-material';
 import manageErrorAndSessionUtils from '../../../../../utils/manageErrorAndSessionUtils';
+import useFetchApi from '../../../../../hooks/useFetchApi';
+
+import ExcelJS from 'exceljs';
+// import { saveAs } from 'file-saver';
+
 
 const CustomBar = ({children, color}) => {
 
@@ -1589,7 +1594,7 @@ const TresColores = ({valor, totalDeValor}) => {
  */
 const TresColoresPorcentaje = ({value}) => {
 
-	console.log("valores de %cd :",value );
+	// console.log("valores de %cd :",value );
 	//quita signo porcentual. ejem: 50% a 50
 	const valorNumerico = parseFloat(value);
 
@@ -1707,7 +1712,7 @@ const PorcentajeCapitalDos = ({children}) => {
 const PorcentajeCuentasDos = ({children}) => {
 	const porcentaje = (children.cuentas/children.totalCuentas)*100;
 	const valor = <AdicionaComas value={convertirNuloEnVacio(children.cuentas)}/>
-	console.log("este es el valor convertido de cuentas: ", valor);
+	// console.log("este es el valor convertido de cuentas: ", valor);
 	// console.log("porcentaje", porcentaje, "valores de fila: ",value);
 	
 	return(
@@ -1805,17 +1810,47 @@ const PorcentajeSolesPagos = ({value}) => {
 			}
 			</>
 		)
-	}
+}
 	
 
+const DownloadExcel = ({children}) => {
+
+	const {loading, error, data, postMethod} = useFetchApi();
+	const dispatch = useDispatch();
+	
+
+	const getData = async () => {
+
+		// montamos el body para hacer la peticionde los datos y la informacion que ira en cada excel exportado ()
+		const {excelDownloadDetails, bodyToDownloadExcel} = GetBodyForExcel(children);
+		const {data, error} = await postMethod(bodyToDownloadExcel,`/admin/tablon/datos-descarga?entidad=${children.payloadUrl.selectEntidad}&mes=${formatDate(children?.payloadUrl?.selectFecha)}&carteras=${children.codCartera}`); 
+
+		manageErrorAndSessionUtils(error,dispatch);
+		if(!error){
+			console.log("existen errores: ", error)
+			DescargarExcelConEstilos(data?.data, excelDownloadDetails);
+		}
+
+	};
 
 
-const GetData = async (children, dispatch) => {
-	// const dispatch = useDispatch();
-	console.log("Valores dentro de fila. inicial:", children);
+	// return <button onClick={()=>{GetBodyForExcel(children)}}   className="bg-green-400 px-6 rounded py-1 text-white hover:bg-green-500 font-ralewayRegular">Excel</button>
+	if(children?.tipo == "suma" || children?.tipo == "fila"){
+		
+		// return <button onClick={()=>{GetBodyForExcel(children,dispatch)}}   className="bg-green-400 px-6 rounded py-1 text-white hover:bg-green-500 font-ralewayRegular active:bg-green-900 ">Excel</button>
+		return <button onClick={getData}   className="bg-green-400 px-1 min-w-20 rounded py-1 text-white hover:bg-green-500 font-ralewayRegular active:bg-green-900 "> {loading? "Descargando": "Excel"}</button>
+	}else{
+		
+		// return <button onClick={()=>{GetBodyForExcel(children,dispatch)}}  disabled  className="bg-gray-400 px-6 rounded py-1 text-white cursor-not-allowed  font-ralewayRegular active:bg-green-900 ">Excel</button>
+		return <button onClick={getData}  disabled  className="bg-gray-400 px-1 min-w-20 rounded py-1 text-white cursor-not-allowed  font-ralewayRegular active:bg-green-900 ">{loading? "Descargando": "Excel"}</button>
+	}
+	
+}
 
-	// Construimos el payload
-	let payload = {
+const GetBodyForExcel = (children) => {
+
+	// Construimos el cuerpo para la descarga
+	let bodyToDownloadExcel = {
 		"producto": [], 
 		"rangocampaña": [],    
 		"macroRegiones": [], 
@@ -1829,10 +1864,8 @@ const GetData = async (children, dispatch) => {
 		"maduracion": null ,
 	};
 
-	console.log("datos por fila:", children);
-
 	// Almacena detalles como filtros usados para realizar la descarga de registros de excel
-	let downloadData = {
+	let excelDownloadDetails = {
 		Fecha:"-",
 		Entidad:"-",
         Cartera:"-",
@@ -1843,29 +1876,40 @@ const GetData = async (children, dispatch) => {
 
 	// const fecha = new Date(children?.payloadUrl?.selectFecha);
 	// const formattedFecha = fecha.toLocaleDateString('es-ES');
-	// downloadData.Fecha = formattedFecha;
+	// excelDownloadDetails.Fecha = formattedFecha;
 	// console.log("valor de fecha: ",formattedFecha );
 
 	
-	// downloadData.Fecha = formatDatechildren?.payloadUrl?.selectFecha?.format('MM-YYYY');
-	downloadData.Fecha = formatDate(children?.payloadUrl?.selectFecha);
-	downloadData.Entidad = children?.payloadUrl?.selectEntidad;
-	downloadData.Cartera = children?.desCartera;
+	// excelDownloadDetails.Fecha = formatDatechildren?.payloadUrl?.selectFecha?.format('MM-YYYY');
+	excelDownloadDetails.Fecha = formatDate(children?.payloadUrl?.selectFecha);
+	excelDownloadDetails.Entidad = children?.payloadUrl?.selectEntidad;
+	excelDownloadDetails.Cartera = children?.desCartera;
 
-	downloadData.CodigoDeCartera = children?.codCartera;
+	excelDownloadDetails.CodigoDeCartera = children?.codCartera;
 	
 
 
-	payload.producto = children.payloadBody.producto;
-	payload.rangocampaña = children.payloadBody.rangocampaña;
-	payload.macroRegiones = children.payloadBody.macroRegiones;
-	payload.añoCastigo = children.payloadBody.añoCastigo;
-	payload.moneda = children.payloadBody.moneda;
-	payload.estadoCuenta = children.payloadBody.estadoCuenta;
-	payload.mesCastigo = children.payloadBody.mesCastigo;
-	payload.prioridad = children.payloadBody.prioridad;
-	payload.rangoEdad = children.payloadBody.rangoEdad;
-	payload.tipo = children.payloadBody.tipo;
+	// payload.producto = children.payloadBody.producto;
+	// payload.rangocampaña = children.payloadBody.rangocampaña;
+	// payload.macroRegiones = children.payloadBody.macroRegiones;
+	// payload.añoCastigo = children.payloadBody.añoCastigo;
+	// payload.moneda = children.payloadBody.moneda;
+	// payload.estadoCuenta = children.payloadBody.estadoCuenta;
+	// payload.mesCastigo = children.payloadBody.mesCastigo;
+	// payload.prioridad = children.payloadBody.prioridad;
+	// payload.rangoEdad = children.payloadBody.rangoEdad;
+	// payload.tipo = children.payloadBody.tipo;
+
+	bodyToDownloadExcel.producto = structuredClone(children?.payloadBody?.producto);
+	bodyToDownloadExcel.rangocampaña = structuredClone(children?.payloadBody?.rangocampaña);
+	bodyToDownloadExcel.macroRegiones = structuredClone(children?.payloadBody?.macroRegiones);
+	bodyToDownloadExcel.añoCastigo = structuredClone(children.payloadBody?.añoCastigo);
+	bodyToDownloadExcel.moneda = structuredClone(children?.payloadBody?.moneda);
+	bodyToDownloadExcel.estadoCuenta = structuredClone(children?.payloadBody?.estadoCuenta);
+	bodyToDownloadExcel.mesCastigo = structuredClone(children?.payloadBody?.mesCastigo);
+	bodyToDownloadExcel.prioridad = structuredClone(children?.payloadBody?.prioridad);
+	bodyToDownloadExcel.rangoEdad = structuredClone(children?.payloadBody?.rangoEdad);
+	bodyToDownloadExcel.tipo = structuredClone(children?.payloadBody?.tipo);
 
 
 
@@ -1881,76 +1925,68 @@ const GetData = async (children, dispatch) => {
 		 * son carteras y también tienen filas que son subgrupos de las filas Cartera 
 		 */
 
-		downloadData.Filtro = "Estado General de Cartera";
+		excelDownloadDetails.Filtro = "Estado General de Cartera";
 	}else if(children?.payloadBody?.tipo =="Prioridad"){
-		downloadData.Filtro = "Cartera Según Prioridad";
+		excelDownloadDetails.Filtro = "Cartera Según Prioridad";
 		if(children.tipo == "suma"){
 			// Cuando el tipo es suma, e payload tiene que ser vacio, tal cual se muestra.
 		}else if(children.tipo == "fila"){
 			
-
 			// llenamos datos de filtros especificos
-			payload.prioridad = children.codTipo;
-
-			downloadData.Fila = children.codTipo;
+			bodyToDownloadExcel.prioridad = structuredClone(children.codTipo);
+			excelDownloadDetails.Fila = structuredClone(children.codTipo);
 			
-
 		}
 
 	}else if(children?.payloadBody?.tipo =="Maduracion"){
-		downloadData.Filtro = "Cartera Por Rango de Maduración";
+		excelDownloadDetails.Filtro = "Cartera Por Rango de Maduración";
 		if(children.tipo == "suma"){
 			// Cuando el tipo es suma, e payload tiene que ser vacio, tal cual se muestra.
 		}else if(children.tipo == "fila"){
 			// llenamos datos de filtros especificos
-			payload.maduracion = children.codTipo;
-			downloadData.Fila = children.codTipo;
+			bodyToDownloadExcel.maduracion = structuredClone(children.codTipo);
+			excelDownloadDetails.Fila = structuredClone(children.codTipo);
 		}
 	}else if(children?.payloadBody?.tipo =="AÑO_CASTIGO"){
-		downloadData.Filtro = "Cartera por Año y Mes de Castigo";
+		excelDownloadDetails.Filtro = "Cartera por Año y Mes de Castigo";
 		if(children.tipo == "suma"){
 			// Cuando el tipo es suma, e payload tiene que ser vacio, tal cual se muestra.
 		}else if(children.tipo == "fila"){
 
 			// llenamos datos de filtros especificos
 			const fechaYmes = children.codTipo.split(" - ");
-			payload.añoCastigo = fechaYmes[0];
-			payload.mesCastigo = fechaYmes[1];
-			downloadData.Fila = children.codTipo;
+			bodyToDownloadExcel.añoCastigo = structuredClone(fechaYmes[0]);
+			bodyToDownloadExcel.mesCastigo = structuredClone(fechaYmes[1]);
+			excelDownloadDetails.Fila = structuredClone(children.codTipo);
 		}
 	}else if(children?.payloadBody?.tipo =="RangoCampaña"){
-		downloadData.Filtro = "Cartera por Rango De Campaña";
+		excelDownloadDetails.Filtro = "Cartera por Rango De Campaña";
 		if(children.tipo == "suma"){
-			console.log("rango campaña suma");
 			// Cuando el tipo es suma, e payload tiene que ser vacio, tal cual se muestra.
 		}else if(children.tipo == "fila"){
 			// llenamos datos de filtros especificos
-			console.log("rango campaña fila");
-			payload.rangocampaña[0] = children.codTipo;
-			downloadData.Fila = children.codTipo; 
+			bodyToDownloadExcel.rangocampaña[0] = structuredClone(children.codTipo);
+			excelDownloadDetails.Fila = structuredClone(children.codTipo); 
 		}
 	}else if(children?.payloadBody?.tipo =="CodProducto"){
-		downloadData.Filtro = "Cartera por Tipo de Producto";
-		console.log("entramos en - de producto")
+		excelDownloadDetails.Filtro = "Cartera por Tipo de Producto";
 		if(children.tipo == "suma"){
-			console.log("entramos en suma de producto")
 			// Cuando el tipo es suma, e payload tiene que ser vacio, tal cual se muestra.
 		}else if(children.tipo == "fila"){
 			// llenamos datos de filtros especificos
-			console.log("entramos en fila de producto")
-			payload.producto[0] = children.codTipo;
-			downloadData.Fila = children.codTipo;
+			bodyToDownloadExcel.producto[0] = structuredClone(children.codTipo);
+			excelDownloadDetails.Fila = children.codTipo;
 		}
 	}else if(children?.payloadBody?.tipo =="MacroRegiones"){
-		downloadData.Filtro = "Cartera por Zona";
+		excelDownloadDetails.Filtro = "Cartera por Zona";
 		if(children.tipo == "suma"){
 			// Cuando el tipo es suma, e payload tiene que ser vacio, tal cual se muestra.
 		}else if(children.tipo == "fila"){
 			// llenamos datos de filtros especificos
 			// Tomar en cuenta que el backend esta enviado archivos "sin info" que es un valor que no existe para hacer la busqueda.
 			// probablemente esto genere errores en la consulta
-			payload.macroRegiones[0] = children.codTipo;
-			downloadData.Fila = children.codTipo;
+			bodyToDownloadExcel.macroRegiones[0] = structuredClone(children.codTipo);
+			excelDownloadDetails.Fila = children.codTipo;
 		}
 	}else{
 		swal({
@@ -1961,24 +1997,16 @@ const GetData = async (children, dispatch) => {
 		});
 		return null;
 	}
-	console.log("Valores dentro de fila. final:", children);
-	let {data, error} = await testFetch.post(payload,`/admin/tablon/datos-descarga?entidad=${children.payloadUrl.selectEntidad}&mes=${formatDate(children?.payloadUrl?.selectFecha)}&carteras=${children.codCartera}`); 
+
+	// let {data, error} = await testFetch.post(bodyToDownloadExcel,`/admin/tablon/datos-descarga?entidad=${children.payloadUrl.selectEntidad}&mes=${formatDate(children?.payloadUrl?.selectFecha)}&carteras=${children.codCartera}`); 
 	
-	manageErrorAndSessionUtils(error,dispatch);
-	DescargarExcelUnaSolaHoja(data?.data, downloadData);
-	return null;
+	// manageErrorAndSessionUtils(error,dispatch);
+	// DescargarExcelUnaSolaHoja(data?.data, downloadData);
+	// return null;
+	return {excelDownloadDetails, bodyToDownloadExcel}
 }
 
-const DownloadExcel = ({children}) => {
-	const dispatch = useDispatch();
-	// return <button onClick={()=>{GetData(children)}}   className="bg-green-400 px-6 rounded py-1 text-white hover:bg-green-500 font-ralewayRegular">Excel</button>
-	if(children?.tipo == "suma" || children?.tipo == "fila"){
-		return <button onClick={()=>{GetData(children,dispatch)}}   className="bg-green-400 px-6 rounded py-1 text-white hover:bg-green-500 font-ralewayRegular active:bg-green-900 ">Excel</button>
-	}else{
-		return <button onClick={()=>{GetData(children,dispatch)}}  disabled  className="bg-gray-400 px-6 rounded py-1 text-white cursor-not-allowed  font-ralewayRegular active:bg-green-900 ">Excel</button>
-	}
-	
-}
+
 
 const DescargarExcelUnaSolaHoja = (ReactExcelData, downloadData) => {
 
@@ -2002,7 +2030,6 @@ const DescargarExcelUnaSolaHoja = (ReactExcelData, downloadData) => {
 
     //     // Añadir más filas de datos aquí según sea necesario
     // ];
-
 	let worksheetData = [
         ["Datos usados para la Descarga de registros"], // Título
         [],
@@ -2025,7 +2052,6 @@ const DescargarExcelUnaSolaHoja = (ReactExcelData, downloadData) => {
 	// worksheetData[0][8][1]=downloadData.Fila; // Fila
 
 
-	console.log("Datos de array: ", worksheetData);
 
     // Convertimos el array de objetos `data` a un array de arrays compatible con `worksheetData`
     const dataRows = ReactExcelData.map(row => [
@@ -2092,6 +2118,171 @@ const DescargarExcelUnaSolaHoja = (ReactExcelData, downloadData) => {
     // Descargamos propiamente el archivo
     saveAs(new Blob([s2ab(wbout)], { type: "application/octet-stream" }), 'export.xlsx');
 }
+
+
+const DescargarExcelConEstilos = async (ReactExcelData, downloadData) => {
+    // Crear un nuevo libro de trabajo
+    const workbook = new ExcelJS.Workbook();
+
+    // Agregar una hoja al libro
+    const worksheet = workbook.addWorksheet('Hoja 1');
+
+    // Definir columnas con encabezados y anchos
+    worksheet.columns = [
+        { header: 'Primera columna', key: 'primeraColumna', width: 30 },
+        { header: 'Segunda columna', key: 'segundaColumna', width: 30 },
+        { header: 'Tercera columna', key: 'terceraColumna', width: 30 },
+        { header: 'Cuarta columna',  key: 'cuartaColumna',  width: 30 },
+        { header: 'Quinta columna',  key: 'quintaColumna',  width: 30 },
+        { header: 'Sexta columna',   key: 'sextaColumna',   width: 30 },
+    ];
+
+    // Agregar información de filtros usados
+    worksheet.addRow([]);
+	worksheet.addRow(['Filtros generales usados para la descarga']);
+	worksheet.addRow(['Fecha:', downloadData.Fecha]);
+    worksheet.addRow(['Entidad:', downloadData.Entidad]);
+    worksheet.addRow(['Cartera:', downloadData.Cartera]);
+    worksheet.addRow(['Código de Cartera:', downloadData.CodigoDeCartera]);
+    worksheet.addRow(['Filtro:', downloadData.Filtro]);
+    worksheet.addRow(['Fila:', downloadData.Fila]);
+
+	const titulosPrimerGrupoCeldas = ['A3', 'A4', 'A5', 'A6', 'A7', 'A8', 'A9'];
+	titulosPrimerGrupoCeldas.forEach((direccion) => {
+		const celda = worksheet.getCell(direccion);
+		celda.alignment = { horizontal: 'left', vertical: 'middle', indent: 1 };
+	});
+
+	const datosPrimerGrupoCeldas = ['B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B9'];
+	datosPrimerGrupoCeldas.forEach((direccion) => {
+		const celda = worksheet.getCell(direccion);
+		celda.alignment = { horizontal: 'left', vertical: 'middle', indent: 1 };
+	});
+
+	const terceraFila =  worksheet.getRow(3);
+	terceraFila.height = 30;
+	terceraFila.eachCell((cell)=>{
+		cell.font = { bold: true, color: { argb: 'FF215967' } };
+		cell.alignment = {vertical: 'middle' };
+	})
+
+    // Agregar una fila vacía para separar filtros de la tabla de datos
+    worksheet.addRow([]);
+
+
+    // Agregar encabezados de la tabla de datos
+    const encabezados = [
+        'Tipo de documento',
+        'Número de documento',
+        'Número de cuenta',
+        'Capital',
+        'Rango de Campaña',
+        'Campaña',
+    ];
+    const encabezadoFila = worksheet.addRow(encabezados);
+
+    // Aplicar estilos a los encabezados
+    encabezadoFila.eachCell((cell) => {
+		cell.border = {
+			top: { style: 'thin' },
+			left: { style: 'thin' },
+			bottom: { style: 'thin' },
+			right: { style: 'thin' },
+		};
+        cell.font = { bold: true, color: { argb: 'FF215967' } };
+        cell.fill = {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'FFF2F2F2' }, // Azul oscuro
+        };
+		
+        cell.alignment = { horizontal: 'center', vertical: 'middle' };
+    });
+
+	// Establecer altura de la fila del encabezado
+	encabezadoFila.height = 30; // Altura en puntos
+
+    // Agregar datos de la tabla
+    ReactExcelData.forEach((row) => {
+        const nuevaFila = worksheet.addRow([
+            row["Tipo de documento"] || '-',
+            row["Número de documento"] || '-',
+            row["Número de cuenta"] || '-',
+            row["Capital"] || '-',
+            row["Rango de Campaña"] || '-',
+            row["Campaña"] || '-',
+        ]);
+
+		// Establecer la altura de la fila de datos
+		nuevaFila.height = 30; // Altura en puntos
+		nuevaFila.eachCell((cell) => {
+
+			cell.border = {
+				top: 	{ style: 'thin',  color: { argb: 'FFA6A6A6' }},
+				left: 	{ style: 'thin',  color: { argb: 'FFA6A6A6' } },
+				bottom: { style: 'thin',  color: { argb: 'FFA6A6A6' } },
+				right: 	{ style: 'thin',  color: { argb: 'FFA6A6A6' } },
+			};
+
+			cell.font = { bold: false, color: { argb: 'FF595959' } };
+			cell.alignment = { horizontal: 'center', vertical: 'middle' };
+			// cell.alignment = { indent: 50 }; 
+		});
+
+		// Aplicar sangría a la columna 'Entidad' (columna 2) y 'Cartera' (columna 3)
+		const celda = nuevaFila.getCell(4) // Sangría de 2 espacios
+		celda.alignment = {  horizontal: 'right', vertical: 'middle', indent: 1 };
+
+
+    });
+
+    // Aplicar bordes y alineación a las filas de datos
+    // worksheet.eachRow({ includeEmpty: false }, (row, rowNumber) => {
+    //     if (rowNumber > 11) { // Asumiendo que las primeras 8 filas son filtros y encabezados
+    //         row.eachCell((cell) => {
+    //             cell.border = {
+    //                 top: { style: 'thin' },
+    //                 left: { style: 'thin' },
+    //                 bottom: { style: 'thin' },
+    //                 right: { style: 'thin' },
+    //             };
+
+				
+	// 			cell.fill = {
+	// 				type: 'pattern',
+	// 				pattern: 'solid',
+	// 				fgColor: { argb: 'FFF2F2F2' }, // Azul oscuro
+	// 			};
+
+	// 			cell.font = { bold: false, color: { argb: 'FF595959' } };
+	// 			cell.alignment = { horizontal: 'center', vertical: 'middle' };
+	// 			cell.alignment = { indent: 50 }; 
+    //         });
+    //     }
+    // });
+
+    // Combinar celdas para el título general
+    worksheet.mergeCells('A1:F1');
+	
+	// Le damos una altura al titulo
+	const titulo =  worksheet.getRow(1);
+	titulo.height = 30;
+
+    const formatoDetitulo = worksheet.getCell('A1');
+    formatoDetitulo.value = 'Detalles de cuentas';
+    formatoDetitulo.font = { size: 12, bold: true, color: { argb: 'FF901616' }  };
+    formatoDetitulo.alignment = { horizontal: 'center', vertical: 'middle' };
+
+    // Formatear la columna de Capital como moneda
+    worksheet.getColumn('D').numFmt = '"S/."#,##0.00';
+
+    // Generar el archivo Excel
+    const buffer = await workbook.xlsx.writeBuffer();
+
+    // Descargar el archivo
+    saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'Detalles de cuentas.xlsx');
+};
+
 
 // Convierte cadena binaria a un ArrayBuffer
 function s2ab(s) {

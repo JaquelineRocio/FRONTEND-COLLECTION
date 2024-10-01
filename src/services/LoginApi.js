@@ -48,7 +48,7 @@ export class LoginApi {
     }
 
     static post(data, url, apiUrl = apiUrlEntrada) {
-
+        // console.log("metodo post");
         return fetch(`${apiUrl}${url}`, {    
             method: 'POST',
             headers: {
@@ -60,7 +60,7 @@ export class LoginApi {
         // Toda respueta correcta se carga en este bloque
         .then( async (response) => {
 
-
+            // console.log("Bloque then:", response);
             const data = await response.json(); // Leer el cuerpo de la respuesta una vez
             // console.log("Bloque primer then:", response);
             // console.log("Bloque primer then:", data);
