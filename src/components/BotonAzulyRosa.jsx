@@ -9,8 +9,8 @@ const BotonAzulyRosa = ({layout = "INGRESE NOMBRE", azul=true, className="null",
                 justify-center
                 items-center
                 ${azul?"active:bg-[#1061FF]":"active:bg-[#FF025D]"} 
-                px-2
-                py-7
+                px-7
+                py-4
                 font-ralewayBold 
                 text-sm 
                 rounded

@@ -4,17 +4,16 @@ import { thunk } from "redux-thunk";
 import storage from "redux-persist/lib/storage";
 import persistStore from "redux-persist/es/persistStore";
 import authSlice from "./authSlice";
-import loginSlice from "./loginSlice"
+
 
 const persistConfig = {
     key: "root",
     storage,
-    whitelist: ['auth', 'login']
+    whitelist: ['auth']
 }
 
 const rootReducer  = combineReducers({
     auth: authSlice,
-    login: loginSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig,rootReducer)
@@ -26,17 +25,9 @@ export const store = configureStore({
         getDefaultMiddleware({
             serializableCheck: false,
         }).concat(thunk),
-
 });
 
 export const persistor  = persistStore(store);
-
-// 
 export const AppDispatch = store.dispatch;
-
 import { useDispatch } from "react-redux";
 export const useAppDispatch = () => useDispatch;
-// import { AppDispatch } from './store';
-// export const useAppDispatch = () => useDispatch<AppDispatch>();
-
-// export type AppThunkDispatch = ThunkDispatch;

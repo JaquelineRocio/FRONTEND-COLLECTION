@@ -17,7 +17,7 @@ import { Carousel, Typography } from '@material-tailwind/react';
 import { useForm } from "react-hook-form";
 import ClipLoader from "react-spinners/ClipLoader";
 import proyecInformation from './../../services/resources/proyectInformation';
-
+import Redirect from '../../oauth2/Redirect';
 
 const Login = () => {
 
@@ -27,31 +27,10 @@ const Login = () => {
     
     const {register, handleSubmit, formState:{errors}} = useForm();
 
-        // const onSubmit = handleSubmit(data => {
-        //     setLoading(true);
-        //     dispatch(loginUser(data)).then((response)=>{
-
-        //       console.log("respuesta de login :", response);
-        //       if(response.type=="auth/loginUser/fulfilled"){
-        //         navigate("/dashboard");
-        //       }else{
-        //         setLoading(false);
-        //         Swal.fire({
-        //           // position: 'top-end',
-        //           icon: "error",
-        //           title: "Usuario o contraseña incorrectos",
-        //           showCancelButton: false,
-        //           timer: 1500
-        //         });
-        //       }
-        //     });
-        // })
-
         const onSubmit = handleSubmit(data => {
           setLoading(true);
-          dispatch(loginUser(data))
-          .unwrap()
-          .then((response)=>{
+
+          dispatch(loginUser(data)).unwrap().then((response)=>{
 
             // console.log("respuesta de login :", response);
 
@@ -62,8 +41,6 @@ const Login = () => {
               console.log("codigo de error: ",error.status);
               console.log("mensaje de error: ",error.message);
              let messageError = null;
-
-
 
 
              if(error.message=="Bad credentials" ){
@@ -150,6 +127,7 @@ const Login = () => {
                             <ClipLoader color="#ffffff" size={24} loading={loading}/>
                           </button>
                         </div>
+                        <div className='bg-[#FF025D] rounded-md text-white p-3 text-center mt-4' onClick={Redirect}>Ingresar con laravelBackend</div>
                   </form>
                   {/* ------------------ */}
 

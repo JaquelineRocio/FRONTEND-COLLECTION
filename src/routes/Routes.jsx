@@ -23,7 +23,7 @@ import ProtectedRoute from "../views/Auth/ProtectedRoute";
 import { useDispatch } from "react-redux";
 import {unauthenticatedUser} from "../store/authSlice";
 import { useEffect } from "react";
-import UsoFormularioReactHookForm from "../views/ExampleView/UsoFormularioReactHookForm";
+// import UsoFormularioReactHookForm from "../views/ExampleView/UsoFormularioReactHookForm";
 import PageNotFound from "./../views/miscellany/PageNotFound";
 import EnConstruccion from "./../views/miscellany/EnConstruccion";
 // import FlexTailwind from "../views/ExampleView/GridTailwind";
@@ -33,7 +33,19 @@ import ContruccionDeTabla from "../views/ExampleView/ContruccionDeTabla";
 import HooksReact from "../views/ExampleView/HooksReact";
 import SelectComponent from "../views/ExampleView/SelectComponent";
 import SelectMaterialUI from "../views/ExampleView/SelectMaterialUI";
+import RouteAccessControl from "./RouteAccessControl";
+// import { useAccessControl } from "./RouteAccessControl";
+import useViewAccessControl from "./useViewAccessControl";
 // import Debug from "../views/ExampleView/Debug";
+import CallbackOauth2 from "../oauth2/CallbackOauth2";
+// import { useSelector } from 'react-redux';
+// import useFetchApi from "../hooks/useFetchApi";
+import SidebarAccessManagementView from "../views/Admin/Pages/SidebarAccessManagement/SidebarAccessManagementView";
+import Usuarios from "../views/Admin/Pages/SidebarAccessManagement/Children/Usuarios/Usuarios";
+import Equipo from "../views/Admin/Pages/SidebarAccessManagement/Children/Equipo/Equipo";
+import Contrasenha from "../views/Admin/Pages/SidebarAccessManagement/Children/Contrasenha/Contrasenha";
+import Perfiles from "../views/Admin/Pages/SidebarAccessManagement/Children/Perfiles/Perfiles";
+import HistorialCambios from "../views/Admin/Pages/SidebarAccessManagement/Children/HistorialCambios/HistorialCambios";
 
 const DeleteSession = ({children}) => {
   const dispatch = useDispatch();
@@ -99,7 +111,29 @@ const Route = () => {
           },
           {
             path: "gestionaccesos",
-            element: <EnConstruccion/>
+            element: <SidebarAccessManagementView/>,
+            children: [
+              {
+                index: true,
+                element: <Usuarios/>
+              },          
+              {
+                path: "equipo",
+                element: <Equipo/>
+              },
+              {
+                path: "contrasenha",
+                element: <Contrasenha/>
+              },
+              {
+                path: "perfiles",
+                element: <Perfiles/>
+              },
+              {
+                path: "historialcambios",
+                element: <HistorialCambios/>
+              },
+            ]
           }
         ],
       },
@@ -123,6 +157,18 @@ const Route = () => {
         path: 'selectmaterialui',
         element: <SelectMaterialUI/>
       },
+      {
+        path: "/callback",
+        element: <CallbackOauth2/>,
+      },
+      {
+        path: "/obtenertoken",
+        element: <Xxx/>
+      },
+      {
+        path: "/informacionprotegida",
+        element: <RouteAccessControl roles={["Editor"]} permissions={["editar artículos", "crear artículos"]}> <Xxx/> </RouteAccessControl> 
+      }
       // {
       //   path: 'debug',
       //   element: <Debug/>
@@ -137,4 +183,16 @@ const Route = () => {
 export default Route;
 
 
-    
+const Xxx = () => {
+  const canEdit = useViewAccessControl({roles:["Editor"], permissions:["editar artículos","crear artículos"]})
+
+  return(
+    <>
+      { canEdit && <div className="bg-pink-100">crear</div>}
+      <div className="bg-pink-200">eliminar</div>
+      <div className="bg-pink-300">actualizar</div>
+      <div className="bg-pink-400">visualizar</div>
+      <div className="bg-pink-500">cinco</div>
+    </>
+  )
+}
