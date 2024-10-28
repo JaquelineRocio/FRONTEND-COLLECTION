@@ -1821,7 +1821,7 @@ const DownloadExcel = ({children}) => {
 
 	const getData = async () => {
 
-		// montamos el body para hacer la peticionde los datos y la informacion que ira en cada excel exportado ()
+		// montamos el body para hacer la peticion de los datos y la informacion que ira en cada excel exportado ()
 		const {excelDownloadDetails, bodyToDownloadExcel} = GetBodyForExcel(children);
 		const {data, error} = await postMethod(bodyToDownloadExcel,`/admin/tablon/datos-descarga?entidad=${children.payloadUrl.selectEntidad}&mes=${formatDate(children?.payloadUrl?.selectFecha)}&carteras=${children.codCartera}`); 
 
@@ -1887,19 +1887,12 @@ const GetBodyForExcel = (children) => {
 
 	excelDownloadDetails.CodigoDeCartera = children?.codCartera;
 	
-
-
-	// payload.producto = children.payloadBody.producto;
-	// payload.rangocampaña = children.payloadBody.rangocampaña;
-	// payload.macroRegiones = children.payloadBody.macroRegiones;
-	// payload.añoCastigo = children.payloadBody.añoCastigo;
-	// payload.moneda = children.payloadBody.moneda;
-	// payload.estadoCuenta = children.payloadBody.estadoCuenta;
-	// payload.mesCastigo = children.payloadBody.mesCastigo;
-	// payload.prioridad = children.payloadBody.prioridad;
-	// payload.rangoEdad = children.payloadBody.rangoEdad;
-	// payload.tipo = children.payloadBody.tipo;
-
+	/**
+	 * al iniciar todo el proceso, a cada fila se le dio el objeto "payloadBdoy", este 
+	 * objeto contiene datos que se usaron para realizar la peticion de registros de todas las
+	 * tablas. Estos mismos valores los necesitamos 
+	 */
+	console.log("Children", children);
 	bodyToDownloadExcel.producto = structuredClone(children?.payloadBody?.producto);
 	bodyToDownloadExcel.rangocampaña = structuredClone(children?.payloadBody?.rangocampaña);
 	bodyToDownloadExcel.macroRegiones = structuredClone(children?.payloadBody?.macroRegiones);
@@ -1965,6 +1958,7 @@ const GetBodyForExcel = (children) => {
 			// Cuando el tipo es suma, e payload tiene que ser vacio, tal cual se muestra.
 		}else if(children.tipo == "fila"){
 			// llenamos datos de filtros especificos
+			bodyToDownloadExcel.rangocampaña = []
 			bodyToDownloadExcel.rangocampaña[0] = structuredClone(children.codTipo);
 			excelDownloadDetails.Fila = structuredClone(children.codTipo); 
 		}
@@ -1974,18 +1968,24 @@ const GetBodyForExcel = (children) => {
 			// Cuando el tipo es suma, e payload tiene que ser vacio, tal cual se muestra.
 		}else if(children.tipo == "fila"){
 			// llenamos datos de filtros especificos
+			bodyToDownloadExcel.producto = []
 			bodyToDownloadExcel.producto[0] = structuredClone(children.codTipo);
 			excelDownloadDetails.Fila = children.codTipo;
 		}
 	}else if(children?.payloadBody?.tipo =="MacroRegiones"){
 		excelDownloadDetails.Filtro = "Cartera por Zona";
 		if(children.tipo == "suma"){
+			// bodyToDownloadExcel.macroRegiones = [];
 			// Cuando el tipo es suma, e payload tiene que ser vacio, tal cual se muestra.
 		}else if(children.tipo == "fila"){
 			// llenamos datos de filtros especificos
 			// Tomar en cuenta que el backend esta enviado archivos "sin info" que es un valor que no existe para hacer la busqueda.
 			// probablemente esto genere errores en la consulta
+			// bodyToDownloadExcel.macroRegiones[0] = structuredClone(children.codTipo);
+			console.log("antes de insertar a la variable", bodyToDownloadExcel.macroRegiones);
+			bodyToDownloadExcel.macroRegiones = []
 			bodyToDownloadExcel.macroRegiones[0] = structuredClone(children.codTipo);
+			console.log("despues de insertar a la variable", bodyToDownloadExcel.macroRegiones);
 			excelDownloadDetails.Fila = children.codTipo;
 		}
 	}else{

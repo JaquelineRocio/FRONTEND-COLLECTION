@@ -42,12 +42,13 @@ const useFetchApi = () =>{
         let errores = null;
 
         try {
-            console.log("se esta enviado el token?", accessToken);
+            // console.log("se esta enviado el token?", accessToken);
             const response = await fetch(`${apiUrl}${url}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${accessToken}`
+                    'Authorization': `Bearer ${accessToken}`,
+                    'Accept': 'application/json' // para indicarle al backend que la peticion que estoy realizando es tipo api y que requiero un json como respuesta
                 },
                 body: JSON.stringify(body),
                 signal: signalRef.current,
@@ -128,12 +129,13 @@ const useFetchApi = () =>{
         let errores = null;
 
         try {
-            console.log("se esta enviado el token?", accessToken);
+            // console.log("se esta enviado el token?", accessToken);
             const response = await fetch(`${apiUrl}${url}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${accessToken}`
+                    'Authorization': `Bearer ${accessToken}`,
+                    'Accept': 'application/json' // para indicarle al backend que la peticion que estoy realizando es tipo api y que requiero un json como respuesta
                 },
                 // body: JSON.stringify(body),
                 signal: signalRef.current,

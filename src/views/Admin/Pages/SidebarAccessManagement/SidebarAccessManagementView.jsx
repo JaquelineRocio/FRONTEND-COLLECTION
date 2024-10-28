@@ -6,8 +6,8 @@ import { registrosCuentasDelCliente, titulosParaTablaCuentasDelCliente } from ".
 
 const SidebarAccessManagementView = () => {
     return(
-        <div className="bg-pink-100 h-[90vh] py-5 px-7 ">
-            <div className="flex mb-5 bg-yellow-400">
+        <div className=" h-[90vh] py-5 px-7 ">
+            <div className="flex mb-5">
                     <Link to="/dashboard" className="pr-5 flex items-center"> <IoChevronBackCircle  className={`text-5xl text-[#1F263E]`}/> </Link>
                     <div className="">
                         <h1 className="font-ralewaySemibold text-2xl">Gestión de accesos</h1>
@@ -15,7 +15,7 @@ const SidebarAccessManagementView = () => {
                     </div>
             </div>
 
-            <div className="flex flex-wrap mb-5 justify-around bg-blue-200">
+            <div className="flex flex-wrap mb-5 justify-around">
 
                 <TextLink text="Usuarios"             to=""/>
                 <TextLink text="Equipo"               to="equipo"/>

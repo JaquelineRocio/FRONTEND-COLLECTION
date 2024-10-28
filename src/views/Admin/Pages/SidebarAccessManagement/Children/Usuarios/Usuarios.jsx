@@ -5,7 +5,7 @@ const Usuarios = () => {
 
     return(
         <>
-            <div className="mb-6 border-[1px] bg-pink-500"> 
+            <div className="mb-6 border-[1px]"> 
                  <h3 className="bg-gray-200 p-4 rounded font-ralewaySemibold text-xl">
                     Cuentas del cliente
                 </h3>

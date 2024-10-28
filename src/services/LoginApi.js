@@ -7,6 +7,9 @@ export class LoginApi {
     static get(url, apiUrl = urlBackend) {
         return fetch(`${apiUrl}${url}`, {
             method: 'GET',
+            headers: {
+                'Accept': 'application/json', // Añadido el encabezado Accept
+            },
         })
         .then((response) => {
             if (!response.ok) {
@@ -40,6 +43,8 @@ export class LoginApi {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Accept': 'application/json', // Añadido el encabezado Accept
+                
             },
             body: JSON.stringify(data),
         })

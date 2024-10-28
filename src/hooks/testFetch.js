@@ -88,7 +88,8 @@ export function getToken (){
         const parsedPersistRoot = JSON.parse(persistRoot);
         const auth = JSON.parse(parsedPersistRoot.auth);
         token = auth.token;
-        // console.log("Token:", token);
+        token = auth.accessToken;
+        // console.log("Token obnetido :", token);
         // console.log("verificando token",token );
         return token;
 
