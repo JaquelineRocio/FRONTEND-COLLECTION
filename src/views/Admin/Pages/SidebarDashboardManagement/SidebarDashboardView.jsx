@@ -255,7 +255,7 @@ const SidebarDashboardView = () => {
 
     // Elimina opciones que pueden ser seleccionado de todos los filtros
     function cleanOptionsFromAllFilter(){
-        // setOptionsEntidad([]); // No se limpiará las opciones de entidad , pues ellas deben permanecer para que se pueda realizar otras busquedas
+        setOptionsEntidad([]); // No se limpiará las opciones de entidad , pues ellas deben permanecer para que se pueda realizar otras busquedas
         setOptionsCartera([]);
         setOptionsProducto([]);
         setOptionsRangoCampanha([]);
@@ -1251,6 +1251,7 @@ const SidebarDashboardView = () => {
 
     // Carga vaores para segundo filtro "Entidad" - depende de fecha
     useEffect(()=>{
+        setSelectEntidad('');
         getOptionToEntidad();
     },[selectFecha])
 
@@ -1476,7 +1477,7 @@ function alertas(opcion){
  * @param {function} dispatch - en necesario para interactuar con redux, exclusivamente para el login
  */
 const procesarDatos = (response, setUseState, condicion, dispatch) => {
-
+    console.log("valroes para llenar en select entidad", response);
     // Si hay error, quiere decir que no hay data (data igual a null)
     // Si existe errores setData se deja como esta
     if(response.error){
@@ -1500,12 +1501,25 @@ const procesarDatos = (response, setUseState, condicion, dispatch) => {
 
         }else if(condicion == "setOptionsCartera"){
 
+            
             const carteraOptions = response.data?.data.map(option => ({
-                value: option.CodCartera,
-                label: option.Cartera
+                // value: option.CodCartera,
+                // label: option.Cartera
+
+                value: removeBrackets(option.CodCartera),
+                label: removeBrackets(option.Cartera)
             }));
             setUseState(carteraOptions);
 
+
+            // const carteraOptions = response.data?.data.map(()=>{
+
+            //     return(<>
+            //         value: option.CodCartera,
+            //         label: option.Cartera
+            //         </>)
+            // })
+        
         }else if(condicion == "jkl"){
             console.log(condicion);
         }else if(condicion == "mno"){
@@ -1515,3 +1529,10 @@ const procesarDatos = (response, setUseState, condicion, dispatch) => {
     }
 }
 
+
+function removeBrackets(str) {
+    if (typeof str === 'string') {
+        return str.replace(/\[|\]/g, '');
+    }
+    return str;
+}
